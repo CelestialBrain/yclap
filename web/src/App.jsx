@@ -7,7 +7,6 @@ import {
   mentor_lens,
   seat_board,
 } from "./data/cohort";
-import { pilot_proof } from "./data/pilot";
 import {
   day_of,
   goal,
@@ -679,11 +678,6 @@ export default function App() {
               <div>
                 <p className="hero_program_name">{program.full_name}</p>
                 <p className="hero_description">{program.description}</p>
-                <ul className="place_chip_row" aria-label="Places">
-                  {pilot_proof.place_chip.map((place) => (
-                    <li key={place}>{place}</li>
-                  ))}
-                </ul>
                 <div className="hero_action">
                   <a className="btn btn_ink" href="#journey">
                     See the journey
@@ -692,18 +686,6 @@ export default function App() {
                     Cohort seats
                   </a>
                 </div>
-                <p className="non_claim_line">
-                  Non-claims: no carbon credits, no plastic neutrality, no
-                  flood-corruption cosplay.
-                </p>
-              </div>
-
-              <div className="hero_aside_card">
-                <p className="hero_aside_tagline">Dalhin mo lang ang idea</p>
-                <p className="hero_aside_note">
-                  Describe it in one sentence. We scope at the desk and ship in
-                  the accelerator window.
-                </p>
               </div>
             </div>
 
@@ -767,28 +749,6 @@ export default function App() {
               </li>
             ))}
           </ol>
-
-          <div className="policy_gap" role="note">
-            <div className="policy_gap_side">
-              <p className="policy_gap_label">Policy intent</p>
-              <p className="policy_gap_text">Laws, funds, and frameworks</p>
-            </div>
-            <div className="policy_gap_bridge" aria-hidden="true">
-              <span className="policy_gap_dot" />
-              <span className="policy_gap_line" />
-              <span className="policy_gap_break">gap</span>
-              <span className="policy_gap_line" />
-              <span className="policy_gap_dot policy_gap_dot_fill" />
-            </div>
-            <div className="policy_gap_side policy_gap_side_end">
-              <p className="policy_gap_label">Student evidence</p>
-              <p className="policy_gap_text">Kg, partners, and live demos</p>
-            </div>
-            <p className="policy_gap_punch">
-              Intent is funded. Evidence isn&apos;t produced. That gap is a
-              student-sized job, and it&apos;s the one we took.
-            </p>
-          </div>
 
           <div className="ship_pipeline_block">
             <h3 className="block_title">What we ship</h3>
