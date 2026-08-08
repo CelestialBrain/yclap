@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 160" role="img" aria-labelledby="motif-chevron-title">
+  <title id="motif-chevron-title">Youth CLAP forward chevron motif</title>
+  <g fill="#FFFFFF">
+    <path opacity=".18" d="m18 19 61 61-61 61h37l61-61-61-61H18Z"/>
+    <path opacity=".42" d="m61 19 61 61-61 61h37l61-61-61-61H61Z"/>
+    <path opacity=".8" d="m104 19 61 61-61 61h37l61-61-61-61h-37Z"/>
+  </g>
+</svg>

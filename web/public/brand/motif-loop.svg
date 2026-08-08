@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 220" role="img" aria-labelledby="motif-loop-title">
+  <title id="motif-loop-title">Youth CLAP mirrored loop motif</title>
+  <g fill="none" stroke="#FFFFFF" stroke-width="8" opacity=".72">
+    <path d="M20 25h20c54 0 98 44 98 98v4H118c-54 0-98-44-98-98v-4Z"/>
+    <path d="M20 195v-4c0-54 44-98 98-98h20v4c0 54-44 98-98 98H20Z"/>
+  </g>
+</svg>

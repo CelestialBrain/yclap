@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="logo-slanted-title logo-slanted-description">
+  <title id="logo-slanted-title">Youth CLAP symbol — slanted orientation</title>
+  <desc id="logo-slanted-description">The canonical upright geometry rotated negative forty-five degrees into the source-observed diagonal arrangement.</desc>
+  <g transform="rotate(-45 300 300)">
+    <defs>
+      <linearGradient id="logo-blue-gradient" x1="0.5" y1="0" x2="0.5" y2="1">
+        <stop offset="0" stop-color="#0B9ADB"/>
+        <stop offset="1" stop-color="#058CD6"/>
+      </linearGradient>
+      <linearGradient id="logo-green-gradient" x1="0.5" y1="0" x2="0.5" y2="1">
+        <stop offset="0" stop-color="#B9FF90"/>
+        <stop offset="0.52" stop-color="#00E800"/>
+        <stop offset="1" stop-color="#00A94C"/>
+      </linearGradient>
+      <linearGradient id="logo-orange-gradient" x1="0.5" y1="0" x2="0.5" y2="1">
+        <stop offset="0" stop-color="#FFC33A"/>
+        <stop offset="1" stop-color="#F6B22D"/>
+      </linearGradient>
+      <linearGradient id="logo-red-gradient" x1="0.5" y1="0" x2="0.5" y2="1">
+        <stop offset="0" stop-color="#FF3920"/>
+        <stop offset="1" stop-color="#FF0B08"/>
+      </linearGradient>
+    </defs>
+    <g id="logo-blue-person">
+      <path id="logo-blue-body" d="M 330 150 L 330 270 L 450 270" fill="none" stroke="url(#logo-blue-gradient)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse id="logo-blue-head" cx="390" cy="210" rx="21" ry="21" fill="url(#logo-blue-gradient)"/>
+    </g>
+    <g id="logo-green-person" transform="rotate(270 300 300)">
+      <path id="logo-green-body" d="M 330 150 L 330 270 L 450 270" fill="none" stroke="url(#logo-green-gradient)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse id="logo-green-head" cx="390" cy="210" rx="21" ry="21" fill="url(#logo-green-gradient)"/>
+    </g>
+    <g id="logo-orange-person" transform="rotate(90 300 300)">
+      <path id="logo-orange-body" d="M 330 150 L 330 270 L 450 270" fill="none" stroke="url(#logo-orange-gradient)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse id="logo-orange-head" cx="390" cy="210" rx="21" ry="21" fill="url(#logo-orange-gradient)"/>
+    </g>
+    <g id="logo-red-person" transform="rotate(180 300 300)">
+      <path id="logo-red-body" d="M 330 150 L 330 270 L 450 270" fill="none" stroke="url(#logo-red-gradient)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse id="logo-red-head" cx="390" cy="210" rx="21" ry="21" fill="url(#logo-red-gradient)"/>
+    </g>
+  </g>
+</svg>

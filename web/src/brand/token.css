@@ -1,0 +1,35 @@
+:root {
+  --color-blue: #058cd6;
+  --color-blue-deep: #075d89;
+  --color-green: #45c223;
+  --color-green-vivid: #00e800;
+  --color-green-deep: #008653;
+  --color-orange: #f6b22d;
+  --color-red: #ff3920;
+  --color-ink: #1f2022;
+  --color-paper: #f9f9f9;
+  --color-grid: #e4e7e8;
+  --color-focus: #073e5f;
+  --gradient-ocean: linear-gradient(115deg, #058cd6 0%, #25afa6 52%, #66d23b 100%);
+  --gradient-forest: linear-gradient(115deg, #55d334 0%, #008653 100%);
+  --gradient-sunset: linear-gradient(115deg, #f6b22d 0%, #ff7b22 48%, #ff3920 100%);
+  --gradient-lagoon: linear-gradient(115deg, #058cd6 0%, #45c223 100%);
+  --gradient-navy: linear-gradient(115deg, #075d89 0%, #058cd6 100%);
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --radius-card: 24px;
+  --radius-tile: 20px;
+  --radius-pill: 999px;
+  --shadow-card: 0 12px 28px rgba(31, 32, 34, 0.12);
+  --shadow-badge: 0 10px 0 rgba(145, 63, 22, 0.22), 0 20px 30px rgba(31, 32, 34, 0.14);
+  --type-family: Montserrat, "Avenir Next", "Century Gothic", sans-serif;
+  --type-weight-regular: 400;
+  --type-weight-strong: 700;
+  --type-weight-display: 800;
+}
