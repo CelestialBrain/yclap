@@ -349,11 +349,76 @@ button.session_node {
   color: var(--desk-green);
 }
 
+.hero_program_name {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--desk-green);
+}
+
+.hero_description {
+  margin: 0 0 1rem;
+  max-width: 38rem;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
 .hero_action {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
   margin-top: 1.25rem;
+}
+
+.day_of_row {
+  list-style: none;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.day_of_row li {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--desk-line);
+  border-radius: 14px;
+  background: var(--paper, #fff);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.day_of_row strong {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--desk-green);
+}
+
+.day_of_row span {
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+@media (max-width: 900px) {
+  .day_of_row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .day_of_row {
+    grid-template-columns: 1fr;
+  }
 }
 
 .hero_running {

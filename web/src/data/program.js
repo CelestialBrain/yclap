@@ -1,10 +1,24 @@
 export const program = {
   full_name: "Youth Climate Leadership Accelerator Project",
   short_name: "Youth CLAP",
+  short_code: "Y-CLAP",
   tagline: "Knowledge into Action. Youth into Leaders.",
+  description:
+    "A five-week CCC climate accelerator for selected university youth. Ateneo delegates learn the science and the system, design a local pilot, and pitch a live demo at the Innovation Showcase on 12 September 2026.",
   host: "Climate Change Commission and Ateneo de Manila University",
   ateneo_office:
     "Office of the Assistant Vice President for Social and Environmental Engagement for Development and Sustainability (SEEDS)",
+  /** Orientation logistics (2026-08-08 Ateneo desk briefing) */
+  assembly: {
+    place: "Areté, near Gate 3 / Gate 3.5",
+    assemble_time: "6:45 AM",
+    depart_time: "7:00 AM",
+    registration_time: "8:00 AM",
+    registration_place: "Mapúa University AVR, Intramuros",
+    first_day_attire: "Ateneo PE shirt and pants",
+    travel_note:
+      "Meet as one at Areté before departure so the cohort moves together to Mapúa.",
+  },
 };
 
 /**
@@ -196,10 +210,10 @@ export const session = [
     session_index: "01",
     session_name: "Modules 1 and 2",
     session_detail:
-      "Climate science and governance, the baseline everyone argues from.",
+      "Climate science and governance, the baseline everyone argues from. Registration 8:00 AM at Mapúa AVR. Ateneo cohort assembles at Areté (Gate 3 / 3.5) at 6:45 AM, departs 7:00 AM. First day attire: PE shirt and pants.",
     session_who: "Dr Emma Porio and Dr Rodel Lasco",
     session_who_short: "PORIO · LASCO",
-    venue: "Mapúa University, Intramuros",
+    venue: "Mapúa University AVR, Intramuros",
     session_color: "#EE3B24",
     session_motif: "spark",
     session_motif_label: "Catalyst",
@@ -237,9 +251,10 @@ export const session = [
     session_month: "AUGUST",
     session_index: "03",
     session_name: "Masterclass and consultation",
-    session_detail: "Expert masterclass plus review of each canvas and pilot.",
-    session_who: "Porio, Lasco, and SEEDS mentors",
-    session_who_short: "PORIO · LASCO · SEEDS",
+    session_detail:
+      "Expert masterclass plus review of each canvas and pilot. Ateneo day-of contacts on site.",
+    session_who: "Porio, Lasco, and Ateneo mentors",
+    session_who_short: "PORIO · LASCO · DESK",
     venue: "Mapúa University, Intramuros",
     session_color: "#EFA92C",
     session_motif: "loop",
@@ -271,7 +286,7 @@ export const session = [
   {
     session_date: "2026-09-12",
     session_label: "Sep 12",
-    session_stack_label: "SEP 12 — FIXED",
+    session_stack_label: "SEP 12 · FIXED",
     session_code: "SHOWCASE",
     session_day: "12",
     session_month: "SEPTEMBER",
@@ -323,5 +338,26 @@ export const goal = [
   {
     goal_name: "Join a community of practice",
     goal_note: "Young Climate Innovators Circle after the pilot run",
+  },
+];
+
+/** Day-of coordination from 2026-08-08 orientation (transcript-backed) */
+export const day_of = [
+  {
+    day_of_label: "Assemble",
+    day_of_note: "Areté near Gate 3 / 3.5 · 6:45 AM · leave 7:00 AM",
+  },
+  {
+    day_of_label: "Register",
+    day_of_note: "Mapúa AVR · 8:00 AM · move as one before departure",
+  },
+  {
+    day_of_label: "First-day kit",
+    day_of_note: "Ateneo PE shirt and pants · meds · fan · umbrella · jacket",
+  },
+  {
+    day_of_label: "Safety",
+    day_of_note:
+      "School activity under Ateneo handbook 2025 and Mapúa protocols · MMC ~2.1 km",
   },
 ];

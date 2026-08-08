@@ -1,15 +1,15 @@
-/** Ateneo Youth CLAP cohort — seats, lanes, mentors */
+/** Ateneo Youth CLAP cohort: seats, lanes, mentors */
 
 export const seat_board = {
-  board_label: "SEAT BOARD v0.1",
-  frozen_on: "2026-08-07",
+  board_label: "SEAT BOARD v0.2",
+  frozen_on: "2026-08-08",
   seat_count: 11,
   person_count: 10,
   shared_seat_count: 1,
-  eyebrow: "ROLE ARCHITECTURE — 4 LANES / 11 SEATS / 10 PEOPLE",
+  eyebrow: "ROLE ARCHITECTURE · 4 LANES / 11 SEATS / 10 PEOPLE",
   title: "Everyone leaves the room carrying one thing.",
   note: [
-    "dotted = assumed, confirm with cohort",
+    "courses refreshed from 2026-08-08 orientation intros",
     "gold outline = shared seat",
     "no photos on the board by design",
   ],
@@ -24,7 +24,7 @@ export const lane = [
     lane_verb: "Ship the demo slice",
     lane_promise: "Ship demos people can click.",
     day_one_output: "RUNNING PROTOTYPE",
-    day_one_label: "DAY-ONE OUTPUT — RUNNING PROTOTYPE",
+    day_one_label: "DAY-ONE OUTPUT: RUNNING PROTOTYPE",
     artifact_label: "Clickable demo",
     artifact_kind: "phone",
     course_fit: ["ME", "Applied Math", "CTM", "BOx"],
@@ -37,9 +37,10 @@ export const lane = [
         person_name: "Mar Angelo Revelo",
         short_name: "GELO",
         course_tag: "ME",
-        course_name: "BS Management Engineering",
+        course_name: "BS Management Engineering, year 2",
         role_tag: "LEAD BUILDER",
-        strength: "Owns the running build; last call on scope.",
+        strength:
+          "Owns the running build; uses data to decide what to prioritize.",
         is_lead: true,
         is_assumed: false,
         task: [
@@ -50,11 +51,11 @@ export const lane = [
       },
       {
         person_name: "Alfonso Albano",
-        short_name: "ALFONSO",
+        short_name: "ALPHONSE",
         course_tag: "APPLIED MATH",
-        course_name: "BS Applied Math to Data Science",
+        course_name: "BS Applied Mathematics to Data Science, year 3",
         strength: "Turns the model into logic that runs.",
-        is_assumed: true,
+        is_assumed: false,
         task: [
           "Impact math (kg to methane / flood co-benefit narrative)",
           "Rate tables and pilot scoreboard",
@@ -63,11 +64,11 @@ export const lane = [
       },
       {
         person_name: "Aleij Jill Mendoza",
-        short_name: "ALEIJ",
+        short_name: "ALEGE",
         course_tag: "CTM",
-        course_name: "BS CTM, Sustainability minor",
+        course_name: "BS Communications Technology Management, year 3 · sustainability minor",
         strength: "Keeps the demo path unbroken end to end.",
-        is_assumed: true,
+        is_assumed: false,
         task: [
           "UX flows for collector path and diversion log",
           "Sustainability claims that stay honest",
@@ -84,22 +85,22 @@ export const lane = [
     lane_verb: "Measure it, defend it",
     lane_promise: "Make claims mentor-proof.",
     day_one_output: "ONE DEFENSIBLE FIGURE",
-    day_one_label: "DAY-ONE OUTPUT — ONE DEFENSIBLE FIGURE",
+    day_one_label: "DAY-ONE OUTPUT: ONE DEFENSIBLE FIGURE",
     artifact_label: "Defensible figure",
     artifact_kind: "chart",
-    course_fit: ["Chem", "Bio", "Physics", "MEc"],
-    course_fit_line: "FITS CHEM · BIO · PHYSICS · MEc",
-    skill: ["chemistry", "biology", "physics", "field methods"],
+    course_fit: ["EnvSci", "Bio", "Physics", "MEc"],
+    course_fit_line: "FITS ENVSCI · BIO · PHYSICS · MEc",
+    skill: ["environmental science", "biology", "physics", "field methods"],
     well_size: 152,
     motif: "petal",
     member: [
       {
         person_name: "Clariz Pillos",
-        short_name: "CLARIZ",
-        course_tag: "CHEM",
-        course_name: "BS Chemistry, AIS / World Bank Y2Y",
+        short_name: "CLARICE",
+        course_tag: "ENVSCI",
+        course_name: "BS Environmental Science, year 3",
         strength: "Sets the method before anyone quotes a number.",
-        is_assumed: true,
+        is_assumed: false,
         task: [
           "Climate and waste science one-pager for LEARN day",
           "Source checklist for EcoWaste claims",
@@ -108,11 +109,12 @@ export const lane = [
       },
       {
         person_name: "Katherine Leal",
-        short_name: "KATHERINE",
+        short_name: "KATHY",
         course_tag: "BIO",
-        course_name: "BS Biology",
-        strength: "Sources the field data and checks where it breaks.",
-        is_assumed: true,
+        course_name: "BS Biology, year 2 · ecology track",
+        strength:
+          "Resilient field lens; plans ecology, climate research, and policy.",
+        is_assumed: false,
         task: [
           "Nature co-benefit framing (diversion is not tree-planting theater)",
           "Local ecology note for Pasig / QC pilot area",
@@ -122,13 +124,13 @@ export const lane = [
       {
         person_name: "Charisse Macapagal",
         short_name: "CHARISSE",
-        course_tag: "MEc",
-        course_name: "Physics, GoodGovPH, climate-justice theatre",
+        course_tag: "PHYSICS",
+        course_name: "BS Applied Physics (MSV), year 3",
         strength: "Carries the figure into the cut without distorting it.",
         also_lane_code: "story",
         also_lane_label: "ALSO IN 04",
         is_shared: true,
-        is_assumed: true,
+        is_assumed: false,
         task: [
           "Climate justice angle (informal collectors, equity)",
           "Energy and waste systems talking points",
@@ -145,11 +147,11 @@ export const lane = [
     lane_verb: "Get it adopted",
     lane_promise: "People, partners, pesos.",
     day_one_output: "ONE NAMED PARTNER",
-    day_one_label: "DAY-ONE OUTPUT — ONE NAMED PARTNER",
+    day_one_label: "DAY-ONE OUTPUT: ONE NAMED PARTNER",
     artifact_label: "Named partner",
     artifact_kind: "handshake",
-    course_fit: ["LEARN", "CTM", "MEc"],
-    course_fit_line: "FITS LEARN · CTM · MEc",
+    course_fit: ["MEc", "BOx", "CTM"],
+    course_fit_line: "FITS MEc · BOx · CTM",
     skill: ["org leadership", "finance", "partnerships", "MEc"],
     well_size: 136,
     motif: "loop",
@@ -157,10 +159,10 @@ export const lane = [
       {
         person_name: "Sophia Aliza Caverte",
         short_name: "SOPHIA",
-        course_tag: "LEARN",
-        course_name: "AB Management Economics, MEcO EB",
+        course_tag: "MEc",
+        course_name: "AB Management Economics, year 3",
         strength: "Opens the door and gets the partner named out loud.",
-        is_assumed: true,
+        is_assumed: false,
         task: [
           "Campaign Canvas resource block",
           "Partner ask list (orgas, junkshop, SK)",
@@ -170,10 +172,10 @@ export const lane = [
       {
         person_name: "Nathanielle Sophia Alaethea Araneta",
         short_name: "NATHANIELLE",
-        course_tag: "CTM",
+        course_tag: "BOx",
         course_name: "Ateneo BOx President 26 to 27",
         strength: "Holds the follow-up until the yes is written down.",
-        is_assumed: true,
+        is_assumed: false,
         task: [
           "Recruit pilot users from BOx and allied orgs",
           "Campus logistics for collection day",
@@ -194,22 +196,22 @@ export const lane = [
     lane_verb: "Make it land in 3 minutes",
     lane_promise: "Make the room feel it in three minutes.",
     day_one_output: "3-MIN CUT",
-    day_one_label: "DAY-ONE OUTPUT — 3-MIN CUT",
+    day_one_label: "DAY-ONE OUTPUT: 3-MIN CUT",
     artifact_label: "3-min pitch cut",
     artifact_kind: "timer",
-    course_fit: ["Media", "LEARN", "BOx"],
-    course_fit_line: "FITS MEDIA · LEARN · BOx",
+    course_fit: ["LEARN", "MEc", "Physics"],
+    course_fit_line: "FITS LEARN · MEc · PHYSICS",
     skill: ["writing", "design learning", "video", "theatre"],
     well_size: 152,
     motif: "chevron",
     member: [
       {
-        person_name: "Mark Lawrence Marquez",
+        person_name: "Mark Laurence Marquez",
         short_name: "MARK",
-        course_tag: "MEDIA",
-        course_name: "Learning Science and Design, Matanglawin",
+        course_tag: "LEARN",
+        course_name: "BS Learning Science and Design",
         strength: "Cuts to three minutes without overclaiming.",
-        is_assumed: true,
+        is_assumed: false,
         task: [
           "Campaign Canvas copy and pitch script",
           "Exhibit board design language",
@@ -219,10 +221,11 @@ export const lane = [
       {
         person_name: "Ivan Nite",
         short_name: "IVAN",
-        course_tag: "LEARN",
-        course_name: "Ateneo, OPCS video production",
-        strength: "Finds the frame in the footage the team already has.",
-        is_assumed: true,
+        course_tag: "MEc",
+        course_name: "AB Management Economics, year 3",
+        strength:
+          "Brings hope-forward framing when the climate story turns dark.",
+        is_assumed: false,
         task: [
           "3-min demo video backup",
           "Pilot photo and video evidence kit",
@@ -232,14 +235,14 @@ export const lane = [
       {
         person_name: "Charisse Macapagal",
         short_name: "CHARISSE",
-        course_tag: "MEc",
-        course_name: "Physics, climate-justice theatre",
+        course_tag: "PHYSICS",
+        course_name: "BS Applied Physics (MSV), year 3",
         strength:
-          "One person is the bridge — the figure and the cut agree.",
+          "One person is the bridge: the figure and the cut agree.",
         also_lane_code: "science",
         also_lane_label: "ALSO IN 02",
         is_shared: true,
-        is_assumed: true,
+        is_assumed: false,
         task: [
           "Co-lead pitch rehearsal",
           "Audience empathy beats",
@@ -249,7 +252,7 @@ export const lane = [
   },
 ];
 
-/** Constellation layout — percent coords for desktop map */
+/** Constellation layout: percent coords for desktop map */
 export const constellation_well = [
   {
     lane_code: "build",
@@ -312,7 +315,7 @@ export const constellation_well = [
     reverse: true,
     sat: [
       {
-        person_key: "Mark Lawrence Marquez",
+        person_key: "Mark Laurence Marquez",
         x: 18,
         y: 70,
         align: "end",
@@ -368,7 +371,7 @@ export const mentor_lens = [
   },
 ];
 
-/** @deprecated use mentor_lens — kept for any residual import */
+/** @deprecated use mentor_lens; kept for any residual import */
 export const session_expert = mentor_lens.map((item) => ({
   person_name: item.person_name,
   focus: item.focus_tag.toLowerCase().replace(/ · /g, ", "),
@@ -378,24 +381,26 @@ export const session_expert = mentor_lens.map((item) => ({
 
 export const host_office = {
   person_name: "Dr Leland Joseph R. Dela Cruz",
-  role_name: "AVP — SEEDS, Ateneo de Manila",
-  role_short: "AVP — SEEDS",
+  role_name: "AVP, SEEDS, Ateneo de Manila",
+  role_short: "AVP, SEEDS",
   host_note:
-    "Opens the desk on DEEPEN and signs off on where the pilot may run.",
+    "Opened the Ateneo opportunity after the CCC invitation and backs the selected cohort.",
   portrait_src: "/portrait/leland-dela-cruz.jpg",
 };
 
 export const escort = [
   {
-    person_name: "Jack Rivera",
-    role_name: "SEEDS escort",
-    /** Public professional headshot not found — request approved still from SEEDS */
+    person_name: "Jack Laurence Cebadero Rivera",
+    short_name: "J Love",
+    role_name: "Binhi Para mentor, OSCI · day-of lead",
+    /** Public professional headshot not found; request approved still from SEEDS */
     portrait_src: null,
   },
   {
     person_name: "Shenina Badua",
-    role_name: "SEEDS escort",
-    /** Public professional headshot not found — request approved still from SEEDS */
+    short_name: "Shen",
+    role_name: "SEEDS · backup contact when Jack is offline",
+    /** Public professional headshot not found; request approved still from SEEDS */
     portrait_src: null,
   },
 ];

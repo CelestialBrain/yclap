@@ -9,6 +9,7 @@ import {
 } from "./data/cohort";
 import { pilot_proof } from "./data/pilot";
 import {
+  day_of,
   goal,
   legal_ground,
   output,
@@ -220,7 +221,7 @@ function ClimbingStack({ expanded_code, onToggle }) {
                   <span className="climb_riser_meta">
                     <span className="climb_riser_index">
                       {is_stage
-                        ? `${item.session_index} — STAGE`
+                        ? `${item.session_index} · STAGE`
                         : item.session_index}
                     </span>
                     <SessionMotif
@@ -259,7 +260,7 @@ function ClimbingStack({ expanded_code, onToggle }) {
         })}
       </div>
       <div className="climb_ground">
-        <span>GROUND — DAY ZERO</span>
+        <span>GROUND · DAY ZERO</span>
         <span className="climb_ground_mid">
           EACH BLOCK = ONE SATURDAY
         </span>
@@ -403,7 +404,7 @@ function SeatBoardMobile() {
             <span className="seat_lane_num">{item.lane_number}</span>
             <strong>{item.lane_name}</strong>
           </div>
-          <p className="seat_mobile_out">OUTPUT — {item.day_one_output}</p>
+          <p className="seat_mobile_out">OUTPUT: {item.day_one_output}</p>
           <ul className="seat_mobile_list">
             {item.member.map((person) => (
               <li key={person.person_name}>
@@ -629,11 +630,6 @@ export default function App() {
   const [focus_seat_lane, setFocusSeatLane] = useState(null);
   const [focus_const_lane, setFocusConstLane] = useState(null);
 
-  const kg_percent = Math.min(
-    100,
-    Math.round((pilot_proof.kg_diverted / pilot_proof.kg_target) * 100),
-  );
-
   function toggleSession(code) {
     setExpandedSession((prev) => (prev === code ? null : code));
   }
@@ -649,7 +645,7 @@ export default function App() {
           <LogoMark size={36} />
           <span>
             <strong>Youth CLAP</strong>
-            <small>Ateneo desk, CCC 2026</small>
+            <small>Ateneo desk · CCC 2026</small>
           </span>
         </a>
         <nav className="clean_nav" aria-label="Primary">
@@ -665,7 +661,7 @@ export default function App() {
       </header>
 
       <main id="main">
-        {/* —— Hero —— */}
+        {/* Hero */}
         <section className="hero_canvas" id="top" aria-labelledby="hero_title">
           <div className="hero_photo">
             <div className="hero_photo_veil" aria-hidden="true" />
@@ -679,14 +675,10 @@ export default function App() {
           </div>
 
           <div className="hero_sheet">
-            <div className="hero_sheet_grid hero_sheet_grid_proof">
+            <div className="hero_sheet_grid">
               <div>
-                <p className="hero_lead">
-                  A student-run desk for the Youth Climate Leadership Accelerator
-                  Project. <strong>Two builds already live</strong> (Gargar and
-                  EcoWaste), four lanes open, and a standing offer: bring a
-                  climate idea, walk away with a demo slice.
-                </p>
+                <p className="hero_program_name">{program.full_name}</p>
+                <p className="hero_description">{program.description}</p>
                 <ul className="place_chip_row" aria-label="Places">
                   {pilot_proof.place_chip.map((place) => (
                     <li key={place}>{place}</li>
@@ -706,52 +698,6 @@ export default function App() {
                 </p>
               </div>
 
-              <div className="proof_strip" aria-label="Pilot proof">
-                <div className="proof_tile">
-                  <span className="proof_tile_label">PET reference</span>
-                  <strong>₱{pilot_proof.pet_rate_amount}/kg</strong>
-                  <span className="proof_tile_meta">
-                    freeze {pilot_proof.rate_freeze_date}
-                  </span>
-                </div>
-                <div className="proof_tile">
-                  <span className="proof_tile_label">Al cans</span>
-                  <strong>₱{pilot_proof.aluminum_rate_amount}/kg</strong>
-                  <span className="proof_tile_meta">{pilot_proof.rate_status}</span>
-                </div>
-                <div className="proof_tile">
-                  <span className="proof_tile_label">Collectors</span>
-                  <strong>
-                    {pilot_proof.collector_verified_count}/
-                    {pilot_proof.collector_showcase_count}
-                  </strong>
-                  <span className="proof_tile_meta">
-                    verified of showcase trio
-                  </span>
-                </div>
-                <div className="proof_tile proof_tile_wide">
-                  <div className="proof_kg_head">
-                    <span className="proof_tile_label">Diversion log</span>
-                    <strong>
-                      {pilot_proof.kg_diverted} / {pilot_proof.kg_target} kg
-                    </strong>
-                  </div>
-                  <div
-                    className="proof_kg_bar"
-                    role="progressbar"
-                    aria-valuenow={kg_percent}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                    aria-label="Progress toward 100 kg target"
-                  >
-                    <span style={{ width: `${Math.max(kg_percent, 2)}%` }} />
-                  </div>
-                  <span className="proof_tile_meta">
-                    Field kg stays 0 until real handoffs are logged
-                  </span>
-                </div>
-              </div>
-
               <div className="hero_aside_card">
                 <p className="hero_aside_tagline">Dalhin mo lang ang idea</p>
                 <p className="hero_aside_note">
@@ -767,7 +713,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* —— Grounds —— */}
+        {/* Grounds */}
         <section
           className="section section_grounds"
           id="grounds"
@@ -872,7 +818,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* —— Journey —— */}
+        {/* Journey */}
         <section
           className="section section_paper section_climb"
           id="journey"
@@ -892,6 +838,15 @@ export default function App() {
             </p>
           </div>
 
+          <ul className="day_of_row" aria-label="Day-of logistics">
+            {day_of.map((item) => (
+              <li key={item.day_of_label}>
+                <strong>{item.day_of_label}</strong>
+                <span>{item.day_of_note}</span>
+              </li>
+            ))}
+          </ul>
+
           <div className="climb_desktop">
             <ClimbingStack
               expanded_code={expanded_session}
@@ -906,7 +861,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* —— Seats —— */}
+        {/* Seats */}
         <section
           className="section section_paper section_seats"
           id="seats"
@@ -940,7 +895,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* —— Constellation —— */}
+        {/* Constellation */}
         <section
           className="section section_paper section_constellation"
           id="lanes"
@@ -968,7 +923,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* —— Mentors —— */}
+        {/* Mentors */}
         <section
           className="section section_paper"
           id="people"
@@ -1059,15 +1014,20 @@ export default function App() {
                       </div>
                     )}
                     <div>
-                      <strong>{person.person_name}</strong>
+                      <strong>
+                        {person.short_name
+                          ? `${person.short_name} · ${person.person_name}`
+                          : person.person_name}
+                      </strong>
                       <span>{person.role_name}</span>
                     </div>
                   </div>
                 ))}
               </div>
               <p className="escort_note">
-                Find them at the desk on Aug 29 and Sep 12. They route you to the
-                right room.
+                Jack runs day-of logistics (assembly, transport, safety). Shen
+                is the backup if he is offline. Message him on Messenger for the
+                cohort group chat.
               </p>
             </div>
           </div>
@@ -1094,10 +1054,7 @@ export default function App() {
               <LogoMark size={36} />
               <div>
                 <strong>{program.short_name}, Ateneo desk</strong>
-                <p>
-                  Student build for journey, research, and demos. Hosted by the
-                  Climate Change Commission with Ateneo SEEDS.
-                </p>
+                <p>{program.description}</p>
               </div>
             </div>
             <nav className="site_footer_links" aria-label="Footer">
