@@ -16,6 +16,8 @@ Landing includes: **Youth CLAP design-system brand** (tokens + four-person mark)
 
 | Doc | Purpose |
 |-----|---------|
+| [`ROADMAP.md`](ROADMAP.md) | Tiered roadmap from the Aug 15 / Aug 22 sessions |
+| [`docs/plaud/`](docs/plaud/) | Session-recording briefs (transcript-cited asks · decisions · open questions) |
 | [`docs/research/2026-08-deep-research-brief.md`](docs/research/2026-08-deep-research-brief.md) | Climate + PH priorities + people research |
 | [`docs/research/2026-08-research-wave3-delta.md`](docs/research/2026-08-research-wave3-delta.md) | Wave 3 delta (50 agents) · Gargar actions |
 | [`docs/campaign-canvas.md`](docs/campaign-canvas.md) | Campaign Canvas v0.2 |
