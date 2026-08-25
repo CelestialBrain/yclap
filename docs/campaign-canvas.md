@@ -1,6 +1,6 @@
 # Campaign Canvas — Gargar pilot (Youth CLAP)
 
-**Version:** 0.2 · 2026-08-07  
+**Version:** 0.3 · 2026-08-25 · adds Aug 22 async-contract fill-in sections (§13–§14); v0.2 content unchanged below  
 **Owner lane:** Story (Mark) + Mobilize (Sophia) · Builder QA (Gelo)  
 **Research:** `docs/research/2026-08-research-wave3-delta.md`
 
@@ -43,6 +43,8 @@ If people can **see the price** and **reach a collector in one flow**, they will
 **Gargar** — reference rates (EcoWaste + research freeze), calculator, Pasig collector directory (showcase trio first), diversion log with export for pilot proof.
 
 **Mission line:** *See the scrap price. Reach a collector. Log the diversion.*
+
+**Flood activation:** when a flood event hits the node, drives re-activate per [`docs/pilot/flood-drive-protocol.md`](pilot/flood-drive-protocol.md) (PAGASA Orange trigger, 72-hour loop).
 
 ## 7. Tactics (5 weeks)
 
@@ -87,3 +89,63 @@ SEEDS / AIS continuity · EcoWaste Coalition feedback · optional EPR brand conv
 ## 12. Closest competitors (do not copy features yet)
 
 Rezbin (B2B bins) · Plastic Bank (brand PRO) · TrashCash/Circulo+ (points) · VECA/ScrapUncle (Asia twins — rate board + collectors). **Our wedge:** open ₱/kg + Pasig junkshop path + student diversion log for 5-week proof.
+
+---
+
+## 13. Async contract — assigned at Aug 22 BUILD (DUE AUG 28)
+
+Facilitators set an async deadline of **Aug 28, 2026** for: canvas Purpose + Process (seven questions), resource inventory, cost of action/inaction (`29:58`, `35:21`, `50:14` in `docs/plaud/2026-08-22-campaign-canvas.md`; `6:13:28` in `docs/plaud/2026-08-22-session-2-merged.md`). The Climate Venn worksheet is a personal task, tracked separately from this canvas. Submission is via email instructions (`50:14`–`52:00`, campaign-canvas brief). Per-school completion lives in `docs/cohort/contract-tracker.md`.
+
+### 13.1 Purpose + Process — the seven questions (DUE AUG 28)
+
+> **Reconstruction notice:** the exact SPS wording of the seven questions was not captured on-mic — slides were to be shared instead of photographed (`30:50`, campaign-canvas brief). Each question below is **[RECONSTRUCTED]** strictly from transcript-cited teaching; replace with official slide wording when the deck lands. Fill every answer before Aug 28.
+
+| # | Question | Answer (fill in) | Source of question |
+|---|----------|------------------|--------------------|
+| Q1 | What is the one core problem we chose, and what causes it? [RECONSTRUCTED] | | One problem per school as foundation (`4:42:49`, session-2); problem-tree discipline (`25:10`, campaign-canvas brief) |
+| Q2 | What change do we want — stated as a SMART objective, not an activity? [RECONSTRUCTED] | | "An activity is not an objective" (`34:24`–`35:21`, campaign-canvas brief; `5:57:38`, session-2) |
+| Q3 | Which solution carries that change — picked from the brain-jamming sheet? [RECONSTRUCTED] | | A–Z brain jamming → solution tree chain problem → goal → solution → effect (`4:51:00`, `5:15:29`, session-2) |
+| Q4 | What effect do we expect when the solution works? [RECONSTRUCTED] | | Solution-tree "effect" node (`5:15:29`, session-2) |
+| Q5 | What does success look like — which specific indicator (attendance / knowledge gain / behavior), agreed with the funder, not vanity metrics? [RECONSTRUCTED] | | No vanity metric; agree indicator with funder (`41:35`, campaign-canvas brief; `6:04:49`, session-2) |
+| Q6 | What assumptions must hold true for this plan to work? [RECONSTRUCTED] | | Assumptions named as a taught canvas field (repo-check row, campaign-canvas brief) |
+| Q7 | How will we monitor and evaluate progress toward the indicator? [RECONSTRUCTED] | | M&E indicator named as a missing taught field (repo-check row, campaign-canvas brief) |
+
+### 13.2 Resource inventory — physical / intellectual / human / financial (DUE AUG 28)
+
+Assigned with the four categories named on-mic (`50:14`–`52:00`, campaign-canvas brief; `6:13:28`, session-2). Sophia owns the resource block per lane map (`web/src/data/cohort.js` mobilize lane).
+
+| Category | What we have (fill in) | What we still need (fill in) |
+|----------|------------------------|------------------------------|
+| Physical | | |
+| Intellectual | | |
+| Human | | |
+| Financial | | |
+
+### 13.3 Cost of action vs cost of inaction (DUE AUG 28)
+
+Assigned together with the resource inventory (`50:14`–`52:00`, campaign-canvas brief; `6:13:28`, session-2).
+
+| | Cost (fill in) |
+|---|----------------|
+| If we act (run the Gargar pilot) | |
+| If we do not act (residual waste stays opaque) | |
+
+Evidence base for both cells: `docs/research/wave3-agent/R37-sdg12-waste-metrics.md` and §1 above.
+
+## 14. Roadmap gap fields
+
+### 14.1 Assumptions (fill in)
+
+What must be true for §5 theory of change to hold; falsify during field weeks.
+
+1.
+2.
+3.
+
+### 14.2 M&E — success indicators (fill in)
+
+Non-vanity indicators only (attendance / knowledge gain / behavior; `41:35`, campaign-canvas brief). Co-design with funder before Sep 12.
+
+| Indicator | Type (output/outcome) | Target | Measured how | Vanity check (why it is not likes/views) |
+|-----------|----------------------|--------|--------------|------------------------------------------|
+| | | | | |
