@@ -12,7 +12,7 @@ Program clock: **Aug 28 async contract due · Aug 29 Masterclass · Sep 12 Innov
 |------|----------------|---------|--------|--------------------|--------|
 | Async-contract packet: Campaign Canvas v0.3 + per-school tracker | Facilitators assigned canvas purpose+process (7 questions), resource inventory, cost of action/inaction by Aug 28 (`session-2` `6:13:28`; `campaign-canvas` brief) — repo canvas v0.2 lacks assumptions/M&E/success fields and no completion tracking exists | `docs/campaign-canvas.md` v0.3 + `docs/cohort/contract-tracker.md` | M | Open v0.3; PASS iff every officially assigned field has a fill-in section AND tracker lists each school with status columns for tree / canvas / inventory / costs | **done** — v0.3 + `docs/cohort/contract-tracker.md` (2026-08-25)
 | Cohort idea-guardrails one-pager ("before you propose") | Cohort keeps re-inventing what already ships (transparency website ≈ Gargar wedge) and re-proposing killed directions (planting drives, blue-carbon credits, another recycling app) — before the Aug 29 room | `docs/cohort/idea-guardrails.md` | S | PASS iff page names the project rack as first check, links R10/R28/R30 evidence lines, and states the three pitfall patterns with one-line reasons | **done** — `docs/cohort/idea-guardrails.md` (2026-08-25)
-| Landing program truth vs recorded reality | `program.js`/README sell Aug 15 as in-person Mapúa with governance (it ran online; governance moved to Aug 22), and Aug 29 venue is "TBD" in the recording while data pins Mapúa; vault correction: Aug 22 actually ran at Mapúa **Makati** (Intramuros power interruption, OSCI email 2026-08-20) — **coordinate with main's uncommitted `program.js` rewrite first** | web landing program section (edit on main, not this worktree) | S | Open landing; PASS iff Aug 15 row reflects online delivery, completed sessions are marked done, and no date/venue contradicts a recorded session | blocked — reconcile with main's uncommitted diff |
+| Landing program truth vs recorded reality | Landing sold Aug 15 as in-person Mapúa with governance (it ran online; governance moved to Aug 22) and Aug 22 venue Intramuros (it ran at Makati). Fixed on main @ b3e9b61 (2026-08-25): session rows + README corrected, `npm run build` green | web landing program section (`web/src/data/program.js`) | S | Open landing; PASS iff Aug 15 row reflects online delivery, completed sessions are marked done, and no date/venue contradicts a recorded session — **PASS** | **done** (2026-08-25) |
 
 ## P1 — Sep 12 showcase readiness
 
@@ -41,7 +41,7 @@ See [`docs/roadmap-rejected.md`](docs/roadmap-rejected.md) for the full log with
 
 | Item | What blocks it |
 |------|----------------|
-| Klima Kasan Awards ₱50k entry | Need award deadline + eligibility rules |
+| ~~Klima Kasan Awards ₱50k entry~~ | **resolved 2026-08-25** — probable referent is the OML Center × CCC MKK Shorts / Klima Film Festival family (₱ matches); 2026 pitch window closed Jul 15 (186 pitches → 20 advancing), so moot this cycle. Identity probable-not-certain; revisit next edition |
 | MWell challenge participation (window Aug 22–Sep 11, winners Sep 12) | Need team commitment decision |
 | Pre-showcase convocation + CCC×NYC institutionalization | Organizer-level decision, outside desk control |
 | Carbon-market integrity / PH biodiversity-credit standard research | CCC deferred it in-session; needs scoping call |
