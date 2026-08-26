@@ -26,6 +26,8 @@
 
 The official pre-test and post-test questionnaire were distributed as forms, not read aloud. Request both instruments (plus the post-session evaluation form) from the Save Philippine Seas / RECS secretariat and paste them below verbatim when received.
 
+**Form link recovered from the vault (2026-08-25):** the Session 1 "post-test + post-session evaluation" Google Form is live at `docs/library.md` → Session materials. Question text still needs pasting here — the link alone does not expose the items.
+
 ```
 [ PRE-TEST QUESTIONS — pending from SPS secretariat ]
 [ POST-TEST QUESTIONS — pending from SPS secretariat ]

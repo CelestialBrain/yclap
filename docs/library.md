@@ -12,6 +12,17 @@ Asked in two sessions ("download PhilCCA/NAP", `climate-biodiversity` brief `9:0
 | LCCAP action-plan resources | NICCDIES / CCC | current | [niccdies.climate.gov.ph/action-plans/local-climate-change-action-plan](https://niccdies.climate.gov.ph/action-plans/local-climate-change-action-plan) | 200 live | BUILD ask "know your LGU adaptation projects" (`project-development` `1:19:57`); basis of R17-lccap-lgu-plans.md |
 | Communities for Resilience (CORE) program | CCC | current | [climate.gov.ph/our-programs/communities-for-resilience](https://climate.gov.ph/our-programs/communities-for-resilience) | 200 live | Repo research context (youth-lab briefs' "RECS/CORE" beat) |
 
+## Session materials (organizer-shared links)
+
+From Anna Oposa's Session 1 follow-up email, 2026-08-15 (vault: `gmail__[External] [Youth CLAP] Session 1 Materials and Reminders`) — all live-checked 2026-08-25:
+
+| Deck | Link | Check |
+|------|------|-------|
+| The Big Questions on Climate Change | [drive.google.com/file/d/1js09A9Ynqd6Z7XRVIKYp6mX1wA6ujJru](https://drive.google.com/file/d/1js09A9Ynqd6Z7XRVIKYp6mX1wA6ujJru/view) | 200 |
+| Climate Justice | [drive.google.com/file/d/12euTLyGm3e0UW7rpffCdmwaaex4jciMZ](https://drive.google.com/file/d/12euTLyGm3e0UW7rpffCdmwaaex4jciMZ/view) | 200 |
+| Nature-Based Solutions for Climate Action | Google Slides deck — link in the same email (long URL with editor tokens; open the email copy rather than a retyped link) | not re-verified |
+| Post-test + post-session evaluation form | [docs.google.com/forms/…/viewform](https://docs.google.com/forms/d/e/1FAIpQLScP3PBZHwea5RBEqRradTowBXAfH4tygNFN9M_WyeCDNBs_tg/viewform) | 200 |
+
 ## Start here
 
 1. **PhilCCA WG2** — one PDF, the science base every problem tree leans on.

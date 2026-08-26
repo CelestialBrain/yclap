@@ -11,7 +11,7 @@
 
 | School | Problem tree | Canvas 7Q | Resource inventory | Cost of action/inaction | Solution tree | Submitted on | Owner |
 |--------|--------------|-----------|--------------------|-------------------------|---------------|--------------|-------|
-| Ateneo de Manila University | drafted | not started | not started | not started | drafted | — | Mark Marquez + Sophia Caverte (canvas per lane map) |
+| Ateneo de Manila University | drafted | not started | not started | not started | drafted | — | team of 10 — internal cadence: Wed Aug 26 scope meeting → task work Wed–Fri → Fri Aug 28 finalize (vault: Messenger "yclap participants", 2026-08-22/24) |
 | school-2 *(fill name)* | not started | not started | not started | not started | not started | — | — |
 | school-3 *(fill name)* | not started | not started | not started | not started | not started | — | — |
 | school-4 *(fill name)* | not started | not started | not started | not started | not started | — | — |

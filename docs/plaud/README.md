@@ -15,4 +15,6 @@ Eight recordings from Youth CLAP sessions (Aug 15 LEARN · Aug 22 BUILD), fetche
 
 Known recording-quality caveats (apply everywhere): diarization frequently merges or splits people; names garble (Borje/Borja, Porio/"Estenssoro", SPS five ways); several `[AI note]`-only "assignment" lists were never spoken and must not be treated as asks.
 
+**Vault corroboration (2026-08-25):** the polkadoc vault (`~/polkadoc` — YCLAP Messenger chat + 5 CCC-YCLAP email threads) confirms both sessions ran at **Mapúa Makati campus** on Aug 22, not Intramuros (power interruption; OSCI email 2026-08-20), and that Aug 15 moved fully online. Briefs saying "Mapúa" without a campus mean this correction applies.
+
 Candidate extraction from these briefs is roadmapped in [`../../ROADMAP.md`](../../ROADMAP.md); killed ideas in [`../roadmap-rejected.md`](../roadmap-rejected.md).
