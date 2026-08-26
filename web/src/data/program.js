@@ -306,18 +306,35 @@ export const session = [
   },
 ];
 
+/**
+ * Official Youth CLAP outputs (CCC onboarding: Batch 2 students).
+ * Project *form* is free (plan, site, device, campaign, AutoCAD, etc.);
+ * these five packages are what must be submitted / shown.
+ */
 export const output = [
   {
-    output_name: "Climate action project",
-    output_note: "Community- or school-facing intervention with a pilot slice",
+    output_name: "Project Prototype",
+    output_note:
+      "A concrete project plan addressing a climate problem in your school or community. Form is open: plan, website, device, campaign, AutoCAD, etc.",
   },
   {
-    output_name: "Campaign Canvas",
-    output_note: "Problem, audience, tactics, ask, and metrics",
+    output_name: "Project Pitch",
+    output_note:
+      "A 3-minute presentation delivered at the Innovation Showcase",
   },
   {
-    output_name: "3-minute elevator pitch",
-    output_note: "Demo-first story for the Innovation Showcase",
+    output_name: "Project Summary",
+    output_note:
+      "A 1-page summary of the project (problem, solution, activities, M&E plan)",
+  },
+  {
+    output_name: "Resource Map",
+    output_note: "A map of what you have vs. what you need",
+  },
+  {
+    output_name: "M&E Plan",
+    output_note:
+      "A simple monitoring and evaluation plan with indicators and tools",
   },
 ];
 
