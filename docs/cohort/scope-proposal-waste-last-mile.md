@@ -22,6 +22,10 @@ Both pass Catherine's test: schools, orgs, and admin can keep using the fix afte
 
 Plus one study that makes all three credible: **where does our segregated waste actually go, and what % survives?** (`3:43`). AIS already runs waste audits with CFMO — we coordinate, we don't duplicate (R48).
 
+## Where Gargar fits
+
+Gargar was never part of the original program plan — it is our own desk build, so pointing it at the school problem is pure upside, not scope theft. Teammates have separately flagged that **the Gargar website likely needs a rewrite anyway**. If the group picks this scope, the smart move is one rewrite serving both: keep the proven backend (rates, collector directory, diversion log) and rebuild the front end around event kits, calculator, and partner flows — instead of forking a second site we then maintain twice.
+
 ## Why this beats staying on species scarcity
 
 The forest stays our *evidence*: botany class quadrant sampling found the litter (`som-forest-restoration` `2:54`) — dead understory and species loss are partly a trash problem at the forest edge. Narrow framing = only botany classes use it; this framing = anyone who eats on campus. Guardrails-clean: hardware + logistics + planning intelligence, not another recycling app (`docs/cohort/idea-guardrails.md`).
@@ -37,3 +41,4 @@ The forest stays our *evidence*: botany class quadrant sampling found the litter
 1. Drop / shrink / keep the SOM-forest species-scarcity framing?
 2. Which slices do we commit (all three is too much for one week)?
 3. Who talks to AIS/CFMO about the flow audit, and who hunts partners?
+4. Rewrite the Gargar site in place around this scope (one product), or fork a separate SOM build as earlier planned?
