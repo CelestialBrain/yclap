@@ -1,10 +1,12 @@
-# Plaud brief — Campus Waste Last-Mile and Segregation Kits
+# Plaud brief — Campus Waste Last-Mile and Segregation Kits (solo proposal)
 
 2026-08-25 · 10:52 · 1 diarized speaker ("Speaker 1")
 
+**Status: ONE MEMBER'S OPINIONS** (Gelo), recorded after informal chats — NOT a group decision. Consensus claims below rest entirely on the speaker's off-mic retelling of Ivan and Catherine.
+
 **Source:** https://web.plaud.ai/s/pub_127aab99-4a60-448f-a035-b6de9e6b3804::U5xX95QLv9Jn9rpk5nieX7m2nALasNHn0Z2IWD5JH7PAIfHGI0qH-qy1m4lg63Uo3YqbwAqe1uU_lg9AittrYAI
 
-Solo reasoning note recorded after a group conversation: the team moves OFF the narrow "SOM forest loses species" framing (Ivan's push, Catherine's usability criterion) onto **campus waste last-mile logistics** — what happens to well-segregated waste after the bin.
+Solo reasoning note drafting a proposal to bring to the group: Gelo argues for moving OFF the narrow "SOM forest loses species" framing (Ivan's push, Catherine's usability criterion) onto **campus waste last-mile logistics** — what happens to well-segregated waste after the bin.
 
 ## Ask
 
@@ -28,7 +30,7 @@ Context beats: originally wanted Pasig City Gargar scope but accepted school-bas
 |---|--------|-------|
 | M1 | Concert-scale mass areas may be "more of a mentality thing we can't really solve" — though maybe it's accessibility, which the kit addresses | `10:03` |
 
-## Decision
+## Speaker position (not yet a group decision)
 
 1. **Scope bet:** solving last-mile logistics offers "more tangible and lasting impact than simply promoting more segregation" — segregation is already best practice; distribution is broken (`3:43`, `5:41`).
 2. Event-influx blindness named as a key failure point: ~3 cans for ~2,000 people at covered-court events; organizers plan reactively ("clean up after") because they lack volume intelligence (`6:39`–`8:35`).

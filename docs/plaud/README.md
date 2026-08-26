@@ -12,7 +12,7 @@ Eight recordings from Youth CLAP sessions (Aug 15 LEARN · Aug 22 BUILD), fetche
 | [2026-08-22-campaign-canvas.md](2026-08-22-campaign-canvas.md) | BUILD lecture — canvas purpose + process | 1:07:28 | 2 facilitator |
 | [2026-08-22-project-development.md](2026-08-22-project-development.md) | BUILD lecture — governance + valuation | 3:01:43 | 19 label |
 | [2026-08-22-som-forest-restoration.md](2026-08-22-som-forest-restoration.md) | Gargar reskin memo (SOM swamp forest) | 13:59 | solo (Gelo) |
-| [2026-08-25-campus-waste-last-mile.md](2026-08-25-campus-waste-last-mile.md) | Group pivot — campus waste last-mile + kits + calculator | 10:52 | solo label |
+| [2026-08-25-campus-waste-last-mile.md](2026-08-25-campus-waste-last-mile.md) | Solo proposal — campus waste last-mile + kits + calculator (one member's opinion) | 10:52 | solo label |
 
 Known recording-quality caveats (apply everywhere): diarization frequently merges or splits people; names garble (Borje/Borja, Porio/"Estenssoro", SPS five ways); several `[AI note]`-only "assignment" lists were never spoken and must not be treated as asks.
 
