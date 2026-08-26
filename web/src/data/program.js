@@ -8,8 +8,10 @@ export const program = {
   host: "Climate Change Commission and Ateneo de Manila University",
   ateneo_office:
     "Office of the Assistant Vice President for Social and Environmental Engagement for Development and Sustainability (SEEDS)",
-  /** Orientation logistics (2026-08-08 Ateneo desk briefing) */
+  /** Orientation logistics (2026-08-08 Ateneo desk briefing) — superseded: Aug 15 ran online (Habagat); kept for the record */
   assembly: {
+    status_note:
+      "Superseded — the Aug 15 session moved online, so this assembly plan never executed.",
     place: "Areté, near Gate 3 / Gate 3.5",
     assemble_time: "6:45 AM",
     depart_time: "7:00 AM",
@@ -210,10 +212,10 @@ export const session = [
     session_index: "01",
     session_name: "Modules 1 and 2",
     session_detail:
-      "Climate science and governance, the baseline everyone argues from. Registration 8:00 AM at Mapúa AVR. Ateneo cohort assembles at Areté (Gate 3 / 3.5) at 6:45 AM, departs 7:00 AM. First day attire: PE shirt and pants.",
+      "Climate science and governance, the baseline everyone argues from. Moved fully ONLINE due to Habagat: MS Teams, join before 8:30 AM, display name as [UNIVERSITY] Name. Original plan (Areté 6:45 AM assembly, Mapúa AVR 8:00 AM registration) did not run.",
     session_who: "Dr Emma Porio and Dr Rodel Lasco",
     session_who_short: "PORIO · LASCO",
-    venue: "Mapúa University AVR, Intramuros",
+    venue: "Online — MS Teams (moved from Mapúa AVR due to Habagat)",
     session_color: "#EE3B24",
     session_motif: "spark",
     session_motif_label: "Catalyst",
@@ -231,10 +233,10 @@ export const session = [
     session_index: "02",
     session_name: "Modules 3 and 4",
     session_detail:
-      "Project development and resource mobilization. Campaign Canvas starts here.",
+      "Project development and resource mobilization. Campaign Canvas starts here. Venue moved from Intramuros to Makati campus on Aug 20 (power interruption); transportation was provided.",
     session_who: "Ms Vicky Tan",
     session_who_short: "VICKY TAN",
-    venue: "Mapúa University, Intramuros",
+    venue: "Mapúa University, Makati",
     session_color: "#F5871F",
     session_motif: "petal",
     session_motif_label: "Opening",

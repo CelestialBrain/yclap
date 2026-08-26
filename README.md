@@ -38,9 +38,9 @@ Landing includes: **Youth CLAP design-system brand** (tokens + four-person mark)
 
 | Date | Session |
 |------|---------|
-| Aug 15 | LEARN · Mapúa |
-| Aug 22 | BUILD · Mapúa |
-| Aug 29 | Masterclass · Mapúa |
+| Aug 15 | LEARN · online (moved for Habagat) |
+| Aug 22 | BUILD · done — Mapúa Makati |
+| Aug 29 | Masterclass · Mapúa (venue per organizer) |
 | Sep 5 | Async prepare |
 | Sep 12 | Innovation Showcase |
 
