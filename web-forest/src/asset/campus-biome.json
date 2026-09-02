@@ -1,0 +1,840 @@
+{
+  "_comment": "Biome seed for the 09-02 pivot. Rings tagged is_placeholder are OUR delineation or invented padding - never label them surveyed. species_code carries provisional assignments from the demo encounter seeds; the AIS inventory (due 09-09) supersedes them.",
+  "generated_at": "2026-09-03",
+  "generated_by": "Overpass z-mirror query over the campus bbox, 2026-09-03",
+  "attribution": "Ring geometry (c) OpenStreetMap contributors, ODbL",
+  "biome": [
+    {
+      "biome_code": "sunken-forest",
+      "name": "Sunken Forest",
+      "kind": "wood",
+      "is_placeholder": true,
+      "ring": null,
+      "ring_source": "NOT IN OPENSTREETMAP. Agreed in the 09-02 pulong (52:46) as its own biome; extent must be drawn by the team.",
+      "species_code": [],
+      "species_source": null,
+      "note": "Blocking. Nothing renders until someone draws this ring."
+    },
+    {
+      "biome_code": "som-grove",
+      "name": "SOM grove",
+      "kind": "wood",
+      "is_placeholder": true,
+      "ring": [
+        {
+          "part_name": "JG School of Management Building (anchor, padded)",
+          "osm_way_id": 25766555,
+          "osm_tag": {},
+          "point": [
+            [
+              14.639447,
+              121.075156
+            ],
+            [
+              14.639447,
+              121.077344
+            ],
+            [
+              14.637415,
+              121.077344
+            ],
+            [
+              14.637415,
+              121.075156
+            ],
+            [
+              14.639447,
+              121.075156
+            ]
+          ]
+        }
+      ],
+      "ring_source": "PLACEHOLDER — a padded box around the JG SOM building, not a surveyed wood. OSM has no wood polygon here.",
+      "species_code": [],
+      "species_source": null,
+      "note": "Extent is invented padding. Must be redrawn before it is shown as a real boundary."
+    },
+    {
+      "biome_code": "lst-woods",
+      "name": "LST woods",
+      "kind": "wood",
+      "is_placeholder": true,
+      "ring": [
+        {
+          "part_name": "Loyola School of Theology (anchor, padded)",
+          "osm_way_id": 160693276,
+          "osm_tag": {},
+          "point": [
+            [
+              14.638747,
+              121.080436
+            ],
+            [
+              14.638747,
+              121.082784
+            ],
+            [
+              14.636133,
+              121.082784
+            ],
+            [
+              14.636133,
+              121.080436
+            ],
+            [
+              14.638747,
+              121.080436
+            ]
+          ]
+        }
+      ],
+      "ring_source": "PLACEHOLDER — a padded box around Loyola School of Theology. OSM has no wood polygon here.",
+      "species_code": [],
+      "species_source": null,
+      "note": "Extent is invented padding. Must be redrawn."
+    },
+    {
+      "biome_code": "mini-forest",
+      "name": "North mini-forest",
+      "kind": "wood",
+      "is_placeholder": false,
+      "ring": [
+        {
+          "part_name": "Mini-forest",
+          "osm_way_id": 18338479,
+          "osm_tag": {
+            "landuse": "forest"
+          },
+          "point": [
+            [
+              14.644194,
+              121.075961
+            ],
+            [
+              14.643928,
+              121.076189
+            ],
+            [
+              14.643904,
+              121.07621
+            ],
+            [
+              14.643508,
+              121.076463
+            ],
+            [
+              14.643294,
+              121.07672
+            ],
+            [
+              14.643277,
+              121.076775
+            ],
+            [
+              14.643354,
+              121.076917
+            ],
+            [
+              14.64342,
+              121.077017
+            ],
+            [
+              14.643498,
+              121.077166
+            ],
+            [
+              14.643471,
+              121.077315
+            ],
+            [
+              14.643419,
+              121.078109
+            ],
+            [
+              14.643801,
+              121.078402
+            ],
+            [
+              14.643981,
+              121.07854
+            ],
+            [
+              14.644072,
+              121.078602
+            ],
+            [
+              14.644445,
+              121.078672
+            ],
+            [
+              14.644272,
+              121.077378
+            ],
+            [
+              14.644133,
+              121.077394
+            ],
+            [
+              14.644074,
+              121.077241
+            ],
+            [
+              14.644054,
+              121.07712
+            ],
+            [
+              14.644069,
+              121.076866
+            ],
+            [
+              14.644288,
+              121.076742
+            ],
+            [
+              14.644194,
+              121.075961
+            ]
+          ]
+        }
+      ],
+      "ring_source": "OSM landuse=forest — the ONLY real forest polygon near campus.",
+      "species_code": [],
+      "species_source": null,
+      "note": "Sits north of CAMPUS_BOX.north (14.6425); the box must be extended to 14.6460 or this is clipped away."
+    },
+    {
+      "biome_code": "bellarmine-field",
+      "name": "Bellarmine & Cervini",
+      "kind": "open-field",
+      "is_placeholder": false,
+      "ring": [
+        {
+          "part_name": "Bellarmine Field",
+          "osm_way_id": 26301595,
+          "osm_tag": {
+            "landuse": "recreation_ground"
+          },
+          "point": [
+            [
+              14.639919,
+              121.079246
+            ],
+            [
+              14.64081,
+              121.079741
+            ],
+            [
+              14.641245,
+              121.078917
+            ],
+            [
+              14.640507,
+              121.07846
+            ],
+            [
+              14.640401,
+              121.078425
+            ],
+            [
+              14.639919,
+              121.079246
+            ]
+          ]
+        },
+        {
+          "part_name": "Cervini Field",
+          "osm_way_id": 608076945,
+          "osm_tag": {
+            "landuse": "greenfield"
+          },
+          "point": [
+            [
+              14.639769,
+              121.079385
+            ],
+            [
+              14.639357,
+              121.079321
+            ],
+            [
+              14.638918,
+              121.079008
+            ],
+            [
+              14.638887,
+              121.079126
+            ],
+            [
+              14.638926,
+              121.079145
+            ],
+            [
+              14.639039,
+              121.079259
+            ],
+            [
+              14.638993,
+              121.07931
+            ],
+            [
+              14.638984,
+              121.079324
+            ],
+            [
+              14.639048,
+              121.079475
+            ],
+            [
+              14.639068,
+              121.079492
+            ],
+            [
+              14.63919,
+              121.079545
+            ],
+            [
+              14.639199,
+              121.079528
+            ],
+            [
+              14.639271,
+              121.079541
+            ],
+            [
+              14.639292,
+              121.079572
+            ],
+            [
+              14.639308,
+              121.079587
+            ],
+            [
+              14.639285,
+              121.079743
+            ],
+            [
+              14.639548,
+              121.079798
+            ],
+            [
+              14.639769,
+              121.079385
+            ]
+          ]
+        }
+      ],
+      "ring_source": "OSM landuse=recreation_ground + landuse=greenfield.",
+      "species_code": [
+        "balete",
+        "lagundi"
+      ],
+      "species_source": "Carried from the existing demo encounter seeds (e4 Bellarmine field edge, e8 Bellarmine path). Demo-map positions, NOT a survey.",
+      "note": "The balete here is the documented landmark tree."
+    },
+    {
+      "biome_code": "south-field",
+      "name": "South fields",
+      "kind": "open-field",
+      "is_placeholder": false,
+      "ring": [
+        {
+          "part_name": "Moro Lorenzo Football Field",
+          "osm_way_id": 25775205,
+          "osm_tag": {
+            "leisure": "pitch"
+          },
+          "point": [
+            [
+              14.637493,
+              121.075225
+            ],
+            [
+              14.637478,
+              121.075825
+            ],
+            [
+              14.636549,
+              121.075801
+            ],
+            [
+              14.636564,
+              121.075201
+            ],
+            [
+              14.637493,
+              121.075225
+            ]
+          ]
+        },
+        {
+          "part_name": "Ocampo Field",
+          "osm_way_id": 25775206,
+          "osm_tag": {
+            "leisure": "pitch"
+          },
+          "point": [
+            [
+              14.636518,
+              121.076205
+            ],
+            [
+              14.636181,
+              121.076694
+            ],
+            [
+              14.636924,
+              121.077237
+            ],
+            [
+              14.637267,
+              121.076754
+            ],
+            [
+              14.636518,
+              121.076205
+            ]
+          ]
+        },
+        {
+          "part_name": "Matteo Field",
+          "osm_way_id": 608204747,
+          "osm_tag": {
+            "leisure": "park"
+          },
+          "point": [
+            [
+              14.63766,
+              121.076797
+            ],
+            [
+              14.637615,
+              121.077202
+            ],
+            [
+              14.638134,
+              121.077104
+            ],
+            [
+              14.63815,
+              121.076986
+            ],
+            [
+              14.63766,
+              121.076797
+            ]
+          ]
+        },
+        {
+          "part_name": "Science Education Complex Field",
+          "osm_way_id": 25849653,
+          "osm_tag": {
+            "leisure": "park"
+          },
+          "point": [
+            [
+              14.638637,
+              121.076808
+            ],
+            [
+              14.638511,
+              121.076848
+            ],
+            [
+              14.638388,
+              121.07697
+            ],
+            [
+              14.638352,
+              121.077115
+            ],
+            [
+              14.638375,
+              121.077247
+            ],
+            [
+              14.63843,
+              121.077367
+            ],
+            [
+              14.638611,
+              121.077561
+            ],
+            [
+              14.638862,
+              121.077216
+            ],
+            [
+              14.638697,
+              121.077059
+            ],
+            [
+              14.638637,
+              121.076808
+            ]
+          ]
+        }
+      ],
+      "ring_source": "OSM leisure=pitch / leisure=park.",
+      "species_code": [],
+      "species_source": null,
+      "note": "No encounter seed falls here yet."
+    },
+    {
+      "biome_code": "zen-garden",
+      "name": "Zen Garden",
+      "kind": "cultivated",
+      "is_placeholder": false,
+      "ring": [
+        {
+          "part_name": "Zen Garden",
+          "osm_way_id": 25849643,
+          "osm_tag": {
+            "leisure": "garden"
+          },
+          "point": [
+            [
+              14.639164,
+              121.077848
+            ],
+            [
+              14.639652,
+              121.077853
+            ],
+            [
+              14.639649,
+              121.078212
+            ],
+            [
+              14.639482,
+              121.078223
+            ],
+            [
+              14.639154,
+              121.07822
+            ],
+            [
+              14.639164,
+              121.077848
+            ]
+          ]
+        }
+      ],
+      "ring_source": "OSM leisure=garden.",
+      "species_code": [],
+      "species_source": null,
+      "note": "Small, ornamental — a good contrast biome."
+    },
+    {
+      "biome_code": "dorm-side",
+      "name": "Dorm side",
+      "kind": "residential-canopy",
+      "is_placeholder": false,
+      "ring": [
+        {
+          "part_name": "University Dorms",
+          "osm_way_id": 1219258787,
+          "osm_tag": {
+            "landuse": "residential"
+          },
+          "point": [
+            [
+              14.639722,
+              121.081248
+            ],
+            [
+              14.639484,
+              121.081016
+            ],
+            [
+              14.639434,
+              121.08101
+            ],
+            [
+              14.639384,
+              121.080956
+            ],
+            [
+              14.639342,
+              121.080929
+            ],
+            [
+              14.6393,
+              121.080907
+            ],
+            [
+              14.639305,
+              121.080885
+            ],
+            [
+              14.638984,
+              121.080804
+            ],
+            [
+              14.638978,
+              121.080831
+            ],
+            [
+              14.638959,
+              121.080827
+            ],
+            [
+              14.638947,
+              121.080876
+            ],
+            [
+              14.638967,
+              121.080881
+            ],
+            [
+              14.638932,
+              121.081028
+            ],
+            [
+              14.639252,
+              121.081109
+            ],
+            [
+              14.639262,
+              121.081066
+            ],
+            [
+              14.63936,
+              121.0811
+            ],
+            [
+              14.639347,
+              121.081166
+            ],
+            [
+              14.639588,
+              121.081401
+            ],
+            [
+              14.639674,
+              121.081307
+            ],
+            [
+              14.639683,
+              121.081315
+            ],
+            [
+              14.639716,
+              121.081279
+            ],
+            [
+              14.639704,
+              121.081267
+            ],
+            [
+              14.639705,
+              121.081266
+            ],
+            [
+              14.639722,
+              121.081248
+            ]
+          ]
+        },
+        {
+          "part_name": "De La Costa Housing",
+          "osm_way_id": 92670282,
+          "osm_tag": {
+            "landuse": "residential"
+          },
+          "point": [
+            [
+              14.633776,
+              121.081256
+            ],
+            [
+              14.63377,
+              121.081686
+            ],
+            [
+              14.633768,
+              121.081813
+            ],
+            [
+              14.633762,
+              121.082211
+            ],
+            [
+              14.63429,
+              121.082307
+            ],
+            [
+              14.63474,
+              121.082432
+            ],
+            [
+              14.63498,
+              121.082539
+            ],
+            [
+              14.635111,
+              121.082572
+            ],
+            [
+              14.635255,
+              121.08259
+            ],
+            [
+              14.635448,
+              121.08272
+            ],
+            [
+              14.635548,
+              121.082749
+            ],
+            [
+              14.636383,
+              121.082924
+            ],
+            [
+              14.637547,
+              121.083126
+            ],
+            [
+              14.637552,
+              121.083113
+            ],
+            [
+              14.637686,
+              121.08313
+            ],
+            [
+              14.637885,
+              121.083194
+            ],
+            [
+              14.638059,
+              121.083226
+            ],
+            [
+              14.63812,
+              121.083128
+            ],
+            [
+              14.638157,
+              121.083024
+            ],
+            [
+              14.638164,
+              121.082411
+            ],
+            [
+              14.63825,
+              121.082299
+            ],
+            [
+              14.638317,
+              121.081985
+            ],
+            [
+              14.637912,
+              121.081922
+            ],
+            [
+              14.637381,
+              121.081839
+            ],
+            [
+              14.636904,
+              121.081739
+            ],
+            [
+              14.636376,
+              121.081579
+            ],
+            [
+              14.636209,
+              121.081604
+            ],
+            [
+              14.63595,
+              121.081755
+            ],
+            [
+              14.635586,
+              121.081938
+            ],
+            [
+              14.63535,
+              121.082016
+            ],
+            [
+              14.634866,
+              121.08191
+            ],
+            [
+              14.634886,
+              121.081798
+            ],
+            [
+              14.634552,
+              121.081718
+            ],
+            [
+              14.634498,
+              121.081573
+            ],
+            [
+              14.634372,
+              121.08118
+            ],
+            [
+              14.634084,
+              121.081239
+            ],
+            [
+              14.633925,
+              121.081233
+            ],
+            [
+              14.633869,
+              121.081251
+            ],
+            [
+              14.633776,
+              121.081256
+            ]
+          ]
+        }
+      ],
+      "ring_source": "OSM landuse=residential.",
+      "species_code": [],
+      "species_source": null,
+      "note": "De La Costa reaches lat 14.63376, south of CAMPUS_BOX.south (14.635) — box must extend to 14.6337."
+    },
+    {
+      "biome_code": "academic-core",
+      "name": "Academic core",
+      "kind": "planted-walk",
+      "is_placeholder": true,
+      "ring": null,
+      "ring_source": "NOT IN OPENSTREETMAP as one polygon. Covers Gonzaga / CTC / Rizal Library / Berchmans / Xavier walks.",
+      "species_code": [
+        "narra",
+        "raintree",
+        "molave",
+        "katmon",
+        "dao"
+      ],
+      "species_source": "Carried from demo encounter seeds e1,e2,e3,e5,e7. Demo-map positions, NOT a survey.",
+      "note": "Holds 5 of the 8 existing encounters. Needs a hand-drawn ring."
+    },
+    {
+      "biome_code": "katipunan-edge",
+      "name": "Katipunan edge",
+      "kind": "planted-walk",
+      "is_placeholder": true,
+      "ring": null,
+      "ring_source": "NOT IN OPENSTREETMAP. The gate yard and western walks.",
+      "species_code": [
+        "mahogany"
+      ],
+      "species_source": "Carried from demo encounter seed e6 (Katipunan gate yard). Demo-map position, NOT a survey.",
+      "note": "Needs a hand-drawn ring."
+    }
+  ]
+}

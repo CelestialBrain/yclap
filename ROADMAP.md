@@ -589,3 +589,43 @@ stops → biomes; `n of N` → per-biome), two survive re-aimed.
 | CC0 low-poly trees inside the product | Quaternius / Poly Pizza / Kenney are all CC0 and usable, but they clash with the hand-drawn field-guide art. 3D belongs in the pitch, not the product (`1:07:02` Ivan already framed it that way) |
 | Spawn timers we cannot justify | `33:04` asked for rarity and urgency; rarity must derive from real observation gaps, not an invented respawn clock |
 | Public leaderboard / race / cross-user comparison | Still rejected with named sources pending the P0 decision |
+
+## 2026-09-03 (later) — 3D is in scope, and the biome seed exists
+
+Two changes to the section above, both owner decisions taken after it was written.
+
+**1. 3D is adopted.** The 09-03 brief recommended keeping 3D out of the bundle;
+the owner overruled that — the character, and the unboxing moment that reveals
+it, are to be built in 3D. The recommendation is not re-litigated here; what
+follows is the honest cost of doing it well.
+
+- **Renderer:** `<model-viewer>`, self-hosted — **not** three.js directly, and
+  **not** loaded from unpkg. model-viewer's own issue tracker documents models
+  failing to load when the library is served from a CDN, and this app's whole
+  story is offline: the component JS *and* every `.glb` must be precached by
+  `public/sw.js` or the character is a blank box on stage.
+- **Budget:** the app is 92 kB gzipped today. 3D is the single largest thing
+  ever added to it. The gate is a **hard ceiling, not a hope** — see the P1 row.
+- **Pipeline:** [glTF-Transform](https://gltf-transform.dev/) for Draco or
+  Meshopt plus KTX2; texture cap 1024 px. Draco is documented at up to 10×
+  geometry reduction, and quantization + meshopt has taken real models from
+  29 MB to 2.5 MB. Assume nothing ships uncompressed.
+- **Scope boundary:** 3D is for the **character and the unboxing**. The map
+  stays 2D raster tiles with biome fills. Putting 3D trees on the map is a
+  separate, much larger job and is not in this tier.
+
+**2. The biome seed is committed** — `web-forest/src/asset/campus-biome.json`,
+generated from a live Overpass sweep. **10 biomes: 7 carry real OSM geometry,
+3 have no ring at all** and are blocking until someone draws them (Sunken
+Forest, academic core, Katipunan edge). Every placeholder is flagged
+`is_placeholder`, and `species_code` carries provisional assignments lifted
+from the existing demo encounter seeds — labelled as demo-map positions, never
+as a survey. The AIS inventory (due 09-09) supersedes them.
+
+**`CAMPUS_BOX` is measurably too small.** Against the real biome extent it
+clips **~137 m off the south** (De La Costa reaches 14.63376), **~216 m off the
+north** (Mini-forest reaches 14.64444) and **~131 m off the east** (121.08323).
+Proposed: `north 14.6455 · south 14.6330 · west 121.0740 · east 121.0840`.
+
+Full build spec, sequenced for a single implementer:
+[`docs/spec/biome-3d-build-spec.md`](docs/spec/biome-3d-build-spec.md).
