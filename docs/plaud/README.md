@@ -1,6 +1,6 @@
 # Plaud brief index
 
-Eight recordings from Youth CLAP sessions (Aug 15 LEARN · Aug 22 BUILD), fetched via the cached plaud fetcher (`~/.piper/plaud/<pub_uuid>/note.md`). Each brief cites the transcript (`m:ss`) as evidence; claims appearing only in Plaud's AI note are labelled `[AI note]`. Asks are cross-referenced against this repo: **exists · partial · absent · unmappable**.
+Twelve recordings from Youth CLAP sessions (Aug 15 LEARN · Aug 22 BUILD · Aug 26 Ateneo CCC weekly · Aug 29 Masterclass), fetched via the cached plaud fetcher (`~/.piper/plaud/<pub_uuid>/note.md`). Each brief cites the transcript (`m:ss`) as evidence; claims appearing only in Plaud's AI note are labelled `[AI note]`. Asks are cross-referenced against this repo: **exists · partial · absent · unmappable**.
 
 | Brief | Session | Duration | Speakers |
 |-------|---------|----------|----------|
@@ -13,6 +13,10 @@ Eight recordings from Youth CLAP sessions (Aug 15 LEARN · Aug 22 BUILD), fetche
 | [2026-08-22-project-development.md](2026-08-22-project-development.md) | BUILD lecture — governance + valuation | 3:01:43 | 19 label |
 | [2026-08-22-som-forest-restoration.md](2026-08-22-som-forest-restoration.md) | Gargar reskin memo (SOM swamp forest) | 13:59 | solo (Gelo) |
 | [2026-08-25-campus-waste-last-mile.md](2026-08-25-campus-waste-last-mile.md) | Solo proposal — campus waste last-mile + kits + calculator (one member's opinion) | 10:52 | solo label |
+| [2026-08-26-lingguhang-pulong.md](2026-08-26-lingguhang-pulong.md) | Ateneo CCC weekly — website as innovation output | 38:04 | 8 labels, diarization suspect |
+| [2026-08-29-ateneo-biodiversity-platform.md](2026-08-29-ateneo-biodiversity-platform.md) | Masterclass — Ateneo pitch + mentor talk (`1:57:43`–`2:21:06`) | 3:18:43 (slice ~23 min) | 22 labels on file, diarization suspect |
+| [2026-08-29-youth-climate-roundtable.md](2026-08-29-youth-climate-roundtable.md) | Masterclass morning — UNICEF / UST / NYC / Ayala | 1:11:50 | 11 labels, diarization suspect |
+| [2026-09-02-pulong-website-biome-showcase.md](2026-09-02-pulong-website-biome-showcase.md) | Ateneo CCC weekly — **biome pivot**, gamification, showcase tasks | 1:16:50 | 9 labels, diarization suspect |
 
 Known recording-quality caveats (apply everywhere): diarization frequently merges or splits people; names garble (Borje/Borja, Porio/"Estenssoro", SPS five ways); several `[AI note]`-only "assignment" lists were never spoken and must not be treated as asks.
 
