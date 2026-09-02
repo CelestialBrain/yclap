@@ -1,0 +1,39 @@
+{
+  "agent_id": "G27",
+  "target": "National Youth Commission Philippines climate awards youth projects winners",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.3819736,
+  "structured": {
+    "agent_id": "G27",
+    "target": "National Youth Commission Philippines climate awards youth projects winners",
+    "project_name": "Project MOSES (Monitoring and Observation of Site-specific E-weather Station)",
+    "builder": [
+      "Engr. Christian B. Hernandez"
+    ],
+    "school_or_org": "Mindanao State University / Mindoro State University (instructor; Oriental Mindoro focus)",
+    "year_or_edition": "2025 (3rd year of PRA)",
+    "program_event": "Philippine Resilience Awards 2025 (Youth Category); NYC partner present, CCC/Legarda-led",
+    "theme_or_track": "Youth Category — Kababaihan at Kabataan: Katuwang sa Paghahabi ng Isang Matatag na Bayan",
+    "what_it_does": "IoT-based localized synoptic weather monitoring system that fills gaps in real-time, site-specific weather data in Oriental Mindoro (e.g. Mag-asawang Tubig Watershed), helping communities anticipate hydro-meteorological hazards such as flash floods, extreme rainfall, and heat waves.",
+    "place": "Youth Category awardee (one of five equal youth champions; not ranked 1st–5th in sources)",
+    "outcome_or_award": "Philippine Resilience Awards 2025 Youth Category recognition; continued support to scale initiatives (2024 cohort reported Php150,000 each)",
+    "theme_same_every_year": "no",
+    "confidence": "medium",
+    "source_url": [
+      "https://climate.gov.ph/news/1047",
+      "https://pia.gov.ph/press-release/women-and-youth-climate-resilience-leaders-honored-at-philippine-resilience-awards-2025/",
+      "https://tribune.net.ph/2025/12/05/women-youth-climate-champions-recognized-at-philippine-resilience-awards-2025",
+      "https://globalnation.inquirer.net/302327/meet-the-women-and-youth-redefining-what-climate-leadership-could-look-like",
+      "https://www.pna.gov.ph/articles/1263859",
+      "https://climate.gov.ph/news/961",
+      "https://www.heraldofilipino.org/21st-tayo-awards/",
+      "https://www.sunstar.com.ph/davao/tayo-ang-mga-bagong-bayani",
+      "https://www.forestfoundation.ph/news/centre-for-sustainability-philippines-wins-tayo16-award/",
+      "https://en.wikipedia.org/wiki/National_Youth_Commission_(Philippines)"
+    ],
+    "gap": "No public, detailed list of winners was found for a climate-specific award run solely by the National Youth Commission (NYC). NYC’s 2025 KABAYANI Awards include an Environment and Climate Action category and planned awarding at the PYDP Festival, but named climate-project winners and project descriptions were not located on open web sources. Historic TAYO Awards (NYC-founded; NYC sponsorship ended ~2018–2019; now TAYO Awards Foundation) have an Environment, DRR, and Climate Action track—e.g. Salumayag Youth Collective for Forests (TAYO 21 Top 10 / Coke Barkada; Reweaving For Forests) and Centre for Sustainability Philippines (TAYO 16; Cleopatra’s Needle Critical Habitat)—but these are not current NYC-administered climate awards. PRA is CCC multistakeholder (NYC Asec Gervy James Gumarit attended 2025); NYC is not lead organizer.",
+    "note": "Other PRA 2025 Youth Category climate/resilience project winners (same program, PH gov sources): (1) Reskyusi Food Basket Program — Raymart S. Garcia, Brgy. Commonwealth, Quezon City (food rescue / sustainable food systems; malnutrition and wastage); (2) Kwentong Kalikasan — Val Amiel Vestil, Association of Young Environmental Journalists (storytelling for ecological awareness and climate resilience); (3) Green by Design — Shri Tahanie B. Macaumbao, National Youth Council (waste reduction, water sustainability, water-hyacinth focus around Lake Lanao / Marawi); (4) Subang Environmental Initiatives — Peter John C. Enorio, Cebu Technological University (restore degraded land, kamagong/bamboo, nature-based adaptation, coastal clean-ups). PRA 2024 Youth: Christian John Evangelista (Manila City DRRMO); Edren Llanillo (Padyarescue / Go Bike Project, Bugallon, Pangasinan). NYC climate-related work also includes #NowPH campaign (not an awards program). Primary record uses Project MOSES as a clearly climate-tech youth project with full name, builder, org, and mechanism documented on climate.gov.ph and PIA."
+  },
+  "stderr_tail": ""
+}

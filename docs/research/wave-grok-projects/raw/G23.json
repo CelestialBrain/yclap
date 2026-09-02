@@ -1,0 +1,35 @@
+{
+  "agent_id": "G23",
+  "target": "Gawad CCC Outstanding Young Climate Scientists list years winners schools",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.1869712,
+  "structured": {
+    "agent_id": "G23",
+    "target": "Gawad CCC Outstanding Young Climate Scientists list years winners schools",
+    "project_name": "Gawad CCC: Search for Outstanding Young Climate Scientists",
+    "builder": [
+      "Climate Change Commission (CCC)",
+      "Department of Education (DepEd)",
+      "National Panel of Technical Experts (NPTE)"
+    ],
+    "school_or_org": "Climate Change Commission (Philippines); participant schools include science high schools (2019 NCR list public)",
+    "year_or_edition": "2018 (National Climate Science Youth Congress, related precursor under Climate Science Youth Program); 2019 (Gawad CCC edition documented)",
+    "program_event": "Gawad CCC: Search for Outstanding Young Climate Scientists (under CCC Climate Science Youth Program; often tied to Global Warming and Climate Change Consciousness Week)",
+    "theme_or_track": "2018: water security / “The 1.5 °Celsius Challenge: Securing Water for All Filipinos”; 2019: Food-Water-Energy Nexus",
+    "what_it_does": "A CCC contest for science high school students to present climate-related research (adaptation/mitigation, nexus solutions). The 2019 edition included regional recognition activities, a climate-science bootcamp for regional winners to strengthen the climate lens of their work, then a National Gawad CCC presentation. Judges included NPTE members and other national agency representatives, in coordination with DepEd.",
+    "place": "Philippines (2019 public list focused on National Capital Region science high schools; program described four regional recognition activities leading to a national stage)",
+    "outcome_or_award": "Public sources list participating schools and research titles for 2019 NCR presentations and state that regional winners advanced (four researches noted after bootcamp/national process). No verified public ranked 1st/2nd/3rd winner list or named student champions.",
+    "theme_same_every_year": "No — documented themes differ by year (2018 water security / 1.5°C; 2019 Food-Water-Energy Nexus).",
+    "confidence": "medium",
+    "source_url": [
+      "https://climate.gov.ph/our-programs/climate-science-youth-program",
+      "https://www.cif.org/just-transition-toolbox/example/climate-science-youth-program-philippines",
+      "https://climate.gov.ph/index.php/events/latest-events/50"
+    ],
+    "gap": "No official public ranked winners list (individual student names, placements, cash/prizes) found for 2019 national finals or later years. Post-2019 editions of Gawad CCC not verified on public CCC pages. 2018 National Climate Science Youth Congress only publicly ties to Philippine Science High School Main Campus researches, without a full school/winner roster. Facebook/school posts exist but were not used as primary name sources to avoid unverified inventoried people.",
+    "note": "2019 NCR schools and research titles as published by CCC: (1) Navotas National Science High School — toxicological/environmental effects of common food colorants (ORTCAA + FTIR) for food safety; (2) Parañaque Science High School — Makahiya (Mimosa pudica) tablets ovicidal/larvicidal vs Aedes aegypti in undrained flood water; (3) Quezon City Science High School — solar-powered CNN device to scan/detect rice bacterial blight (Xanthomonas oryzae pv. oryzae); (4) Pasay City Science High School — portable seawater purifier using coconut husk/cinder filtration-distillation; (5) City of Mandaluyong Science High School — yellowfin tuna bone powder as tensile-strength stimulator in cassava starch bioplastic. Useful for Youth CLAP: track science high schools + DepEd/CCC Youth Program pathways; do not invent student names until a primary results release is found."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G23\\\", \\\"target\\\": \\\"Gawad CCC Outstanding Young Climate Scientists list years winners schools\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\"\\\", \\\"confidence\\\": \\\""
+}

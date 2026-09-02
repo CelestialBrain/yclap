@@ -1,0 +1,38 @@
+{
+  "out": "/Users/angelonrevelo/Code/yclap/web-forest/src/asset/icon",
+  "model": "gpt-5.6-sol",
+  "anchor": "leaf_scan",
+  "contract": {
+    "width": 1024,
+    "height": 1024,
+    "palette": ["#FF00FF", "#1F2022", "#F9F9F9", "#008653", "#45C223", "#F6B22D"],
+    "maxDistinct": 6,
+    "opaque": false,
+    "keyOut": true,
+    "minInkShare": 0.06
+  },
+  "style": "Paint one Ateneo Field Guide UI glyph — ink-outline, flat-fill, paper-notebook sticker craft — for a student walking-and-noticing PWA about campus trees.\n\nGROUND\nThe background is uniform #FF00FF magenta, edge to edge, and is the ONLY thing behind the subject. Magenta is GROUND ONLY and must never appear inside the drawing — it is keyed out afterwards, so any magenta shape inside the subject becomes a hole. Do not key, cut out, or post-process anything yourself; return the flat magenta render.\n\nBANS — these are the failures this set keeps hitting, so read them as hard rules\n- NO gradient, no mesh, no airbrush, no soft shading, no glow, no bloom.\n- NO drop shadow, no cast shadow, no ambient occlusion, no bevel, no emboss.\n- NO 3D render, no clay, no plastic sheen, no glossy highlight sweep, no photorealism.\n- NO texture, no grain, no paper fibre, no halftone, no stipple, no hatching.\n- NO text, no letters, no numerals, no watermark, no signature, no logo.\n- NO thin hairline strokes of the Phosphor / Lucide / Material kind. Every contour is heavy.\n- NO outline-only forms. Shapes are SOLID FILLED and then contoured.\n- NO scene, no horizon, no ground plane, no background objects, no frame, no border, no card.\n- NO trash, scrap, bottles, sacks, junk-shop trucks, weigh scales, coins or payout props.\n- NO Pokemon, pokeball, XP bar, rank badge, trophy, medal, star rating or leaderboard.\n- NO magenta anywhere inside the subject.\n\nCRAFT\nOne closed sticker shape. A heavy #1F2022 ink contour of even weight on every major form, with round caps and round joins. Flat colour, one fill per shape, two to four fills plus the ink. Volume comes from stacking a lighter green on a deeper green, never from blur. Chunky enough to still read at 24 pixels.\n\nCOLOUR, use these six and nothing else\n- #FF00FF ground only, never inside the subject\n- #1F2022 ink contour and any interior line\n- #F9F9F9 paper — the fill for anything white, a page, a lens, a highlight\n- #008653 deep leaf — the shade side, the base green\n- #45C223 lit leaf — the young or lit side, the accent green\n- #F6B22D mustard — one small warm accent only: a seed, a fruit, a spark, a dot. Never a wash and never more than a few percent of the drawing.",
+  "framing": "CANVAS AND SCALE — identical for every glyph in this set\n- One square canvas. One subject, optically centred.\n- The drawing fills roughly the middle 80 percent of the canvas, with a clear even margin of empty magenta on all four sides. Aim for about 20 percent of the canvas area as ink-and-fill, never less than 15 percent and never more than 26 percent.\n- SOLID FILLED forms, never an outline sketch, never a wireframe.\n- No feature thinner than about 8 units on a 256 grid — that is the width that survives being shrunk to 24 pixels. If a detail cannot be drawn that thick, leave it out.\n- Straight-on view. No perspective, no isometric tilt, no three-quarter rotation.\n- Nothing touches or bleeds off the canvas edge.",
+  "item": [
+    {
+      "name": "leaf_scan",
+      "subject": "four short right-angle corner brackets arranged as a square viewfinder, framing one simple pointed leaf with a single centre vein, plus one small four-point sparkle just outside the top-right bracket"
+    },
+    {
+      "name": "shutter",
+      "subject": "a camera shutter button: a thick ring with a solid disc inside it, and one small crescent highlight inside the disc at the upper left"
+    },
+    {
+      "name": "locate",
+      "subject": "a location crosshair: a ring with a solid dot at its exact centre, and four short straight ticks pointing outward from the ring at top, right, bottom and left"
+    },
+    {
+      "name": "walk",
+      "subject": "two shoe-sole footprints seen from directly above, the forward one higher and slightly right of the rear one, each a rounded sole with a separate rounded heel pad"
+    },
+    {
+      "name": "export",
+      "subject": "a rectangular page with one folded top-right corner, and a fat downward arrow with a solid triangular head overlapping the lower half of the page"
+    }
+  ]
+}

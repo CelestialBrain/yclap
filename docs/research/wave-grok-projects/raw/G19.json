@@ -1,0 +1,36 @@
+{
+  "agent_id": "G19",
+  "target": "SXD AI CIIC 2025 circular fashion zero waste founders school",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.1291452,
+  "structured": {
+    "agent_id": "G19",
+    "target": "SXD AI CIIC 2025 circular fashion zero waste founders school",
+    "project_name": "SXD AI",
+    "builder": [
+      "Shelly Xu",
+      "Shelly Xu Design (SXD) / SXD, Inc."
+    ],
+    "school_or_org": "SXD AI / Shelly Xu Design (SXD, Inc.); founder Shelly Xu, Harvard Business School MBA 2021",
+    "year_or_edition": "2025",
+    "program_event": "Climate Impact Innovations Challenge (CIIC) 2025",
+    "theme_or_track": "Circular Economy",
+    "what_it_does": "SXD AI uses patent-published AI, trained on proprietary design data, to generate scalable zero-waste garment patterns that eliminate fabric waste at the design stage. It co-designs and scales zero-material-waste products for brands and manufacturers, aiming for large material savings, CO2 cuts, and lower production cost. Partners are required to reinvest savings into fair wages.",
+    "place": "Headquartered New York, NY (United States); CIIC pilot/partnership focus Indonesia (e.g. Busana Apparel Group); also listed as working in Bangladesh and other markets",
+    "outcome_or_award": "Winner of CIIC 2025 Circular Economy track; one of three winners sharing a total Rp10 billion catalytic grant to pilot solutions in Indonesia (Grand Finale 11 Oct 2025 at Indonesia International Sustainability Forum, Jakarta)",
+    "theme_same_every_year": "",
+    "confidence": "high",
+    "source_url": [
+      "https://climateimpactinnovations.com/ciic-2025-awards-aslan-renewables-arukah-capital-sxd-ai-rp10-billion/",
+      "https://temasekfoundation.org.sg/news/media-releases/climate-impact-innovations-challenge-awards-aslan-renewables--arukah-capital--and-sxd-ai-a-total-of-rp10-billion-in-catalytic-funding-to-pilot-their-solutions-in-indonesia",
+      "https://east.vc/news/insights/ai-in-climate-tech-southeast-asia-climate-solutions",
+      "https://solve.mit.edu/solutions/83872",
+      "https://www.hbs.edu/socialenterprise/blog/25-years-of-new-venture-competition-se-track-shelly-xu-mba-2021"
+    ],
+    "gap": "Exact split of the Rp10 billion among the three CIIC winners not published; full SXD AI co-founder/team roster beyond Shelly Xu not listed on CIIC/Temasek/East Ventures pages; MIT Solve leaves country HQ field blank though city is New York, NY; undergraduate school of Shelly Xu not verified in fetched sources.",
+    "note": "SEA climate-tech (CIIC), not PH Youth CLAP. CIIC 2025 is the 3rd edition, organized by East Ventures and Temasek Foundation; ~500 applicants, 9 finalists, three track winners (Energy Transition / Sustainable Agriculture / Circular Economy). Claimed impact metrics from official materials: ~10x material savings, ~80% CO2 reduction, up to ~55% cost savings vs other approaches. Founder also HBS NVC Social Enterprise Track Grand Prize & Crowd Favorite (2021); MIT Solve 2024 Global Climate Challenge solver. Useful for student teams: zero-waste by design + AI scaling + Indonesia manufacturing pilot path under CIIC."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{  \\\"agent_id\\\": \\\"G19\\\",\\n  \\\"target\\\": \\\"SXD AI CIIC 2025 circular fashion zero waste founders school\\\",\\n  \\\"project_name\\\": \\\"unknown\\\",\\n  \\\"builder\\\": [],\\n  \\\"school_or_org\\\": \\\"\\\",\\n  \\\"year_or_edition\\\": \\\"\\\",\\n  \\\"program_event\\\": \\\"\\\",\\n  \\\"theme_or_track\\\": \\\"\\\",\\n  \\\"what_it_does\\\": \\\"\\\",\\n  \\\"place\\\": \\\"\\\",\\n  \\\"outcome_or_award\\\": \\\"\\\",\\n  \\\"theme_same_every_year\\\": \\\"\\"
+}

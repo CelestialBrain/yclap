@@ -1,0 +1,37 @@
+{
+  "agent_id": "G24",
+  "target": "First Gen youth climate action projects schools Nueva Ecija CAP",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.16127,
+  "structured": {
+    "agent_id": "G24",
+    "target": "First Gen youth climate action projects schools Nueva Ecija CAP",
+    "project_name": "Climate Action Projects (CAPs) under Create for the Climate / Youth for Climate and Energy Leadership Summit (YCELS)",
+    "builder": [
+      "First Gen Corporation",
+      "First Gen Hydro Power Corp. (FG Hydro)",
+      "student teams from Pantabangan National High School",
+      "student teams from Cadaclan Integrated School",
+      "Oscar M. Lopez (OML) Center (mentorship partner)"
+    ],
+    "school_or_org": "First Gen Corporation (FG Hydro host); Pantabangan National High School; Cadaclan Integrated School (public schools, Pantabangan, Nueva Ecija)",
+    "year_or_edition": "2025 (1st YCELS); 2026 (2nd YCELS, Aug 2026 coverage)",
+    "program_event": "Youth for Climate and Energy Leadership Summit (YCELS), under First Gen Create for the Climate (CFTC)",
+    "theme_or_track": "Climate science, energy landscape, youth leadership, and community-based climate action (no single named annual theme published)",
+    "what_it_does": "Student teams attend expert sessions then design school- and community-level climate action projects (CAPs). Mentors help refine proposals; First Gen awards seed funding to top teams for implementation. 2026 funded CAPs included: eco-friendly learning space from recycled plastic bottles; plastic caps into eco-pebbles/eco-bricks; solar-powered rainwater harvesting/irrigation for an herbal garden (Pantabangan NHS); school garden with waste management, tree planting, and awareness (Cadaclan); vertical gardens from recycled plastic bottles (Cadaclan).",
+    "place": "Pantabangan, Nueva Ecija (FG Hydro HQ); 2025 summit also held in Batangas City for other host communities",
+    "outcome_or_award": "2026: five student teams recognized and given seed funding (three PNHS, two Cadaclan Integrated School). 2025: top projects received P30,000 seed funding each plus mentorship (examples included plastic-bottle cleaning tools, solar-powered vending machine for blackouts, school water dispensers to cut single-use plastic).",
+    "theme_same_every_year": "",
+    "confidence": "high",
+    "source_url": [
+      "https://insiderph.com/first-gen-empowers-youth-to-lead-climate-action-in-schools",
+      "https://insiderph.com/first-gen-sparks-youth-led-energy-and-climate-innovations",
+      "https://businessmirror.com.ph/2026/08/03/first-gen-holds-second-climate-summit-for-youth-leaders"
+    ],
+    "gap": "Individual student/builder names not published. Exact peso amounts and ranked placements for 2026 seed funding not stated in full text retrieved (Business Mirror page blocked by bot check). Official CAP titles beyond short descriptions not listed. First Gen CSR page not successfully fetched. Not the same program as CCC Youth CLAP.",
+    "note": "Corporate youth climate program (Lopez/First Gen), not CCC Youth CLAP—though CCC was among 2026 resource speakers with DENR, Waves for Water, MAD Earth, YGOAL Inc., New Energy Nexus Philippines, and Abot Tala Community. Evaluators in 2026: FG Hydro, Pantabangan MENRO, barangay officials. 28 students from two Pantabangan schools in 2026; 62 youth leaders across Batangas City and Pantabangan in 2025. Useful for Ateneo Youth CLAP desk as a school-level CAP + seed-funding model in Nueva Ecija host communities of First Gen hydro."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G24\\\", \\\"target\\\": \\\"First Gen youth climate action projects schools Nueva Ecija CAP\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\"\\\", \\\"confidence\\\": \\\"none\\\", \\\""
+}

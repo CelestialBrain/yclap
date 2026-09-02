@@ -1,0 +1,37 @@
+# treewatch reference set — shot page + cover-image URL, read 2026-09-02
+# Shot pages answer HTTP 202 (JS bot challenge) to every fetcher tried.
+# The collection page is not challenged and carries these image URLs in order:
+#   https://dribbble.com/angelo-revelo-gelo/collections/7931269-treewatch        (24)
+#   https://dribbble.com/angelo-revelo-gelo/collections/7931269-treewatch?page=2  (5)
+# Append ?resize=1400x0 to any image URL for a readable copy. Images are not
+# committed — they are other people's work.
+
+01 MOSS               https://dribbble.com/shots/27468623-MOSS-Plant-Identification-App-UI-Concept   https://cdn.dribbble.com/userupload/48054261/file/ff939f495a673e57a19216780ead56e4.png
+02 Nautilus           https://dribbble.com/shots/27157920--Nautilus-Naturalist-Journal-App           https://cdn.dribbble.com/userupload/46977967/file/f79ea52afc76c2f04fa29e75f22815fc.png
+03 FIELD              https://dribbble.com/shots/27655399-FIELD-Travel-Journal-App                   https://cdn.dribbble.com/userupload/48741387/file/f6cd2fa4b10959480958609a1af1bb7a.png
+04 Hikeable Map       https://dribbble.com/shots/22294137-Hikeable-Map                               https://cdn.dribbble.com/userupload/9354694/file/original-2d66f990cf0f24be1671a93d717c4dfc.png
+05 Trail Finder       https://dribbble.com/shots/21257389-Trail-Finder-Community-Hike-Bike-App       https://cdn.dribbble.com/userupload/6423931/file/original-c2d5aec844f5d59fd7fa6e3d39367a2a.jpg
+06 Bird discovery     https://dribbble.com/shots/27112123-Bird-discovery-app                         https://cdn.dribbble.com/userupload/46822957/file/eff495a9ee696ddd3f1db6a20a1aa4a3.png
+07 Bird Card          https://dribbble.com/shots/27659154-Nature-UI-001-Bird-Card                    https://cdn.dribbble.com/userupload/48755685/file/5935b6f4715ac485ea8d52addfb50562.png
+08 Walkguide          https://dribbble.com/shots/26356111-Walkguide-app-UI-concept                   https://cdn.dribbble.com/userupload/44357417/file/290b5783c50eade5181106ea91af050d.jpg
+09 Foragely           https://dribbble.com/shots/26302717-Foragely-Edible-Wild-Plants-Foraging-App   https://cdn.dribbble.com/userupload/44190095/file/original-3562eea3196557aeb040790924dccd8e.png
+10 Park Nearby        https://dribbble.com/shots/15244745-Park-Nearby-park-finder-app                https://cdn.dribbble.com/userupload/30892999/file/original-4b14306bdae4cc4d97ab9bfca5e8471d.jpg
+11 Arboretum A        https://dribbble.com/shots/26556435-App-Where-Learning-Meets-Play-The-Arboretum-Adventure  https://cdn.dribbble.com/userupload/44957443/file/526f65c7279cdbfbb2809b3a43df4d73.png
+12 Arboretum B        https://dribbble.com/shots/26540528-App-Where-Learning-Meets-Play-The-Arboretum-Adventure  https://cdn.dribbble.com/userupload/45007396/file/b280a5d5ed91914a2127a2d485652768.png
+13 Insect Explorer    https://dribbble.com/shots/26893458-Insect-Explorer-App                        https://cdn.dribbble.com/userupload/46091353/file/c943d8c7563c3108ffdd147dc6a49f79.png
+14 GreenTrack         https://dribbble.com/shots/25520416--GreenTrack-Mapping-Nature-with-Intuitive-Design      https://cdn.dribbble.com/userupload/18927040/file/original-746c57003d24d711663c43d6888989fc.jpg
+15 UniNav             https://dribbble.com/shots/26228735-UniNav-University-Navigating-App           https://cdn.dribbble.com/userupload/43953084/file/original-d8837bd18e1c45ea03b4c8a2fbad4c8d.png
+16 Margin             https://dribbble.com/shots/27660287-Margin-Journaling-App-UI                   https://cdn.dribbble.com/userupload/48760094/file/1d8f12c5252b9aa54d7e2a476cc16d3a.png
+17 Nature Observation https://dribbble.com/shots/1995100-Nature-Observation-App                      https://cdn.dribbble.com/userupload/41741470/file/original-538485e58ce765b3b9c8c6766e5aa0b6
+18 ForestDrop         https://dribbble.com/shots/27289043-ForestDrop-Tree-Donation-App-UI            https://cdn.dribbble.com/userupload/47422787/file/631e252539cec984f6efba0ba8b98bc3.png
+19 TrailBlazer        https://dribbble.com/shots/24551486-TrailBlazer-Route-discovering-for-hiking-enthusiasts  https://cdn.dribbble.com/userupload/15684734/file/original-0fe1d6c48d962eceb99bc2f2488d0381.png
+20 Museum Orangery    https://dribbble.com/shots/20952530-Museum-Orangery-Ui-website-design          https://cdn.dribbble.com/userupload/5449537/file/original-e5ac23401c84d838cb70f935b31d845d.jpg
+21 WildWander         https://dribbble.com/shots/22132692-WildWander-A-hiking-trail-booking-app      https://cdn.dribbble.com/userupload/8928774/file/original-8e18d8e274536e6e1cc16b3aca7a8534.png
+22 Whistler           https://dribbble.com/shots/27392393-Whistler-Hiking-App-UX-UI-Project          https://cdn.dribbble.com/userupload/47786556/file/3ca65b0628e1706253705a875ac92383.jpg
+23 Wanderly           https://dribbble.com/shots/27596337-Wanderly-Travel-Planning-Community-Platform https://cdn.dribbble.com/userupload/48521012/file/97b57ad9ffcad12c20dabff66417cdfb.png
+24 Botanical Card     https://dribbble.com/shots/9391128-Botanical-Card-Interaction                  https://cdn.dribbble.com/userupload/25757252/file/still-031a985f9fdaf2da11da68c7507b6cf5.png
+25 Folio              https://dribbble.com/shots/27587337-Folio-Social-Book-Club-Digital-Library-Mobile-App    https://cdn.dribbble.com/userupload/48487740/file/afacfe2f1cf48c29f00e1971a843b961.jpeg
+26 Weagle             https://dribbble.com/shots/27653326-Weagle-Super-App-Operations-Dashboard      https://cdn.dribbble.com/userupload/48734524/file/still-f3c3fc900654b6e3038711f5394888b1.png
+27 Travel Website     https://dribbble.com/shots/23623873-Travel-Website-Design                      https://cdn.dribbble.com/userupload/12997298/file/original-39a03b11c7e4889caab7d290e365b536.png
+28 Edu Club           https://dribbble.com/shots/20750179-Dashboard-Edu-Club-Student-Dashboard       https://cdn.dribbble.com/userupload/4915332/file/original-0aa30de0e094667d613aece21947d841.png
+29 asklepios pin      https://dribbble.com/shots/26882401-asklepios-v3-AI-Health-Wellness-App-Map-Pin-Component-UI  https://cdn.dribbble.com/userupload/46057143/file/edcf021c3603943507c8e6b88b6cbd54.png

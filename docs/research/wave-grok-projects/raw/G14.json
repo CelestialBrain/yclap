@@ -1,0 +1,36 @@
+{
+  "agent_id": "G14",
+  "target": "regenerative cacao chocolate Bukidnon climate enterprise Villgro showcase",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.1742904,
+  "structured": {
+    "agent_id": "G14",
+    "target": "regenerative cacao chocolate Bukidnon climate enterprise Villgro showcase",
+    "project_name": "Anitu Forest Chocolates",
+    "builder": [
+      "Marvi Montecillo",
+      "Rogen Montecillo"
+    ],
+    "school_or_org": "Anitu Forest Farm / Anitu Food Forest (private enterprise, Kibawe); Villgro Philippines NatureNest Accelerator (with UNDP Philippines and Government of Canada); also incubated at Miriam College–Henry Sy Sr. Innovation Center",
+    "year_or_edition": "2026 (NatureNest impact showcase March 12; Climate Action Showcase June 18); brand developed ~2021; Young Farmers Challenge 2022",
+    "program_event": "Villgro Philippines NatureNest Accelerator / NatureNest impact showcase; Villgro Philippines Climate Action Showcase 2026",
+    "theme_or_track": "Nature-based solutions; regenerative agriculture / syntropic agroforestry; climate-resilient livelihoods",
+    "what_it_does": "Tree-to-bar artisan chocolates from cacao grown with syntropic regenerative farming that restores degraded land into a multi-species cacao forest without chemical fertilizers or pesticides. Consumer demand for the chocolate funds forest expansion and local employment; the couple manages the full farm-to-bar value chain.",
+    "place": "Kibawe, Bukidnon, Mindanao, Philippines (showcases: Ortigas/Pasig and RCBC Plaza, Makati)",
+    "outcome_or_award": "Audience Choice Award at Villgro NatureNest impact showcase (March 12, 2026); featured at Villgro Climate Action Showcase (June 18, 2026); Young Farmers Challenge Top 1, Batch 2, Provincial (2022, Rogen)",
+    "theme_same_every_year": "",
+    "confidence": "high",
+    "source_url": [
+      "https://mindanews.com/business/2026/07/chocolates-rain-catchers-and-mushrooms-mindanao-innovations-featured-in-climate-action-showcase-in-makati/",
+      "https://agritayo.com/villgro-ph-highlights-climate-solutions/",
+      "https://agritayo.com/anitu-forest-chocolates-turning-degraded-soil-into-a-sweet-sustainable-future-in-bukidnon/",
+      "https://sustina.earth/nature-based-solutions-shine-at-villgro-event/",
+      "https://mb.com.ph/2025/2/28/anitu-forest-farm-s-small-batch-chocolates-are-the-products-of-forest-regeneration"
+    ],
+    "gap": "Exact NatureNest cohort start/end months and any cash prize amounts not confirmed in public sources; website URL and product SKUs not fully documented in the articles used; no competitive ranking stated for the June Climate Action Showcase (featured participant only).",
+    "note": "Also branded Anitu Food Forest / Anitu Forest Farm. Strong Youth CLAP / regenerative agri case: syntropic cacao → small-batch chocolate, demand-driven reforestation, Mindanao-to-Makati climate showcase path. Support stack includes DA, DTI, DOST R&D, MC-HSSIC, Villgro, UNDP PH, Canada. Farm reported expanded from ~3 ha to ~9 ha with plans toward larger scale."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G14\\\", \\\"target\\\": \\\"regenerative cacao chocolate Bukidnon climate enterprise Villgro showcase\\\", \\\"project_name\\\": \\\"\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\"\\\", \\\"confidence\\\": \\\"none\\\","
+}

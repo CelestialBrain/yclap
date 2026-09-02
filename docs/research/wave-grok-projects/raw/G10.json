@@ -1,0 +1,32 @@
+{
+  "agent_id": "G10",
+  "target": "Likha-Klima Innovation Showcase Climate Change Commission youth",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.6786624,
+  "structured": {
+    "agent_id": "G10",
+    "target": "Likha-Klima Innovation Showcase Climate Change Commission youth",
+    "project_name": "Likha-Klima (tentative title) — Innovation Showcase of the Youth Climate Leadership Accelerator Project",
+    "builder": [
+      "Climate Change Commission (Philippines)"
+    ],
+    "school_or_org": "Climate Change Commission (CCC); target universities/schools (possible partners listed in TOR, not confirmed as final participants)",
+    "year_or_edition": "2025 (pilot; contract window ~30 Sep–23 Dec 2025; Innovation Showcase/Recognition Ceremony planned 10 Dec 2025)",
+    "program_event": "Youth Climate Leadership Accelerator Project (YCLAP) Innovation Showcase under CCC One Programming: Support for Partnerships with Academe and University-Based Youth Organizations for Climate Change Mainstreaming Projects; ITB No. 2025-005 consultancy procurement",
+    "theme_or_track": "Youth climate leadership, design thinking, advocacy/campaigning, and innovation for climate adaptation and mitigation (no separate named annual theme found)",
+    "what_it_does": "Likha-Klima is the CCC’s tentative title for a one-day culmination Innovation Showcase of the Youth Climate Leadership Accelerator Project—not a single student product. University-based youth complete five accelerator modules (in-person Saturdays plus asynchronous work in November 2025), a Masterclass (planned 22 Nov 2025 during Climate Change Consciousness Week), and a “Meeting of the Brains” prep session, then exhibit climate adaptation/mitigation and advocacy innovations in an exhibit-plus-pavilion format for invited youth, academe, NGOs, and government. A Young Climate Innovators’ (and Campaigners’) Circle community of practice is planned to launch at or after the showcase, with a recognition ceremony closing the accelerator.",
+    "place": "Philippines (Metro Manila–focused pilot; CCC office listed at First Residences Bldg., JP Laurel St., Malacañang Comp., San Miguel, Manila; sessions with host/partner universities)",
+    "outcome_or_award": "Planned recognition ceremony and launch of Young Climate Innovators/Campaigners Circle; no public placement winners or award results verified under the Likha-Klima name",
+    "theme_same_every_year": "",
+    "confidence": "medium",
+    "source_url": [
+      "https://climate.gov.ph/public/ckfinder/userfiles/files/Service%20Provision/TERMS_OF_REFERENCE_Consulting_Firm_for_CICA_Youth_REVISED.pdf",
+      "https://climate.gov.ph/public/ckfinder/userfiles/files/Service%20Provision/PBD%20Youth%20Climate.pdf"
+    ],
+    "gap": "No public confirmation that the showcase was actually held under the final name “Likha-Klima” (title was explicit as tentative in the TOR). No verified list of final participating universities/teams, individual student builders, Masterclass speakers, consulting firm awarded under ITB 2025-005, PhilGEPS award notice, post-event press coverage, terminal report, or specific project innovations/placements. Possible university list (UST, Miriam College, DLSU, Mapúa, Ateneo de Manila, PUP, PLM, Taguig City University, UP) is aspirational/possible in the TOR only—not confirmed enrollment. Secondary Facebook mentions of YCLAP partnerships (e.g., PLV, Taguig) not fully verifiable from primary CCC pages in this pass.",
+    "note": "For Youth CLAP desk: treat Likha-Klima as CCC program infrastructure (showcase + accelerator), not a competing student climate-tech product. Parent program aligns closely with Ateneo Youth CLAP naming (YCLAP). TOR target: up to 10 universities, max 3 orgs/school, 4 students/org; modules on climate policy/agreements, youth movements, leadership, advocacy tools. Design Reference Group may include NYC, CHED, Climate Reality Philippines, AIM, UNICEF, NPTE/academe, private-sector climate expert. ABC for consulting services: Php 1,700,000. Do not invent winners or school teams; follow up on CCC BAC (bac@climate.gov.ph) / PhilGEPS for award and any post-Dec 2025 terminal report."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G10\\\", \\\"target\\\": \\\"Likha-Klima Innovation Showcase Climate Change Commission youth\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\"\\\", \\\"confidence\\\": \\\"none\\\", \\\""
+}

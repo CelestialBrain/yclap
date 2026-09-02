@@ -1,0 +1,39 @@
+{
+  "agent_id": "G18",
+  "target": "AC Biode CIIC 2024 circular waste syngas founders",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.1359632,
+  "structured": {
+    "agent_id": "G18",
+    "target": "AC Biode CIIC 2024 circular waste syngas founders",
+    "project_name": "AC Biode (chemolysis / Plastalyst / AC Biodecomposer)",
+    "builder": [
+      "Tadashi Kubo (CEO & Co-founder)",
+      "Robert Kunzmann (COO & Co-founder)",
+      "Dr. Mizusawa (CTO)",
+      "AC Biode"
+    ],
+    "school_or_org": "AC Biode (Japan- and Luxembourg-based clean technology company; founders met at University of Cambridge; CTO background Kyoto University)",
+    "year_or_edition": "2024",
+    "program_event": "Climate Impact Innovations Challenge (CIIC) 2024 — East Ventures and Temasek Foundation; Grand Finale at Indonesia International Sustainability Forum (ISF) 2024, Jakarta Convention Center",
+    "theme_or_track": "Circular Economy",
+    "what_it_does": "CIIC listing: scalable chemolysis of mixed organic waste to produce syngas for green energy generation. Company tech also includes Plastalyst (low-temperature ~200°C, water-based catalytic recycling of mixed/hard plastics into monomers) and AC Biodecomposer (hydrogen/syngas from organic waste); CIIC grant framed as piloting Plastalyst in Indonesia.",
+    "place": "Company: Luxembourg HQ with Japan (Kyoto) operations; also UK presence. CIIC pilot target: Indonesia (Jakarta finale).",
+    "outcome_or_award": "Winner, Circular Economy track, CIIC 2024. One of three winners sharing Rp10 billion (~US$645,894) grant funding to pilot solutions in Indonesia; AC Biode company post reports Rp3.3 billion grant for Plastalyst pilot in Indonesia.",
+    "theme_same_every_year": "",
+    "confidence": "high",
+    "source_url": [
+      "https://climateimpactinnovations.com/climate-impact-innovations-challenge-2024-reveals-winners/",
+      "https://east.vc/news/press-release/climate-impact-innovations-challenge-awarded-sungreenh2-hydrogen-refinery-and-ac-biode-a-total-of-rp10-billion",
+      "https://acbiode.com/2024/09/13/climate-impact-innovations-challenge-awarded-ac-biode-rp3-3-billion-in-grant-funding-to-pilot-their-plastalyst-in-indonesia/",
+      "https://acbiode.com/2024/07/29/finalist-at-the-climate-impact-innovations-challenge-2024/",
+      "https://www.isc3.org/page/ac-biode",
+      "https://heaptalk.com/news/three-climate-tech-startups-seize-645894-prize-in-ciic-2024/"
+    ],
+    "gap": "No public source names a single student team or PH university for this entry—it is a Japan/Luxembourg startup, not an Ateneo/Youth CLAP project. CIIC winner quotes Habibur Rahman as Head Engineer of AC Biode, not as founder; founder roles are from ISC3/company profiles, not from the CIIC press kit. Exact split of the Rp10B pool is only stated as Rp3.3B for AC Biode on the company blog title/page, not independently itemized on the East Ventures/CIIC winners page. Whether the CIIC submission brand was officially \"Plastalyst\" vs \"AC Biodecomposer\" is slightly mixed across company pages (official CIIC text uses the chemolysis/syngas description only).",
+    "note": "SEA climate-tech reference (Indonesia pilot competition), not Philippine-founded. Useful for Youth CLAP circular-economy desk: waste→syngas chemolysis + plastic catalyst story; founded 2019 after Cambridge meeting; ~30 innovation awards claimed on ISC3 profile. Co-winners: SunGreenH2 (Energy Transition), Hydrogen Refinery (Sustainable Agriculture). Tracks for CIIC 2024 were Energy Transition, Sustainable Agriculture, Circular Economy."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G18\\\", \\\"target\\\": \\\"AC Biode CIIC 2024 circular waste syngas founders\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\"\\\", \\\"confidence\\\": \\\"none\\\", \\\"source_url\\\": "
+}

@@ -1,0 +1,35 @@
+{
+  "agent_id": "G01",
+  "target": "Raymart S. Garcia Reskyusi Food Basket Philippine Resilience Awards",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.1310896,
+  "structured": {
+    "agent_id": "G01",
+    "target": "Raymart S. Garcia Reskyusi Food Basket Philippine Resilience Awards",
+    "project_name": "Reskyusi Food Basket Program",
+    "builder": [
+      "Raymart S. Garcia"
+    ],
+    "school_or_org": "Barangay Commonwealth, Quezon City",
+    "year_or_edition": "2025",
+    "program_event": "Philippine Resilience Awards 2025",
+    "theme_or_track": "Youth Category; 2025 theme “Kababaihan at Kabataan: Katuwang sa Paghahabi ng Isang Matatag na Bayan”",
+    "what_it_does": "Barangay food bank and food-rescue facility that collects surplus edible produce from public markets (Wed/Sat nights, 80+ youth volunteers), processes and distributes food baskets to food-insecure families and undernourished children, and routes inedible scraps to community composting and vermicomposting so vermicast returns to local urban gardens—cutting landfill methane while addressing malnutrition.",
+    "place": "Barangay Commonwealth, Quezon City, Philippines",
+    "outcome_or_award": "Youth Category Resilience Champion / awardee, Philippine Resilience Awards 2025; barangay also cited with DENR Kwentong KLIMA-likasan; PIA feature also notes Galing Pook and Walang Gutom Awards for the program",
+    "theme_same_every_year": "",
+    "confidence": "high",
+    "source_url": [
+      "https://climate.gov.ph/news/1047",
+      "https://pia.gov.ph/press-release/women-and-youth-climate-resilience-leaders-honored-at-philippine-resilience-awards-2025/",
+      "https://globalnation.inquirer.net/302327/meet-the-women-and-youth-redefining-what-climate-leadership-could-look-like",
+      "https://quezoncity.gov.ph/barangay-commonwealth-awards-for-reskyusi-food-basket-program/",
+      "https://pia.gov.ph/news/when-communities-rise-how-the-reskyusi-and-watt-a-ride-redefined-environmental-stewardship/"
+    ],
+    "gap": "Other named co-builders/team leads beyond Raymart S. Garcia not listed in official award write-ups; program founding year not stated on CCC/PIA award pages (PIA feature says it began from a youth-camp idea and is described as the country’s first barangay-established food bank/rescue facility, without a calendar year); PRA Youth Category lists five co-champions with no 1st/2nd ranking published; Galing Pook / Walang Gutom award years and exact placement not verified in the sources fetched for PRA.",
+    "note": "Strong CCC / Youth CLAP fit: PRA is a CCC multistakeholder program (with PCW, National Resilience Council, SM Prime, WiNDRR, ARISE PH), initiated by Sen. Loren Legarda; ceremony at Philippine Normal University during 18th Global Warming and Climate Change Consciousness Week (late 2025). Garcia is Barangay Commonwealth Kagawad and is quoted as Reskyusi Program Officer. Name “Reskyusi” = rescue + Kyusi (Quezon City). Useful student angle: circular food system (rescue → baskets → compost/vermicast → urban farms) linking food security, waste, and climate."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{\\\"agent_id\\\":\\\"G01\\\",\\\"target\\\":\\\"Raymart S. Garcia Reskyusi Food Basket Philippine Resilience Awards\\\",\\\"project_name\\\":\\\"unknown\\\",\\\"builder\\\":[],\\\"school_or_org\\\":\\\"\\\",\\\"year_or_edition\\\":\\\"\\\",\\\"program_event\\\":\\\"\\\",\\\"theme_or_track\\\":\\\"\\\",\\\"what_it_does\\\":\\\"\\\",\\\"place\\\":\\\"\\\",\\\"outcome_or_award\\\":\\\"\\\",\\\"theme_same_every_year\\\":\\\"\\\",\\\"confidence\\\":\\\"none\\\",\\\"source_url\\\":[],\\\"gap\\\""
+}

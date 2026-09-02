@@ -1,0 +1,48 @@
+{
+  "agent_id": "G04",
+  "target": "Christian B. Hernandez Project MOSES IoT weather Mindanao State University Oriental Mindoro",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.1415832,
+  "structured": {
+    "agent_id": "G04",
+    "target": "Christian B. Hernandez Project MOSES IoT weather Mindanao State University Oriental Mindoro",
+    "project_name": "Project MOSES (Monitoring and Observation of Site-specific E-weather Station)",
+    "builder": [
+      "Engr. Christian B. Hernandez (Project Leader)",
+      "Harold Y. Bangalisan",
+      "Dr. John Edgar S. Anthony",
+      "Maria Trixia Genesis A. Ballesteros",
+      "Eric G. Buñag",
+      "Christian Jay R. Canilang",
+      "Arjoyce G. Coronacion",
+      "Didrey Monet Kesia Dawis",
+      "Ma. Riverose A. Gasis",
+      "Roger A. Montoya",
+      "Marvin N. Teñido",
+      "Jeanamiah Macaraig"
+    ],
+    "school_or_org": "Mindoro State University (MinSU), Institute of Agricultural and Biosystems Engineering; funded by DOST–MIMAROPA (with DOST Oriental Mindoro partnership)",
+    "year_or_edition": "2025 (Philippine Resilience Awards Youth Category; also DOST-MIMAROPA RSTW Best R&D)",
+    "program_event": "Philippine Resilience Awards (PRA) 2025 — Youth Category; also DOST-MIMAROPA Regional Science and Technology Week 2025; NAST 47th Annual Scientific Meeting 2025 (poster feature)",
+    "theme_or_track": "Kababaihan at Kabataan: Katuwang sa Paghahabi ng Isang Matatag na Bayan (PRA 2025)",
+    "what_it_does": "Research-driven, IoT-based localized synoptic weather monitoring system that collects and transmits real-time, site-specific weather data (reported coverage on the order of ~9–25 km) for flood-prone areas. Deployed around the Mag-asawang Tubig Watershed in Naujan, Oriental Mindoro, it supports provincial/municipal DRRM offices with early warning for hydro-meteorological hazards such as flash floods, extreme rainfall, and heat waves.",
+    "place": "Oriental Mindoro, Philippines (Mag-asawang Tubig Watershed, Naujan; communities in Victoria, Naujan, Calapan and nearby low-lying areas; MinSU Victoria campus and San Andres, Naujan stations also cited in project media)",
+    "outcome_or_award": "Youth Category awardee, Philippine Resilience Awards 2025 (CCC / partners; Nov 24, 2025, Philippine Normal University). Best Research and Development Project — Agriculture and Environment Category, 2025 DOST-MIMAROPA Regional S&T Week (May 28, 2025). Featured poster among 294 works at NAST 47th ASM (July 2025). Additional public claims include 2024 DENR–Globe KLIMA-likasan First Prize (Individual) and later GovInsider Innovator of the Year recognition (secondary/social posts).",
+    "theme_same_every_year": "",
+    "confidence": "high",
+    "source_url": [
+      "https://climate.gov.ph/news/1047",
+      "https://www.minsu.edu.ph/news/details/291",
+      "https://www.minsu.edu.ph/news/details/180",
+      "https://www.minsu.edu.ph/news/details/199",
+      "https://mb.com.ph/2025/12/15/meet-the-women-and-youth-redefining-what-climate-leadership-could-look-like",
+      "https://globalnation.inquirer.net/302327/meet-the-women-and-youth-redefining-what-climate-leadership-could-look-like",
+      "https://pia.gov.ph/press-release/women-and-youth-climate-resilience-leaders-honored-at-philippine-resilience-awards-2025/"
+    ],
+    "gap": "Target string says “Mindanao State University Oriental Mindoro”; primary MinSU, Manila Bulletin, and Inquirer sources identify Mindoro State University (MinSU). CCC/PIA pages mislabel the school as Mindanao State University — treat that as a secondary error, not the institutional home. Exact project launch/start year not confirmed on MinSU news pages (a GovInsider LinkedIn post claims launch in 2022; leave as unverified). Full component stack, open data access model, and station count not detailed on pages fetched. GovInsider Innovator of the Year 2026 and some dual awards are mainly Facebook/social; not re-verified on independent primary pages in this pass.",
+    "note": "Strong Youth CLAP / CCC fit via PRA 2025 Youth Category under CCC Week. Hernandez is a licensed Agricultural and Biosystems Engineer and MinSU faculty/instructor (Institute of Agricultural and Biosystems Engineering), not a student competitor. Project expands to Project GENESIS (Green Energy Network for Enhanced Synoptic Integrated Station) as a second phase (DOST/DEPDev support cited on MinSU). Project site link on MinSU: projectmoses.io. For student teams: model is university R&D + DOST regional funding + local DRRM use-case, fully Filipino-developed weather hardware/software framing."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G04\\\", \\\"target\\\": \\\"Christian B. Hernandez Project MOSES IoT weather Mindanao State University Oriental Mindoro\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\"\\\", "
+}

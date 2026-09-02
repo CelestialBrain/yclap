@@ -1,0 +1,36 @@
+{
+  "agent_id": "G22",
+  "target": "Climate Science Youth Program Philippines CCC winners Gawad Outstanding Young Climate Scientists",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.1664892,
+  "structured": {
+    "agent_id": "G22",
+    "target": "Climate Science Youth Program Philippines CCC winners Gawad Outstanding Young Climate Scientists",
+    "project_name": "Gawad CCC: Search for Outstanding Young Climate Scientists (Climate Science Youth Program)",
+    "builder": [
+      "Climate Change Commission (CCC)",
+      "Department of Education (DepEd)",
+      "National Panel of Technical Experts (NPTE)"
+    ],
+    "school_or_org": "Climate Change Commission (Philippines); participating science high schools (NCR 2019 showcase): Navotas National Science High School; Parañaque Science High School; Quezon City Science High School; Pasay City Science High School; City of Mandaluyong Science High School; 2018 Congress featured Philippine Science High School Main Campus",
+    "year_or_edition": "2018 (National Climate Science Youth Congress); 2019 (Gawad CCC: Search for Outstanding Young Climate Scientists); program listed as ongoing",
+    "program_event": "Climate Science Youth Program (CSYP); Gawad CCC: Search for Outstanding Young Climate Scientists; National Climate Science Youth Congress (NCSYC); held in connection with Global Warming and Climate Change Consciousness Week",
+    "theme_or_track": "2018: “The 1.5 °Celsius Challenge: Securing Water for All Filipinos” (water security / climate adaptation-mitigation). 2019: Food-Water-Energy Nexus researches from NCR science high schools.",
+    "what_it_does": "The CCC Climate Science Youth Program builds secondary-level climate science knowledge and aims to inform curriculum with DepEd and NPTE. Its Gawad CCC contest gives science high school students a stage to present climate-related research, with regional recognition, a climate science bootcamp for regional winners, and a National Gawad CCC. 2019 NCR presenters included projects on food colorant safety, Makahiya larvicidal tablets for dengue mosquitoes, a solar-powered CNN device for rice bacterial blight, coconut-husk seawater purification, and yellowfin-tuna bone powder bioplastic.",
+    "place": "Philippines (national program); 2019 Gawad public showcase focused on National Capital Region science high schools",
+    "outcome_or_award": "Platform for recognition as Outstanding Young Climate Scientists; 2019 activity described as producing four researches after regional recognition and National Gawad CCC, judged by NPTE and national agency representatives. Public sources list five 2019 NCR presenting school projects but do not name ranked 1st/2nd/3rd winners or individual student awardees.",
+    "theme_same_every_year": "No — themes differ by year (2018 water security / 1.5°C challenge; 2019 Food-Water-Energy Nexus).",
+    "confidence": "high",
+    "source_url": [
+      "https://climate.gov.ph/our-programs/climate-science-youth-program",
+      "https://www.cif.org/just-transition-toolbox/example/climate-science-youth-program-philippines",
+      "https://climate.gov.ph/events/climate-change-consciousness-week/13th-annual-global-warming-and-climate-change-consciousness-week/climate-science-master-class-for-secondary-school-teachers",
+      "https://climate.gov.ph/index.php/events/latest-events/50"
+    ],
+    "gap": "No public ranked winner list (1st place / national champions) or individual student names for Gawad CCC 2019; which of the five listed NCR school projects advanced or won is not stated. 2018 NCSYC PSHS Main Campus research titles and winners not listed on fetched pages. Later editions after 2019 and full regional winner set not found in open web sources used.",
+    "note": "Useful for Youth CLAP student teams: this is a government (CCC) science-high research showcase, not a startup accelerator. Partner with DepEd pathways and NPTE judges. 2019 projects map well to food safety, vector control under flooding, climate-smart agriculture (rice blight detection), water purification, and bioplastics—strong FWE-nexus framing. Official CCC page is the primary source; CIF toolbox mirrors it. For named winners, FOI to CCC or DepEd/school archives may be needed."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{\\\"agent_id\\\":\\\"G22\\\",\\\"target\\\":\\\"Climate Science Youth Program Philippines CCC winners Gawad Outstanding Young Climate Scientists\\\",\\\"project_name\\\":\\\"unknown\\\",\\\"builder\\\":[],\\\"school_or_org\\\":\\\"\\\",\\\"year_or_edition\\\":\\\"\\\",\\\"program_event\\\":\\\"\\\",\\\"theme_or_track\\\":\\\"\\\",\\\"what_it_does\\\":\\\"\\\",\\\"place\\\":\\\"\\\",\\\"outcome_or_award\\\":\\\"\\\",\\\"theme_same_every_year\\\":\\\"\\\",\\\"confidence\\\":\\\"non"
+}

@@ -1,0 +1,44 @@
+{
+  "agent_id": "G12",
+  "target": "Villgro Philippines Climate Action Showcase 2026 full list participating enterprises",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.265742,
+  "structured": {
+    "agent_id": "G12",
+    "target": "Villgro Philippines Climate Action Showcase 2026 full list participating enterprises",
+    "project_name": "Climate Action Showcase 2026",
+    "builder": [
+      "Villgro Philippines",
+      "Anitu Forest Chocolates (Marvi Montecillo, Rogen Montecillo)",
+      "O1nnovations / 01NNOVATIONS Rainwater Solutions (Augustus Nicko Bas)",
+      "Ikram Mushroom Farm / Ikram Agriculture Cooperative (Sittie Aireen Lomangcolob)",
+      "Project Payatas (JM Dioso)",
+      "Bamboo Impact Lab",
+      "Kinabuhi",
+      "PAMMÉ",
+      "Resiklo"
+    ],
+    "school_or_org": "Villgro Philippines (impact incubator)",
+    "year_or_edition": "2026 (18 June 2026, 1:00–4:30 PM)",
+    "program_event": "Climate Action Showcase 2026 (Philippine Environment Month showcase of Villgro-mentored climate enterprises)",
+    "theme_or_track": "",
+    "what_it_does": "Villgro Philippines convened about 10 climate enterprises for pitches, interactive booths, a panel on scaling Philippine climate innovation, and structured networking. Solutions spanned regenerative cacao agroforestry, gravity-fed rainwater harvesting, mushroom farming for IDP livelihoods, textile upcycling, bamboo, recycling machines, and related circular/regenerative livelihoods—from Bukidnon, Agusan del Sur, Marawi, Payatas, and other regions.",
+    "place": "RCBC Plaza, Makati City, Metro Manila, Philippines (enterprises also from Bukidnon, Agusan del Sur, Marawi/Lanao, Aurora, Palawan, Dumaguete, Cavite, Payatas/Quezon City, among others)",
+    "outcome_or_award": "",
+    "theme_same_every_year": "",
+    "confidence": "medium",
+    "source_url": [
+      "https://mindanews.com/business/2026/07/chocolates-rain-catchers-and-mushrooms-mindanao-innovations-featured-in-climate-action-showcase-in-makati/",
+      "https://luma.com/9acl6dhx",
+      "https://agritayo.com/villgro-ph-highlights-climate-solutions/",
+      "https://sustina.earth/inside-villgros-fair-futures-showcase-the-impact-of-11-local-climate-ventures/",
+      "https://www.facebook.com/villgrophilippines/posts/this-is-climate-action-showcase-2026-entrepreneurs-turning-waste-into-new-materi/1367601752142834/",
+      "https://www.climateaction.asia/"
+    ],
+    "gap": "No single official public roster of all 10 named participants was found on villgrophilippines.org or elsewhere. Public sources name roughly 8 enterprises (Anitu Forest Chocolates; O1nnovations; Ikram; Project Payatas; Bamboo Impact Lab; Kinabuhi; PAMMÉ; Resiklo) plus descriptions without firm legal names for others (Egongot sabutan weavers in Aurora; non-electric slow cooker from Palawan/Magic Bag references in showcase media; rent-to-own solar in Dumaguete; plastic-free personal care from Makati; passive cooling from a Manila builder). Founders not public for Bamboo Impact Lab, Kinabuhi, PAMMÉ, Resiklo. No placement awards for this showcase found (distinct from Fair Futures Impact Showcase on 30 June 2026). Climate Action Map portfolio data did not load enterprise names when fetched.",
+    "note": "Do not conflate with Fair Futures Impact Showcase (30 June 2026; theme “Fueling Climate Action Through a Just Transition”; 11 of 12 Climate Ascent cohort fully named on Sustina: O1nnovations, The Soilmate Collective, Bamboo Impact Lab, Gloria Isabel Aquaponics Farm, Magnus Renewable Tech Corp, Project Payatas, RMP HomeSense/Magic Bag, ILAJA, HeritageFinds, Container Living PH, Kawayan Collective Tarlac; Audience Choice: Container Living PH / Mac Evangelista). Climate Action Showcase (18 June) and Fair Futures showcase are different dates; some brands (e.g. O1nnovations, Project Payatas, Bamboo Impact Lab) appear in both ecosystems. Malen Horigue (Villgro program coordinator) and Priya Thachadi (Villgro PH Co-Founder/CEO) are quoted in coverage. Student teams should treat the 10-enterprise count as confirmed (Luma + FB) and the named partial list as media-verified, not as a complete official roster."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{\\\"agent_id\\\":\\\"G12\\\",\\\"target\\\":\\\"Villgro Philippines Climate Action Showcase 2026 full list participating enterprises\\\",\\\"project_name\\\":\\\"unknown\\\",\\\"builder\\\":[],\\\"school_or_org\\\":\\\"\\\",\\\"year_or_edition\\\":\\\"\\\",\\\"program_event\\\":\\\"\\\",\\\"theme_or_track\\\":\\\"\\\",\\\"what_it_does\\\":\\\"\\\",\\\"place\\\":\\\"\\\",\\\"outcome_or_award\\\":\\\"\\\",\\\"theme_same_every_year\\\":\\\"\\\",\\\"confidence\\\":\\\"none\\\",\\\"source"
+}

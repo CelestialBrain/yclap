@@ -1,0 +1,35 @@
+{
+  "agent_id": "G09",
+  "target": "Youth Climate Leadership Accelerator Project past participants winners showcase Philippines CCC",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.6581268,
+  "structured": {
+    "agent_id": "G09",
+    "target": "Youth Climate Leadership Accelerator Project past participants winners showcase Philippines CCC",
+    "project_name": "Youth Climate Leadership Accelerator Project",
+    "builder": [
+      "Climate Change Commission - Climate Change Office (CCC-CCO)"
+    ],
+    "school_or_org": "Climate Change Commission (Philippines); partner mentions include Pamantasan ng Lungsod ng Valenzuela College of Public Administration and Governance (PLV-CPAG)",
+    "year_or_edition": "2025 (ITB No. 2025-005; funded under General Appropriations Act of 2025; competitive bidding listed around August 2025)",
+    "program_event": "Youth Climate Leadership Accelerator Project (YCLAP) — CCC procurement of consulting services to conduct the project",
+    "theme_or_track": "",
+    "what_it_does": "The Philippine Climate Change Commission (CCC-CCO) procured consulting services to design/conduct the Youth Climate Leadership Accelerator Project. Public bidding documents describe five (5) module packets, each with a module outline, learning objectives, lecture presentation deck, and other learning materials. Full operational cohort mechanics beyond that are not published in the sources reviewed.",
+    "place": "Philippines",
+    "outcome_or_award": "",
+    "theme_same_every_year": "",
+    "confidence": "medium",
+    "source_url": [
+      "https://climate.gov.ph/public/ckfinder/userfiles/files/Service%20Provision/PBD%20Youth%20Climate.pdf",
+      "https://climate.gov.ph/public/ckfinder/userfiles/files/Service%20Provision/TERMS_OF_REFERENCE_Consulting_Firm_for_CICA_Youth_REVISED.pdf",
+      "https://climate.gov.ph/public/ckfinder/userfiles/files/Transparency/PMR%202nd%20Semester%202025.pdf",
+      "https://www.facebook.com/plvcpag/posts/%F0%9D%90%84%F0%9D%90%9A%F0%9D%90%AB%F0%9D%90%A5%F0%9D%90%A2%F0%9D%90%9E%F0%9D%90%AB-%F0%9D%90%93%F0%9D%90%A8%F0%9D%90%9D%F0%9D%90%9A%F0%9D%90%B2-%F0%9D%90%82%F0%9D%90%8F%F0%9D%90%80%F0%9D%90%86%F0%9D%90%94%F0%9D%90%A0%F0%9D%90%A7%F0%9D%90%9A%F0%9D%90%B2%F0%9D%90%9A%F0%9D%90%A7-%F0%9D%90%82%F0%9D%90%A5%F0%9D%90%A2%F0%9D%90%A6%F0%9D%90%9A%F0%9D%90%AD%F0%9D%90%9E-%F0%9D%90%82%F0%9D%90%A1%F0%9D%90%9A%F0%9D%90%A7%F0%9D%90%A0%F0%9D%90%9E-%F0%9D%90%82%F0%9D%90%A8%F0%9D%90%A6%F0%9D%90%A6%F0%9D%90%A2%F0%9D%90%AC%F0%9D%90%AC%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7-%F0%9D%90%9A%F0%9D%90%A7%F0%9D%90%9D-%F0%9D%90%8F%F0%9D%90%8B%F0%9D%90%95-%F0%9D%90%82%F0%9D%90%8F%F0%9D%90%80%F0%9D%90%86-%F0%9D%90%85%F0%9D%90%A8%F0%9D%90%AB%F0%9D%90%A0%F0%9D%90%9E-%F0%9D%90%8F%F0%9D%90%9A%F0%9D%90%AB%F0%9D%90%AD%F0%9D%90%A7%F0%9D%90%9E%F0%9D%90%AB%F0%9D%90%AC%F0%9D%90%A1/122117116821341259/",
+      "https://www.facebook.com/officiallanicayetano/posts/climate-action-is-more-urgent-than-ever-and-our-city-continues-to-take-meaningfu/1500233274800491/"
+    ],
+    "gap": "No public list of past participants, winners, individual student/team names, schools of participants, year-by-year themes/tracks, placements, or a winners showcase for the Philippine CCC Youth Climate Leadership Accelerator Project. Winning/awarded consulting firm name and full TOR scope (participant selection criteria, cohort size, duration, showcase format) were not verified from publicly indexed text. Program appears newly set up via 2025 procurement rather than a multi-year alumni pipeline with published graduates.",
+    "note": "Do not confuse with similarly named Indian programs (e.g. Sustera Y-CLAP Youth Climate Leadership Accelerator Programme; Youth4Water/Youngistaan Young Climate Leaders Action Project). Separate CCC-linked youth recognition exists under the Philippine Resilience Awards (women/youth climate champions)—that is a different awards program, not YCLAP alumni. For student teams: monitor climate.gov.ph procurement/news and CCC social channels for first-cohort calls or showcase announcements; ABC for the 2025 consulting contract was PHP 1,700,000 (ITB 2025-005)."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G09\\\", \\\"target\\\": \\\"Youth Climate Leadership Accelerator Project past participants winners showcase Philippines CCC\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\""
+}

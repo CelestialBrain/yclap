@@ -1,0 +1,38 @@
+{
+  "agent_id": "G07",
+  "target": "Philippine Resilience Awards 2024 youth winners projects list CCC",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.1974688,
+  "structured": {
+    "agent_id": "G07",
+    "target": "Philippine Resilience Awards 2024 youth winners projects list CCC",
+    "project_name": "PRA 2024 Youth Category: (1) Manila City DRRM work of Christian John Evangelista; (2) Padyarescue Inc. / Go Bike Project of Edren Llanillo",
+    "builder": [
+      "Christian John Evangelista",
+      "Edren Llanillo",
+      "Padyarescue Incorporated",
+      "Go Bike Project"
+    ],
+    "school_or_org": "Manila City Disaster Risk Reduction and Management Office (Evangelista); Padyarescue Incorporated / Go Bike Project, Bugallon, Pangasinan (Llanillo). Awards led by Climate Change Commission with Office of Sen. Loren Legarda, National Resilience Council, Philippine Commission on Women, SM Prime, ARISE, Women's International Network on Disaster Risk Reduction",
+    "year_or_edition": "2024 (ceremony 25 November 2024)",
+    "program_event": "Philippine Resilience Awards (PRA) 2024 — Youth Category; held during 17th National Global Warming and Climate Change Consciousness Week 2024",
+    "theme_or_track": "Consciousness Week theme: \"Aksyon at Adaptasyon ng Makabagong Henerasyon\"; PRA tracks: Women Category and Youth Category",
+    "what_it_does": "Two youth champions were recognized (not a ranked list of many projects). Christian John Evangelista was honored as Astronomer-Meteorologist and DRRM Officer V of the Manila City DRRM Office for youth climate/disaster resilience leadership in the capital. Edren Llanillo was honored as Executive Director of Padyarescue Inc. and co-founder of the Go Bike Project (Bugallon, Pangasinan), a youth-volunteer bicycle emergency-response model that trains \"Go Bikers\" in first aid, basic life support, DRRM, and climate adaptation and equips bikes with first-aid and disaster tools for community health and emergency response.",
+    "place": "Ceremony: SMX Convention Center, Mall of Asia Complex, Pasay City. Awardee bases: Manila City (Evangelista); Bugallon, Pangasinan, with Go Bike reach reported across nearby towns/barangays (Llanillo)",
+    "outcome_or_award": "Youth Category resilience champions of PRA 2024; each awardee (women and youth categories) received Php150,000 to scale climate resilience initiatives",
+    "theme_same_every_year": "",
+    "confidence": "high",
+    "source_url": [
+      "https://climate.gov.ph/news/961",
+      "https://tribune.net.ph/2024/12/05/philippine-resilience-awards-2024-honors-women-youth-climate-champions",
+      "https://globalnation.inquirer.net/302327/meet-the-women-and-youth-redefining-what-climate-leadership-could-look-like",
+      "https://tribune.net.ph/2024/12/22/bikers-for-life-youth-trains-young-first-aiders",
+      "https://mirror.pia.gov.ph/features/2022/02/27/pangasinan-youth-save-lives-one-ride-at-a-time"
+    ],
+    "gap": "CCC official 2024 release names only two youth awardees and does not list a titled project for Evangelista beyond his Manila DRRMO role; no public 1st/2nd ranking; school/university of either youth champion not stated on CCC page; detailed Go Bike mechanism comes from secondary coverage (Inquirer/Tribune/PIA), not the CCC winners article; PNA article https://www.pna.gov.ph/articles/1238683 referenced in search but did not return usable body text in fetch.",
+    "note": "Do not confuse with PRA 2025 youth winners (five youth: Raymart Garcia/Reskyusi Food Basket; Shri Tahanie Macaumbao/Green by Design; Val Amiel Vestil/Kwentong Kalikasan; Peter John Enorio/Subang Environmental Initiatives; Christian Hernandez/Project MOSES)—those are a different edition. Women Category 2024 (for desk context, not youth track): Daisy Cabauatan, Divina Fontanilla, Cecilia Quipayo, Ma. Thessa Ramos, Erma Suyo. Student teams: PRA is CCC-led recognition of women and youth resilience champions with cash support to scale; youth list for 2024 is short (two people), so Youth CLAP mapping should treat Evangelista's LGU DRRM practice and Llanillo's Padyarescue/Go Bike as the two 2024 youth project anchors."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G07\\\", \\\"target\\\": \\\"Philippine Resilience Awards 2024 youth winners projects list CCC\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\"\\\", \\\"confidence\\\": \\\"none\\\", "
+}

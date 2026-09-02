@@ -1,0 +1,37 @@
+{
+  "agent_id": "G28",
+  "target": "Mapúa University climate sustainability student innovation projects 2023-2026",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.30455,
+  "structured": {
+    "agent_id": "G28",
+    "target": "Mapúa University climate sustainability student innovation projects 2023-2026",
+    "project_name": "Cardinal One / Aguila Neo Electric",
+    "builder": [
+      "Mapúa University Cardinal One (student-led engineering team)",
+      "Karis Evangeline Carlos"
+    ],
+    "school_or_org": "Mapúa University",
+    "year_or_edition": "2024–2026",
+    "program_event": "Shell Eco-marathon Asia-Pacific and the Middle East",
+    "theme_or_track": "2024: Prototype Internal Combustion Engine (ICE/Gasoline); 2026: Prototype Battery-Electric (BE) — Aguila Neo Electric",
+    "what_it_does": "Cardinal One is a Mapúa student engineering team that designs, builds, and races ultra energy-efficient prototype vehicles for Shell Eco-marathon, competing on fuel/energy economy rather than speed. In 2024 they ran an ICE prototype (~274.45 km/L). For 2026 they launched Aguila Neo Electric, their first battery-electric prototype (lighter chassis/shell, Li-ion pack, BMS, motor controller, telemetry, safety interlocks), aiming at clean mobility and energy efficiency; it passed all 10 technical inspections at Lusail (Qatar) and recorded a best attempt of 91.0 km/kWh.",
+    "place": "Mapúa University (Intramuros, Manila, Philippines); competition venues: Mandalika International Circuit, Lombok, Indonesia (2024); Lusail International Circuit, Qatar (2026)",
+    "outcome_or_award": "Technical Innovation Award, Shell Eco-marathon APAC & Middle East 2024; 7th place ICE prototype (274.45 km/L) in 2024; 2026 battery-electric entry passed 10/10 technical inspections, best 91.0 km/kWh, ranked 16th of 19 in Prototype BE (official SEM results). Mapúa also held the Technical Innovation Award historically in 2013 (ICE).",
+    "theme_same_every_year": "",
+    "confidence": "high",
+    "source_url": [
+      "https://www.zigwheels.ph/car-news/mapua-universitys-cardinal-one-receives-technical-innovation-award-at-shell-eco-marathon-apac-me",
+      "https://www.gmanetwork.com/news/scitech/technology/953387/mapua-unveils-electric-vehicle-prototype-for-shell-eco-marathon-asia-2026/story/",
+      "https://www.gmanetwork.com/news/scitech/technology/976168/mapua-ev-prototype-shell-eco-marathon/story/",
+      "https://results.sem-app.com/app/sem_2026_qa/team/PH0013002",
+      "https://www.shell.com.ph/about-us/sustainability/communities/shell-eco-marathon.html",
+      "https://www.mapua.edu.ph/news/mapua-team-cardinal-one-kinmo-pw-shell-eco-marathon-2027"
+    ],
+    "gap": "Full public roster of Cardinal One builders beyond the team name and Karis Evangeline Carlos (Shell Eco-marathon about page / Mapúa Women's Month coverage) was not verified. No public evidence found of Mapúa student teams in Youth CLAP, CCC youth programs, or similarly branded PH climate youth challenges for 2023–2026. Famous Mapúa climate inventions AuREUS (Carvey Ehren Maigue, James Dyson Sustainability Award ~2020) and Bathala/rocket stove (Team Carding, ~2015–2017 Dumagat community) fall outside the 2023–2026 primary window. WEHLO (Localized Weather, Environment and Hydromet Monitoring System) is a strong climate-adaptation Mapúa project launched/deployed 2023–2024 with DOST-PCIEERD (₱15M FASTRAC), led publicly by faculty Dr. Francis Aldrine Uy / School of Civil, Environmental and Geological Engineering—not documented as a student innovation team product. Campus BS Energy Engineering (2025) is a degree program, not a student project.",
+    "note": "Strongest documented Mapúa student climate-sustainability innovation in 2023–2026 is Shell Eco-marathon Cardinal One (energy-efficient mobility). Team transitioned ICE → full battery-electric (Aguila Neo Electric) for 2026; only PH team noted in Prototype BE that year. Useful adjacent Mapúa climate assets for Youth CLAP desk mapping: WEHLO (DRR/weather sensors for LGUs Infanta–General Nakar, Quezon; Pantabangan–Angat, Bulacan; WMO-aligned, web portal + mobile alerts); historical AuREUS food-waste UV-to-visible solar windows; university sustainability reporting and ICSET 2025. For student teams: SEM requires multi-year continuity, technical inspection discipline, sponsor partnerships (e.g. Kinmo PW/UNI-T for 2027 campaign), and track validation (e.g. Batangas Racing Circuit) before international events."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G28\\\", \\\"target\\\": \\\"Mapúa University climate sustainability student innovation projects 2023-2026\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\"\\\", \\\"confidence\\\""
+}

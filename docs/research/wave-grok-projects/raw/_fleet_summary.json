@@ -1,0 +1,188 @@
+{
+  "agents": 30,
+  "with_structured": 29,
+  "notional_cost_usd_sum": 7.098411600000001,
+  "elapsed_ms": 550996,
+  "by_id": [
+    {
+      "id": "G01",
+      "stop": "end_turn",
+      "cost": 0.1310896,
+      "ok": true
+    },
+    {
+      "id": "G02",
+      "stop": "end_turn",
+      "cost": 0.2468192,
+      "ok": true
+    },
+    {
+      "id": "G03",
+      "stop": "end_turn",
+      "cost": 0.145448,
+      "ok": true
+    },
+    {
+      "id": "G04",
+      "stop": "end_turn",
+      "cost": 0.1415832,
+      "ok": true
+    },
+    {
+      "id": "G05",
+      "stop": "end_turn",
+      "cost": 0.2508164,
+      "ok": true
+    },
+    {
+      "id": "G06",
+      "stop": "end_turn",
+      "cost": 0.2032424,
+      "ok": true
+    },
+    {
+      "id": "G07",
+      "stop": "end_turn",
+      "cost": 0.1974688,
+      "ok": true
+    },
+    {
+      "id": "G08",
+      "stop": "end_turn",
+      "cost": 0.197948,
+      "ok": true
+    },
+    {
+      "id": "G09",
+      "stop": "end_turn",
+      "cost": 0.6581268,
+      "ok": true
+    },
+    {
+      "id": "G10",
+      "stop": "end_turn",
+      "cost": 0.6786624,
+      "ok": true
+    },
+    {
+      "id": "G11",
+      "stop": "end_turn",
+      "cost": 0.350736,
+      "ok": true
+    },
+    {
+      "id": "G12",
+      "stop": "end_turn",
+      "cost": 0.265742,
+      "ok": true
+    },
+    {
+      "id": "G13",
+      "stop": "end_turn",
+      "cost": 0.1441248,
+      "ok": true
+    },
+    {
+      "id": "G14",
+      "stop": "end_turn",
+      "cost": 0.1742904,
+      "ok": true
+    },
+    {
+      "id": "G15",
+      "stop": "end_turn",
+      "cost": 0.1438716,
+      "ok": true
+    },
+    {
+      "id": "G16",
+      "stop": "end_turn",
+      "cost": 0.2830592,
+      "ok": true
+    },
+    {
+      "id": "G17",
+      "stop": "end_turn",
+      "cost": 0.1758448,
+      "ok": true
+    },
+    {
+      "id": "G18",
+      "stop": "end_turn",
+      "cost": 0.1359632,
+      "ok": true
+    },
+    {
+      "id": "G19",
+      "stop": "end_turn",
+      "cost": 0.1291452,
+      "ok": true
+    },
+    {
+      "id": "G20",
+      "stop": "end_turn",
+      "cost": 0.1255892,
+      "ok": true
+    },
+    {
+      "id": "G21",
+      "stop": "end_turn",
+      "cost": 0.1151948,
+      "ok": true
+    },
+    {
+      "id": "G22",
+      "stop": "end_turn",
+      "cost": 0.1664892,
+      "ok": true
+    },
+    {
+      "id": "G23",
+      "stop": "end_turn",
+      "cost": 0.1869712,
+      "ok": true
+    },
+    {
+      "id": "G24",
+      "stop": "end_turn",
+      "cost": 0.16127,
+      "ok": true
+    },
+    {
+      "id": "G25",
+      "stop": "end_turn",
+      "cost": 0.1543608,
+      "ok": true
+    },
+    {
+      "id": "G26",
+      "stop": "end_turn",
+      "cost": 0.2153656,
+      "ok": true
+    },
+    {
+      "id": "G27",
+      "stop": "cancelled",
+      "cost": 0.2771608,
+      "ok": false
+    },
+    {
+      "id": "G28",
+      "stop": "end_turn",
+      "cost": 0.30455,
+      "ok": true
+    },
+    {
+      "id": "G29",
+      "stop": "end_turn",
+      "cost": 0.294508,
+      "ok": true
+    },
+    {
+      "id": "G30",
+      "stop": "end_turn",
+      "cost": 0.44297,
+      "ok": true
+    }
+  ]
+}

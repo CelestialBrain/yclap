@@ -1,0 +1,37 @@
+{
+  "agent_id": "G16",
+  "target": "sabutan weaving forest restoration Aurora climate enterprise Philippines",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.2830592,
+  "structured": {
+    "agent_id": "G16",
+    "target": "sabutan weaving forest restoration Aurora climate enterprise Philippines",
+    "project_name": "Dimasalang Egongot Tribe Farmers and Weavers Association Inc. (DETFAWAI / DEFTAWAI) — sabutan weaving nature-based enterprise",
+    "builder": [
+      "Rosalinda Francia (tribal chieftain; established DETFAWAI in 2016)",
+      "Dimasalang Egongot Tribe Farmers and Weavers Association Inc. (DETFAWAI)"
+    ],
+    "school_or_org": "Dimasalang Egongot Tribe Farmers and Weavers Association Inc. (DETFAWAI) — Indigenous Peoples community-based organization / nature-based enterprise, Maria Aurora, Aurora",
+    "year_or_edition": "Association established 2016; NatureNest Accelerator cohort 2025 (program May–Dec 2025; Impact Showcase 12 March 2026)",
+    "program_event": "NatureNest Accelerator (Villgro Philippines with UNDP Philippines; funded by Government of Canada under AGCF — Accelerating Green and Climate Finance in the Philippines: Nature-based Solutions, with DOF and partner agencies including CCC); also DENR Small Program Grant (SPG)-5 grantee; Forest Foundation Philippines forest-products partner",
+    "theme_or_track": "Nature-based Enterprises (NbEs) / Nature-based Solutions — forest stewardship, sustainable forestry & biomaterials, community climate resilience",
+    "what_it_does": "DETFAWAI is an Egongot IP association that handweaves sabutan (pandan) fiber into bags, mats, fans, pouches, and related crafts as a community livelihood, while members act as forest guardians of the Dimasalang Ancestral Domain. To sustain the craft and plant supply, the group established a sabutan nursery and plants sabutan (reported as Pandanos sabotan), linking cultural weaving, women-and-youth income, and local biodiversity/forest restoration in the Sierra Madre of Aurora.",
+    "place": "Dimasalang Ancestral Domain, Maria Aurora, Aurora Province, Philippines (Sierra Madre); pasalubong centers also referenced in Baler/Aurora",
+    "outcome_or_award": "Selected among ~9–10 NatureNest Accelerator nature-based enterprises; presented at NatureNest Impact Showcase (12 March 2026). Grew from ~30 founding members (2016) to 100+ farmers and weavers (primarily women and youth). DENR SPG-5 support; featured by Forest Foundation Philippines as a Sierra Madre forest-product enterprise. Audience Choice Award at the showcase went to Anitu Forest Chocolates, not DETFAWAI.",
+    "theme_same_every_year": "",
+    "confidence": "high",
+    "source_url": [
+      "https://agritayo.com/sierra-madre-tribal-groups-weave-to-protect-ancestral-land-keep-identity/",
+      "https://www.forestfoundation.ph/support-forest-products/",
+      "https://www.forestfoundation.ph/blog/gifts-from-and-for-the-forest-11-locally-made-christmas-gift-ideas-for-the-thoughtful-giver/",
+      "https://sustina.earth/nature-based-solutions-shine-at-villgro-event/",
+      "https://villgrophilippines.org/naturenest/",
+      "https://www.facebook.com/DETFAWAI/"
+    ],
+    "gap": "No public link found to Ateneo Youth CLAP, CCC Youth CLAP, or a named Youth CLAP edition/placement. Exact legal registration date/SEC details, hectare count of nursery/restoration, and quantified climate metrics not in sources used. Spelling of association name varies (DETFAWAI vs DEFTAWAI) and botanical name is inconsistently rendered. Climate Action Map (climateaction.asia) lists DETFAWAI in search snippets but page content did not load enterprise detail for verification.",
+    "note": "Strong Youth CLAP desk fit as PH NbS / climate livelihood enterprise (weaving + nursery + ancestral forest guardianship), not as a student contest project. Name variants: DETFAWAI (AgriTayo, Sustina, Villgro) vs DEFTAWAI (Forest Foundation). Related but distinct Aurora sabutan stories: Ecura's Delicacies (pasalubong + sabutan packaging; AIM2Flourish/DLSU student story—not forest restoration enterprise); ASCOT HABI revitalizing sabutan weaving (WURI ranking—academic program). AGCF partners include Climate Change Commission (CCC), useful CCC adjacency without claiming Youth CLAP participation. Student teams: cultural IP enterprise model, women/youth weavers, dual revenue + restoration logic, accelerator pathway via Villgro/UNDP NatureNest."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G16\\\", \\\"target\\\": \\\"sabutan weaving forest restoration Aurora climate enterprise Philippines\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\"\\\", \\\"confidence\\\": \\\"n"
+}

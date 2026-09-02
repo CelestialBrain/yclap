@@ -1,0 +1,36 @@
+{
+  "agent_id": "G13",
+  "target": "O1nnovations gravity rain-catcher Agusan Villgro Philippines",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.1441248,
+  "structured": {
+    "agent_id": "G13",
+    "target": "O1nnovations gravity rain-catcher Agusan Villgro Philippines",
+    "project_name": "O1nnovations gravity-powered raincatcher (O1nnovations Rainwater Solutions)",
+    "builder": [
+      "Augustus Nicko Bas (co-founder and CEO)",
+      "Anthony Adrian Cale (co-founder and CTO / Technology Lead)",
+      "O1nnovations Rainwater Solutions Corp. / O1nnovations - Rainwater Solutions"
+    ],
+    "school_or_org": "O1nnovations Rainwater Solutions Corp. (youth-led social enterprise, HQ San Francisco, Agusan del Sur; founded 2023); mentored under Villgro Philippines accelerator ecosystem",
+    "year_or_edition": "2026 (Villgro Climate Action Showcase, 18 June 2026); org founded 2023",
+    "program_event": "Villgro Philippines Climate Action Showcase (RCBC Plaza, Makati); climate enterprises from Villgro accelerator programming",
+    "theme_or_track": "Climate action / climate innovation (showcase of climate enterprises across growth stages, sectors, and geographies)",
+    "what_it_does": "Co-designs complete gravity-powered rainwater harvesting systems (gutters, pipes, tanks, filters, faucets) with floating and off-grid communities so rain becomes usable or potable water with no electricity. Serves Agusan Marsh floating communities and sells systems to schools in San Francisco, Agusan del Sur, with proceeds intended to subsidize installations for households with low purchasing power.",
+    "place": "San Francisco and Agusan Marsh floating communities, Agusan del Sur, Caraga, Philippines; showcased in Makati (RCBC Plaza)",
+    "outcome_or_award": "Featured Mindanao climate innovator at Villgro Philippines Climate Action Showcase (18 June 2026). Company public posts also claim: Most Outstanding Project for the Planet (UN SDG Awards / UN SDSN Philippines) for project Tubig at Kasanayan; 2nd place Elev8 PH Circular Innovation Challenge Category III (Circular Equipment and Tools). No competitive placement rank stated for the Villgro showcase itself.",
+    "theme_same_every_year": "",
+    "confidence": "high",
+    "source_url": [
+      "https://mindanews.com/business/2026/07/chocolates-rain-catchers-and-mushrooms-mindanao-innovations-featured-in-climate-action-showcase-in-makati/",
+      "https://ph.linkedin.com/company/o1nnovations",
+      "https://www.globalfic.org/stories/augustus-nicko-bas",
+      "https://www.facebook.com/o1nnovations/"
+    ],
+    "gap": "Named university/school for founders not verified in full public articles (only that Augustus is described as a civil engineering graduate in Habitat-related snippets; Anthony Adrian Cale as environmental engineer). Exact Villgro accelerator cohort name and start year not specified beyond mentorship and showcase. Full Global Fellows in Courage profile text did not load. Complete co-founder/team list beyond Bas and Cale not independently verified. UN SDSN and Elev8 awards are company-posted claims; independent award-page confirmation not fetched.",
+    "note": "Name is pronounced 'uwan-novations' from Bisaya for rain. Youth-led (team under 30); NYC Youth Organization Registration Program accreditation claimed on company page. Related project names: Tubig at Kasanayan / Tubig at KasanayO1 (WASH + skills; linked to Modern Balsa Initiative lineage). Design lesson for student teams: 100% gravity for off-grid/floating sites; community co-design; cross-subsidy (school sales → subsidized marsh homes). Relevant PH climate-innovation / Villgro ecosystem example for Youth CLAP climate and WASH tracks—not a traditional university competition entry."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G13\\\", \\\"target\\\": \\\"O1nnovations gravity rain-catcher Agusan Villgro Philippines\\\"  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  \\n  "
+}

@@ -1,0 +1,33 @@
+{
+  "agent_id": "G06",
+  "target": "Philippine Resilience Awards 2023 youth winners projects list CCC",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.2032424,
+  "structured": {
+    "agent_id": "G06",
+    "target": "Philippine Resilience Awards 2023 youth winners projects list CCC",
+    "project_name": "unknown",
+    "builder": [],
+    "school_or_org": "Climate Change Commission (CCC); partners include Office of Senator Loren Legarda, Philippine Commission on Women, National Resilience Council, ARISE Philippines, WIN DRR Philippines, Carlos P. Romulo Foundation, SM Prime Holdings",
+    "year_or_edition": "2023",
+    "program_event": "Philippine Resilience Awards (2023 branded as Philippine Resilience Awards for Women)",
+    "theme_or_track": "",
+    "what_it_does": "",
+    "place": "Philippines (national; awarding ceremony reported in Manila / Quezon City area, October 2023)",
+    "outcome_or_award": "",
+    "theme_same_every_year": "",
+    "confidence": "high",
+    "source_url": [
+      "https://climate.gov.ph/news/819",
+      "https://resiliencecouncil.ph/pra-recap-of-2023-pra-awardees/",
+      "https://resiliencecouncil.ph/our-work/",
+      "https://resiliencecouncil.ph/pra-2024-theme/",
+      "https://climate.gov.ph/news/961"
+    ],
+    "gap": "No public list of 2023 PRA youth winners or youth projects exists under CCC/NRC sources. Official 2023 coverage is Women Category only (10 women leaders named). NRC states 2023 opened nominations for Women only and Youth Category was added in 2024. 2023 edition theme text (beyond gender/women focus) and any informal youth recognition at side events were not verified as named youth awardees. NRC 2023 recap page is image-heavy without a machine-readable youth roster.",
+    "note": "For Youth CLAP desk: do not treat 2023 as having a youth winners project list. Use 2024+ PRA Youth Category for youth project examples (e.g. 2024 youth awardee Christian John Evangelista cited by NRC). 2023 women awardees and initiatives (official CCC 12 Oct 2023): (1) Mayor Maria Josefina Belmonte, Quezon City — Community-based Urban Farming Program; (2) Alicia Ilaga, DA Climate Resilient Agriculture Office — AMIA Program; (3) Usec. Maria Catalina Cabral, DPWH — infrastructure resilience; (4) Dr. Shirley Agrupis, Mariano Marcos State University — nipa-sap bioethanol / green tech; (5) Maria Vicente Jalandoni, Base Bahay Foundation — Cement-Bamboo Frame Technology; (6) Dr. Urduja Alvarado, Cagayan State University — mangrove/ecological resilience, Gonzaga, Cagayan; (7) Dr. Joy Mirasol, Bukidnon State University — Mindanao protected-area management; (8) Nida Collado, Macatumbalen Community Based Forest and Coastal Management Association, San Vicente, Palawan — community forest/coastal management (also received CCC Accelerator Fund); (9) Sr. Arcelita Sarnillo, St. Paul's Hospital of Iloilo — Green and Healthy Hospital Program; (10) Mila Bogñabal (also spelled Bognalbal), Joroan Farmers and Fisherfolks Association, Tiwi, Albay — climate-resilient agriculture (Accelerator Fund). 2024 PRA theme (for multi-year context only): “Kabataan at Kababaihan: Katatagan ng Bayan.”"
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G06\\\", \\\"target\\\": \\\"Philippine Resilience Awards 2023 youth winners projects list CCC\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"2023\\\", \\\"program_event\\\": \\\"Philippine Resilience Awards\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": "
+}

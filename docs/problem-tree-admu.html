@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Problem Tree — ADMU</title>
+<style>
+  :root{
+    --ink:#14261c; --muted:#5c6f63; --line:#c6d4c9;
+    --paper:#fbfcfa; --card:#ffffff;
+    --leaf:#2f7d4f; --leaf-soft:#eaf4ed;
+    --trunk:#7a4a20; --trunk-soft:#f6ece2;
+    --root:#8a6a2f; --root-soft:#f7f1e2;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:28px 20px 40px;
+    background:var(--paper); color:var(--ink);
+    font:15px/1.5 "Inter","Segoe UI",system-ui,-apple-system,sans-serif;
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+
+  header{text-align:center;margin-bottom:26px}
+  h1{font-size:22px;margin:0 0 4px;letter-spacing:-.01em}
+  header p{margin:0;color:var(--muted);font-size:13px}
+
+  .band{
+    display:flex;align-items:center;gap:10px;
+    margin:0 0 12px;color:var(--muted);
+    font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  }
+  .band::after{content:"";flex:1;height:1px;background:var(--line)}
+  .band b{color:var(--ink);font-weight:700}
+
+  .row{display:grid;gap:12px}
+  .row-5{grid-template-columns:repeat(5,1fr)}
+  .row-4{grid-template-columns:repeat(4,1fr)}
+
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:13px 14px;
+  }
+  .card h3{
+    margin:0 0 7px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  }
+  .card p{margin:0;font-size:13.5px;color:#33453b}
+
+  .branch{border-top:3px solid var(--leaf)}
+  .branch h3{color:var(--leaf)}
+  .root{border-bottom:3px solid var(--root);background:var(--root-soft)}
+  .root h3{color:var(--root)}
+  .tag{
+    display:inline-block;background:var(--root);color:#fff;
+    border-radius:4px;padding:1px 6px;margin-right:6px;font-size:10.5px;
+  }
+
+  .stem{display:flex;justify-content:center}
+  .stem span{width:3px;height:26px;background:var(--line)}
+
+  .trunk{
+    background:var(--trunk-soft);border:2px solid var(--trunk);border-radius:12px;
+    padding:20px 24px;text-align:center;
+  }
+  .trunk h2{
+    margin:0 0 8px;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--trunk);
+  }
+  .trunk p{margin:0;font-size:19px;line-height:1.42;font-weight:600;max-width:820px;margin-inline:auto}
+
+  .deep{
+    margin:14px auto 0;max-width:820px;text-align:center;
+    font-size:13px;color:var(--muted);font-style:italic;
+  }
+
+  .solution{
+    margin-top:26px;background:var(--leaf-soft);
+    border:1px solid var(--leaf);border-left-width:5px;border-radius:10px;
+    padding:16px 20px;
+  }
+  .solution h2{margin:0 0 6px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--leaf)}
+  .solution p{margin:0;font-size:16px;font-weight:600}
+  .solution small{display:block;margin-top:7px;font-size:13px;font-weight:400;color:#3d5a49}
+
+  footer{
+    margin-top:22px;padding-top:14px;border-top:1px solid var(--line);
+    color:var(--muted);font-size:12px;text-align:center;
+  }
+  footer b{color:var(--ink)}
+
+  @media (max-width:900px){
+    .row-5,.row-4{grid-template-columns:1fr 1fr}
+    .trunk p{font-size:17px}
+  }
+  @media (max-width:560px){
+    .row-5,.row-4{grid-template-columns:1fr}
+  }
+  @media print{
+    body{padding:0;background:#fff}
+    .card,.trunk,.solution{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Climate Change Problem Tree — Ateneo de Manila University</h1>
+    <p>Youth CLAP · Group Growth Task 1 · 22 August 2026</p>
+  </header>
+
+  <div class="band"><b>Branches</b> — consequences if unaddressed</div>
+  <div class="row row-5">
+    <div class="card branch">
+      <h3>Environmental</h3>
+      <p>Organics rot anaerobically in landfill and release <b>methane</b>; plastics that leak into creeks and drainage feed the <b>basura → baha</b> chain.</p>
+    </div>
+    <div class="card branch">
+      <h3>Economic</h3>
+      <p>Value is destroyed — households and orgs throw away money, hauling and tipping costs are borne publicly, and collectors lose steady sorted supply.</p>
+    </div>
+    <div class="card branch">
+      <h3>Social / Justice</h3>
+      <p>Flood and dumpsite burden falls on low-income barangays downstream, not on the campus that generated the waste. Informal workers carry the risk with the least price power.</p>
+    </div>
+    <div class="card branch">
+      <h3>Political</h3>
+      <p>Landfill capacity keeps being consumed, RA 9003 compliance stays on paper, and LGUs are pushed toward end-of-pipe fixes instead of diversion.</p>
+    </div>
+    <div class="card branch">
+      <h3>Technological</h3>
+      <p>Recovery infrastructure stays under-used and under-measured — no data on what is generated or diverted, so no one can size an MRF or a route.</p>
+    </div>
+  </div>
+
+  <div class="stem"><span></span></div>
+
+  <div class="trunk">
+    <h2>Trunk — the problem</h2>
+    <p>Recyclable and organic waste from Ateneo and its surrounding community is thrown as residual instead of diverted — even though it has market value and a nearby buyer.</p>
+  </div>
+
+  <div class="stem"><span></span></div>
+
+  <div class="band"><b>Roots</b> — why this problem is in place</div>
+  <div class="row row-4">
+    <div class="card root">
+      <h3><span class="tag">R1</span>Price opacity</h3>
+      <p>Scrap has a real ₱/kg value, but whoever is holding the bottle cannot see it. With no visible value, material defaults to garbage.</p>
+    </div>
+    <div class="card root">
+      <h3><span class="tag">R2</span>Broken last link</h3>
+      <p>Junkshops, MRFs and informal collectors already recover material. Finding one and reaching it is the friction. Capacity exists; routing does not.</p>
+    </div>
+    <div class="card root">
+      <h3><span class="tag">R3</span>Rule, not habit</h3>
+      <p>RA 9003 mandates segregation, but enforcement is weak and bins are recombined downstream — so sorting feels pointless.</p>
+    </div>
+    <div class="card root">
+      <h3><span class="tag">R4</span>Framed as sanitation</h3>
+      <p>Disposal is treated as somebody else's job. Nobody counts the kilograms or the carbon, so there is no feedback loop and no accountability.</p>
+    </div>
+  </div>
+
+  <p class="deep">Deepest root — the material's value and its climate cost are both <b>unpriced and unmeasured</b> at the moment of the decision.</p>
+
+  <div class="solution">
+    <h2>Our solution</h2>
+    <p>Make the price and the path visible at the moment of disposal — then log the kilograms.</p>
+    <small>Attacks R1 and R2 directly, and closes the missing feedback loop on R4 by making diversion measurable.</small>
+  </div>
+
+  <footer>
+    <b>Not claiming:</b> carbon credits or offsets · a flood-control fix (drainage is a stated co-benefit) · any collector as “verified” before we have contacted them. Every kg shown is either logged or labeled a demo seed.
+  </footer>
+
+</div>
+</body>
+</html>

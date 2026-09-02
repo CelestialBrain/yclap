@@ -1,0 +1,38 @@
+{
+  "agent_id": "G03",
+  "target": "Shri Tahanie B. Macaumbao Green by Design Lake Lanao National Youth Council",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.145448,
+  "structured": {
+    "agent_id": "G03",
+    "target": "Shri Tahanie B. Macaumbao Green by Design Lake Lanao National Youth Council",
+    "project_name": "Green by Design",
+    "builder": [
+      "Shri Tahanie B. Macaumbao",
+      "Anna Zaaquira Boloto",
+      "Mohammad Ali Baruang"
+    ],
+    "school_or_org": "Mindanao State University–Marawi Senior High School (origin team); later linked to MSU–Main Campus Marawi; WWF-Philippines National Youth Council; Unawa PH (FPE #Y4B Green Ambassador context)",
+    "year_or_edition": "Pitch/showcase ~2021 (The Next Bright Idea); Philippine Resilience Awards 2025",
+    "program_event": "Philippine Resilience Awards (PRA) 2025 Youth Category (Climate Change Commission); earlier Enderun Colleges The Next Bright Idea; FPE #Y4B Green Ambassador",
+    "theme_or_track": "PRA 2025: Kababaihan at Kabataan: Katuwang sa Paghahabi ng Isang Matatag na Bayan (Youth Category)",
+    "what_it_does": "Green by Design is a social enterprise that targets water hyacinth infestation and waste pollution in Lake Lanao by converting the invasive plant into low-cost, plant-based, compostable packaging. It pairs invasive-species cleanup with an alternative to conventional packaging to support waste reduction and water sustainability for lakeside communities.",
+    "place": "Lake Lanao / Marawi City, Lanao del Sur (BARMM); early implementation plans cited for Wato, Balindong",
+    "outcome_or_award": "PRA 2025 Youth Category awardee (recognized for Green by Design); The Next Bright Idea grand champion (design pitch) and first runner-up (business pitch)",
+    "theme_same_every_year": "",
+    "confidence": "high",
+    "source_url": [
+      "https://climate.gov.ph/news/1047",
+      "https://pia.gov.ph/press-release/women-and-youth-climate-resilience-leaders-honored-at-philippine-resilience-awards-2025/",
+      "https://globalnation.inquirer.net/302327/meet-the-women-and-youth-redefining-what-climate-leadership-could-look-like",
+      "https://www.wheninmanila.com/these-high-school-students-bagged-grand-prizes-from-a-local-pitch-competition-aims-to-start-a-livelihood-for-fellow-marawi-siege-victims/",
+      "https://fpe.ph/video",
+      "https://www.wwf.org.ph/get_involved/empower_young_people/national_youth_council/new_forces_for_nature_get_to_know_the_national_youth_council_members/"
+    ],
+    "gap": "Exact calendar year of The Next Bright Idea win not stated as a formal year on the article page (context/handle point to ~2021). Post-launch production scale, revenue model, and current co-founder roles not detailed in official press. Unawa PH vs Green by Design corporate structure not fully explained beyond FPE ambassador blurb. Climate Tracker Asia NextGen fellow bio page could not be fully re-fetched in this run (snippet only: BS Psychology, MSU Main, age ~20 in Dec 2023). Social posts claiming “first social enterprise in Bangsamoro” not independently confirmed in government sources.",
+    "note": "Strong CCC / Youth CLAP–relevant case: PRA 2025 youth champion from Lake Lanao (Meranaw/Moro youth leadership via WWF National Youth Council). Mechanism is circular: harvest invasive hyacinth + cut plastic packaging waste. Student teams can cite CCC/PIA for award legitimacy and When In Manila + FPE for product mechanism and original MSU-MSHS team. Planned LGU/fisherfolk partnerships and Balindong rollout were stated as intentions after the 2021 pitch, not verified as completed in the sources used."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G03\\\", \\\"target\\\": \\\"Shri Tahanie B. Macaumbao Green by Design Lake Lanao National Youth Council\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\"\\\", \\\"confidence\\\": "
+}

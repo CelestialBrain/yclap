@@ -1,0 +1,43 @@
+{
+  "agent_id": "G29",
+  "target": "Ateneo de Manila SEEDS climate student projects Young Leaders for Resilience",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.294508,
+  "structured": {
+    "agent_id": "G29",
+    "target": "Ateneo de Manila SEEDS climate student projects Young Leaders for Resilience",
+    "project_name": "Young Leaders for Resilience Program (YLRP)",
+    "builder": [
+      "National Resilience Council (NRC)",
+      "SM Prime Holdings",
+      "IBM Philippines",
+      "Asia Pacific College",
+      "National University",
+      "Hans Sy (described as brainchild of YLRP)"
+    ],
+    "school_or_org": "National Resilience Council (public–private partnership); academic partners include Ateneo de Manila University (CCARPH / institutional leadership). Competing student teams were from NRC partner LGU universities (e.g. Pamantasan ng Lungsod ng Muntinlupa & Colegio de Muntinlupa; Xavier University–Ateneo de Cagayan; Camarines Sur Polytechnic Colleges; Ateneo de Zamboanga University)—not verified as Ateneo de Manila SEEDS student teams.",
+    "year_or_edition": "2019 (launched at Top Leaders Forum 2019, 12 November 2019)",
+    "program_event": "Young Leaders for Resilience Program national competition at Top Leaders Forum (TLF) 2019 — organized with SM Prime Holdings, UNDRR, ARISE Philippines, and NRC",
+    "theme_or_track": "TLF 2019 theme: \"From Risk to Resilience: Forging Pathways and Milestones\"; youth climate and disaster risk reduction / resilience challenges of NRC partner LGUs; IBM Enterprise Design Thinking workshops",
+    "what_it_does": "YLRP is an NRC youth program that trains student teams from partner LGUs in Enterprise Design Thinking (led by IBM Philippines, co-facilitated by APC and National University), then has them pitch climate and disaster-resilience innovations for their localities at the Top Leaders Forum. Ateneo de Manila’s SDG 13 materials describe it as introducing design thinking and risk-management principles in identified barangays. Documented 2019 competition projects include Seismo-Power Terminator (auto power shutoff in quakes to limit secondary fire), Project ORO (multi-hazard mobile app bridging LGU–public information), and a Tri-button Emergency Aid Box for emergency communication.",
+    "place": "Philippines (national pitch at SMX Convention Center, Pasay City; partner LGU localities including Muntinlupa, Cagayan de Oro, Iriga, Zamboanga, and others)",
+    "outcome_or_award": "Program formally launched at TLF 2019; eight LGU student entries competed. Public placements: 1st — Muntinlupa (Pamantasan ng Lungsod ng Muntinlupa & Colegio de Muntinlupa), Seismo-Power Terminator (₱100,000 + plaques/medals/laptops); 2nd — Xavier University–Ateneo de Cagayan, Project ORO (₱75,000); 3rd — Camarines Sur Polytechnic Colleges (Iriga), Tri-button Emergency Aid Box (₱50,000). Other teams also received cash prizes.",
+    "theme_same_every_year": "",
+    "confidence": "medium",
+    "source_url": [
+      "https://mb.com.ph/2019/11/29/muntinlupa-students-win-climate-and-disaster-resilience-contest/",
+      "https://ccar2.wordpress.com/2019/11/12/ccarph-in-the-national-resilience-councils-8th-annual-top-leaders-forum-2019/",
+      "https://zamboangacity.gov.ph/climaco-joins-top-leaders-forum-on-disaster-resilience/",
+      "https://www.philstar.com/headlines/2019/11/17/1969474/forum-tackles-public-private-initiatives-risk-reduction",
+      "https://resiliencecouncil.ph/young-leaders-for-resilience/",
+      "https://resiliencecouncil.ph/our-work/",
+      "https://www.ateneo.edu/sustainable-development-goals/sdg-13?page=2",
+      "https://www.ateneo.edu/news/opportunities/2025/06/24/seeds-fund-supports-30-service-learning-projects"
+    ],
+    "gap": "No public source documents a named Ateneo de Manila University (Loyola) student climate project under YLRP, nor any OAVP-SEEDS Fund project that is the same as or entered into Young Leaders for Resilience. Ateneo de Manila appears as NRC/CCARPH institutional partner and speaker (e.g. Fr. Jet Villarin); student competitors named in press are from other schools (including Ateneo de Zamboanga and Xavier Ateneo de Cagayan). Individual SEEDS Fund climate project titles, student builders, years, and outcomes are not listed in open web sources in a way that can be tied to YLRP. NRC site full page and some ARISE pages were not fully retrievable; later YLRP editions (post-2019) beyond SK-focused descriptions are sparsely documented in open search.",
+    "note": "For Youth CLAP desk: treat two distinct mechanisms. (1) YLRP = multi-university, LGU-based NRC/ARISE youth design-thinking competition (2019 national showcase well documented). (2) Ateneo OAVP-SEEDS / SEEDS Fund = internal Ateneo seed funding (up to ~₱100,000 cited in campus posts) for service-learning and sustainability proof-of-concepts, with thematic areas that include environment, disaster prevention, climate change and energy—not the same program as YLRP. CCARPH (Ateneo-linked) partnered on TLF 2019 and celebrated Muntinlupa’s win; useful PH resilience network for student teams seeking LGU + private-sector pitch pathways, not an Ateneo SEEDS product brand."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G29\\\", \\\"target\\\": \\\"Ateneo de Manila SEEDS climate student projects Young Leaders for Resilience\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\"\\\", \\\"confidence\\\":"
+}

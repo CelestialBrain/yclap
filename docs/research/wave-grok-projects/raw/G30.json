@@ -1,0 +1,47 @@
+{
+  "agent_id": "G30",
+  "target": "cross-year themes CCC youth climate awards and accelerators Philippines 2020-2026 same theme every year?",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.44297,
+  "structured": {
+    "agent_id": "G30",
+    "target": "cross-year themes CCC youth climate awards and accelerators Philippines 2020-2026 same theme every year?",
+    "project_name": "Philippine Resilience Awards (PRA)",
+    "builder": [
+      "Senator Loren Legarda (initiator)",
+      "Climate Change Commission (CCC)",
+      "Philippine Commission on Women (PCW)",
+      "National Resilience Council (NRC)",
+      "SM Prime / ARISE Philippines",
+      "Women's International Network on Disaster Risk Reduction (WiNDRR / WINDRR)"
+    ],
+    "school_or_org": "Climate Change Commission (CCC) multistakeholder program (with PCW, NRC, private-sector partners)",
+    "year_or_edition": "PRA modern cycle documented 2023–2025 (third year in 2025); 2026 primer circulated as fourth cycle; earlier Legarda-era PRA existed historically (e.g. 2013 launch references) but is separate from this youth/women cycle",
+    "program_event": "Philippine Resilience Awards (Women and Youth categories); related CCC youth science track: Climate Science Youth Program / Gawad CCC: Search for Outstanding Young Climate Scientists (public evidence mainly 2018–2019)",
+    "theme_or_track": "PRA 2024: “Kababaihan at Kabataan: Katatagan ng Bayan”; PRA 2025: “Kababaihan at Kabataan: Katuwang sa Paghahabi ng Isang Matatag na Bayan”; PRA 2026 primer (secondary docs): “Kababaihan at Kabataan: Nagkakaisa Tungo sa Matatag at Maunlad na Pilipinas”; 2023 edition promoted as Philippine Resilience Awards for Women / “Showcasing Gender and …” (full official theme string incomplete in open sources). CCC Week 2024 (host week for PRA, not PRA-only): “Aksyon at Adaptasyon ng Makabagong Henerasyon”. Gawad CCC 2018 congress: “The 1.5 °Celsius Challenge: Securing Water for All Filipinos”; 2019 research focus: Food–Water–Energy Nexus.",
+    "what_it_does": "PRA is a multistakeholder recognition program led by CCC that nominates, field-validates, and awards women and youth champions whose local initiatives advance climate action and disaster risk reduction/resilience; awardees receive recognition and stated continued support to scale initiatives. Gawad CCC (under Climate Science Youth Program) was a high-school science research contest where students present climate-related research, with regional recognition, bootcamp refinement, and national presentation in coordination with DepEd and NPTE.",
+    "place": "Philippines (nationwide nominations; ceremonies often Manila / Quezon City during CCC Global Warming and Climate Change Consciousness Week)",
+    "outcome_or_award": "Women Category and Youth Category champions (e.g. 2025: three women + five youth awardees; cash/support noted in PNA for prior cycles); not a startup accelerator in public materials",
+    "theme_same_every_year": "No. Across 2023–2026, PRA keeps a stable focus on women and youth (kababaihan at kabataan) and climate/disaster resilience, but the official annual theme wording changes each year (2024 Katatagan ng Bayan; 2025 Katuwang sa Paghahabi ng Isang Matatag na Bayan; 2026 primer Nagkakaisa Tungo sa Matatag at Maunlad na Pilipinas). 2023 was framed more as Awards for Women / gender showcasing. Separate CCC youth science awards (Gawad CCC) also used different topical frames (water security 2018; FWE nexus 2019). No public evidence of one identical theme every year from 2020–2026. No dedicated CCC youth climate “accelerator” with a multi-year fixed theme was found in open sources for this window.",
+    "confidence": "high",
+    "source_url": [
+      "https://climate.gov.ph/news/1047",
+      "https://pia.gov.ph/press-release/women-and-youth-climate-resilience-leaders-honored-at-philippine-resilience-awards-2025/",
+      "https://www.climate.gov.ph/news/941",
+      "https://climate.gov.ph/news/961",
+      "https://www.pna.gov.ph/articles/1234723",
+      "https://www.pna.gov.ph/articles/1252780",
+      "https://www.manilatimes.net/2025/12/21/tmt-newswire/women-youth-climate-change-champions-honored-at-philippine-resilience-awards-2025/2247470",
+      "https://climate.gov.ph/our-programs/climate-science-youth-program",
+      "https://www.windrr.ph/2023/08/08/philippine-resilience-awards-are-now-open-for-nominations/",
+      "https://www.youtube.com/watch?v=25R-dSXWhF0",
+      "https://www.scribd.com/document/1036164885/PRA-2026-Primer",
+      "https://www.studocu.com/ph/document/bulacan-state-university/dramatic-content-writing/pra-2026-primer-kababaihan-at-kabataan-para-sa-resilience/160550485"
+    ],
+    "gap": "Full official 2023 PRA theme string not captured beyond “for Women” / YouTube “Showcasing Gender and …”. 2026 theme verified only via primer mirrors (Scribd/Studocu), not a live climate.gov.ph press release in this pass. No public multi-year listing of Gawad CCC themes after 2019; program page says “ongoing” but recent award cycles 2020–2026 not found. No CCC-branded youth climate accelerator (vs. awards/recognition) documented in open search for 2020–2026. Exact cash/prize amounts and full winner lists per year not exhaustively verified for every edition.",
+    "note": "For Youth CLAP / student teams: treat PRA as the main CCC-linked youth climate award with recurring women+youth categories—expect a new Filipino theme each year, not a fixed slogan. Align proposals to climate/DRR resilience and gender-inclusive impact; nominations typically open mid-year with ceremony during CCC Week (November). Do not conflate CCC Week themes with PRA themes (they can differ). Older Gawad CCC is science-high-school research, not an entrepreneurship accelerator. Always re-check climate.gov.ph and PRAwards.PH Facebook for the current year’s official theme and eligibility (youth ages often cited as 15–30 in partner posts)."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G30\\\", \\\"target\\\": \\\"cross-year themes CCC youth climate awards and accelerators Philippines 2020-2026 same theme every year?\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_y"
+}

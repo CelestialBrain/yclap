@@ -1,0 +1,38 @@
+{
+  "agent_id": "G17",
+  "target": "Waste4Change CIIC circular economy winner founders school Indonesia",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.1758448,
+  "structured": {
+    "agent_id": "G17",
+    "target": "Waste4Change CIIC circular economy winner founders school Indonesia",
+    "project_name": "Waste4Change",
+    "builder": [
+      "Mohamad Bijaksana Junerosano (Founder & CEO)"
+    ],
+    "school_or_org": "Waste4Change (Indonesian waste-management company / social enterprise); founder alumni Institut Teknologi Bandung (ITB), Teknik Lingkungan (Environmental Engineering), class of 2006",
+    "year_or_edition": "2023 (CIIC Grand Finale 2 September 2023)",
+    "program_event": "Climate Impact Innovations Challenge (CIIC) 2023 — East Ventures and Temasek Foundation",
+    "theme_or_track": "Ocean track (CIIC 2023 tracks: Renewable Energy; Food & Agriculture; Mobility; Ocean). Framed as a circular business model to upcycle plastic waste (not a separate 'circular economy' track name).",
+    "what_it_does": "Provides end-to-end responsible waste management in Indonesia: source-separated collection, sorting/recycling, digital waste-journey monitoring, and services that divert materials from landfills toward circular use. For CIIC 2023 it was recognized for a circular model to upcycle plastic waste, including plans for a low-value plastic recycling facility with RiverRecycle.",
+    "place": "Indonesia (multi-city operations; CIIC finale in Jakarta)",
+    "outcome_or_award": "Winner, Ocean track, CIIC 2023; one of four winners sharing a total IDR 10 billion grant pool from East Ventures and Temasek Foundation; also received an additional US$70,000 investment from Rumah Group",
+    "theme_same_every_year": "",
+    "confidence": "high",
+    "source_url": [
+      "https://temasekfoundation.org.sg/news/media-releases/afteroil--baniql--qarbotech--and-waste4change-won-a-total-of-idr-10-billion-in-grant-funding-from-east-ventures-and-temasek-foundation",
+      "https://climateimpactinnovations.com/afteroil-qarbotech-baniql-and-waste4change-won-a-total-of-idr-10-billion-in-grant-funding-from-east-ventures-and-temasek-foundation/",
+      "https://east.vc/news/press-release/afteroil-qarbotech-baniql-and-waste4change-won-grant-funding",
+      "https://techcrunch.com/2022/10/13/waste4change-is-building-a-circular-economy-in-indonesia/",
+      "https://itb.ac.id/berita/alumni-itb-membahas-sistem-pengelolaan-sampah-yang-berkelanjutan-pada-konteks-pedesaan/57718",
+      "https://www.thejakartapost.com/news/2014/04/08/mohamad-bijaksana-junerosano-a-modernist-environmental-activism",
+      "https://www.worldbank.org/en/news/feature/2019/05/31/meet-the-innovators-battling-plastic-waste-in-indonesia-mohamad-bijaksana-junerosano",
+      "https://waste4change.com/en/about"
+    ],
+    "gap": "Per-winner split of the IDR 10 billion CIIC prize pool not published (only the total). Co-founders beyond Junerosano not named in CIIC winner materials (CIIC spokesperson quoted was Bagas Mukti Wibowo, Senior Business Development Executive, not founder). Exact corporate legal entity name variations (e.g. PT Wasteforchange Alam Indonesia vs Waste4Change) not fully reconciled here. Founder's high school not in public sources used.",
+    "note": "Mature climate-tech / circular-waste company founded ~2014 (not a student-built CIIC entry). Strong Youth CLAP parallel for SEA: end-to-end waste value chain, informal collector integration, plastic upcycling, and digital EPR-style traceability. Founder path: ITB Environmental Engineering → Greeneration Indonesia (2008) → Waste4Change (2014). CIIC is Indonesia's large climate-innovation challenge (East Ventures + Temasek Foundation); 2023 Ocean-track win aligns plastic circularity with marine-debris outcomes."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{\\\"agent_id\\\":\\\"G17\\\",\\\"target\\\":\\\"Waste4Change CIIC circular economy winner founders school Indonesia\\\",\\\"project_name\\\":\\\"\\\",\\\"builder\\\":[],\\\"school_or_org\\\":\\\"\\\",\\\"year_or_edition\\\":\\\"\\\",\\\"program_event\\\":\\\"\\\",\\\"theme_or_track\\\":\\\"\\\",\\\"what_it_does\\\":\\\"\\\",\\\"place\\\":\\\"\\\",\\\"outcome_or_award\\\":\\\"\\\",\\\"theme_same_every_year\\\":\\\"\\\",\\\"confidence\\\":\\\"none\\\",\\\"source_url\\\":[],\\\"gap\\\":\\\"Rese"
+}

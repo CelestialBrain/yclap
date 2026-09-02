@@ -1,0 +1,41 @@
+{
+  "agent_id": "G26",
+  "target": "Klima Eskwela Climate Reality Philippines student projects CCC",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.2153656,
+  "structured": {
+    "agent_id": "G26",
+    "target": "Klima Eskwela Climate Reality Philippines student projects CCC",
+    "project_name": "Klima Eskwela (Klima Eskwela: Climate Science, Arts, and Action)",
+    "builder": [
+      "The Climate Reality Project Philippines",
+      "Climate Change Commission (CCC)",
+      "Joseph Pilapil (Engagement and Plastic-Free Reality Program Lead, Climate Reality Philippines)",
+      "Aimee Oliveros (Branch Manager / Interim Branch Manager, Climate Reality Philippines)"
+    ],
+    "school_or_org": "The Climate Reality Project Philippines (NGO branch of The Climate Reality Project); co-implemented with the Philippine Climate Change Commission (CCC); host partners include Caraga State University (CSU), Eastern Visayas State University (EVSU), Pangasinan State University (PSU), Camarines Norte State College (CNSC), and local city/municipal governments",
+    "year_or_edition": "Multi-year rollout; documented legs include 2023–2024 (e.g. Palawan, Dapitan, Ormoc, Siargao, Lapu-Lapu, Daet/CNSC) and 2025–2026 cycle with Mindanao (CSU Butuan, May 2025), Visayas (EVSU Tacloban, 27–28 Nov 2025), and Luzon (PSU Lingayen, Feb 2026)",
+    "program_event": "Klima Eskwela campus workshops under Climate Reality Philippines’ Plastic-Free Reality Program; launching pad for Project Niche (youth capacity-building / project incubator for campus plastic and waste solutions)",
+    "theme_or_track": "Climate science, arts, and action; climate–plastic crisis linkage; movement-building, campaigning, project management, and policy writing for campus single-use plastic and waste solutions",
+    "what_it_does": "Klima Eskwela is a multi-day student-leader workshop that connects climate science and plastics education with grassroots movement-building. Participants map local climate impacts, learn how plastic production and disposal drive greenhouse gases, and train in project management, campaigning, and policy writing to design campus-based plastic-free initiatives. Selected partner schools can become Project Niche grantees with seed support (reported up to PhP 100,000) plus mentorship and membership in the Klima Eskwela Network.",
+    "place": "Philippines (nationwide provincial/campus legs across Mindanao, Visayas, and Luzon—e.g. Butuan/Agusan del Norte, Tacloban/Leyte, Lingayen/Pangasinan, Siargao, Camarines Norte, and earlier stops including Palawan, Dapitan, Ormoc, Lapu-Lapu)",
+    "outcome_or_award": "Not a competitive award with ranked placement. Partner schools and student teams may receive Project Niche seed grants (up to PhP 100,000 cited for campus plastic/waste initiatives), learning access with Climate Reality Philippines, and Klima Eskwela Network membership. Named example grantee project: Juniel Rey Gigaquit’s Cheaper AF (Alternative Feeds, Alternative Fertilizer) at CSU.",
+    "theme_same_every_year": "Yes—consistently framed as climate science + plastic pollution education and youth movement-building under Plastic-Free Reality; common event title form is Klima Eskwela: Climate Science, Arts, and Action. From 2025 onward, legs also explicitly launch or feed Project Niche campus incubators.",
+    "confidence": "high",
+    "source_url": [
+      "https://climatereality.ph/",
+      "https://climatereality.ph/plasticfreereality/",
+      "https://climatereality.ph/tag/youth/",
+      "https://climatereality.ph/2025/06/04/klima-eskwela-2025-kickstarts-in-butuan-empowers-youth-to-find-climate-action-niche/",
+      "https://climatereality.ph/2026/03/09/climate-reality-phs-project-niche-empowers-pangasinan-youth-to-solve-the-plastic-crisis/",
+      "https://mb.com.ph/2025/06/05/klima-eskwela-2025-kickstarts-in-butuan-empowers-youth-to-find-climate-action-niche",
+      "https://mb.com.ph/2026/01/23/klima-eskwela-urges-tacloban-youth-to-turn-yolanda-memories-into-climate-action",
+      "https://www.evsu.edu.ph/university-news/happening-now-evsu-co-hosts-klima-eskwela-climate-action-event/"
+    ],
+    "gap": "No single ‘winning’ student project title or national award ranking for Klima Eskwela as a whole; exact founding year of Klima Eskwela not stated on primary pages fetched (homepage and Plastic-Free Reality describe CCC co-rollout and multi-year legs, with photo evidence from 2023 onward). Full public roster of all Project Niche grantee projects and exact seed amounts paid out per school not published in the sources used. Siargao 2024 BusinessMirror page did not return usable content (browser challenge). Individual student builders of most campus campaigns beyond named speakers/grantees (e.g. Gigaquit) are not systematically listed.",
+    "note": "For Youth CLAP / CCC desk mapping: treat Klima Eskwela as a CCC–Climate Reality PH education + incubator pipeline, not one student-built product. Useful entry points for student teams: host a campus leg, join Klima Eskwela Network, and apply/pitch campus plastic-free or waste projects via Project Niche (seed + mentorship). Program staff contacts publicly named: Joseph Pilapil (Plastic-Free Reality / Engagement), Aimee Oliveros (branch leadership). CCC engagement often includes Commissioner Atty. Rachel Anne Herrera and CCC officers (e.g. Erwin Husmalaga, Sophia Manzano, Atty. Megan Mateo in session roles). Related student-side example from the pipeline: Cheaper AF (Gigaquit, CSU)."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G26\\\", \\\"target\\\": \\\"Klima Eskwela Climate Reality Philippines student projects CCC\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\"\\\", \\\"confidence\\\": \\\"none\\\", \\\"s"
+}

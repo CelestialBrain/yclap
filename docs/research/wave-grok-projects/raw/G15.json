@@ -1,0 +1,37 @@
+{
+  "agent_id": "G15",
+  "target": "mushroom cooperative Marawi IDP climate livelihood Villgro",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.1438716,
+  "structured": {
+    "agent_id": "G15",
+    "target": "mushroom cooperative Marawi IDP climate livelihood Villgro",
+    "project_name": "IKRAM Agriculture Cooperative (IKRAM Mushroom Farm)",
+    "builder": [
+      "Sittie Aireen Caorong-Lomangcolob (founder)",
+      "group of Marawi IDP members (operators)"
+    ],
+    "school_or_org": "IKRAM Agriculture Cooperative (community-based social enterprise, Marawi); supported by Villgro Philippines",
+    "year_or_edition": "2023 (ISIP Social Impact Accelerator); 2025–2026 (Nexus for Equity Accelerator); 18 June 2026 (Climate Action Showcase)",
+    "program_event": "ISIP Social Impact Accelerator (UNDP/Australian Government; co-led by Villgro Philippines & ACTED); Nexus for Equity Accelerator (Villgro Philippines); Villgro Climate Action Showcase (RCBC Plaza, Makati)",
+    "theme_or_track": "Climate action / climate-smart livelihood; Nexus track: sustainable food and packaging (gender-responsive / women-led climate equity)",
+    "what_it_does": "IDP-run community mushroom farm in Marawi that uses local sawdust waste as substrate to grow mushrooms, then sells fresh mushrooms, crackers, chips, and powder. Spent substrate is reused as natural fertilizer; the coop also trains others and partners on log-grown mushrooms linked to forest stewardship (e.g. around Mt. Mupo).",
+    "place": "Marawi City, Lanao del Sur, BARMM, Philippines",
+    "outcome_or_award": "3rd place, Nexus for Equity Accelerator Impact Showcase (12 Feb 2026); featured exhibitor at Villgro Climate Action Showcase (18 June 2026); ISIP Social Impact Accelerator cohort/showcase participant (2023); designated Learning Site for Agriculture (ATI)",
+    "theme_same_every_year": "",
+    "confidence": "high",
+    "source_url": [
+      "https://mindanews.com/business/2026/07/chocolates-rain-catchers-and-mushrooms-mindanao-innovations-featured-in-climate-action-showcase-in-makati/",
+      "https://sustina.earth/these-founders-are-building-climate-solutions-from-the-bottom-up/",
+      "https://www.linkedin.com/posts/villgroph_in-focus-ikram-agriculture-cooperative-activity-7032571459927478272-8tK9",
+      "https://www.undp.org/philippines/press-releases/isip-features-10-social-enterprises-impact-showcase",
+      "https://villgrophilippines.org/project/ikram/",
+      "https://fund.thesparkproject.com/project/rebuilding-lives-through-mushrooms"
+    ],
+    "gap": "Exact founding/registration year not pinned to a single primary source (post-siege, after ~4 years of displacement). Full cooperative member roster beyond founder not publicly listed. Villgro project page (villgrophilippines.org/project/ikram/) returned almost no extractable body text on fetch. ATI Learning Site article URL did not yield usable body content on fetch. No Youth CLAP / CCC award link found for this enterprise.",
+    "note": "Not a university student project—community IDP social enterprise useful as a PH climate-livelihood case for Youth CLAP teams. Arabic *ikram* = generosity (founder explanation). Dual branding: IKRAM Agriculture Cooperative (legal/coop identity) and IKRAM Mushroom Farm (product/brand). Climate angle: circular use of sawdust waste, reduced chemical fertilizer, conservation buy-back agreements. Strong Villgro multi-program arc (ISIP 2023 → Nexus Equity 2025–26 → Climate Action Showcase 2026)."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G15\\\", \\\"target\\\": \\\"mushroom cooperative Marawi IDP climate livelihood Villgro\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\"\\\", \\\"confidence\\\": \\\"none\\\", \\\"sourc"
+}

@@ -1,0 +1,32 @@
+{
+  "agent_id": "G11",
+  "target": "Young Climate Innovators Circle CCC Philippines",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.350736,
+  "structured": {
+    "agent_id": "G11",
+    "target": "Young Climate Innovators Circle CCC Philippines",
+    "project_name": "Young Climate Innovators Circle",
+    "builder": [
+      "Climate Change Commission (CCC)"
+    ],
+    "school_or_org": "Climate Change Commission (CCC), Philippines — under CCC One Programming: Support for Partnerships with Academe and University-Based Youth Organizations",
+    "year_or_edition": "2025 (pilot; planned Execution Phase Nov–Dec 2025)",
+    "program_event": "Youth Climate Leadership Accelerator Project (YCLAP); culminating Innovation Showcase (tentatively titled “Likha-Klima”) during Climate Change Consciousness Week / CCC Week",
+    "theme_or_track": "Sub-outcome 1.2.2 — climate literacy mainstreamed via higher-education accelerator; climate knowledge-building, youth leadership, innovation for adaptation and mitigation, advocacy/campaigning",
+    "what_it_does": "It is the planned community of practice (CoP) spun out of the CCC’s Youth Climate Leadership Accelerator Project. After university youth complete accelerator modules and an innovation showcase, the Circle is meant to be launched as a social channel–based network where members keep sharing knowledge and networking for future climate-innovation work.",
+    "place": "Philippines (target participants: university-based youth in Metro Manila)",
+    "outcome_or_award": "Designed as a sustainability output of the YCLAP pilot (launch planned with the recognition ceremony after the Innovation Showcase). Public sources document the design and procurement, not a verified post-event award list or live membership roster.",
+    "theme_same_every_year": "",
+    "confidence": "medium",
+    "source_url": [
+      "https://climate.gov.ph/public/ckfinder/userfiles/files/Service%20Provision/TERMS_OF_REFERENCE_Consulting_Firm_for_CICA_Youth_REVISED.pdf",
+      "https://climate.gov.ph/public/ckfinder/userfiles/files/Service%20Provision/PBD%20Youth%20Climate.pdf"
+    ],
+    "gap": "No public post-implementation confirmation that the Circle was actually launched, which social channel hosts it, who the member students/orgs are, or which consulting firm was awarded the YCLAP contract. Individual builders (people) not named. Possible partner universities in the TOR (e.g. Ateneo de Manila, UP, DLSU, UST, Miriam, Mapúa, PUP, PLM, Taguig City University) are listed as candidates, not confirmed participants. Naming varies slightly in the same TOR: “Young Climate Innovators Circle,” “Young Climate Innovators’ Circle,” and “Young Climate Innovators and Campaigners Circle.”",
+    "note": "Parent program is YCLAP (Youth Climate Leadership Accelerator Project), ITB No. 2025-005, ABC Php 1,700,000; contract window in TOR ~30 Sep–23 Dec 2025. Accelerator: 5 modules (3 full Saturdays + async), Masterclass during CCC Week, “Meeting of the Brains,” then Innovation Showcase + recognition. Design Reference Group (planned) may include NYC, CHED, Climate Reality Philippines, AIM, UNICEF, academe/NPTE, and private-sector climate experts. Facebook posts also reference YCLAP partnership activity (e.g. PLV CPAG / Pamantasan ng Lungsod ng Valenzuela) but do not independently document the Circle launch. Useful for Ateneo Youth CLAP: this is CCC’s own youth-accelerator CoP concept, not a student startup project—frame as government program design/procurement, not a finished product with winners."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G11\\\", \\\"target\\\": \\\"Young Climate Innovators Circle CCC Philippines\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\"\\\", \\\"confidence\\\": \\\"none\\\", \\\"source_url\\\": []"
+}

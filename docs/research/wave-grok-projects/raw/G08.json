@@ -1,0 +1,44 @@
+{
+  "agent_id": "G08",
+  "target": "Philippine Resilience Awards theme by year 2023 2024 2025 CCC",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.197948,
+  "structured": {
+    "agent_id": "G08",
+    "target": "Philippine Resilience Awards theme by year 2023 2024 2025 CCC",
+    "project_name": "Philippine Resilience Awards (PRA)",
+    "builder": [
+      "Climate Change Commission (CCC)",
+      "Office of Senator Loren Legarda",
+      "Philippine Commission on Women (PCW)",
+      "National Resilience Council (NRC)",
+      "SM Prime / SM Cares",
+      "ARISE Philippines",
+      "Women’s International Network on Disaster Risk Reduction (WINDRR) Philippines",
+      "Carlos P. Romulo Foundation (2023 partner)"
+    ],
+    "school_or_org": "Climate Change Commission (lead government agency); multistakeholder with PCW, NRC, Office of Sen. Loren Legarda, SM Prime, ARISE PH, WINDRR PH",
+    "year_or_edition": "2023 (women category launch year of current CCC-led run); 2024 (2nd; women + youth); 2025 (3rd; women + youth)",
+    "program_event": "Philippine Resilience Awards — CCC-led recognition of women and (from 2024) youth climate and disaster-resilience champions; often staged during Global Warming and Climate Change Consciousness Week",
+    "theme_or_track": "2023: no public slogan found; program titled “Philippine Resilience Awards for Women” / Category for Women (women leaders in climate & DRR only). 2024: “Kababaihan at Kabataan: Katatagan ng Bayan.” 2025: “Kababaihan at Kabataan: Katuwang sa Paghahabi ng Isang Matatag na Bayan.” (Do not confuse 2024 CCC Week theme “Aksyon at Adaptasyon ng Makabagong Henerasyon” with the PRA theme.)",
+    "what_it_does": "National recognition program that seeks, validates, and honors women and youth whose local initiatives reduce climate/disaster vulnerability, strengthen community capacity, and advance gender-responsive resilience. Awardees undergo expert assessment and field validation; some receive scaling support (e.g., cash awards in 2024; Accelerator Fund for selected 2023 grassroots awardees).",
+    "place": "Philippines (nationwide nominees; ceremonies in Metro Manila — e.g. 2024 SMX Convention Center Pasay; 2025 Philippine Normal University Manila)",
+    "outcome_or_award": "Program-level: annual awards in Women and Youth categories (2023 women-only). Example scale: 10 women champions in 2023; 5 women + 2 youth in 2024 (Php150,000 each reported); 3 women + 5 youth in 2025.",
+    "theme_same_every_year": "No. Themes change by year: 2023 women-focused category without a verified slogan; 2024 “Kababaihan at Kabataan: Katatagan ng Bayan”; 2025 “Kababaihan at Kabataan: Katuwang sa Paghahabi ng Isang Matatag na Bayan.” Core focus stays women (and youth from 2024) in climate/disaster resilience.",
+    "confidence": "high",
+    "source_url": [
+      "https://climate.gov.ph/news/1047",
+      "https://climate.gov.ph/news/961",
+      "https://climate.gov.ph/news/819",
+      "https://climate.gov.ph/news/815",
+      "https://pia.gov.ph/press-release/ccc-pcw-nrc-forge-partnership-for-2024-philippine-resilience-awards/",
+      "https://www.manilatimes.net/2025/12/21/tmt-newswire/women-youth-climate-change-champions-honored-at-philippine-resilience-awards-2025/2247470",
+      "https://form.jotform.com/251391412471451"
+    ],
+    "gap": "No official public source found stating an explicit 2023 PRA theme slogan (only “PRA for Women” / Category for Women). Full 2023–2025 awardee lists and prize details not exhaustively cross-checked beyond CCC/PIA/Manila Times pages. Historical 2013 Legarda conceptualization vs 2023 CCC-led relaunch wording varies slightly by source.",
+    "note": "Useful for Youth CLAP / student teams: PRA is a recognition + scaling pathway, not a pitch competition—nominations emphasize demonstrated community impact, field validation, and gender/youth leadership. Categories relevant to youth open from 2024 (ages ~15–30 cited in some call materials). Pair PRA with CCC Week calendars (Nov). Youth 2025 examples include Project MOSES (IoT weather), Subang Environmental Initiatives, Reskyusi Food Basket, Kwentong Kalikasan, Green by Design—good peer benchmarks for PH campus climate projects. Official PRA FB: https://www.facebook.com/PRAwards.PH"
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G08\\\", \\\"target\\\": \\\"Philippine Resilience Awards theme by year 2023 2024 2025 CCC\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\"\\\", \\\"confidence\\\": \\\"none\\\", \\\"so"
+}

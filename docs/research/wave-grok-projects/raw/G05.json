@@ -1,0 +1,38 @@
+{
+  "agent_id": "G05",
+  "target": "Peter John C. Enorio Subang Environmental Initiatives Cebu Technological University",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.2508164,
+  "structured": {
+    "agent_id": "G05",
+    "target": "Peter John C. Enorio Subang Environmental Initiatives Cebu Technological University",
+    "project_name": "Subang Environmental Initiatives",
+    "builder": [
+      "Peter John C. Enorio",
+      "Subang Philippines"
+    ],
+    "school_or_org": "Cebu Technological University – Barili Campus",
+    "year_or_edition": "2025",
+    "program_event": "Philippine Resilience Awards (PRA) 2025 — Youth Category",
+    "theme_or_track": "Kababaihan at Kabataan: Katuwang sa Paghahabi ng Isang Matatag na Bayan",
+    "what_it_does": "Youth-led environmental advocacy that restores degraded lands and empowers communities through nature-based adaptation. Public write-ups describe kamagong and bamboo propagation, coastal clean-ups, and a goal of restoring about one hectare of degraded land per community site; related Subang work also covers ecosystem restoration, climate action, disaster preparedness, and sustainable agriculture.",
+    "place": "Cebu (CTU Barili Campus / Province of Cebu), Philippines",
+    "outcome_or_award": "Youth Category honoree, Philippine Resilience Awards 2025 (Climate Change Commission multistakeholder program; ceremony at Philippine Normal University during 18th Global Warming and Climate Change Consciousness Week). Separately reported as 2024 Outstanding Regional Youth Volunteer (Region VII / Central Visayas context via CTU coverage).",
+    "theme_same_every_year": "",
+    "confidence": "high",
+    "source_url": [
+      "https://climate.gov.ph/news/1047",
+      "https://pia.gov.ph/press-release/women-and-youth-climate-resilience-leaders-honored-at-philippine-resilience-awards-2025/",
+      "https://globalnation.inquirer.net/302327/meet-the-women-and-youth-redefining-what-climate-leadership-could-look-like",
+      "https://www.manilatimes.net/2025/12/21/tmt-newswire/women-youth-climate-change-champions-honored-at-philippine-resilience-awards-2025/2247470",
+      "https://tribune.net.ph/2025/12/05/women-youth-climate-champions-recognized-at-philippine-resilience-awards-2025",
+      "https://www.ctu.edu.ph/2025/12/ctu-barili-student-recognized-in-philippine-resilience-awards-2025-for-subang-project/",
+      "https://www.ctu.edu.ph/barili/2024/12/02/enorio-is-2024-outstanding-regional-youth-volunteer/"
+    ],
+    "gap": "Could not fully retrieve CTU.edu.ph article bodies (HTTP failures on fetch); details from those URLs rest on search snippets and cross-reporting. No public ranked place (1st/2nd/etc.) among Youth Category winners—sources list him among five youth honorees. Exact Subang founding date, full co-founder roster, measured hectares restored, and funding model not verified in the official CCC/PIA/Inquirer pages used. No explicit Ateneo Youth CLAP / Youth CLAP program participation found. Facebook (Subang Philippines) claims founding March 20, 2023 at CTU-Barili and 200+ projects—not independently confirmed via primary institutional page.",
+    "note": "Strong CCC / PRA 2025 case study for PH youth climate resilience: nature-based land restoration + community empowerment, campus-rooted (CTU Barili BSABE student) with a named youth org (Subang / Subang CTU Chapter). Enorio is repeatedly identified as Founding / National Executive President of Subang Philippines. Related activities in public coverage include black bamboo propagation (2026 launch with CTU Barili), waste/agriculture initiatives, and disaster relief (e.g. Subang–CTU coordinated relief). PRA partners include CCC, PCW, National Resilience Council, SM Prime, WiNDRR, ARISE PH; awardees are promised continued support to scale. Useful angle for student teams: chapter model + NBS (bamboo/kamagong) + DRR community work rather than pure climate-tech hardware."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G05\\\", \\\"target\\\": \\\"Peter John C. Enorio Subang Environmental Initiatives Cebu Technological University\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\"\\\", \\\"confid"
+}

@@ -1,0 +1,39 @@
+{
+  "agent_id": "G21",
+  "target": "Qarbotech photosynthesis spray CIIC 2023 founders Malaysia or SEA",
+  "exit_code": 0,
+  "stopReason": "end_turn",
+  "cost_usd_notional": 0.1151948,
+  "structured": {
+    "agent_id": "G21",
+    "target": "Qarbotech photosynthesis spray CIIC 2023 founders Malaysia or SEA",
+    "project_name": "Qarbotech / QarboGrow",
+    "builder": [
+      "Chor Chee Hoe (Co-Founder & CEO)",
+      "Suraya Abdul Rashid / Prof. Dr. Suraya Abdul Rashid (Founder/Chief Scientist / CSO)",
+      "Amirul Merican (Co-Founder & COO)",
+      "Qarbotech Sdn Bhd"
+    ],
+    "school_or_org": "Qarbotech Sdn Bhd (Malaysia deep-tech/agritech company); technology rooted in research at Universiti Putra Malaysia (UPM); CEO Chor Chee Hoe linked via MBA at Asia School of Business",
+    "year_or_edition": "2023",
+    "program_event": "Climate Impact Innovations Challenge (CIIC) 2023 — East Ventures & Temasek Foundation; Grand Finale 2 September 2023, Jakarta (sideline of ASEAN Business and Investment Summit 2023)",
+    "theme_or_track": "Food and Agriculture track (CIIC 2023 tracks: Renewable Energy, Food & Agriculture, Mobility, Ocean)",
+    "what_it_does": "Flagship product QarboGrow is a biocompatible organic concentrate using carbon quantum dots (extracted from agricultural-waste biochar). Farmers mix it with water and spray it on leaves; the dots integrate with chloroplasts to improve light/photon absorption and electron transfer, raising photosynthesis rate, yield, resilience, and potentially cutting fertiliser use—without gene editing.",
+    "place": "Malaysia (headquartered; manufacturing scale-up in Puchong); commercial trials/expansion in Indonesia and broader Southeast Asia",
+    "outcome_or_award": "Winner, Food and Agriculture track, CIIC 2023; one of four track winners sharing a total IDR 10 billion grant pool from East Ventures and Temasek Foundation",
+    "theme_same_every_year": "",
+    "confidence": "high",
+    "source_url": [
+      "https://climateimpactinnovations.com/afteroil-qarbotech-baniql-and-waste4change-won-a-total-of-idr-10-billion-in-grant-funding-from-east-ventures-and-temasek-foundation/",
+      "https://www.greenqueen.com.hk/?p=75124",
+      "https://asb.edu.my/qarbotech-plants-photosynthesis/",
+      "https://agfundernews.com/qarbotech-turbocharges-photosynthesis-with-carbon-quantum-dots-were-kind-of-cheating-the-plant-to-capture-more-light",
+      "https://qarbotech.com/",
+      "https://qarbotech.com/about/"
+    ],
+    "gap": "Exact individual grant amount awarded specifically to Qarbotech (only total IDR 10B for four winners is stated). Company about page fetch returned little body text. Minor public variance on founding timeline (company often dated 2018; one interview says Chor joined as cofounder in 2021 after a 2020 academic collab). Not a Philippine/Youth CLAP entry—no PH school or CCC link found.",
+    "note": "SEA climate-tech reference, not PH Youth CLAP. Useful framing for student teams: university IP (UPM nanotech) + commercial co-founders; spray-on biostimulant (not seed breeding/GMO); CIIC is a regional climate challenge with track winners and grant capital, not a school science fair. Product names: company Qarbotech; commercial spray/concentrate QarboGrow (earlier home-garden line Harvast also mentioned). Yield claims in press vary (e.g. up to ~30–60% depending on source/crop); treat as company-reported, not independently audited here."
+  },
+  "stderr_tail": "",
+  "raw_stdout_head": "{\n  \"text\": \"{ \\\"agent_id\\\": \\\"G21\\\", \\\"target\\\": \\\"Qarbotech photosynthesis spray CIIC 2023 founders Malaysia or SEA\\\", \\\"project_name\\\": \\\"unknown\\\", \\\"builder\\\": [], \\\"school_or_org\\\": \\\"\\\", \\\"year_or_edition\\\": \\\"\\\", \\\"program_event\\\": \\\"\\\", \\\"theme_or_track\\\": \\\"\\\", \\\"what_it_does\\\": \\\"\\\", \\\"place\\\": \\\"\\\", \\\"outcome_or_award\\\": \\\"\\\", \\\"theme_same_every_year\\\": \\\"\\\", \\\"confidence\\\": \\\"none\\\", "
+}
