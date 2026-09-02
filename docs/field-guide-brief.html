@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Field Guide — what the app has, and how it plays</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#058cd6; --blue-deep:#075d89;
+  --green:#45c223; --green-deep:#008653;
+  --orange:#f6b22d; --red:#ff3920;
+  --ink:#1f2022; --paper:#f9f9f9; --grid:#e4e7e8;
+  --forest:linear-gradient(115deg,#55d334 0%,#008653 100%);
+  --r-card:24px; --r-tile:20px; --r-pill:999px;
+}
+@page{ size:A4; margin:14mm 13mm; }
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  font-family:Montserrat,"Avenir Next","Century Gothic",sans-serif;
+  color:var(--ink); background:#fff;
+  font-size:9.6pt; line-height:1.5; -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
+.page{ page-break-after:always; }
+.page:last-child{ page-break-after:auto; }
+h1,h2,h3{ margin:0; line-height:1.15; }
+p{ margin:0 0 8px; }
+em{ font-style:italic; }
+strong{ font-weight:700; }
+
+/* ── cover ─────────────────────────────────────────────── */
+.cover{
+  background:var(--forest); color:#fff; border-radius:var(--r-card);
+  padding:30px 32px 26px; margin-bottom:16px;
+}
+.eyebrow{ font-size:8pt; font-weight:700; letter-spacing:.16em; text-transform:uppercase; opacity:.85; }
+.cover h1{ font-size:31pt; font-weight:800; letter-spacing:-.02em; margin:10px 0 6px; }
+.cover .sub{ font-size:11.5pt; font-weight:600; opacity:.95; max-width:74%; line-height:1.35; }
+.cover .meta{ margin-top:18px; padding-top:14px; border-top:1.5px solid rgba(255,255,255,.3);
+  display:flex; gap:26px; font-size:8.2pt; }
+.cover .meta b{ display:block; font-size:8pt; letter-spacing:.12em; text-transform:uppercase; opacity:.75; font-weight:700; margin-bottom:2px; }
+
+/* ── structure ─────────────────────────────────────────── */
+.sec{ margin:0 0 12px; }
+.sec > h2{
+  font-size:14pt; font-weight:800; letter-spacing:-.01em; margin-bottom:3px;
+  padding-left:11px; border-left:5px solid var(--green);
+}
+.sec > .lede{ font-size:9.2pt; color:#4a4d50; margin:0 0 9px; padding-left:16px; max-width:96%; }
+.card{ background:var(--paper); border:1px solid var(--grid); border-radius:var(--r-tile); padding:11px 14px; }
+.grid2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.grid4{ display:grid; grid-template-columns:repeat(4,1fr); gap:9px; }
+
+/* ── stat tiles ────────────────────────────────────────── */
+.stat{ background:var(--paper); border:1px solid var(--grid); border-radius:var(--r-tile); padding:11px 12px; }
+.stat .n{ font-size:20pt; font-weight:800; letter-spacing:-.02em; color:var(--green-deep); line-height:1; }
+.stat .l{ font-size:8pt; font-weight:700; margin-top:5px; }
+.stat .s{ font-size:7.1pt; color:#6b6f73; margin-top:2px; line-height:1.35; }
+
+/* ── surfaces ──────────────────────────────────────────── */
+.surf{ border:1px solid var(--grid); border-radius:var(--r-tile); padding:11px 12px; background:#fff; }
+.surf .route{ display:inline-block; font-weight:800; font-size:8.4pt; color:#fff;
+  background:var(--ink); border-radius:var(--r-pill); padding:2.5px 10px; letter-spacing:.02em; }
+.surf h3{ font-size:9.6pt; font-weight:700; margin:7px 0 4px; }
+.surf p{ font-size:8.2pt; color:#4a4d50; margin:0; line-height:1.45; }
+
+/* ── tables ────────────────────────────────────────────── */
+table{ width:100%; border-collapse:collapse; font-size:8.4pt; }
+th{ text-align:left; font-weight:700; font-size:7.4pt; letter-spacing:.1em; text-transform:uppercase;
+  color:#6b6f73; padding:0 8px 5px 0; border-bottom:1.5px solid var(--grid); }
+td{ padding:6px 8px 6px 0; border-bottom:1px solid var(--grid); vertical-align:top; line-height:1.4; }
+td.f{ font-weight:700; width:29%; }
+tr:last-child td{ border-bottom:none; }
+
+/* ── pills ─────────────────────────────────────────────── */
+.pill{ display:inline-block; font-size:7pt; font-weight:700; border-radius:var(--r-pill);
+  padding:2px 8px; border:1.4px solid; margin:0 3px 3px 0; white-space:nowrap; }
+.p-ship{ color:var(--green-deep); border-color:var(--green-deep); background:rgba(69,194,35,.09); }
+.p-open{ color:#a06a00; border-color:var(--orange); background:rgba(246,178,45,.13); }
+.p-no{ color:#b32414; border-color:var(--red); background:rgba(255,57,32,.08); }
+.p-native{ color:var(--green-deep); border-color:var(--green-deep); }
+.p-exotic{ color:var(--blue-deep); border-color:var(--blue-deep); }
+.p-threat{ color:#b32414; border-color:var(--red); }
+
+/* ── species ───────────────────────────────────────────── */
+.sp{ border:1px solid var(--grid); border-radius:14px; padding:9px 10px; background:#fff; }
+.sp .cn{ font-size:9.4pt; font-weight:700; }
+.sp .sn{ font-size:7.6pt; font-style:italic; color:#6b6f73; margin-bottom:5px; }
+
+/* ── pull quote ────────────────────────────────────────── */
+.pull{ background:var(--ink); color:#fff; border-radius:var(--r-tile); padding:13px 18px; margin:9px 0; }
+.pull .q{ font-size:12.5pt; font-weight:700; line-height:1.3; letter-spacing:-.01em; }
+.pull .a{ font-size:7.6pt; opacity:.7; margin-top:7px; }
+.pull .q .hl{ color:var(--green); }
+
+/* ── callout ───────────────────────────────────────────── */
+.note{ border-left:4px solid var(--orange); background:rgba(246,178,45,.09);
+  border-radius:0 12px 12px 0; padding:10px 13px; font-size:8.4pt; line-height:1.45; }
+.note b{ display:block; font-size:7.4pt; letter-spacing:.1em; text-transform:uppercase; color:#a06a00; margin-bottom:3px; }
+
+/* ── invariants ────────────────────────────────────────── */
+.inv{ font-size:8.3pt; line-height:1.42; padding:4px 0 4px 20px; border-bottom:1px solid var(--grid); position:relative; }
+.inv:last-child{ border-bottom:none; }
+.inv::before{ content:"✓"; position:absolute; left:2px; top:6px; color:var(--green-deep); font-weight:800; font-size:9pt; }
+
+.foot{ margin-top:14px; padding-top:9px; border-top:1.5px solid var(--grid);
+  font-size:7.3pt; color:#6b6f73; line-height:1.5; display:flex; justify-content:space-between; gap:16px; }
+.mono{ font-family:"SF Mono",Consolas,monospace; font-size:7.4pt; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="cover">
+    <div class="eyebrow">Youth CLAP · Ateneo CCC · Innovation Showcase 12 Sep 2026</div>
+    <h1>Field Guide</h1>
+    <div class="sub">A student-led campus-forest PWA for Ateneo Loyola Heights — walk the campus, meet a tree, log what you saw.</div>
+    <div class="meta">
+      <div><b>Live</b>yclap-field-guide.marangelonrevelo.workers.dev</div>
+      <div><b>Surfaces</b>Home · Map · Journal · Plan</div>
+      <div><b>Status</b>Deployed · 65/65 tests green</div>
+      <div><b>As of</b>2 Sep 2026</div>
+    </div>
+  </div>
+<div class="sec">
+    <h2>What it is</h2>
+    <p class="lede">A phone-first field guide to the trees on our own campus. You open it on a walk, it tells you what is near you, you photograph a tree, iNaturalist suggests what it is, and it goes into <em>your</em> journal. It works with no signal.</p>
+    <div class="grid4">
+      <div class="stat"><div class="n">1,809</div><div class="l">Trees on campus</div><div class="s">AIS figure, SY 2025–26. Not our survey.</div></div>
+      <div class="stat"><div class="n">101</div><div class="l">In the arboretum</div><div class="s">AIS figure. Cited on screen.</div></div>
+      <div class="stat"><div class="n">9</div><div class="l">Species curated</div><div class="s">Each fact carries a source.</div></div>
+      <div class="stat"><div class="n">186</div><div class="l">Walkable paths</div><div class="s">OSM footways inside the campus box.</div></div>
+    </div>
+  </div>
+<div class="sec">
+    <h2>The four surfaces</h2>
+    <div class="grid2">
+      <div class="surf">
+        <span class="route">/</span>
+        <h3>Home</h3>
+        <p>The campus in three sourced numbers, the species you can meet, and the one gap said out loud: AIS has a species database, but not a count and location per tree.</p>
+      </div>
+      <div class="surf">
+        <span class="route">/map</span>
+        <h3>Map</h3>
+        <p>Real satellite or street tiles, your position projected through Web Mercator, encounters that fire at 25 m and stop hedging at 8 m. Start a walk, open the camera, log a sighting.</p>
+      </div>
+      <div class="surf">
+        <span class="route">/journal</span>
+        <h3>Journal</h3>
+        <p>Your collection. Every sighting keeps species, photo, note, walk, coordinate, accuracy — and whether the fix was real or the demo loop. Exports to GeoJSON and CSV.</p>
+      </div>
+      <div class="surf">
+        <span class="route">/plan</span>
+        <h3>Plan</h3>
+        <p>What we are asking for and from whom — the AIS count-and-location gap, CFMO grounds data, Ateneo Wild's photo catalogue. The asks are on the record, not in a slide.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot">
+    <div>Field Guide · Ateneo Loyola Heights · Youth CLAP desk</div>
+    <div>1 / 4</div>
+  </div>
+</div>
+
+<div class="page">
+<div class="sec">
+    <h2>What ships today</h2>
+    <p class="lede">Every row below is running in the deployed build.</p>
+    <table>
+      <tr><td class="f">Map without a map library</td><td>A slippy map written here in ~270 lines — pan, zoom about the cursor, real Web Mercator. Four key-free basemaps: Guide, Trail, Paper, Satellite. Each was probed at a campus tile before it was allowed to ship; three candidates were rejected for watermarks, missing zoom levels, or a 404.</td></tr>
+      <tr><td class="f">Position you can trust</td><td><span class="mono">watchPosition</span> projected through the same projection the tile server drew with, so the marker stays on its feature at every zoom. The accuracy ring is a real radius in real metres.</td></tr>
+      <tr><td class="f">Demo campus</td><td>A scripted 42-second walk over the real paths, <strong>on by default</strong> — a hall off Katipunan has no useful GPS fix, and a stage demo must not depend on one. Toggle it off to use the device.</td></tr>
+      <tr><td class="f">Encounters</td><td>True haversine metres. Within 25 m an encounter pins and gets an arrival ring; within 8 m the card stops hedging. It follows the nearest tree until you tap one.</td></tr>
+      <tr><td class="f">Camera</td><td>Live rear-facing viewfinder → canvas → JPEG at ≤1024 px. Falls back to a file picker when permission is denied or there is no camera. The stream is torn down on capture.</td></tr>
+      <tr><td class="f">Identification</td><td>The photo is POSTed to iNaturalist's computer vision. <strong>This app runs no model</strong> and the caption says so. With no token it replays a recorded reply and announces that in capitals.</td></tr>
+      <tr><td class="f">Walk sessions</td><td>Start and end a walk; every sighting saved inside it carries a walk id, coordinate, accuracy, and whether the fix was real.</td></tr>
+      <tr><td class="f">Journal &amp; export</td><td>localStorage — no account, no server, no other student's data. Summary is counts and groupings. Exports located sightings as GeoJSON and CSV; photos are deliberately excluded.</td></tr>
+      <tr><td class="f">Offline</td><td>A hand-written service worker precaches the shell and cache-firsts assets and map tiles, capped at 1400 with oldest-first eviction. <strong>Tap "Save offline" once before you go on stage.</strong> Verified 2 Sep against a harness that blocks the service worker too, not just the page.</td></tr>
+    </table>
+  </div>
+<div class="sec">
+    <h2>How it is built</h2>
+    <div class="grid2">
+      <div class="card" style="font-size:8.4pt;line-height:1.55">
+        <strong>Stack.</strong> React and react-dom, and nothing else. The slippy map and the service worker are hand-written — handing both to a map library to get pan, zoom and correctly-placed markers was the worse trade for a 300 KB bundle that has to work offline.<br><br>
+        <strong>Verified.</strong> 65 tests across 21 suites, all green. Type-check clean. Offline proven against a harness that emulates the network on the service worker too — the naive version blocks the page and lets every tile through, which proves nothing.
+      </div>
+      <div class="card" style="font-size:8.4pt;line-height:1.55">
+        <strong>Deployed.</strong> Cloudflare Workers with static assets, SPA fallback so <span class="mono">/map</span> survives a reload. HTTPS is not cosmetic here — the camera will not open without it.<br><br>
+        <strong>Before a demo.</strong> Tap <em>Save offline</em> once on the basemap you plan to show. Leave <em>Demo campus</em> on. Add an iNaturalist token if you want live identification — it expires in about a day.
+      </div>
+    </div>
+  </div>
+  <div class="foot">
+    <div>Field Guide · What ships today</div>
+    <div>2 / 4</div>
+  </div>
+</div>
+
+<div class="page">
+<div class="sec">
+    <h2>How we make it play</h2>
+    <p class="lede">The app is built on a specific, defensible position about game mechanics — one drawn from Ateneo's own published research, and one that is enforced by an automated test rather than by good intentions.</p>
+
+    <div class="pull">
+      <div class="q">Counting is not a breach of the rule.<br><span class="hl">Comparing is.</span></div>
+      <div class="a">The line every engagement feature in this app is held to. Derived from a survey of 40+ nature-app interfaces: not one of them ranks its users against each other. Every "progress" number in the reference set — <em>3 of 5 discoveries</em>, <em>47 species</em>, <em>2.8 km · 46 min · 7 species</em> — is about <em>this walk</em> or <em>my collection</em>.</div>
+    </div>
+
+    <p>So the app is a <strong>collection game</strong>, not a competition. You are playing against the campus and against your own last walk — never against another student. Two sources put us here: Nicholson's <em>Meaningful Gamification</em>, and RECIPE (Rodrigo, Favis &amp; Cuyegkeng 2021), the framework behind Ateneo's own SDG game. The journal carries their line on screen: <strong>"Reflection, not a race."</strong></p>
+
+    <div class="grid2" style="margin-top:11px">
+      <div class="card">
+        <div style="font-size:8pt;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green-deep);margin-bottom:7px">Playing today</div>
+        <div style="font-size:8.4pt;line-height:1.55">
+          <div><span class="pill p-ship">shipped</span> <strong>A collection to fill.</strong> Nine curated species as a grid of badges, with empty slots for what you have not met yet.</div>
+          <div style="margin-top:6px"><span class="pill p-ship">shipped</span> <strong>Discovery by proximity.</strong> Trees announce themselves as you get near — 25 m to appear, 8 m to confirm. The walk is the input device.</div>
+          <div style="margin-top:6px"><span class="pill p-ship">shipped</span> <strong>The capture moment.</strong> One big round shutter, a live viewfinder, then a species suggestion. This is the loop people repeat.</div>
+          <div style="margin-top:6px"><span class="pill p-ship">shipped</span> <strong>A session with a boundary.</strong> Start walk / end walk gives play a beginning and an end, and tags everything caught inside it.</div>
+          <div style="margin-top:6px"><span class="pill p-ship">shipped</span> <strong>Your own record.</strong> Sightings, species, located count, by-species bars, by-day pills — all yours, all local.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:8pt;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#a06a00;margin-bottom:7px">Proposed before 12 Sep</div>
+        <div style="font-size:8.4pt;line-height:1.55">
+          <div><span class="pill p-open">open</span> <strong>A walk with a shape.</strong> Ordered stops and a progress rail reading <em>n of N</em>, resetting each walk.</div>
+          <div style="margin-top:6px"><span class="pill p-open">open</span> <strong>A receipt, not a stop.</strong> Ending a walk shows distance, elapsed time, species seen, and which were <em>new to you</em>.</div>
+          <div style="margin-top:6px"><span class="pill p-open">open</span> <strong>Seen-of-total.</strong> The journal header reads <em>4 of 9 species seen</em>, and each sighting gets a stable specimen index.</div>
+          <div style="margin-top:6px"><span class="pill p-open">open</span> <strong>A question, not just a form.</strong> Saving a sighting asks what you noticed — optional, never blocking the save.</div>
+          <div style="margin-top:6px"><span class="pill p-open">open</span> <strong>Report a tree we do not have.</strong> Turns the AIS gap into something a student can act on, and it leaves in the export.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="sec">
+    <h2>The honesty invariants</h2>
+    <p class="lede">Rules that must survive any edit to this app. They are the reason a judge can trust the rest of it.</p>
+    <div class="card">
+      <div class="inv"><strong>AIS's numbers are AIS's.</strong> 1,809 trees, 101 in the arboretum, ~⅔ green cover — each carries a source and a year on screen. Nothing is labelled "our survey."</div>
+      <div class="inv"><strong>The AIS gap is said out loud.</strong> AIS has the species database; what it lacks is count and location per tree. That sentence appears on Home, Map and Plan.</div>
+      <div class="inv"><strong>iNaturalist identifies, not this app.</strong> No model weights ship here, and with no token the app says its reply was recorded — it never claims to have looked at your photo.</div>
+      <div class="inv"><strong>Encounter coordinates are positions on a demo map</strong>, not surveyed tree locations.</div>
+      <div class="inv"><strong>The paths and campus outline are OpenStreetMap's</strong>, credited on the map whenever the layer is on. Not a survey, not a cadastral boundary.</div>
+      <div class="inv"><strong>Restricted ground stays hatched</strong> and spawns no encounters. The scripted demo walk was re-routed when it was found crossing it.</div>
+      <div class="inv"><strong>No leaderboard, no points, no rank, no streak</strong> — asserted by test, not by memory.</div>
+    </div>
+  </div>
+  <div class="foot">
+    <div>Field Guide · How we make it play</div>
+    <div>3 / 4</div>
+  </div>
+</div>
+
+<div class="page">
+<div class="sec">
+    <h2>What we turned down, and why</h2>
+    <p class="lede">These are logged refusals with named sources, not oversights — which is why they are worth showing rather than hiding.</p>
+    <table>
+      <tr><th>Refused</th><th>Reason on record</th></tr>
+      <tr><td class="f"><span class="pill p-no">refused</span> Public leaderboard, XP, rank, points-per-photo</td><td>Sophie: against incentivising advocacy involvement. Ivan: no prize budget unless a sponsor appears. A prize-driven walk stops when the prize does.</td></tr>
+      <tr><td class="f"><span class="pill p-no">refused</span> Streaks</td><td>Punishes the student who misses a day. The journal is a record, not an obligation.</td></tr>
+      <tr><td class="f"><span class="pill p-no">refused</span> Community feed, follows, avatar pins of other students</td><td>Turns a walk into an audience. Also a real safeguarding question about broadcasting where students are.</td></tr>
+      <tr><td class="f"><span class="pill p-no">refused</span> CO₂-offset / survival-rate impact dashboard</td><td>We do not measure it. A number we cannot source is the fastest way to lose a judge.</td></tr>
+      <tr><td class="f"><span class="pill p-no">refused</span> Steps, calories, weather</td><td>Same rule — we do not measure them.</td></tr>
+    </table>
+    <div class="note" style="margin-top:10px">
+      <b>A decision the team should make out loud</b>
+      The no-ranking rule is currently enforced by a test: <span class="mono">journal.test.ts</span> fails the build if a <span class="mono">rank</span>, <span class="mono">score</span>, <span class="mono">points</span>, <span class="mono">streak</span>, <span class="mono">level</span> or <span class="mono">xp</span> field ever appears in the journal summary. That is deliberate — it stops the rule eroding quietly under deadline. If the team now wants competitive mechanics, that is a legitimate call, but it should be made explicitly, with Sophie and Ivan in the room, and the test changed on purpose — not worked around.
+    </div>
+  </div>
+<div class="sec">
+    <h2>The nine species</h2>
+    <p class="lede">Curated, not scraped. Every claim on a species card traces to a citation carried in the app.</p>
+    <div class="grid3">
+      <div class="sp"><div class="cn">Narra</div><div class="sn">Pterocarpus indicus</div><span class="pill p-native">Native</span><span class="pill">National tree</span><span class="pill">Shade</span></div>
+      <div class="sp"><div class="cn">Molave</div><div class="sn">Vitex parviflora</div><span class="pill p-native">Native</span><span class="pill p-threat">Threatened</span><span class="pill">Hardwood</span></div>
+      <div class="sp"><div class="cn">Katmon</div><div class="sn">Dillenia philippinensis</div><span class="pill p-native">Native</span><span class="pill">Endemic</span><span class="pill">Understory</span></div>
+      <div class="sp"><div class="cn">Dao</div><div class="sn">Dracontomelon dao</div><span class="pill p-native">Native</span><span class="pill">Canopy</span></div>
+      <div class="sp"><div class="cn">Mahogany</div><div class="sn">Swietenia macrophylla</div><span class="pill p-exotic">Exotic</span><span class="pill">Fast shade</span></div>
+      <div class="sp"><div class="cn">Rain tree</div><div class="sn">Samanea saman</div><span class="pill p-exotic">Exotic</span><span class="pill">Wide shade</span></div>
+      <div class="sp"><div class="cn">Teak</div><div class="sn">Tectona grandis</div><span class="pill p-exotic">Exotic</span><span class="pill">Timber</span></div>
+      <div class="sp"><div class="cn">Balete</div><div class="sn">Ficus sp.</div><span class="pill p-native">Native</span><span class="pill">Strangler fig</span><span class="pill">Landmark</span></div>
+      <div class="sp"><div class="cn">Lagundi</div><div class="sn">Vitex negundo</div><span class="pill p-native">Native</span><span class="pill">Shrub</span><span class="pill">Medicinal</span></div>
+    </div>
+    <div class="note" style="margin-top:10px">
+      <b>Why Lagundi and Molave stay apart</b>
+      Both are <em>Vitex</em>, and the two get merged constantly — including on our own early species list. They are different plants, and the app keeps them as separate records with a caution on each card naming the other. Getting a species wrong in public is exactly the kind of error a botanist in the audience will catch.
+    </div>
+  </div>
+  <div class="foot">
+    <div>Youth CLAP desk · Ateneo Committee on Climate Change · prepared 2 Sep 2026</div>
+    <div>4 / 4</div>
+  </div>
+</div>
+
+</body>
+</html>
