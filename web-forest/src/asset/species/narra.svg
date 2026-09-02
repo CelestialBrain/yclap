@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none" role="img" aria-hidden="true">
+  <path d="M64 116V42" stroke="#1F2022" stroke-width="5" stroke-linecap="round"/>
+  <path d="M64 78C46 70 28 76 22 90c16 6 30 2 42-8Z" fill="#3F8A1F" stroke="#1F2022" stroke-width="3.4" stroke-linejoin="round"/>
+  <path d="M64 78C82 70 100 76 106 90c-16 6-30 2-42-8Z" fill="#008653" stroke="#1F2022" stroke-width="3.4" stroke-linejoin="round"/>
+  <path d="M64 62C48 54 32 58 26 70c14 5 26 2 38-6Z" fill="#45C223" stroke="#1F2022" stroke-width="3.4" stroke-linejoin="round"/>
+  <path d="M64 62C80 54 96 58 102 70c-14 5-26 2-38-6Z" fill="#3F8A1F" stroke="#1F2022" stroke-width="3.4" stroke-linejoin="round"/>
+  <path d="M64 48C52 42 40 46 36 56c10 4 20 2 28-5Z" fill="#45C223" stroke="#1F2022" stroke-width="3.2" stroke-linejoin="round"/>
+  <path d="M64 48C76 42 88 46 92 56c-10 4-20 2-28-5Z" fill="#008653" stroke="#1F2022" stroke-width="3.2" stroke-linejoin="round"/>
+  <circle cx="64" cy="30" r="11" fill="#F6B22D" stroke="#1F2022" stroke-width="3.4"/>
+  <circle cx="48" cy="36" r="7.5" fill="#E1A036" stroke="#1F2022" stroke-width="3.2"/>
+  <circle cx="80" cy="36" r="7.5" fill="#E1A036" stroke="#1F2022" stroke-width="3.2"/>
+  <circle cx="64" cy="30" r="4" fill="#F9F9F9"/>
+</svg>

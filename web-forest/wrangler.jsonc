@@ -1,0 +1,12 @@
+{
+  // Field Guide — Ateneo Loyola Heights. Static Vite build served by a Worker
+  // with the assets binding; there is no server code, so no `main` entry.
+  "name": "yclap-field-guide",
+  "compatibility_date": "2026-09-02",
+  "assets": {
+    "directory": "./dist",
+    // `/map`, `/journal` and `/plan` are pushState routes with no file behind
+    // them — a deep link or a reload must land on index.html, not a 404.
+    "not_found_handling": "single-page-application"
+  }
+}

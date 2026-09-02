@@ -1,0 +1,119 @@
+{
+  "_comment": "Recorded-shape POST /v1/computervision/score_image body for Pterocarpus indicus photo https://www.inaturalist.org/observations/36874701",
+  "total_results": 7,
+  "page": 1,
+  "per_page": 7,
+  "results": [
+    {
+      "combined_score": 0.9124,
+      "vision_score": 0.94,
+      "frequency_score": 1,
+      "taxon": {
+        "id": 348101,
+        "name": "Pterocarpus indicus",
+        "preferred_common_name": "Burmese-Rosewood",
+        "rank": "species",
+        "rank_level": 10,
+        "iconic_taxon_name": "Plantae",
+        "wikipedia_url": "http://en.wikipedia.org/wiki/Pterocarpus_indicus",
+        "observations_count": 3929,
+        "is_active": true
+      }
+    },
+    {
+      "combined_score": 0.0412,
+      "vision_score": 0.0612,
+      "frequency_score": 1,
+      "taxon": {
+        "id": 68662,
+        "name": "Pterocarpus",
+        "preferred_common_name": "Bloodwoods",
+        "rank": "genus",
+        "rank_level": 20,
+        "iconic_taxon_name": "Plantae",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Pterocarpus",
+        "observations_count": 9444,
+        "is_active": true
+      }
+    },
+    {
+      "combined_score": 0.0188,
+      "vision_score": 0.0388,
+      "frequency_score": 0,
+      "taxon": {
+        "id": 344886,
+        "name": "Pterocarpus macrocarpus",
+        "preferred_common_name": "Burma Padauk",
+        "rank": "species",
+        "rank_level": 10,
+        "iconic_taxon_name": "Plantae",
+        "wikipedia_url": "http://en.wikipedia.org/wiki/Pterocarpus_macrocarpus",
+        "observations_count": 170,
+        "is_active": true
+      }
+    },
+    {
+      "combined_score": 0.0091,
+      "vision_score": 0.0291,
+      "frequency_score": 0,
+      "taxon": {
+        "id": 292108,
+        "name": "Pterocarpus officinalis",
+        "preferred_common_name": "Dragonsblood Tree",
+        "rank": "species",
+        "rank_level": 10,
+        "iconic_taxon_name": "Plantae",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Pterocarpus officinalis",
+        "observations_count": 822,
+        "is_active": true
+      }
+    },
+    {
+      "combined_score": 0.0064,
+      "vision_score": 0.0264,
+      "frequency_score": 0,
+      "taxon": {
+        "id": 68659,
+        "name": "Pterocarpus marsupium",
+        "preferred_common_name": "Malabar kino",
+        "rank": "species",
+        "rank_level": 10,
+        "iconic_taxon_name": "Plantae",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Pterocarpus marsupium",
+        "observations_count": 370,
+        "is_active": true
+      }
+    },
+    {
+      "combined_score": 0.0042,
+      "vision_score": 0.0242,
+      "frequency_score": 0,
+      "taxon": {
+        "id": 442817,
+        "name": "Pterocarpus santalinus",
+        "preferred_common_name": "red sanders",
+        "rank": "species",
+        "rank_level": 10,
+        "iconic_taxon_name": "Plantae",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Pterocarpus santalinus",
+        "observations_count": 306,
+        "is_active": true
+      }
+    },
+    {
+      "combined_score": 0.0027,
+      "vision_score": 0.0227,
+      "frequency_score": 0,
+      "taxon": {
+        "id": 209982,
+        "name": "Pterocarpus rohrii",
+        "rank": "species",
+        "rank_level": 10,
+        "iconic_taxon_name": "Plantae",
+        "wikipedia_url": null,
+        "observations_count": 107,
+        "is_active": true
+      }
+    }
+  ]
+}

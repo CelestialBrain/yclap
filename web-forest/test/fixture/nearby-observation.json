@@ -1,0 +1,199 @@
+{
+  "_comment": "Recorded GET /v1/observations Plantae around 14.6386,121.0785; campus Narra from https://www.inaturalist.org/observations/36874701",
+  "total_results": 16,
+  "page": 1,
+  "per_page": 16,
+  "results": [
+    {
+      "id": 36874701,
+      "quality_grade": "research",
+      "observed_on": "2018-08-03",
+      "uri": "https://www.inaturalist.org/observations/36874701",
+      "taxon": {
+        "id": 348101,
+        "name": "Pterocarpus indicus",
+        "preferred_common_name": "Burmese-Rosewood",
+        "rank": "species"
+      }
+    },
+    {
+      "id": 1,
+      "quality_grade": "needs_id",
+      "observed_on": null,
+      "uri": null,
+      "taxon": {
+        "id": 999,
+        "name": "",
+        "preferred_common_name": "unnamed"
+      }
+    },
+    {
+      "id": 394630184,
+      "quality_grade": "casual",
+      "observed_on": "2026-08-26",
+      "uri": "https://www.inaturalist.org/observations/394630184",
+      "taxon": {
+        "id": 281371,
+        "name": "Samanea saman",
+        "preferred_common_name": "Monkey pod tree",
+        "rank": "species"
+      }
+    },
+    {
+      "id": 394909215,
+      "quality_grade": "needs_id",
+      "observed_on": "2026-08-27",
+      "uri": "https://www.inaturalist.org/observations/394909215",
+      "taxon": {
+        "id": 130374,
+        "name": "Cyanthillium cinereum",
+        "preferred_common_name": "little ironweed",
+        "rank": "species"
+      }
+    },
+    {
+      "id": 394984293,
+      "quality_grade": "needs_id",
+      "observed_on": "2026-08-27",
+      "uri": "https://www.inaturalist.org/observations/394984293",
+      "taxon": {
+        "id": 51822,
+        "name": "Euphorbia",
+        "preferred_common_name": "Spurges",
+        "rank": "genus"
+      }
+    },
+    {
+      "id": 394909120,
+      "quality_grade": "research",
+      "observed_on": "2026-08-27",
+      "uri": "https://www.inaturalist.org/observations/394909120",
+      "taxon": {
+        "id": 273713,
+        "name": "Euphorbia tithymaloides",
+        "preferred_common_name": "Devil's Backbone",
+        "rank": "species"
+      }
+    },
+    {
+      "id": 394908598,
+      "quality_grade": "casual",
+      "observed_on": "2026-08-27",
+      "uri": "https://www.inaturalist.org/observations/394908598",
+      "taxon": {
+        "id": 67710,
+        "name": "Sansevieria trifasciata",
+        "preferred_common_name": "Snake Plant",
+        "rank": "species"
+      }
+    },
+    {
+      "id": 394909182,
+      "quality_grade": "needs_id",
+      "observed_on": "2026-08-27",
+      "uri": "https://www.inaturalist.org/observations/394909182",
+      "taxon": {
+        "id": 206266,
+        "name": "Dieffenbachia seguine",
+        "preferred_common_name": "tuftroot",
+        "rank": "species"
+      }
+    },
+    {
+      "id": 394908795,
+      "quality_grade": "needs_id",
+      "observed_on": "2026-08-27",
+      "uri": "https://www.inaturalist.org/observations/394908795",
+      "taxon": {
+        "id": 143208,
+        "name": "Syngonium podophyllum",
+        "preferred_common_name": "Goosefoot-plant",
+        "rank": "species"
+      }
+    },
+    {
+      "id": 394908847,
+      "quality_grade": "needs_id",
+      "observed_on": "2026-08-27",
+      "uri": "https://www.inaturalist.org/observations/394908847",
+      "taxon": {
+        "id": 53804,
+        "name": "Bougainvillea",
+        "preferred_common_name": "bougainvilleas",
+        "rank": "genus"
+      }
+    },
+    {
+      "id": 394813570,
+      "quality_grade": "needs_id",
+      "observed_on": "2026-08-27",
+      "uri": "https://www.inaturalist.org/observations/394813570",
+      "taxon": {
+        "id": 133310,
+        "name": "Ixora",
+        "preferred_common_name": "ixoras",
+        "rank": "genus"
+      }
+    },
+    {
+      "id": 394813515,
+      "quality_grade": "needs_id",
+      "observed_on": "2026-08-27",
+      "uri": "https://www.inaturalist.org/observations/394813515",
+      "taxon": {
+        "id": 169878,
+        "name": "Tradescantia spathacea",
+        "preferred_common_name": "Moses-in-the-cradle",
+        "rank": "species"
+      }
+    },
+    {
+      "id": 394813492,
+      "quality_grade": "needs_id",
+      "observed_on": "2026-08-27",
+      "uri": "https://www.inaturalist.org/observations/394813492",
+      "taxon": {
+        "id": 69223,
+        "name": "Epipremnum aureum",
+        "preferred_common_name": "Golden Pothos",
+        "rank": "species"
+      }
+    },
+    {
+      "id": 394630369,
+      "quality_grade": "needs_id",
+      "observed_on": "2026-08-26",
+      "uri": "https://www.inaturalist.org/observations/394630369",
+      "taxon": {
+        "id": 708987,
+        "name": "Homalomena philippinensis",
+        "preferred_common_name": null,
+        "rank": "species"
+      }
+    },
+    {
+      "id": 395219665,
+      "quality_grade": "needs_id",
+      "observed_on": "2026-08-26",
+      "uri": "https://www.inaturalist.org/observations/395219665",
+      "taxon": {
+        "id": 163001,
+        "name": "Fissidens dubius",
+        "preferred_common_name": "Rock Pocket-moss",
+        "rank": "species"
+      }
+    },
+    {
+      "id": 394630183,
+      "quality_grade": "needs_id",
+      "observed_on": "2026-08-26",
+      "uri": "https://www.inaturalist.org/observations/394630183",
+      "taxon": {
+        "id": 281371,
+        "name": "Samanea saman",
+        "preferred_common_name": "Monkey pod tree",
+        "rank": "species"
+      }
+    }
+  ]
+}

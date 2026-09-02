@@ -1,0 +1,43 @@
+{
+  "name": "Field Guide — Ateneo Loyola Heights",
+  "short_name": "Field Guide",
+  "description": "Student-led campus-forest walk. Youth CLAP 2026 · Ateneo CCC.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F9F9F9",
+  "theme_color": "#008653",
+  "categories": ["education", "navigation"],
+  "icons": [
+    {
+      "src": "/brand/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/brand/mark-plant.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    { "name": "Walk the campus", "url": "/map" },
+    { "name": "My journal", "url": "/journal" }
+  ]
+}

@@ -25,3 +25,11 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Local secrets (VITE_INAT_API_TOKEN etc.) — .env.example is committed
+.env
+.env.local
+.env.*.local
+
+# Pre-deplate originals — regenerate with script/deplate.py
+web-forest/script/asset-with-plate/

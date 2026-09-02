@@ -1,0 +1,107 @@
+@import "tailwindcss";
+@import "./token.css";
+
+@theme {
+  --color-blue: #058cd6;
+  --color-blue-deep: #075d89;
+  --color-green: #45c223;
+  --color-green-vivid: #00e800;
+  --color-green-deep: #008653;
+  --color-orange: #f6b22d;
+  --color-red: #ff3920;
+  --color-ink: #1f2022;
+  --color-paper: #f9f9f9;
+  --color-grid: #e4e7e8;
+  --color-focus: #073e5f;
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --shadow-card: 0 12px 28px rgba(31, 32, 34, 0.12);
+  --grad-forest: linear-gradient(115deg, #55d334, #008653);
+  --grad-lagoon: linear-gradient(115deg, #058cd6, #45c223);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  color: #1f2022;
+  background: #f9f9f9;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: 0;
+  background: none;
+  color: inherit;
+}
+
+.scroll-soft {
+  scrollbar-width: none;
+}
+.scroll-soft::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+:focus-visible {
+  outline: 2px solid #073e5f;
+  outline-offset: 2px;
+}
+
+@keyframes fgup {
+  from {
+    transform: translateY(40px);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fgfade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes discPulse {
+  0% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+}
+
+@keyframes fgpulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.55;
+  }
+  70% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
