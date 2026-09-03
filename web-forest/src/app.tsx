@@ -178,7 +178,7 @@ function HomeScreen({ is_desktop, onWalk, onPlan }: { is_desktop: boolean; onWal
               A student-led field guide for Ateneo&rsquo;s urban forest — so noticing becomes a habit, not a poster.
             </p>
             <div className="flex gap-3" style={{ marginTop: 32 }}>
-              <StatTile big="1,809" line="trees geo-tagged" source="AIS · SY 2025–2026" />
+              <StatTile big="1,809" line="trees inventoried" source="AIS · SY 2025–2026" />
               <StatTile big="101" line="threatened trees" source="AIS arboretum" />
               <StatTile big="~⅔" line="of 89 ha green" source="AIS, Loyola Heights" />
             </div>
@@ -269,7 +269,7 @@ function HomeScreen({ is_desktop, onWalk, onPlan }: { is_desktop: boolean; onWal
         </p>
       </div>
       <div className="flex gap-2" style={{ padding: "18px 20px 4px" }}>
-        <StatTile big="1,809" line="trees geo-tagged" source="AIS · SY 2025–2026" />
+        <StatTile big="1,809" line="trees inventoried" source="AIS · SY 2025–2026" />
         <StatTile big="101" line="threatened trees" source="AIS arboretum" />
         <StatTile big="~⅔" line="of 89 ha green" source="AIS, Loyola Heights" />
       </div>

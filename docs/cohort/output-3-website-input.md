@@ -67,10 +67,17 @@ coverage and contribution, not competition.
 | Student participation | sightings logged per walk session (device-local, aggregate only) | 0 — pre-launch |
 | Data gap closed for AIS | sightings carrying a location AIS lacks | 0 — pre-launch |
 
-The last row is the one worth arguing in the room: **AIS has the species list;
-what it is missing is the count and the location of each tree** (Cathy,
-`2:12:12`). Every located sighting a student logs is one row of exactly the data
-AIS does not have. That is the project's contribution, stated as a measurable.
+The last row is the one worth arguing in the room — **but check it before you
+write it.** Cathy said at the 08-29 pitch (`2:12:12`) that AIS has the species
+database and is missing the count and the location of each tree. Our own R14
+research file says AIS geo-tagged 1,809 trees in SY 2025-2026, which would mean
+they have both. **These contradict, and we have not resolved it** (see
+`docs/research/2026-09-03-source-audit.md`). Clariz's AIS conversation settles it.
+
+Write it as conditional until then: *if* AIS lacks a point file, every located
+sighting a student logs is one row of exactly the data they need; *if* they have
+one, the contribution is surfacing it to students who have never seen it. Either
+is a real contribution. Claiming the wrong one in front of AIS would not be.
 
 Note for whoever writes this section: do not promise a participation *target* we
 have no basis for. We have not run a session yet.

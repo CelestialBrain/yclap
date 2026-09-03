@@ -42,7 +42,6 @@ const TILE_CACHE = "field-guide-tile-v1";
    `openstreetmap.fr` is CyclOSM and is a different domain from `.org`. */
 const TILE_HOST = [
   "tile.openstreetmap.org",
-  "tile-cyclosm.openstreetmap.fr",
   "server.arcgisonline.com",
 ];
 /* Two full campus layers at z17–19 is ~450 tiles; the cap leaves room for a

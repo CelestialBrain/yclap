@@ -285,8 +285,24 @@ export const landmark: Landmark[] = [
 ];
 
 /** Said out loud wherever an AIS figure appears. Cathy, 2026-08-29 (2:12:12). */
+/**
+ * What we can honestly say about AIS's data — which is less than we were saying.
+ *
+ * Two sources disagree, and the app was printing both in the same flow:
+ *   - R14 records AIS as having **geo-tagged 1,809 trees** (SY 2025–2026),
+ *     sourced to AIS campus communications with no retrievable link.
+ *   - Cathy, at the 08-29 pitch (`2:12:12`), said AIS has the species database
+ *     and is **missing the count and the location** of each tree.
+ *
+ * Both cannot be true. If they geo-tagged 1,809 trees they have count and
+ * location; if they lack count and location they did not geo-tag that many. Our
+ * own notes flagged this twice and it got built into the product anyway.
+ *
+ * Until Clariz's AIS conversation settles it, this states the open question
+ * rather than picking whichever answer flatters the project.
+ */
 export const AIS_GAP_NOTE =
-  "AIS keeps a species database for the campus. What it is missing is the count and the location of each tree — that gap is exactly what a walk like this could help close.";
+  "AIS keeps a species database for the campus. Whether it also holds a count and a location for every tree is exactly what we are asking them — if that point file exists we surface it, and if it does not, a walk like this is one way to start one.";
 
 export const WILD_NOTE =
   "Ateneo Wild keeps an Instagram catalogue of campus birds and trees, run by a faculty member. Not consulted yet.";

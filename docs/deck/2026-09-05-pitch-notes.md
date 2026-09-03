@@ -20,7 +20,7 @@ Screens to drop in: [`2026-09-05-asset/`](2026-09-05-asset/).
 |---|---|---|
 | **94 sectors · 35.0 ha** | The campus cut into areas | Faces of the OpenStreetMap road + footway network (ODbL) |
 | **68 biomes · 24.0 ha** | Sectors green enough to walk into and look at a plant | Measured, ≥45% vegetation |
-| **1,809 campus trees · 101 arboretum** | Inventory context | **AIS, SY 2025–2026** — theirs, not ours |
+| **1,809 campus trees · 101 arboretum** | Inventory context | **AIS, SY 2025–2026** — theirs, not ours. 1,809 traces to AIS campus communications with no archived link; 101 is corroborated by the GUIDON (2023-11-27) |
 
 Method, if asked: 660 campus ways → 2,759 segments → a planar arrangement of
 2,455 vertices and 2,813 edges → 371 faces, filtered to 94 real sectors.
@@ -80,10 +80,15 @@ and the first thing it caught was us.
 
 We have areas but thin content: only 6 sectors currently name something to find,
 because we refuse to invent assignments. **The AIS inventory lands Wed 09-09**
-and is what fills this — AIS has the species list; what it is missing is the
-count and the location of each tree (Cathy, `2:12:12`), and that gap is exactly
-what a walk like this could help close. That is the ask, and it is a better ask
-than a finished-looking map would be.
+and is what fills this.
+
+Careful with the next sentence. Cathy said AIS has the species database and
+lacks the count and location of each tree (`2:12:12`); our own R14 file says AIS
+geo-tagged 1,809 trees, which would mean they have both. **We have not resolved
+that** — see `docs/research/2026-09-03-source-audit.md`. Do not assert either on
+stage. Say: "AIS has the inventory; we are asking what form it takes, and the
+app is built to surface it either way." That is true, and it survives someone
+from AIS being in the room.
 
 ## Asset index
 

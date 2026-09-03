@@ -12,7 +12,18 @@
 export type Layer = "guide" | "trail" | "paper" | "satellite";
 
 /** Presets are cycled in this order by the map's one layer control. */
-export const LAYER_ORDER: Layer[] = ["guide", "trail", "paper", "satellite"];
+/**
+ * Presets cycled by the map's one layer control.
+ *
+ * `trail` is deliberately NOT in this list. CyclOSM's tile servers returned
+ * 502 / 500 / timeout on a, b and c on 2026-09-03, so cycling into it gives a
+ * grey map — not something to discover on stage. The source entry below stays,
+ * so restoring it is: add "trail" back to this list AND put
+ * "tile-cyclosm.openstreetmap.fr" back in TILE_HOST in `public/sw.js`.
+ * `sw.test.ts` enforces that the two stay in step in both directions — it is
+ * what caught the stale allowlist entry when the layer was pulled.
+ */
+export const LAYER_ORDER: Layer[] = ["guide", "paper", "satellite"];
 
 interface Source {
   label: string;
@@ -100,7 +111,7 @@ export const SOURCE: Record<Layer, Source> = {
   },
   satellite: {
     label: "Satellite",
-    attribution: "Imagery © Esri, Maxar, Earthstar Geographics",
+    attribution: "Imagery © Esri, Vantor, Earthstar Geographics",
     url: (z, x, y) =>
       `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`,
     max_zoom: 19,
