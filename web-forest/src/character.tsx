@@ -1,0 +1,199 @@
+/**
+ * The walker's character — egg → sprout → sapling → tree.
+ *
+ * The stages are the ones asked for on the record (`1:05:55` egg → seedling →
+ * tree), and the rule at `1:08:20` is that absence changes how it *looks*
+ * without taking progress away. That is why `vigor` and `stage` are separate
+ * props: vigor droops the leaves and greys the crown when nobody has walked in
+ * a while, and it is fully recoverable by walking again. Stage only ever rises.
+ *
+ * Why this is SVG and not a `.glb`
+ * --------------------------------
+ * The 09-03 spec adopted 3D via a self-hosted `<model-viewer>` for exactly this
+ * character. That path needs an authored model, and no `.glb` exists in this
+ * repo yet — shipping a placeholder cube would look worse than this does. So
+ * the character is drawn with the depth cues that actually sell volume on a
+ * screen: a lit side and a shaded side on every mass, a contact shadow that
+ * anchors it to the ground, and a slow idle bob.
+ *
+ * It also billboards. On the raked map the ground plane is rotated in 3D, and
+ * this counter-rotates by the same pitch, so it stands UP out of the map the
+ * way a Pokémon GO avatar does rather than lying flat on it like a sticker.
+ * That upright-against-a-tilted-ground read is most of what makes the view feel
+ * 3D, and it costs no bundle.
+ *
+ * `CHARACTER_MODEL_SLOT` marks where a real model drops in when one is authored;
+ * the budget line in the spec (hard ceiling, Draco/Meshopt, precached by the
+ * service worker) applies the day it does.
+ */
+
+export const CHARACTER_MODEL_SLOT = "public/model/character.glb — not authored yet";
+
+/* The growth rules live in `stage.ts`, not here: Node's type stripping cannot
+   load a `.tsx`, so a rule that lives beside JSX is a rule no test can import.
+   Re-exported so callers still have one place to reach for the character. */
+export {
+  STAGE_AT,
+  STAGE_LABEL,
+  STAGE_ORDER,
+  stageFor,
+  toNextStage,
+  type Stage,
+} from "./stage.ts";
+import type { Stage } from "./stage.ts";
+import { STAGE_LABEL } from "./stage.ts";
+
+interface Props {
+  stage: Stage;
+  /** 0..1. Low = unwalked and drooping. Never removes a stage. */
+  vigor?: number;
+  size?: number;
+  /** Map pitch to stand up against. 0 outside the map. */
+  tilt_degree?: number;
+  /** Map bearing to stand up against. 0 outside the map. */
+  bearing_degree?: number;
+  is_idle_animated?: boolean;
+  /**
+   * Walking changes the animation, not the art.
+   *
+   * A stage is a thing you earned; a gait is a thing you are doing right now.
+   * Keeping them separate is why absence can droop the leaves (`1:08:20`)
+   * without ever taking a stage away.
+   */
+  is_walking?: boolean;
+  /** Degrees clockwise from screen-up. Leans into the direction of travel. */
+  heading_degree?: number;
+}
+
+export default function Character({
+  stage,
+  vigor = 1,
+  size = 92,
+  tilt_degree = 0,
+  bearing_degree = 0,
+  is_idle_animated = true,
+  is_walking = false,
+  heading_degree = 0,
+}: Props) {
+  const v = Math.max(0, Math.min(1, vigor));
+  /* Leaf colour walks from a tired olive to full canopy green with vigor. */
+  const leaf = `hsl(${96 + v * 26} ${34 + v * 30}% ${52 - v * 12}%)`;
+  const leaf_dark = `hsl(${96 + v * 26} ${36 + v * 30}% ${36 - v * 8}%)`;
+  const leaf_light = `hsl(${98 + v * 26} ${40 + v * 30}% ${64 - v * 8}%)`;
+  const droop = (1 - v) * 7;
+
+  return (
+    <div
+      style={{
+        width: size,
+        height: size * 1.15,
+        /* Billboard: undo the plane's rotations in REVERSE order, because the
+           inverse of (Rx·Rz) is (Rz⁻¹·Rx⁻¹). Undoing only the pitch is what
+           left the walker lying on their side as soon as the camera swung.
+           Then lean into the heading — a small skew, not a turn, because the
+           art is flat and edge-on it would vanish. */
+        transform: `rotateZ(${-bearing_degree}deg) rotateX(${-tilt_degree}deg) rotate(${Math.max(-14, Math.min(14, heading_degree / 12))}deg)`,
+        transformOrigin: "50% 100%",
+        transformStyle: "preserve-3d",
+        pointerEvents: "none",
+      }}
+    >
+      <style>{`
+        @keyframes yc-bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-3.5%) } }
+        @keyframes yc-sway { 0%,100% { transform: rotate(-1.6deg) } 50% { transform: rotate(1.6deg) } }
+        /* A walk is a faster bob with a slight roll — enough to read as motion
+           at 80 px without needing a rig or a second sprite. */
+        @keyframes yc-step {
+          0%,100% { transform: translateY(0) rotate(-3deg) }
+          50%     { transform: translateY(-9%) rotate(3deg) }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .yc-bob, .yc-sway, .yc-step { animation: none !important }
+        }
+      `}</style>
+      <svg
+        viewBox="0 0 100 115"
+        width={size}
+        height={size * 1.15}
+        className={is_walking ? "yc-step" : is_idle_animated ? "yc-bob" : undefined}
+        style={
+          is_walking
+            ? { animation: "yc-step 0.62s ease-in-out infinite" }
+            : is_idle_animated
+              ? { animation: "yc-bob 3.4s ease-in-out infinite" }
+              : undefined
+        }
+        role="img"
+        aria-label={`Your ${STAGE_LABEL[stage].toLowerCase()}`}
+      >
+        <defs>
+          <radialGradient id="yc-shadow" cx="50%" cy="50%">
+            <stop offset="0%" stopColor="rgba(24,38,20,0.42)" />
+            <stop offset="100%" stopColor="rgba(24,38,20,0)" />
+          </radialGradient>
+          <linearGradient id="yc-shell" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#FDF6E3" />
+            <stop offset="55%" stopColor="#EBDCBB" />
+            <stop offset="100%" stopColor="#C9B489" />
+          </linearGradient>
+          <linearGradient id="yc-trunk" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#9A6F44" />
+            <stop offset="42%" stopColor="#7A5433" />
+            <stop offset="100%" stopColor="#553A22" />
+          </linearGradient>
+          <linearGradient id="yc-leaf" x1="0.2" y1="0" x2="0.9" y2="1">
+            <stop offset="0%" stopColor={leaf_light} />
+            <stop offset="52%" stopColor={leaf} />
+            <stop offset="100%" stopColor={leaf_dark} />
+          </linearGradient>
+        </defs>
+
+        {/* Contact shadow — the single strongest cue that this sits ON ground. */}
+        <ellipse cx="50" cy="105" rx={stage === "egg" ? 20 : 27} ry="6.5" fill="url(#yc-shadow)" />
+
+        {stage === "egg" && (
+          <g>
+            <ellipse cx="50" cy="76" rx="24" ry="28" fill="url(#yc-shell)" stroke="#B49B6F" strokeWidth="2" />
+            <ellipse cx="41" cy="66" rx="7" ry="9" fill="rgba(255,255,255,0.55)" />
+            <path d="M36 84 q7 -5 14 0 q7 5 14 0" stroke="#C4A87A" strokeWidth="2.6" fill="none" strokeLinecap="round" />
+            <path d="M50 50 q3 -8 9 -11" stroke={leaf_dark} strokeWidth="3" fill="none" strokeLinecap="round" />
+          </g>
+        )}
+
+        {stage === "sprout" && (
+          <g className="yc-sway" style={{ transformOrigin: "50px 100px", animation: is_idle_animated ? "yc-sway 4.2s ease-in-out infinite" : undefined }}>
+            <path d="M50 100 L50 68" stroke="url(#yc-trunk)" strokeWidth="6" strokeLinecap="round" />
+            <path d={`M50 74 q-19 ${-6 - droop} -23 ${-17 + droop}`} stroke="none" fill="none" />
+            <ellipse cx="34" cy={62 + droop} rx="15" ry="9" fill="url(#yc-leaf)" transform={`rotate(${-24 + droop} 34 ${62 + droop})`} />
+            <ellipse cx="66" cy={58 + droop} rx="16" ry="10" fill="url(#yc-leaf)" transform={`rotate(${20 - droop} 66 ${58 + droop})`} />
+            <ellipse cx="50" cy={48 + droop} rx="11" ry="13" fill="url(#yc-leaf)" />
+          </g>
+        )}
+
+        {stage === "sapling" && (
+          <g className="yc-sway" style={{ transformOrigin: "50px 100px", animation: is_idle_animated ? "yc-sway 4.8s ease-in-out infinite" : undefined }}>
+            <path d="M50 100 L50 58" stroke="url(#yc-trunk)" strokeWidth="8" strokeLinecap="round" />
+            <path d="M50 74 L34 64 M50 68 L66 56" stroke="url(#yc-trunk)" strokeWidth="4.5" strokeLinecap="round" />
+            <circle cx="31" cy={60 + droop} r="14" fill="url(#yc-leaf)" />
+            <circle cx="69" cy={52 + droop} r="15" fill="url(#yc-leaf)" />
+            <circle cx="50" cy={40 + droop} r="19" fill="url(#yc-leaf)" />
+            <circle cx="44" cy={34 + droop} r="7" fill="rgba(255,255,255,0.20)" />
+          </g>
+        )}
+
+        {stage === "tree" && (
+          <g className="yc-sway" style={{ transformOrigin: "50px 100px", animation: is_idle_animated ? "yc-sway 5.6s ease-in-out infinite" : undefined }}>
+            <path d="M50 101 L50 56" stroke="url(#yc-trunk)" strokeWidth="11" strokeLinecap="round" />
+            <path d="M50 72 L30 60 M50 66 L71 52 M50 60 L40 48" stroke="url(#yc-trunk)" strokeWidth="5" strokeLinecap="round" />
+            <circle cx="26" cy={56 + droop} r="16" fill="url(#yc-leaf)" />
+            <circle cx="74" cy={48 + droop} r="17" fill="url(#yc-leaf)" />
+            <circle cx="38" cy={36 + droop} r="18" fill="url(#yc-leaf)" />
+            <circle cx="62" cy={32 + droop} r="20" fill="url(#yc-leaf)" />
+            <circle cx="50" cy={24 + droop} r="17" fill="url(#yc-leaf)" />
+            <circle cx="42" cy={22 + droop} r="8" fill="rgba(255,255,255,0.22)" />
+          </g>
+        )}
+      </svg>
+    </div>
+  );
+}

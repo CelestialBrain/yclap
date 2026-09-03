@@ -1,11 +1,12 @@
 /**
  * Real geography for the walk.
  *
- * The map SVG is a hand-drawn handoff base, not a survey raster. To make GPS
- * real anyway we declare one explicit bounding box over Loyola Heights and
- * project both ways through it: a live `watchPosition` fix lands at the right
- * percent on the drawing, and an encounter's percent yields a lat/lon we can
- * measure a true metre distance against.
+ * Two projections coexist here, and that is deliberate. The linear box
+ * projection below maps percent ↔ lat/lon across CAMPUS_BOX — close enough over
+ * ~1.4 km to place a card or seed a position. Web Mercator (`toWorld`, at the
+ * bottom) is what a tile server actually draws; overlay the linear one on
+ * Mercator tiles and markers walk off their features as you pan. Anything that
+ * has to sit on real imagery goes through `toWorld`.
  *
  * Honesty line that must survive any edit: an encounter coordinate is a
  * position on THIS demo map, not a surveyed tree location. AIS holds the
@@ -23,12 +24,20 @@ export interface Fix extends LatLon {
   source: "gps" | "demo";
 }
 
-/** Campus frame. y=0% is the north edge, x=0% the west edge. */
+/**
+ * Campus frame. y=0% is the north edge, x=0% the west edge.
+ *
+ * Extended 2026-09-03 (build spec T1.1): the seed box clipped the real biome
+ * extent by ~137 m south (De La Costa reaches 14.63376), ~216 m north (the
+ * Mini-forest reaches 14.64444) and ~131 m east (121.08323). The new edges are
+ * those findings padded, and `geo.test.ts` asserts every ring point in
+ * `campus-biome.json` falls inside.
+ */
 export const CAMPUS_BOX = {
-  north: 14.6425,
-  south: 14.635,
+  north: 14.6455,
+  south: 14.633,
   west: 121.074,
-  east: 121.082,
+  east: 121.084,
 } as const;
 
 export const EARTH_RADIUS_M = 6371008.8;
@@ -106,26 +115,28 @@ export interface GeoState {
  * A looping walk for the stage, past the encounter discs, so a projector demo
  * moves without granting geolocation. It stays inside CAMPUS_BOX and outside
  * the restricted grove — both asserted in `geo.test.ts`.
+ *
+ * Held as explicit lat/lon since T1.1: the coordinates were cut from the old
+ * smaller CAMPUS_BOX the day they were drawn, so extending the box must not
+ * drag the loop onto new ground. The route is unchanged on the earth.
  */
-export const DEMO_WALK_PERCENT: { x_percent: number; y_percent: number }[] = [
-  { x_percent: 22, y_percent: 74 },
-  { x_percent: 27, y_percent: 62 },
-  { x_percent: 33, y_percent: 52 },
-  { x_percent: 39, y_percent: 46 },
-  { x_percent: 44, y_percent: 50 },
-  { x_percent: 49, y_percent: 70 },
-  { x_percent: 58, y_percent: 33 },
-  { x_percent: 70, y_percent: 55 },
-  { x_percent: 78, y_percent: 40 },
+export const DEMO_WALK: LatLon[] = [
+  { lat: 14.63695, lon: 121.07576 },
+  { lat: 14.63785, lon: 121.07616 },
+  { lat: 14.6386, lon: 121.07664 },
+  { lat: 14.63905, lon: 121.07712 },
+  { lat: 14.63875, lon: 121.07752 },
+  { lat: 14.63725, lon: 121.07792 },
+  { lat: 14.640025, lon: 121.07864 },
+  { lat: 14.638375, lon: 121.0796 },
+  { lat: 14.6395, lon: 121.08024 },
   /* Routed north of the restricted grove rather than straight back across it —
      a demo that walks a student through off-limits ground teaches the wrong
      thing, and `geo.test.ts` fails if this route ever re-enters the polygon. */
-  { x_percent: 66, y_percent: 20 },
-  { x_percent: 40, y_percent: 22 },
-  { x_percent: 33, y_percent: 30 },
+  { lat: 14.641, lon: 121.07928 },
+  { lat: 14.64085, lon: 121.0772 },
+  { lat: 14.64025, lon: 121.07664 },
 ];
-
-export const DEMO_WALK: LatLon[] = DEMO_WALK_PERCENT.map((p) => percentToLatLon(p.x_percent, p.y_percent));
 
 /** Position along the demo loop at `progress` ∈ [0,1), linearly interpolated. */
 export function demoWalkAt(progress: number): LatLon {

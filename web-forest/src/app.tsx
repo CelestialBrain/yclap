@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import CampusMap from "./campus-map";
+import PlayMap from "./play-map";
+import Character, { stageFor, STAGE_LABEL, toNextStage } from "./character";
+import { biome_sector, sectorAt, sector as sector_row, type Sector } from "./sector";
 import Viewfinder, { type Shot } from "./camera";
 import {
   AIS_GAP_NOTE,
@@ -22,17 +25,21 @@ import {
   readSighting,
   readWalk,
   seenCode,
+  seenSector,
+  sectorProgress,
   startWalk,
   summarize,
   toCsv,
   toGeoJson,
+  vigorOf,
   type Sighting,
   type Walk,
 } from "./journal";
 import { CAMPUS_CENTER, formatLatLon, formatMeter } from "./geo";
 import { LAYER_ORDER, nextLayer, prefetchCampus, SOURCE, type Layer, type View } from "./tile-map";
 import { useGeo } from "./use-geo";
-import { rankEncounter } from "./nearby";
+import { biomePresenceAt, rankEncounter, type BiomePresence } from "./nearby";
+
 import {
   campusCodeForScientific,
   demoIdentify,
@@ -67,6 +74,15 @@ import {
 
 /** ~1.2 m per pixel: a walker sees their block, not the whole 89 ha. */
 const WALK_ZOOM = 18;
+/**
+ * Play sits one step closer than the field view.
+ *
+ * At 18 the campus does not fill a raked screen — the ground runs out well
+ * before the top and leaves a dead band, because there is no geometry north of
+ * the campus ring to draw. 19 puts buildings and paths at the scale you would
+ * actually recognise while standing among them.
+ */
+const PLAY_ZOOM = 19;
 const OVERVIEW_ZOOM = 16;
 
 const CARD_RADIUS = RADIUS.card;
@@ -476,8 +492,253 @@ function NearbySheet({
   );
 }
 
-function identifyCaption(state: InatIdentifyState): string {
-  if (state.status === "loading") return "iNaturalist is identifying this photo — not this app.";
+/* ── biome card ──────────────────────────────────────────────────────────────
+ *
+ * The pivot's card: entering a biome opens it, leaving closes it. It shows the
+ * area's species representatives — top three up front (`59:29`), the rest one
+ * tap deeper — and, when the ring is our delineation, it says so on screen.
+ * Distance still ranks the residents inside; it just no longer picks the card.
+ */
+
+function BiomeSpeciesRow({
+  species_code,
+  presence,
+  onLog,
+}: {
+  species_code: string;
+  presence: BiomePresence;
+  onLog: (species_code: string) => void;
+}) {
+  const sp = species[species_code];
+  if (!sp) return null;
+  const resident = presence.resident.find((r) => r.row.species_code === species_code);
+  const distance_line = resident
+    ? resident.distance_m <= AT_TREE_RADIUS_M
+      ? "You are at this tree"
+      : resident.is_at
+        ? `In range · ${formatMeter(resident.distance_m)}`
+        : `${formatMeter(resident.distance_m)} ${resident.compass}`
+    : null;
+  return (
+    <button
+      type="button"
+      onClick={() => onLog(species_code)}
+      className="w-full flex items-center justify-between gap-3"
+      style={{ padding: "10px 0", borderTop: "1px solid #E4E7E8", textAlign: "left" }}
+    >
+      <span className="flex items-center gap-3" style={{ minWidth: 0 }}>
+        <TaxonThumb species_code={species_code} size={46} />
+        <span style={{ minWidth: 0 }}>
+          <span style={{ display: "block", fontWeight: 700, fontSize: 14.5, lineHeight: 1.2 }}>{sp.common_name}</span>
+          <span style={{ display: "block", fontStyle: "italic", fontSize: 11.5, color: "rgba(31,32,34,0.6)" }}>
+            {sp.scientific_name}
+          </span>
+          {distance_line && (
+            <span style={{ display: "block", fontSize: 11.5, fontWeight: 700, color: "#075D89", marginTop: 2 }}>
+              {distance_line}
+            </span>
+          )}
+        </span>
+      </span>
+      <PrimaryPill sp={sp} />
+    </button>
+  );
+}
+
+function BiomeCard({
+  presence,
+  is_desktop,
+  onLog,
+}: {
+  presence: BiomePresence;
+  is_desktop: boolean;
+  onLog: (species_code: string) => void;
+}) {
+  const [is_expanded, setExpanded] = useState(false);
+  const row = presence.row;
+  const front = row.species_code.slice(0, 3);
+  const rest = row.species_code.slice(3);
+  return (
+    <div>
+      <div className="flex items-center gap-3.5">
+        <div
+          style={{
+            width: is_desktop ? 72 : 56,
+            height: is_desktop ? 72 : 56,
+            flexShrink: 0,
+            borderRadius: 999,
+            display: "grid",
+            placeItems: "center",
+            background: "rgba(0,134,83,0.09)",
+            border: "2px solid rgba(0,134,83,0.34)",
+          }}
+        >
+          <CanopyIcon size={is_desktop ? 34 : 27} />
+        </div>
+        <TaxonName
+          sp={{
+            species_code: row.biome_code,
+            common_name: row.name,
+            scientific_name: row.kind,
+            origin: "Native",
+            pill: [],
+            note: "",
+            caption: null,
+            tile_note: null,
+          }}
+          size={is_desktop ? 26 : 21}
+          eyebrow={`BIOME · YOU ARE INSIDE`}
+        />
+      </div>
+      {row.is_placeholder && (
+        <div
+          style={{
+            marginTop: 10,
+            borderRadius: 12,
+            background: "rgba(246,178,45,0.12)",
+            border: "1px solid rgba(246,178,45,0.4)",
+            padding: "8px 11px",
+            fontSize: 11.5,
+            lineHeight: 1.4,
+            color: "#8a5d00",
+            fontWeight: 700,
+          }}
+        >
+          Placeholder extent — our delineation, not surveyed.
+        </div>
+      )}
+      <div style={{ marginTop: 10 }}>
+        <Eyebrow>SPECIES TO FIND {row.species_code.length > 0 ? `· ${row.species_code.length}` : ""}</Eyebrow>
+        {row.species_code.length === 0 ? (
+          <p style={{ fontSize: 13, color: "rgba(31,32,34,0.6)", marginTop: 8, lineHeight: 1.45 }}>
+            No species assigned to this area yet — the AIS inventory (due 09-09) will fill it in.
+          </p>
+        ) : (
+          <div style={{ marginTop: 4 }}>
+            {front.map((code) => (
+              <BiomeSpeciesRow key={code} species_code={code} presence={presence} onLog={onLog} />
+            ))}
+            {is_expanded &&
+              rest.map((code) => <BiomeSpeciesRow key={code} species_code={code} presence={presence} onLog={onLog} />)}
+            {rest.length > 0 && (
+              <button
+                type="button"
+                onClick={() => setExpanded((v) => !v)}
+                style={{
+                  marginTop: 8,
+                  fontSize: 12.5,
+                  fontWeight: 700,
+                  color: "#075D89",
+                  background: "none",
+                  border: "none",
+                  padding: 0,
+                }}
+              >
+                {is_expanded ? "Show top three only" : `See all ${row.species_code.length} species`}
+              </button>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/** Compact bar over the map — the biome twin of `NearbyBar`. */
+function BiomeBar({ presence, onExpand }: { presence: BiomePresence; onExpand: () => void }) {
+  const row = presence.row;
+  const first_species = row.species_code[0];
+  return (
+    <div
+      className="absolute inset-x-0 flex items-center gap-3"
+      style={{
+        bottom: 64,
+        background: "#F9F9F9",
+        borderTop: "1.5px solid #E4E7E8",
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        boxShadow: "0 -8px 20px rgba(31,32,34,0.14)",
+        zIndex: 45,
+        padding: "10px 90px 10px 14px",
+        animation: "fgup .28s cubic-bezier(.2,.8,.2,1)",
+      }}
+    >
+      <button onClick={onExpand} className="flex items-center gap-3 flex-1" style={{ textAlign: "left", minWidth: 0 }}>
+        <span
+          style={{
+            width: 48,
+            height: 48,
+            flexShrink: 0,
+            borderRadius: 999,
+            display: "grid",
+            placeItems: "center",
+            background: "rgba(0,134,83,0.09)",
+            border: "2px solid rgba(0,134,83,0.34)",
+          }}
+        >
+          <CanopyIcon size={24} />
+        </span>
+        <span style={{ minWidth: 0 }}>
+          <span
+            style={{
+              display: "block",
+              fontSize: 10,
+              fontWeight: 700,
+              color: "#008653",
+              letterSpacing: "0.07em",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
+            BIOME · INSIDE {row.is_placeholder ? "· PLACEHOLDER, NOT SURVEYED" : ""}
+          </span>
+          <span style={{ display: "block", fontWeight: 800, fontSize: 17, lineHeight: 1.15 }}>{row.name}</span>
+          <span style={{ display: "block", fontSize: 12, fontWeight: 700, color: "#075D89", marginTop: 2 }}>
+            {first_species && species[first_species] ? `Find ${species[first_species].common_name}` : "Species to be assigned"}
+          </span>
+        </span>
+      </button>
+    </div>
+  );
+}
+
+/** Bottom sheet holding the biome card — the twin of `NearbySheet`. */
+function BiomeSheet({
+  presence,
+  onLog,
+  onDismiss,
+}: {
+  presence: BiomePresence;
+  onLog: (species_code: string) => void;
+  onDismiss: () => void;
+}) {
+  return (
+    <div
+      className="absolute inset-x-0 bottom-0 scroll-soft"
+      style={{
+        height: "56%",
+        background: "#F9F9F9",
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24,
+        boxShadow: "0 -12px 28px rgba(31,32,34,0.16)",
+        zIndex: 45,
+        padding: "10px 20px 76px",
+        overflowY: "auto",
+        animation: "fgup .32s cubic-bezier(.2,.8,.2,1)",
+      }}
+    >
+      <button
+        onClick={onDismiss}
+        aria-label="Collapse"
+        style={{ display: "block", width: 40, height: 5, borderRadius: 999, background: "#E4E7E8", margin: "0 auto 12px" }}
+      />
+      <BiomeCard presence={presence} is_desktop={false} onLog={onLog} />
+    </div>
+  );
+}
+
+function identifyCaption(state: InatIdentifyState): string {  if (state.status === "loading") return "iNaturalist is identifying this photo — not this app.";
   if (state.status === "offline") return "iNaturalist computer vision is unreachable. Pick from the campus list, or try again.";
   if (state.status === "empty") return "iNaturalist returned no taxon suggestion. Identification is still iNaturalist’s, not this app’s.";
   if (state.status === "needs_token") {
@@ -1032,7 +1293,48 @@ function PlanContent() {
         </div>
       </section>
       <section style={{ marginTop: 16, borderRadius: 24, border: "1.5px solid #E4E7E8", padding: 16 }}>
-        <Eyebrow>3 · HOW ANOTHER CAMPUS COPIES THIS</Eyebrow>
+        <Eyebrow>3 · THE BIOMES — THE MAP CUT INTO AREAS</Eyebrow>
+        <p style={{ fontSize: 13.5, lineHeight: 1.5, marginTop: 8 }}>
+          Since the 09-02 pulong the unit of play is the area, not the tree — and since 09-03 those areas are cut{" "}
+          <strong style={{ fontWeight: 700 }}>along the real roads and footpaths</strong>, not drawn by us. Each sector
+          below is a face of the OpenStreetMap way network (ODbL), the way a city block is defined by its streets.
+        </p>
+        <p style={{ fontSize: 13, lineHeight: 1.5, marginTop: 8, color: "rgba(31,32,34,0.7)" }}>
+          How green each one is was <strong style={{ fontWeight: 700 }}>measured off satellite imagery</strong>, not
+          guessed from the absence of a building — which is what used to paint car parks as lawn. Species lists stay
+          provisional until the AIS inventory lands (Wed 09-09).
+        </p>
+        <div style={{ marginTop: 10 }}>
+          {[...sector_row]
+            .sort((a, b) => b.area_m2 - a.area_m2)
+            .slice(0, 14)
+            .map((row) => (
+              <div key={row.sector_code} style={{ padding: "10px 0", borderTop: "1px solid #E4E7E8" }}>
+                <div className="flex items-start justify-between gap-3">
+                  <span style={{ fontSize: 14, fontWeight: 500, lineHeight: 1.35 }}>
+                    {row.name}
+                    <span style={{ display: "block", fontSize: 11.5, color: "rgba(31,32,34,0.55)", marginTop: 2 }}>
+                      {row.kind.replace(/-/g, " ")} · {(row.area_m2 / 10000).toFixed(2)} ha ·{" "}
+                      {row.vegetation_ratio === null
+                        ? "not measured"
+                        : `${Math.round(row.vegetation_ratio * 100)}% green (measured)`}
+                      {row.is_named_by_us ? " · name is ours" : ""}
+                    </span>
+                  </span>
+                  {row.is_biome ? <Pill tone="native">biome</Pill> : <Pill tone="exotic">paved</Pill>}
+                </div>
+              </div>
+            ))}
+        </div>
+        <p style={{ fontSize: 12, color: "rgba(31,32,34,0.55)", marginTop: 10, lineHeight: 1.4 }}>
+          {sector_row.length} sectors cut in total, {biome_sector.length} of them vegetated enough to walk into and look
+          at a plant. The rest are drawn as the paved ground they are — showing them as lawn would be the lie this
+          replaced. {sector_row.filter((r) => r.is_named_by_us).length} carry a name we chose because OpenStreetMap has
+          none for that ground.
+        </p>
+      </section>
+      <section style={{ marginTop: 16, borderRadius: 24, border: "1.5px solid #E4E7E8", padding: 16 }}>
+        <Eyebrow>4 · HOW ANOTHER CAMPUS COPIES THIS</Eyebrow>
         <ul style={{ marginTop: 8, paddingLeft: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
           {[
             "A walkable-path map — only where students can actually go.",
@@ -1270,12 +1572,438 @@ function useDesktop() {
   return size;
 }
 
+
+/**
+ * The sector sheet.
+ *
+ * Front kept to four things (`1:00:34` Ivan: "don't overfeed too much…
+ * cocomelon, not an informational video"): what this ground is, how green it
+ * measures, what may grow here, and the one action. Provenance sits one tap
+ * down rather than deleted — a caption nobody can reach is a caption removed.
+ *
+ * Laid out as a bottom sheet on a grid rather than a floating card with ad hoc
+ * margins, which is what made the spacing read as crooked (owner, 09-03): one
+ * padding scale, one gap, a grab handle, and a full-width primary action where
+ * a thumb already is.
+ */
+function SectorCard({
+  row,
+  progress,
+  is_desktop,
+  onLog,
+  onDismiss,
+}: {
+  row: Sector;
+  progress: { seen_count: number; total: number };
+  is_desktop: boolean;
+  onLog: (species_code: string) => void;
+  onDismiss: () => void;
+}) {
+  const [is_open, setOpen] = useState(false);
+  const veg = row.vegetation_ratio;
+  const veg_percent = veg === null ? null : Math.round(veg * 100);
+  const PAD = 18;
+
+  return (
+    <div
+      role="dialog"
+      aria-label={row.name}
+      className="absolute"
+      style={{
+        left: is_desktop ? 18 : 0,
+        right: is_desktop ? "auto" : 0,
+        width: is_desktop ? 380 : undefined,
+        bottom: is_desktop ? 84 : 64,
+        zIndex: 48,
+        background: "#FFFFFF",
+        border: "1.5px solid #E7EBE6",
+        borderRadius: is_desktop ? 24 : "24px 24px 0 0",
+        boxShadow: "0 -8px 34px rgba(24,38,20,0.20)",
+        display: "grid",
+        gap: 14,
+        padding: is_desktop ? `${PAD}px` : `10px ${PAD}px ${PAD}px`,
+      }}
+    >
+      {!is_desktop && (
+        <div style={{ justifySelf: "center", width: 40, height: 4, borderRadius: 999, background: "#DCE2D9" }} />
+      )}
+
+      <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 12, alignItems: "start" }}>
+        <div style={{ minWidth: 0 }}>
+          <div style={{ fontSize: 19, fontWeight: 800, lineHeight: 1.2, letterSpacing: -0.2 }}>{row.name}</div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 8 }}>
+            <Tag>{row.kind.replace(/-/g, " ")}</Tag>
+            <Tag>{(row.area_m2 / 10000).toFixed(2)} ha</Tag>
+            {veg_percent !== null && <Tag tone={veg_percent >= 45 ? "green" : "grey"}>{veg_percent}% green</Tag>}
+          </div>
+        </div>
+        <button
+          aria-label="Close"
+          onClick={onDismiss}
+          style={{
+            width: 34,
+            height: 34,
+            borderRadius: 999,
+            border: "1.5px solid #E7EBE6",
+            background: "#FBFCFA",
+            fontSize: 17,
+            fontWeight: 700,
+            lineHeight: 1,
+            color: "rgba(31,32,34,0.55)",
+            cursor: "pointer",
+          }}
+        >
+          ×
+        </button>
+      </div>
+
+      {row.species_code.length > 0 ? (
+        <div style={{ display: "grid", gap: 9 }}>
+          <div style={{ fontSize: 12.5, fontWeight: 700, color: "rgba(31,32,34,0.55)" }}>
+            {progress.seen_count} of {progress.total} logged here · yours only
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+            {row.species_code.map((code) => {
+              const sp = species[code];
+              if (!sp) return null;
+              return (
+                <button
+                  key={code}
+                  onClick={() => onLog(code)}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 7,
+                    background: "#F1F7EF",
+                    border: "1.5px solid #D7E4D2",
+                    borderRadius: 999,
+                    padding: "9px 14px",
+                    fontSize: 13,
+                    fontWeight: 700,
+                    cursor: "pointer",
+                  }}
+                >
+                  {sp.common_name}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ) : (
+        <p style={{ fontSize: 13, lineHeight: 1.5, color: "rgba(31,32,34,0.6)", margin: 0 }}>
+          No species are assigned here yet — the AIS inventory is the source that will. Log what you actually see.
+        </p>
+      )}
+
+      <button
+        onClick={() => onLog(row.species_code[0] ?? "narra")}
+        style={{
+          width: "100%",
+          background: "#2F6B3A",
+          color: "#fff",
+          border: "none",
+          borderRadius: 16,
+          padding: "15px 16px",
+          fontSize: 15,
+          fontWeight: 800,
+          cursor: "pointer",
+          boxShadow: "0 4px 14px rgba(47,107,58,0.34)",
+        }}
+      >
+        Log what you see here
+      </button>
+
+      <button
+        onClick={() => setOpen((o) => !o)}
+        style={{
+          justifySelf: "start",
+          fontSize: 12,
+          fontWeight: 700,
+          color: "rgba(31,32,34,0.5)",
+          background: "none",
+          border: "none",
+          padding: 0,
+          textDecoration: "underline",
+          cursor: "pointer",
+        }}
+      >
+        {is_open ? "Hide sources" : "Where does this come from?"}
+      </button>
+      {is_open && (
+        <p style={{ fontSize: 12, lineHeight: 1.55, color: "rgba(31,32,34,0.6)", margin: 0 }}>
+          The edges of this sector are the roads and footpaths around it, from OpenStreetMap (ODbL) — not a boundary we
+          drew.{" "}
+          {veg_percent !== null
+            ? `${veg_percent}% green is measured off Esri satellite imagery (${row.vegetation_sample} sampled points), which is how a car park stops being painted as lawn.`
+            : "No imagery covered this ring, so greenness here is inferred from building cover rather than measured."}
+          {row.is_named_by_us ? " The NAME is ours — OSM has none for this ground." : ""}
+          {row.species_code.length > 0
+            ? " Species here are provisional demo-map positions, superseded by the AIS inventory (due 2026-09-09). Not a survey."
+            : ""}
+        </p>
+      )}
+    </div>
+  );
+}
+
+/** One measurement, one pill. Green only when it IS a greenness claim. */
+function Tag({ children, tone = "grey" }: { children: React.ReactNode; tone?: "grey" | "green" }) {
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        background: tone === "green" ? "#E8F3E4" : "#F2F3F1",
+        color: tone === "green" ? "#2F6B3A" : "rgba(31,32,34,0.6)",
+        border: `1px solid ${tone === "green" ? "#D2E6CC" : "#E7EBE6"}`,
+        borderRadius: 999,
+        padding: "4px 10px",
+        fontSize: 11.5,
+        fontWeight: 700,
+        whiteSpace: "nowrap",
+      }}
+    >
+      {children}
+    </span>
+  );
+}
+
+
+
+/**
+ * Play / Field is a core mechanic, not a corner toggle.
+ *
+ * It shipped first as a small pill floating over the map, where it was easy to
+ * miss and sat on top of the map's own controls (owner, 09-03). A segmented
+ * control in the header gives it a permanent home, says which mode you are in
+ * without being read, and stops it colliding with anything.
+ */
+/**
+ * One chrome frame, used by BOTH map views.
+ *
+ * Play and Field used to position their own controls, and they drifted: the
+ * mode switch sat top-right in one and top-left in the other, and on desktop it
+ * landed exactly on top of the coordinate pill. A control that moves when the
+ * view changes is a control you have to hunt for, so the geometry lives here
+ * once and each view supplies only WHAT goes in the slots, never where.
+ *
+ * Three slots. `context` (top-left) says where you are. `control` (top-right,
+ * mode switch always first) is a column, so a view with more controls grows
+ * downward instead of sideways into the context card. `below` spans the FULL
+ * width underneath both — chips belong there because squeezed into the left
+ * column on a 390 px screen they stacked one per row and ate half the map.
+ */
+function MapChrome({
+  is_desktop,
+  context,
+  control,
+  below,
+}: {
+  is_desktop: boolean;
+  context: React.ReactNode;
+  control: React.ReactNode;
+  below?: React.ReactNode;
+}) {
+  const inset = is_desktop ? 18 : 12;
+  return (
+    <div
+      className="absolute"
+      style={{
+        top: inset,
+        left: inset,
+        right: inset,
+        zIndex: 30,
+        display: "flex",
+        flexDirection: "column",
+        gap: 8,
+        /* The frame must not eat map drags — only its children take pointers. */
+        pointerEvents: "none",
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+        <div style={{ minWidth: 0, pointerEvents: "auto" }}>{context}</div>
+        <div style={{ flex: 1 }} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+            gap: 8,
+            flexShrink: 0,
+            pointerEvents: "auto",
+          }}
+        >
+          {control}
+        </div>
+      </div>
+      {below && <div style={{ pointerEvents: "auto" }}>{below}</div>}
+    </div>
+  );
+}
+
+/** The card that says where you are. Same shell in both views. */
+function ContextCard({ label, value }: { label: string; value: string }) {
+  return (
+    <div
+      style={{
+        background: "rgba(255,255,255,0.94)",
+        backdropFilter: "blur(8px)",
+        border: "1.5px solid rgba(228,231,232,0.9)",
+        borderRadius: 18,
+        padding: "9px 15px",
+        boxShadow: "0 4px 16px rgba(24,38,20,0.14)",
+        minWidth: 0,
+      }}
+    >
+      <div
+        style={{
+          fontSize: 10,
+          fontWeight: 800,
+          letterSpacing: 0.7,
+          textTransform: "uppercase",
+          color: "rgba(31,32,34,0.45)",
+        }}
+      >
+        {label}
+      </div>
+      <div
+        style={{
+          fontSize: 15.5,
+          fontWeight: 800,
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          marginTop: 1,
+        }}
+      >
+        {value}
+      </div>
+    </div>
+  );
+}
+
+function ModeSwitch({
+  mode,
+  onMode,
+  is_desktop,
+}: {
+  mode: "play" | "field";
+  onMode: (m: "play" | "field") => void;
+  is_desktop: boolean;
+}) {
+  const item: { id: "play" | "field"; label: string; hint: string }[] = [
+    { id: "play", label: "Play", hint: "Walk the campus" },
+    { id: "field", label: "Field", hint: "Layers and sources" },
+  ];
+  return (
+    <div
+      role="tablist"
+      aria-label="Map mode"
+      style={{
+        display: "inline-flex",
+        background: "#EDF1EA",
+        border: "1.5px solid #DCE4D8",
+        borderRadius: 999,
+        padding: 3,
+        gap: 2,
+      }}
+    >
+      {item.map(({ id, label, hint }) => {
+        const on = mode === id;
+        return (
+          <button
+            key={id}
+            role="tab"
+            aria-selected={on}
+            title={hint}
+            onClick={() => onMode(id)}
+            style={{
+              appearance: "none",
+              border: "none",
+              borderRadius: 999,
+              padding: is_desktop ? "8px 20px" : "7px 16px",
+              fontSize: is_desktop ? 13.5 : 13,
+              fontWeight: 800,
+              lineHeight: 1,
+              cursor: "pointer",
+              background: on ? "#2F6B3A" : "transparent",
+              color: on ? "#FFFFFF" : "rgba(31,32,34,0.62)",
+              boxShadow: on ? "0 2px 8px rgba(47,107,58,0.32)" : "none",
+              transition: "background 120ms, color 120ms",
+            }}
+          >
+            {label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+/** Swing back to north. Doubles as the only sign that rotation exists. */
+function Compass({ bearing, onReset }: { bearing: number; onReset: () => void }) {
+  const off = Math.abs(((bearing % 360) + 540) % 360 - 180) < 179.5;
+  return (
+    <button
+      aria-label={off ? "Face north" : "Facing north"}
+      onClick={onReset}
+      style={{
+        width: 44,
+        height: 44,
+        borderRadius: 999,
+        background: "rgba(255,255,255,0.94)",
+        border: "1.5px solid rgba(228,231,232,0.95)",
+        boxShadow: "0 4px 14px rgba(24,38,20,0.16)",
+        display: "grid",
+        placeItems: "center",
+        cursor: "pointer",
+      }}
+    >
+      <svg width="22" height="22" viewBox="0 0 24 24" style={{ transform: `rotate(${-bearing}deg)` }}>
+        <path d="M12 3 L15.4 13 L12 11 L8.6 13 Z" fill="#C0392B" />
+        <path d="M12 21 L8.6 11 L12 13 L15.4 11 Z" fill="#9AA3A0" />
+      </svg>
+    </button>
+  );
+}
+
 export default function App() {
   const [route, setRoute] = useState<Route>(() => pathToRoute(window.location.pathname));
+  /**
+   * Play is the default view (owner, 09-03: "simple pokemon go like … friendly
+   * and less cluttered"). Field is the same map with every layer control and
+   * every source caption still on it — the citations were moved behind one
+   * button, not deleted, which is the build-spec rule.
+   */
+  const [map_mode, setMapMode] = useState<"play" | "field">(() =>
+    new URLSearchParams(window.location.search).get("view") === "field" ? "field" : "play",
+  );
+  /** Camera bearing, clockwise from north. Two fingers (or shift-drag) swing it. */
+  /**
+   * Camera bearing, clockwise from north. Two fingers — or shift-drag on a
+   * desktop — swing it; the compass puts it back.
+   *
+   * Seeded from `?bearing=` so a projector demo can be set up at a known angle
+   * and so a screenshot of the rotated camera is reproducible. A view parameter
+   * only: it cannot move the walker or touch a single sighting.
+   */
+  const [bearing, setBearing] = useState(() => {
+    const raw = new URLSearchParams(window.location.search).get("bearing");
+    const degree = Number(raw);
+    return raw !== null && Number.isFinite(degree) ? degree : 0;
+  });
+  /* Each view has its own comfortable zoom; switching should not strand you at
+     the other one's. */
+  const setMode = (next: "play" | "field") => {
+    setMapMode(next);
+    setView((prev) => ({ ...prev, zoom: next === "play" ? PLAY_ZOOM : WALK_ZOOM }));
+    setFollowing(true);
+  };
+  const [picked_sector, setPickedSector] = useState<Sector | null>(null);
   const [is_restricted, setRestricted] = useState(true);
   /* `guide` reads better on a walk than imagery; satellite is one tap away. */
   const [layer, setLayer] = useState<Layer>("guide");
-  const [view, setView] = useState<View>(() => ({ ...CAMPUS_CENTER, zoom: WALK_ZOOM }));
+  const [view, setView] = useState<View>(() => ({ ...CAMPUS_CENTER, zoom: PLAY_ZOOM }));
   /* Off the moment the walker pans or zooms — a map that fights the hand is worse
      than one that stops following. The Recentre control turns it back on. */
   const [is_following, setFollowing] = useState(true);
@@ -1284,6 +2012,8 @@ export default function App() {
   const [pinned_id, setPinnedId] = useState<string | null>(null);
   const [is_sheet_open, setSheetOpen] = useState(false);
   const [pick_code, setPickCode] = useState("narra");
+  /** Where the log is happening — the biome name when opened from a biome card. */
+  const [camera_where, setCameraWhere] = useState<string | null>(null);
   const [sighting, setSighting] = useState<Sighting[]>(() => readSighting());
   const [is_demo, setDemo] = useState(true);
   const [toast, setToast] = useState<string | null>(null);
@@ -1292,11 +2022,20 @@ export default function App() {
   const { is_desktop, is_wide } = useDesktop();
   const geo = useGeo(is_demo);
   const seen = seenCode(sighting);
+  const seen_sector = useMemo(() => seenSector(sighting), [sighting]);
+  const stage = stageFor(seen_sector.size);
+  const vigor = useMemo(() => vigorOf(sighting), [sighting]);
+  const here_sector = useMemo(() => (geo.fix ? sectorAt(geo.fix) : null), [geo.fix]);
 
   const ranked = useMemo(() => (geo.fix ? rankEncounter(geo.fix) : []), [geo.fix]);
   const nearest = ranked[0] ?? null;
   const distance_of = (encounter_id: string) =>
     ranked.find((r) => r.row.encounter_id === encounter_id) ?? null;
+
+  /* The pivot's card rule: inside a biome → its card, unless the walker pinned
+     a tree (explicit intent wins, including the auto-pin inside 25 m). */
+  const presence = useMemo(() => (geo.fix ? biomePresenceAt(geo.fix) : null), [geo.fix]);
+  const showing_biome = presence !== null && pinned_id === null;
 
   /* Follow the walker until a gesture says otherwise. */
   useEffect(() => {
@@ -1356,6 +2095,7 @@ export default function App() {
     }
     setRoute(next);
     setCameraOpen(false);
+    setCameraWhere(null);
     if (next !== "/map") setRestricted(true);
   };
 
@@ -1411,8 +2151,9 @@ export default function App() {
     if (at_id) setPinnedId(at_id);
   }, [at_id]);
 
-  const openCamera = (species_code: string) => {
+  const openCamera = (species_code: string, where?: string) => {
     setPickCode(species_code);
+    setCameraWhere(where ?? null);
     setCameraOpen(true);
   };
 
@@ -1461,29 +2202,36 @@ export default function App() {
     : null;
 
   /* The desktop kiosk header already owns the Demo toggle — don't print two. */
+  /**
+   * The field controls, as ONE list.
+   *
+   * These used to be half here and half in the map body, split by
+   * `display: none` per breakpoint — which is how "Following" and "Save
+   * offline" ended up rendered twice side by side on desktop. One list, wrapped
+   * by the layout, shown at every size.
+   */
   const geo_chip = (
-    <div className="flex items-center gap-2">
-      <Chip
-        is_on={is_demo}
-        onClick={() => setDemo((d) => !d)}
-        style={{ display: is_desktop ? "none" : "flex" }}
-      >
-        <LocateIcon size={15} />
-        {is_demo ? "Demo campus" : geo.status === "watching" ? "Live GPS" : "Real GPS"}
-      </Chip>
+    <div className="flex flex-wrap items-center gap-2">
+      {/* The one genuine breakpoint difference in here: on desktop the app's
+          own top bar already owns the demo toggle, so repeating it on the map
+          is two controls for one state. Mobile has no top bar, so it lives
+          here. This is NOT the display:none splitting that caused the
+          duplicates above — the chip exists in exactly one place per size. */}
+      {!is_desktop && (
+        <Chip is_on={is_demo} onClick={() => setDemo((d) => !d)}>
+          <LocateIcon size={15} />
+          {is_demo ? "Demo campus" : geo.status === "watching" ? "Live GPS" : "Real GPS"}
+        </Chip>
+      )}
       <Chip is_on={Boolean(walk)} tone="#075D89" onClick={toggleWalk}>
         <WalkIcon size={15} />
         {walk ? `End walk · ${walk_count}` : "Start a walk"}
       </Chip>
-      <Chip is_on={is_following} onClick={recentre} style={{ display: is_desktop ? "flex" : "none" }}>
+      <Chip is_on={is_following} onClick={recentre}>
         <LocateIcon size={15} />
         {is_following ? "Following" : "Recentre"}
       </Chip>
-      <Chip
-        is_on={Boolean(warm && warm.done >= warm.total)}
-        onClick={warmCampus}
-        style={{ display: is_desktop ? "flex" : "none" }}
-      >
+      <Chip is_on={Boolean(warm && warm.done >= warm.total)} onClick={warmCampus}>
         <ExportIcon size={15} />
         {warm ? (warm.done >= warm.total ? "Offline ready" : `${warm.done}/${warm.total}`) : "Save offline"}
       </Chip>
@@ -1497,6 +2245,101 @@ export default function App() {
       : geo.fix
         ? `${formatLatLon(geo.fix)} · ±${Math.round(geo.fix.accuracy_m)} m`
         : "Waiting for a position…");
+
+
+  /* ── the play view ────────────────────────────────────────────────────────
+   *
+   * Deliberately thin. Everything the field view carries — four basemap
+   * presets, the path network, the canopy caption, every citation — is one tap
+   * away and unchanged; what is gone from THIS screen is the four-chip row, the
+   * coordinate pill and the layer counter, which is what "less cluttered ui"
+   * asked for on 09-03.
+   */
+  const play_progress = toNextStage(seen_sector.size);
+  const playBody = (
+    <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+      <PlayMap
+        view={view}
+        onView={setView}
+        onGesture={() => setFollowing(false)}
+        fix={geo.fix}
+        seen_sector={seen_sector}
+        stage={stage}
+        vigor={vigor}
+        is_desktop={is_desktop}
+        is_restricted_on={is_restricted}
+        onSelectSector={(row) => setPickedSector(row)}
+        bearing_degree={bearing}
+        onBearing={setBearing}
+      />
+
+      <MapChrome
+        is_desktop={is_desktop}
+        context={
+          <ContextCard
+            label={here_sector ? "You are in" : "Walking"}
+            value={here_sector ? here_sector.name : "Between sectors"}
+          />
+        }
+        control={
+          <>
+            <ModeSwitch mode={map_mode} onMode={setMode} is_desktop={is_desktop} />
+            <Compass bearing={bearing} onReset={() => setBearing(0)} />
+          </>
+        }
+      />
+
+      {/* The character's own progress, personal and un-comparable. */}
+      <div
+        className="absolute"
+        style={{
+          left: 14,
+          bottom: is_desktop ? 22 : 112,
+          zIndex: 30,
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
+          background: "rgba(255,255,255,0.92)",
+          backdropFilter: "blur(8px)",
+          border: "1.5px solid rgba(228,231,232,0.9)",
+          borderRadius: 18,
+          padding: "8px 14px 8px 8px",
+          boxShadow: "0 4px 14px rgba(24,38,20,0.13)",
+        }}
+      >
+        <Character stage={stage} vigor={vigor} size={38} is_idle_animated={false} />
+        <div>
+          <div style={{ fontSize: 13, fontWeight: 800 }}>{STAGE_LABEL[stage]}</div>
+          <div style={{ fontSize: 11, color: "rgba(31,32,34,0.6)" }}>
+            {play_progress
+              ? `${play_progress.remaining} more sector${play_progress.remaining === 1 ? "" : "s"} → ${STAGE_LABEL[play_progress.stage]}`
+              : `${seen_sector.size} sectors walked`}
+          </div>
+        </div>
+      </div>
+
+      {!is_desktop && (
+        <Fab
+          label="Log a sighting"
+          onClick={() => openCamera(here_sector?.species_code[0] ?? pick_code, here_sector?.name)}
+          size={68}
+          style={{ position: "absolute", right: 16, bottom: 104, zIndex: 46 }}
+        >
+          <ShutterIcon size={46} />
+        </Fab>
+      )}
+
+      {picked_sector && (
+        <SectorCard
+          row={picked_sector}
+          progress={sectorProgress(sighting, picked_sector)}
+          is_desktop={is_desktop}
+          onLog={(code) => openCamera(code, picked_sector.name)}
+          onDismiss={() => setPickedSector(null)}
+        />
+      )}
+    </div>
+  );
 
   const mapBody = (
     <div style={{ position: "absolute", inset: 0 }}>
@@ -1517,104 +2360,40 @@ export default function App() {
         at_id={at_id}
         disc_size={is_desktop ? 38 : 32}
       />
-      {!is_desktop && (
-        <div
-          className="absolute inset-x-0 top-0 flex items-center"
-          style={{ height: 56, background: "rgba(249,249,249,0.88)", backdropFilter: "blur(6px)", zIndex: 20, padding: "0 16px" }}
-        >
-          <PlantMark size={24} />
-          <span style={{ fontWeight: 800, fontSize: 15, marginLeft: 8 }}>Walk the campus</span>
-        </div>
-      )}
-      {!is_desktop && (
-        <div className="absolute" style={{ top: 62, left: 12, right: 12, zIndex: 25 }}>
-          <div className="flex flex-wrap items-center gap-2">
-            {geo_chip}
-            <Chip
-              /* Lit once you have moved off the friendly default. */
-              is_on={layer !== "guide"}
+      <MapChrome
+        is_desktop={is_desktop}
+        context={<ContextCard label="Loyola Heights" value={geo_line} />}
+        below={geo_chip}
+        control={
+          <>
+            <ModeSwitch mode={map_mode} onMode={setMode} is_desktop={is_desktop} />
+            {/* The basemap cycler lives under the switch in the same column, so
+                it can never sit on top of it the way it used to. */}
+            <button
               onClick={() => setLayer(nextLayer)}
+              className="flex items-center gap-1.5"
+              style={{
+                background: "rgba(255,255,255,0.94)",
+                backdropFilter: "blur(8px)",
+                border: "1.5px solid rgba(228,231,232,0.9)",
+                borderRadius: 999,
+                padding: "8px 13px",
+                fontSize: 12,
+                fontWeight: 700,
+                boxShadow: "0 4px 14px rgba(24,38,20,0.14)",
+                whiteSpace: "nowrap",
+                cursor: "pointer",
+              }}
             >
-              <CanopyIcon size={16} />
+              <CanopyIcon size={17} />
               {SOURCE[layer].label}
-            </Chip>
-            <Chip is_on={is_following} onClick={recentre}>
-              <LocateIcon size={15} />
-              {is_following ? "Following" : "Recentre"}
-            </Chip>
-            <Chip is_on={Boolean(warm && warm.done >= warm.total)} onClick={warmCampus}>
-              <ExportIcon size={15} />
-              {warm ? (warm.done >= warm.total ? "Offline ready" : `${warm.done}/${warm.total}`) : "Save offline"}
-            </Chip>
-          </div>
-          <div
-            style={{
-              marginTop: 6,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              background: "rgba(249,249,249,0.94)",
-              border: "1.5px solid #E4E7E8",
-              borderRadius: 999,
-              padding: "5px 10px",
-              fontSize: 11,
-              fontWeight: 600,
-              color: "rgba(31,32,34,0.7)",
-              boxShadow: "var(--shadow-card)",
-            }}
-          >
-            <PinIcon size={13} />
-            {geo_line}
-          </div>
-        </div>
-      )}
-      <button
-        onClick={() => setLayer(nextLayer)}
-        className="absolute flex items-center gap-1.5"
-        style={{
-          display: is_desktop ? "flex" : "none",
-          top: 18,
-          right: 12,
-          zIndex: 20,
-          background: "#F9F9F9",
-          border: "1.5px solid #E4E7E8",
-          borderRadius: 999,
-          padding: "7px 12px",
-          fontSize: 12,
-          fontWeight: 700,
-          boxShadow: "var(--shadow-card)",
-        }}
-      >
-        <CanopyIcon size={18} />
-        {SOURCE[layer].label}
-        <span style={{ fontWeight: 400, opacity: 0.55 }}>
-          {LAYER_ORDER.indexOf(layer) + 1}/{LAYER_ORDER.length}
-        </span>
-      </button>
-      {is_desktop && (
-        <>
-          <div
-            className="absolute"
-            style={{
-              top: 18,
-              left: 18,
-              background: "#F9F9F9",
-              border: "1.5px solid #E4E7E8",
-              borderRadius: 999,
-              padding: "8px 14px",
-              fontSize: 13,
-              fontWeight: 700,
-              boxShadow: "var(--shadow-card)",
-            }}
-          >
-            <span className="flex items-center gap-1.5">
-              <PinIcon size={16} />
-              Loyola Heights · {geo_line}
-            </span>
-            <div style={{ marginTop: 8 }}>{geo_chip}</div>
-          </div>
-        </>
-      )}
+              <span style={{ fontWeight: 400, opacity: 0.5 }}>
+                {LAYER_ORDER.indexOf(layer) + 1}/{LAYER_ORDER.length}
+              </span>
+            </button>
+          </>
+        }
+      />
       <MapNote is_desktop={is_desktop} layer={layer} />
       {!is_desktop && !is_sheet_open && (
         <Fab
@@ -1627,23 +2406,35 @@ export default function App() {
         </Fab>
       )}
       {!is_desktop && !is_sheet_open && (
-        <NearbyBar
-          sp={sel_sp}
-          where={sel.where}
-          distance_line={selected_distance}
-          is_pinned={pinned_id !== null}
-          onUnpin={() => setPinnedId(null)}
-          onExpand={() => setSheetOpen(true)}
-        />
+        showing_biome && presence ? (
+          <BiomeBar presence={presence} onExpand={() => setSheetOpen(true)} />
+        ) : (
+          <NearbyBar
+            sp={sel_sp}
+            where={sel.where}
+            distance_line={selected_distance}
+            is_pinned={pinned_id !== null}
+            onUnpin={() => setPinnedId(null)}
+            onExpand={() => setSheetOpen(true)}
+          />
+        )
       )}
       {!is_desktop && is_sheet_open && (
-        <NearbySheet
-          sp={sel_sp}
-          where={sel.where}
-          distance_line={selected_distance}
-          onLog={() => openCamera(sel.species_code)}
-          onDismiss={() => setSheetOpen(false)}
-        />
+        showing_biome && presence ? (
+          <BiomeSheet
+            presence={presence}
+            onLog={(code) => openCamera(code, presence.row.name)}
+            onDismiss={() => setSheetOpen(false)}
+          />
+        ) : (
+          <NearbySheet
+            sp={sel_sp}
+            where={sel.where}
+            distance_line={selected_distance}
+            onLog={() => openCamera(sel.species_code)}
+            onDismiss={() => setSheetOpen(false)}
+          />
+        )
       )}
       {!is_desktop && is_sheet_open && (inat.status === "ready" || inat.status === "loading") && (
         <div
@@ -1662,56 +2453,76 @@ export default function App() {
         <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
           <DesktopTopBar route={route} onRoute={go} is_demo={is_demo} onDemo={() => setDemo((d) => !d)} seen_count={seen.size} is_wide={is_wide} />
           {route === "/" && <HomeScreen is_desktop onWalk={() => go("/map")} onPlan={() => go("/plan")} />}
-          {route === "/map" && (
+          {/* Play goes full-bleed on desktop too — a projector wants the map,
+              not a 38% reading column beside it. Field keeps the column. */}
+          {route === "/map" && map_mode === "play" && (
+            <div className="flex-1" style={{ minHeight: 0, position: "relative" }}>{playBody}</div>
+          )}
+          {route === "/map" && map_mode === "field" && (
             <div className="flex-1 flex" style={{ minHeight: 0 }}>
               <div style={{ width: "62%", position: "relative" }}>{mapBody}</div>
               <aside className="scroll-soft" style={{ width: "38%", background: "#F9F9F9", borderLeft: "1.5px solid #E4E7E8", padding: 32, overflowY: "auto" }}>
-                <div className="flex items-center gap-4">
-                  <TaxonThumb species_code={sel_sp.species_code} size={104} />
-                  <TaxonName
-                    sp={sel_sp}
-                    size={28}
-                    eyebrow={`NEARBY · ${sel.where.toUpperCase()}`}
-                    meta={
-                      selected_distance ? (
-                        <span style={{ fontSize: 14, fontWeight: 700, color: "#075D89" }}>{selected_distance}</span>
-                      ) : null
-                    }
-                  />
-                </div>
-                <div style={{ marginTop: 14 }}>
-                  <SpeciesPill sp={sel_sp} />
-                </div>
-                <p style={{ fontSize: 16, lineHeight: 1.5, marginTop: 18 }}>{sel_sp.note}</p>
-                {sel_sp.caption && <div style={{ fontSize: 12, color: "rgba(31,32,34,0.5)", marginTop: 10 }}>{sel_sp.caption}</div>}
-                <div className="flex gap-3" style={{ marginTop: 24 }}>
-                  {[
-                    ["1,809", "campus trees · AIS SY 2025–2026"],
-                    ["101", "arboretum · AIS"],
-                  ].map(([big, cap]) => (
-                    <div key={big} style={{ flex: 1, background: "#fff", border: "1.5px solid #E4E7E8", borderRadius: TILE_RADIUS, padding: 16 }}>
-                      <div style={{ fontWeight: 800, fontSize: 22 }}>{big}</div>
-                      <div style={{ fontSize: 12, color: "rgba(31,32,34,0.6)", marginTop: 4, lineHeight: 1.3 }}>{cap}</div>
+                {showing_biome && presence ? (
+                  <>
+                    <BiomeCard presence={presence} is_desktop onLog={(code) => openCamera(code, presence.row.name)} />
+                    <div style={{ fontSize: 13, color: "rgba(31,32,34,0.65)", marginTop: 18 }}>
+                      {seen.size} species logged on this device{walk ? ` · ${walk_count} on this walk` : ""}
                     </div>
-                  ))}
-                </div>
-                <button
-                  onClick={() => openCamera(sel.species_code)}
-                  className="flex items-center justify-center gap-2"
-                  style={{ width: "100%", height: 52, borderRadius: 12, background: "#008653", color: "#fff", fontWeight: 700, fontSize: 16, marginTop: 24 }}
-                >
-                  <GlyphDisc size={32}>
-                    <ShutterIcon size={24} />
-                  </GlyphDisc>
-                  Log this sighting
-                </button>
-                <div style={{ fontSize: 13, color: "rgba(31,32,34,0.65)", marginTop: 14 }}>
-                  {seen.size} species logged on this device{walk ? ` · ${walk_count} on this walk` : ""}
-                </div>
-                <p style={{ fontSize: 12, color: "rgba(31,32,34,0.55)", marginTop: 8, lineHeight: 1.4 }}>{AIS_GAP_NOTE}</p>
-                <div style={{ fontSize: 13, color: "rgba(31,32,34,0.5)", marginTop: 8, fontStyle: "italic" }}>
-                  No public leaderboard. Formation, not a race.
-                </div>
+                    <p style={{ fontSize: 12, color: "rgba(31,32,34,0.55)", marginTop: 8, lineHeight: 1.4 }}>{AIS_GAP_NOTE}</p>
+                    <div style={{ fontSize: 13, color: "rgba(31,32,34,0.5)", marginTop: 8, fontStyle: "italic" }}>
+                      No public leaderboard. Formation, not a race.
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex items-center gap-4">
+                      <TaxonThumb species_code={sel_sp.species_code} size={104} />
+                      <TaxonName
+                        sp={sel_sp}
+                        size={28}
+                        eyebrow={`NEARBY · ${sel.where.toUpperCase()}`}
+                        meta={
+                          selected_distance ? (
+                            <span style={{ fontSize: 14, fontWeight: 700, color: "#075D89" }}>{selected_distance}</span>
+                          ) : null
+                        }
+                      />
+                    </div>
+                    <div style={{ marginTop: 14 }}>
+                      <SpeciesPill sp={sel_sp} />
+                    </div>
+                    <p style={{ fontSize: 16, lineHeight: 1.5, marginTop: 18 }}>{sel_sp.note}</p>
+                    {sel_sp.caption && <div style={{ fontSize: 12, color: "rgba(31,32,34,0.5)", marginTop: 10 }}>{sel_sp.caption}</div>}
+                    <div className="flex gap-3" style={{ marginTop: 24 }}>
+                      {[
+                        ["1,809", "campus trees · AIS SY 2025–2026"],
+                        ["101", "arboretum · AIS"],
+                      ].map(([big, cap]) => (
+                        <div key={big} style={{ flex: 1, background: "#fff", border: "1.5px solid #E4E7E8", borderRadius: TILE_RADIUS, padding: 16 }}>
+                          <div style={{ fontWeight: 800, fontSize: 22 }}>{big}</div>
+                          <div style={{ fontSize: 12, color: "rgba(31,32,34,0.6)", marginTop: 4, lineHeight: 1.3 }}>{cap}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <button
+                      onClick={() => openCamera(sel.species_code)}
+                      className="flex items-center justify-center gap-2"
+                      style={{ width: "100%", height: 52, borderRadius: 12, background: "#008653", color: "#fff", fontWeight: 700, fontSize: 16, marginTop: 24 }}
+                    >
+                      <GlyphDisc size={32}>
+                        <ShutterIcon size={24} />
+                      </GlyphDisc>
+                      Log this sighting
+                    </button>
+                    <div style={{ fontSize: 13, color: "rgba(31,32,34,0.65)", marginTop: 14 }}>
+                      {seen.size} species logged on this device{walk ? ` · ${walk_count} on this walk` : ""}
+                    </div>
+                    <p style={{ fontSize: 12, color: "rgba(31,32,34,0.55)", marginTop: 8, lineHeight: 1.4 }}>{AIS_GAP_NOTE}</p>
+                    <div style={{ fontSize: 13, color: "rgba(31,32,34,0.5)", marginTop: 8, fontStyle: "italic" }}>
+                      No public leaderboard. Formation, not a race.
+                    </div>
+                  </>
+                )}
                 <InatStrip state={inat} />
               </aside>
             </div>
@@ -1721,7 +2532,7 @@ export default function App() {
           {is_camera_open && (
             <CameraSheet
               pick_code={pick_code}
-              where={sel.where}
+              where={camera_where ?? sel.where}
               fix_line={fix_line}
               onPick={setPickCode}
               onSave={saveSighting}
@@ -1733,13 +2544,13 @@ export default function App() {
       ) : (
         <div style={{ position: "relative", height: "100%", overflowX: "hidden" }}>
           {route === "/" && <HomeScreen is_desktop={false} onWalk={() => go("/map")} onPlan={() => go("/plan")} />}
-          {route === "/map" && mapBody}
+          {route === "/map" && (map_mode === "play" ? playBody : mapBody)}
           {route === "/journal" && <JournalScreen sighting={sighting} seen={seen} is_desktop={false} />}
           {route === "/plan" && <PlanScreen is_desktop={false} />}
           {is_camera_open && (
             <CameraSheet
               pick_code={pick_code}
-              where={sel.where}
+              where={camera_where ?? sel.where}
               fix_line={fix_line}
               onPick={setPickCode}
               onSave={saveSighting}

@@ -1,4 +1,4 @@
-import { percentToLatLon, type LatLon } from "./geo.ts";
+import type { LatLon } from "./geo.ts";
 
 export type Origin = "Native" | "Exotic";
 
@@ -112,37 +112,34 @@ export const species: Record<string, Species> = {
 export interface EncounterSeed {
   encounter_id: string;
   species_code: string;
-  x_percent: number;
-  y_percent: number;
-  where: string;
-}
-
-export interface Encounter extends EncounterSeed {
   /**
-   * Position on THIS demo map, projected through CAMPUS_BOX — not a surveyed
-   * tree location. AIS holds the inventory and, per Cathy (2026-08-29), it
-   * carries species but not count and location per tree.
+   * Explicit lat/lon since T1.1. These were seeded as x/y percents over the
+   * old, smaller CAMPUS_BOX and cut to coordinates the day the box grew, so
+   * extending the frame again must not drag a tree across campus. The old
+   * percent is kept as provenance, nothing more.
    */
   lat: number;
   lon: number;
+  where: string;
 }
+
+export type Encounter = EncounterSeed;
+/* An encounter coordinate is a position on THIS demo map, not a surveyed tree
+   location — the type alias keeps that sentence attached to the name. */
 
 /** Walkable-path discs only. None sit inside the SOM / swamp hatch. */
 const encounter_seed: EncounterSeed[] = [
-  { encounter_id: "e1", species_code: "narra", x_percent: 39, y_percent: 46, where: "Gonzaga walk" },
-  { encounter_id: "e2", species_code: "raintree", x_percent: 58, y_percent: 33, where: "CTC quad" },
-  { encounter_id: "e3", species_code: "molave", x_percent: 27, y_percent: 62, where: "Rizal Library lawn" },
-  { encounter_id: "e4", species_code: "balete", x_percent: 70, y_percent: 55, where: "Bellarmine field edge" },
-  { encounter_id: "e5", species_code: "katmon", x_percent: 49, y_percent: 70, where: "Xavier walk" },
-  { encounter_id: "e6", species_code: "mahogany", x_percent: 78, y_percent: 40, where: "Katipunan gate yard" },
-  { encounter_id: "e7", species_code: "dao", x_percent: 33, y_percent: 30, where: "Berchmans lawn" },
-  { encounter_id: "e8", species_code: "lagundi", x_percent: 22, y_percent: 74, where: "Bellarmine path" },
+  { encounter_id: "e1", species_code: "narra", lat: 14.63905, lon: 121.07712, where: "Gonzaga walk" }, // was 39%, 46%
+  { encounter_id: "e2", species_code: "raintree", lat: 14.640025, lon: 121.07864, where: "CTC quad" }, // was 58%, 33%
+  { encounter_id: "e3", species_code: "molave", lat: 14.63785, lon: 121.07616, where: "Rizal Library lawn" }, // was 27%, 62%
+  { encounter_id: "e4", species_code: "balete", lat: 14.638375, lon: 121.0796, where: "Bellarmine field edge" }, // was 70%, 55%
+  { encounter_id: "e5", species_code: "katmon", lat: 14.63725, lon: 121.07792, where: "Xavier walk" }, // was 49%, 70%
+  { encounter_id: "e6", species_code: "mahogany", lat: 14.6395, lon: 121.08024, where: "Katipunan gate yard" }, // was 78%, 40%
+  { encounter_id: "e7", species_code: "dao", lat: 14.64025, lon: 121.07664, where: "Berchmans lawn" }, // was 33%, 30%
+  { encounter_id: "e8", species_code: "lagundi", lat: 14.63695, lon: 121.07576, where: "Bellarmine path" }, // was 22%, 74%
 ];
 
-export const encounter: Encounter[] = encounter_seed.map((row) => ({
-  ...row,
-  ...percentToLatLon(row.x_percent, row.y_percent),
-}));
+export const encounter: Encounter[] = encounter_seed;
 
 /**
  * The off-limits grove — a PLACEHOLDER extent, and it must keep saying so.
@@ -208,6 +205,14 @@ export interface Consult {
   consult_id: string;
   label: string;
   detail: string | null;
+  /**
+   * Who on the team owns reaching out, from the 09-03 announcement.
+   *
+   * Named here rather than in a chat message because an owner nobody can see is
+   * an owner nobody has. It is a task assignment, NOT evidence that the meeting
+   * happened — every row still reads "not yet" until it actually does.
+   */
+  owner: string | null;
 }
 
 export const consult: Consult[] = [
@@ -215,27 +220,33 @@ export const consult: Consult[] = [
     consult_id: "ais",
     label: "Ateneo Institute of Sustainability (AIS) — tree inventory access",
     detail:
-      "Cuyegkeng & Favis 2019 already described how this campus struggles to get admin buy-in for sustainability programs.",
+      "Cuyegkeng & Favis 2019 already described how this campus struggles to get admin buy-in for sustainability programs. " +
+      "Cathy's note stands: AIS has the species list, and the missing data is count and location.",
+    owner: "Clariz",
   },
   {
     consult_id: "mo",
     label: "Manila Observatory",
     detail: "Villarin is a coauthor on the Metro Manila UHI / LULC papers.",
+    owner: "Charisse · Clariz",
   },
   {
     consult_id: "cfmo",
     label: "CFMO / TAW — grounds",
     detail: null,
+    owner: "Ivan",
   },
   {
     consult_id: "wild",
     label: "Student orgs already walking (Ateneo Wild / AGILA)",
-    detail: null,
+    detail: "Ateneo Wild keeps an Instagram catalogue of campus birds and trees; a prof handles the account.",
+    owner: "Sophie",
   },
   {
     consult_id: "admunav",
     label: "ADMUNAV authors (Lagyo, Galicia, Guico 2025) — walkable-path graph, if they will share it",
     detail: null,
+    owner: null,
   },
 ];
 

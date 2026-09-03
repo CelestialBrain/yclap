@@ -90,11 +90,27 @@ describe("toGeoJson", () => {
   });
 });
 
+/**
+ * Column INDEX is not the rule — the column's presence and its emptiness are.
+ * These read the header and look the cell up by name, so adding a field (as the
+ * biome pivot added `entry_kind` / `reported_name`) cannot silently pass a test
+ * that was really asserting "lat happens to be 5th".
+ */
+function cellOf(csv: string, line_index: number, column: string): string {
+  const line = csv.split("\n");
+  const at = line[0].split(",").indexOf(column);
+  assert.notEqual(at, -1, `CSV has no ${column} column`);
+  return line[line_index].split(",")[at];
+}
+
 describe("toCsv", () => {
   it("writes a header plus one line per sighting", () => {
     const line = toCsv(row).split("\n");
     assert.equal(line.length, 4);
-    assert.ok(line[0].startsWith("sighting_id,species_code"));
+    assert.equal(line[0].split(",")[0], "sighting_id");
+    for (const column of ["species_code", "created_at", "lat", "lon"]) {
+      assert.ok(line[0].split(",").includes(column), `header is missing ${column}`);
+    }
   });
 
   it("quotes a note containing a comma or a quote", () => {
@@ -103,8 +119,15 @@ describe("toCsv", () => {
   });
 
   it("leaves a missing position empty rather than writing a zero", () => {
-    const cell = toCsv([make({})]).split("\n")[1].split(",");
-    assert.equal(cell[4], "");
-    assert.equal(cell[5], "");
+    const csv = toCsv([make({})]);
+    assert.equal(cellOf(csv, 1, "lat"), "");
+    assert.equal(cellOf(csv, 1, "lon"), "");
+    assert.equal(cellOf(csv, 1, "accuracy_m"), "");
+  });
+
+  it("writes a position that IS present", () => {
+    const csv = toCsv([make({ lat: 14.64, lon: 121.078 })]);
+    assert.equal(cellOf(csv, 1, "lat"), "14.64");
+    assert.equal(cellOf(csv, 1, "lon"), "121.078");
   });
 });

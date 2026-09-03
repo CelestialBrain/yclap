@@ -1,5 +1,12 @@
 import campus_boundary from "./asset/campus-boundary.json";
 import campus_path from "./asset/campus-path.json";
+import {
+  SECTOR_ATTRIBUTION,
+  sectorFill,
+  sectorStroke,
+  sector as sector_row,
+  type Sector,
+} from "./sector";
 import type { Encounter } from "./data";
 import { RESTRICTED_POLYGON, species } from "./data";
 import { EncounterDisc, PlayerMark } from "./icon";
@@ -32,11 +39,76 @@ interface Props {
   is_restricted_on?: boolean;
   is_path_on?: boolean;
   is_boundary_on?: boolean;
+  is_biome_on?: boolean;
   at_id?: string | null;
   disc_size?: number;
   is_interactive?: boolean;
   onGesture?: () => void;
 }
+
+/**
+ * The sector fills — the same layer the play view draws, on the field map.
+ *
+ * This used to draw the 09-03 biome seed, which is why the field view still
+ * looked like the old app after the sector cut landed (owner, 09-03). It reads
+ * `sector.ts` now, so both views are the same ground, cut the same way, coloured
+ * by the same measured vegetation. What differs is only what sits ON TOP: the
+ * field view keeps the path network, the four basemaps and every citation.
+ *
+ * Drawn beneath everything (z 0): paths, the outline, the restricted hatch and
+ * the discs all read on top of a fill, and the hatch WINS over any fill it
+ * crosses, because restricted ground is subtracted, not overdrawn.
+ */
+const SECTOR_MIN_ZOOM = 15;
+function SectorLayer({ projection, layer }: { projection: Projection; layer: Layer }) {
+  const theme = SOURCE[layer].theme;
+  return (
+    <svg
+      width={projection.width}
+      height={projection.height}
+      style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0 }}
+      aria-hidden="true"
+    >
+      {projection.zoom >= SECTOR_MIN_ZOOM &&
+        sector_row.map((row) => (
+          <SectorPolygon key={row.sector_code} row={row} projection={projection} is_dark_ground={theme.is_dark_ground} />
+        ))}
+    </svg>
+  );
+}
+
+function SectorPolygon({
+  row,
+  projection,
+  is_dark_ground,
+}: {
+  row: Sector;
+  projection: Projection;
+  is_dark_ground: boolean;
+}) {
+  /* Over imagery the fills have to stay translucent or they hide the very
+     canopy the satellite layer is there to show. */
+  const fill_opacity = is_dark_ground ? 0.44 : 0.56;
+  const point = row.point.map(([lat, lon]) => projection.project({ lat, lon }));
+  const d = `${point.map((p, i) => `${i === 0 ? "M" : "L"}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ")} Z`;
+  return (
+    <path
+      d={d}
+      fill={sectorFill(row)}
+      fillOpacity={fill_opacity}
+      stroke={sectorStroke(row)}
+      strokeWidth={1.4}
+      strokeLinejoin="round"
+    />
+  );
+}
+
+/* The "PLACEHOLDER, NOT SURVEYED" overlay that used to live here is gone with
+ * the thing it warned about. It existed because three of the 09-03 biome rings
+ * were our own delineation; sector boundaries are OSM ways, so there is no
+ * invented ring left to disclaim. The honesty burden moved rather than lifted —
+ * `is_named_by_us` still marks the names we guessed, and the sector card still
+ * says the species lists are provisional until the AIS inventory. */
 
 /**
  * The walkable network.
@@ -190,11 +262,20 @@ export default function CampusMap({
   is_restricted_on = true,
   is_path_on = true,
   is_boundary_on = true,
+  is_biome_on = true,
   at_id = null,
   disc_size = 32,
   is_interactive = true,
   onGesture,
 }: Props) {
+  /* ODbL is a licence term, not chrome: any OSM-derived layer on screen must
+     carry the credit. Biome rings and paths each earn their own line. */
+  const overlay_attribution = [
+    is_path_on ? PATH_ATTRIBUTION : null,
+    is_biome_on ? SECTOR_ATTRIBUTION : null,
+  ]
+    .filter(Boolean)
+    .join(" · ");
   return (
     <TileMap
       view={view}
@@ -202,10 +283,11 @@ export default function CampusMap({
       layer={layer}
       is_interactive={is_interactive}
       onGesture={onGesture}
-      overlay_attribution={is_path_on ? PATH_ATTRIBUTION : undefined}
+      overlay_attribution={overlay_attribution || undefined}
     >
       {(projection) => (
         <>
+          {is_biome_on && <SectorLayer projection={projection} layer={layer} />}
           {is_boundary_on && <CampusOutline projection={projection} layer={layer} />}
           {is_path_on && <PathNetwork projection={projection} layer={layer} />}
           {is_restricted_on && <RestrictedArea projection={projection} />}

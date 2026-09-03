@@ -26,6 +26,22 @@ import {
  * every zoom.
  */
 
+/**
+ * Where the walker sits on screen, as a fraction of container height.
+ *
+ * Below centre, so the ground being walked INTO is ahead of them — the camera
+ * every game in this genre uses.
+ *
+ * This is a SCREEN-SPACE shift applied after projection, NOT the pivot. Making
+ * it the pivot is what broke rotation: the map centre, which is where the
+ * walker is drawn, then sat above the pivot, so swinging the camera swept the
+ * walker off the side of the screen instead of turning the world around them.
+ * The plane pivots on the walker; the projected result then slides down.
+ *
+ * `toScreen` and the CSS transform BOTH read this, so the two cannot drift.
+ */
+const PLAYER_SCREEN_Y = 0.72;
+
 export interface View extends LatLon {
   zoom: number;
 }
@@ -41,6 +57,22 @@ export interface Projection {
   width: number;
   height: number;
   zoom: number;
+  /** 0 when flat. Billboarded children counter-rotate by this. */
+  tilt_degree: number;
+  /** Clockwise from north. Billboarded children counter-rotate by this too. */
+  bearing_degree: number;
+  /**
+   * Where a plane point actually LANDS on screen once the 3D transform is
+   * applied, plus the perspective scale it lands at.
+   *
+   * Children position themselves in plane coordinates and let the browser
+   * transform them — but anything that has to REASON about screen position
+   * (does this label fit, does it collide, is it off the edge) has to ask in
+   * screen space. Doing that arithmetic in the child means duplicating the
+   * perspective constants that live here, and they drift the first time the
+   * pitch changes. So it lives here, next to the transform it inverts.
+   */
+  toScreen: (point: { x: number; y: number }) => { x: number; y: number; scale: number };
 }
 
 interface Props {
@@ -52,6 +84,63 @@ interface Props {
   is_interactive?: boolean;
   /** Credit for anything an overlay draws on top of the tiles. ODbL data has to say so. */
   overlay_attribution?: string;
+  /**
+   * Camera pitch in degrees. 0 is the flat survey view; ~55 is the raked
+   * "standing in it" view the owner asked for on 09-03.
+   *
+   * The whole ground plane — tiles AND every overlay child — is tilted by one
+   * CSS 3D transform on a single wrapper, so markers stay welded to their
+   * features for free: they are transformed by the same matrix as the imagery
+   * under them. Anything that must stay upright (the player, a label) billboards
+   * itself by counter-rotating, which is why `Projection` carries `tilt_degree`.
+   */
+  tilt_degree?: number;
+  /**
+   * Camera bearing in degrees, clockwise from north.
+   *
+   * Pokemon GO lets you swing the camera round the player, and a fixed-north
+   * map makes a walk feel like reading a diagram of yourself. The whole ground
+   * plane rotates about the player; `toScreen` applies the same rotation, and
+   * the pan gesture un-rotates its delta so dragging still moves the map the
+   * way your thumb went rather than the way north happens to be pointing.
+   */
+  bearing_degree?: number;
+  onBearing?: (degree: number) => void;
+  /**
+   * CSS filter for the tiles only.
+   *
+   * The play view desaturates the basemap on purpose: OSM's standard style
+   * draws every footway, kerb and building label, and the owner's note on
+   * 09-03 was that the result is "a lot of lines". Muting the ground lets the
+   * sector fills carry the map instead of competing with it. It is a filter and
+   * not a different tile source so the ODbL credit and the offline cache stay
+   * exactly as they are.
+   */
+  tile_filter?: string;
+  /**
+   * Draw no raster tiles at all.
+   *
+   * The play view renders its own vector ground from `campus-shape.json`, so
+   * there is nothing to fetch and nothing to attribute to a tile host — the
+   * geometry credit still applies and still renders. This is also what makes
+   * that view work with no network at all, rather than only as well as the
+   * tile cache happens to be warmed.
+   */
+  is_tile_hidden?: boolean;
+  /** Flat ground colour behind everything when tiles are hidden. */
+  ground?: string;
+  /**
+   * Lift the attribution by this many pixels.
+   *
+   * The play view runs the map full-bleed, under the bottom nav, which parked
+   * the ODbL credit behind it. That credit is a licence condition, not chrome —
+   * "less cluttered" was never permission to hide it — so the map is told where
+   * the nav ends rather than the credit being dropped.
+   */
+  credit_offset?: number;
+  /** Chrome the map draws in SCREEN space, above the tilted plane. */
+  overlay?: (projection: Projection) => ReactNode;
+  is_chrome_hidden?: boolean;
   children?: (projection: Projection) => ReactNode;
 }
 
@@ -70,11 +159,21 @@ export default function TileMap({
   onGesture,
   is_interactive = true,
   overlay_attribution,
+  tilt_degree = 0,
+  bearing_degree = 0,
+  onBearing,
+  tile_filter,
+  is_tile_hidden = false,
+  ground,
+  credit_offset = 0,
+  overlay,
+  is_chrome_hidden = false,
   children,
 }: Props) {
   const box_ref = useRef<HTMLDivElement | null>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
-  const drag = useRef<{ x: number; y: number; lat: number; lon: number } | null>(null);
+  const drag = useRef<{ x: number; y: number; lat: number; lon: number; bearing: number; is_rotate: boolean } | null>(null);
+  const pointer = useRef(new Map<number, { x: number; y: number }>());
 
   useLayoutEffect(() => {
     const node = box_ref.current;
@@ -142,31 +241,128 @@ export default function TileMap({
     return () => node.removeEventListener("wheel", onWheel);
   }, [zoomAt, is_interactive, onGesture]);
 
+  /**
+   * One pointer pans, two pointers rotate (and so does shift-drag or a
+   * secondary button on a desktop, which has no second finger).
+   *
+   * Panning has to un-rotate its own delta: with the camera swung 90 degrees,
+   * dragging right should still slide the map right on screen, not north. The
+   * `/ cos(tilt)` is the same first-order rake correction as before, exact on
+   * the centre line and drifting toward the horizon, which is invisible at a
+   * walking pan and not worth a full inverse projection.
+   */
   const onPointerDown = (event: React.PointerEvent) => {
     if (!is_interactive) return;
     (event.target as Element).setPointerCapture?.(event.pointerId);
-    drag.current = { x: event.clientX, y: event.clientY, lat: view.lat, lon: view.lon };
+    pointer.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    const rotating = pointer.current.size > 1 || event.shiftKey || event.button === 2;
+    drag.current = {
+      x: event.clientX,
+      y: event.clientY,
+      lat: view.lat,
+      lon: view.lon,
+      bearing: bearing_degree,
+      is_rotate: rotating && Boolean(onBearing),
+    };
   };
 
   const onPointerMove = (event: React.PointerEvent) => {
     const from = drag.current;
     if (!from) return;
+    if (pointer.current.has(event.pointerId)) {
+      pointer.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    }
     const dx = event.clientX - from.x;
     const dy = event.clientY - from.y;
     if (Math.abs(dx) + Math.abs(dy) < 3) return;
     onGesture?.();
+
+    if (from.is_rotate) {
+      /* Horizontal travel swings the camera; a quarter of the screen is a
+         quarter turn, which is about the sensitivity the genre uses. */
+      onBearing?.(from.bearing + (dx / Math.max(1, size.width)) * 360 * 0.75);
+      return;
+    }
+
+    const rake = tilt_degree ? Math.cos((tilt_degree * Math.PI) / 180) : 1;
+    const sx = dx;
+    const sy = dy / rake;
+    const world_dx = sx * Math.cos(bear) + sy * Math.sin(bear);
+    const world_dy = -sx * Math.sin(bear) + sy * Math.cos(bear);
     const start = toWorld({ lat: from.lat, lon: from.lon }, zoom);
-    onView({ ...clampCenter(fromWorld({ x: start.x - dx, y: start.y - dy }, zoom)), zoom });
+    onView({
+      ...clampCenter(fromWorld({ x: start.x - world_dx, y: start.y - world_dy }, zoom)),
+      zoom,
+    });
   };
 
   const endDrag = (event: React.PointerEvent) => {
     (event.target as Element).releasePointerCapture?.(event.pointerId);
-    drag.current = null;
+    pointer.current.delete(event.pointerId);
+    if (pointer.current.size === 0) drag.current = null;
   };
 
-  const tile_x = size.width ? tileRange(origin.x, size.width) : [];
-  const tile_y = size.height ? tileRange(origin.y, size.height) : [];
+  /* A tilted plane shows ground the flat viewport never would, and rotation
+     swings more in from the sides, so the overscan has to cover the diagonal
+     rather than just the top. Without it the map ends in a hard empty band. */
+  const pad_x = tilt_degree ? size.width * 0.9 : 0;
+  const pad_top = tilt_degree ? size.height * 1.35 : 0;
+  const pad_bottom = tilt_degree ? size.height * 0.9 : 0;
+
+  const tile_x = size.width ? tileRange(origin.x - pad_x, size.width + pad_x * 2) : [];
+  const tile_y = size.height ? tileRange(origin.y - pad_top, size.height + pad_top + pad_bottom) : [];
   const count = 2 ** zoom;
+
+  /* Must stay in lockstep with `plane_style` below — same pivot, same depth,
+     same post-projection shift. The pivot is the map centre, which is where the
+     walker is drawn, so rotation turns the world around them. */
+  const origin_x = size.width * 0.5;
+  const origin_y = size.height * 0.5;
+  const shift_y = size.height * (PLAYER_SCREEN_Y - 0.5);
+  const depth = Math.max(600, size.height * 1.6);
+  const rad = (tilt_degree * Math.PI) / 180;
+  const bear = (bearing_degree * Math.PI) / 180;
+
+  const toScreen = useCallback(
+    (point: { x: number; y: number }) => {
+      if (!tilt_degree && !bearing_degree) return { x: point.x, y: point.y, scale: 1 };
+      const dx0 = point.x - origin_x;
+      const dy0 = point.y - origin_y;
+      /* Same order as the CSS: rotate the ground about the player first, then
+         rake the camera over it, then divide by depth. */
+      const dx = dx0 * Math.cos(bear) - dy0 * Math.sin(bear);
+      const dy = dx0 * Math.sin(bear) + dy0 * Math.cos(bear);
+      const z = dy * Math.sin(rad);
+      const scale = depth / (depth - z);
+      return { x: origin_x + dx * scale, y: origin_y + dy * Math.cos(rad) * scale + shift_y, scale };
+    },
+    [tilt_degree, bearing_degree, origin_x, origin_y, depth, rad, bear, shift_y],
+  );
+
+  const projection: Projection = {
+    project,
+    meter_per_pixel: meterPerPixel(view.lat, zoom),
+    width: size.width,
+    height: size.height,
+    zoom,
+    tilt_degree,
+    bearing_degree,
+    toScreen,
+  };
+
+  /* One transform for the entire ground plane. `transformOrigin` sits below the
+   * centre so the player, who lives at the centre, stays at a comfortable
+   * screen height instead of sliding to the top as the pitch increases. */
+  const plane_style: React.CSSProperties = tilt_degree
+    ? {
+        position: "absolute",
+        inset: 0,
+        transformStyle: "preserve-3d",
+        transformOrigin: "50% 50%",
+        transform: `translateY(${shift_y}px) perspective(${depth}px) rotateX(${tilt_degree}deg) rotateZ(${bearing_degree}deg)`,
+        willChange: "transform",
+      }
+    : { position: "absolute", inset: 0 };
 
   return (
     <div
@@ -179,12 +375,13 @@ export default function TileMap({
         position: "absolute",
         inset: 0,
         overflow: "hidden",
-        background: "#dfe3d8",
+        background: ground ?? "#dfe3d8",
         touchAction: is_interactive ? "none" : undefined,
         cursor: is_interactive ? (drag.current ? "grabbing" : "grab") : "default",
       }}
     >
-      {tile_y.map((ty) =>
+      <div style={plane_style}>
+      {!is_tile_hidden && tile_y.map((ty) =>
         tile_x.map((tx) => {
           const wrapped_x = ((tx % count) + count) % count;
           if (ty < 0 || ty >= count) return null;
@@ -207,22 +404,19 @@ export default function TileMap({
                 height: TILE_SIZE,
                 userSelect: "none",
                 pointerEvents: "none",
+                filter: tile_filter,
               }}
             />
           );
         }),
       )}
 
-      {size.width > 0 &&
-        children?.({
-          project,
-          meter_per_pixel: meterPerPixel(view.lat, zoom),
-          width: size.width,
-          height: size.height,
-          zoom,
-        })}
+      {size.width > 0 && children?.(projection)}
+      </div>
 
-      {is_interactive && (
+      {size.width > 0 && overlay?.(projection)}
+
+      {is_interactive && !is_chrome_hidden && (
         <div className="absolute flex flex-col" style={{ right: 10, top: "50%", transform: "translateY(-50%)", zIndex: 22 }}>
           {[
             { label: "Zoom in", sign: 1, glyph: "+" },
@@ -258,8 +452,9 @@ export default function TileMap({
         style={{
           position: "absolute",
           right: 0,
-          bottom: 0,
+          bottom: credit_offset,
           zIndex: 21,
+          opacity: is_chrome_hidden ? 0.55 : 1,
           background: "rgba(249,249,249,0.82)",
           borderTopLeftRadius: 8,
           padding: "2px 7px",
@@ -268,7 +463,7 @@ export default function TileMap({
           pointerEvents: "none",
         }}
       >
-        {overlay_attribution ? `${source.attribution} · ${overlay_attribution}` : source.attribution}
+        {is_tile_hidden ? overlay_attribution ?? source.attribution : overlay_attribution ? `${source.attribution} · ${overlay_attribution}` : source.attribution}
       </div>
     </div>
   );

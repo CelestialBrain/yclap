@@ -629,3 +629,54 @@ Proposed: `north 14.6455 · south 14.6330 · west 121.0740 · east 121.0840`.
 
 Full build spec, sequenced for a single implementer:
 [`docs/spec/biome-3d-build-spec.md`](docs/spec/biome-3d-build-spec.md).
+
+## 2026-09-03 (later still) — sectors cut by the paths, and the imagery gets a vote
+
+Two owner corrections landed after the section above was written, and both
+changed what the unit of play *is*.
+
+**1. Sectors are cut by the paths and roads, not by boxes.** The 09-03 seed drew
+biome rings by hand; three had no ring at all. The correction: separate the
+groves *by the paths/roads, into sectors*. So nothing is drawn any more.
+`script/build-sector.mjs` nodes the real OSM road+footway network over campus
+and walks the planar arrangement — a sector is a FACE of that network, the way a
+city block is defined by its streets. **94 sectors, 38.8 ha**, every boundary
+ODbL OSM geometry rather than our delineation. `is_placeholder` is gone because
+there is nothing left to flag; `is_named_by_us` marks the 5x names we chose
+where OSM has none.
+
+**2. "No building here" is not "grass grows here".** The first cut coloured
+sectors by building cover, so a car park — which has no building on it — scored
+as pure lawn and the map painted the Areté deck and the JSEC service aisles as
+grass. Caught on sight by the owner. `script/measure-vegetation.mjs` now
+composes **Esri World Imagery** over campus and measures an excess-green index
+(`ExG = 2G − R − B`) per sector, so the colour follows the ground rather than an
+inference. It settles exactly the cases that were wrong: "Walk by Matteo Ricci
+Study Hall" measures **11% vegetation at 0% built**; "Walk by Covered Court"
+**14%**. Ground below 45% vegetation is no longer a biome — still drawn, as the
+asphalt it is, but it carries no species and cannot be tapped to log a tree.
+**68 of 94 sectors are walkable biomes.**
+
+### Shipped
+
+| Item | What it closes | Surface | Benchmark (Tier 3) | Status |
+|------|----------------|---------|--------------------|--------|
+| Sectors cut along the path/road network | `52:26` Gelo "specify how we're gonna cut up the map", plus the 09-03 correction that boxes are the wrong shape | `script/build-sector.mjs` · `src/asset/campus-sector.json` · `src/sector.ts` | PASS iff every sector boundary is OSM geometry, no ring is hand-drawn, and slivers below 0.14 compactness are dropped — `sector.test.ts` | **done** (2026-09-03) |
+| Extend `CAMPUS_BOX` north | The rectangle clipped Mini-forest and 57 of the university ring's 118 points | `src/geo.ts` | Mini-forest falls inside the box; `geo.test.ts` still green and the demo walk stays off restricted ground | **done** |
+| Point-in-sector replaces nearest-tree | The 25 m / 8 m rule was a per-tree unit | `src/nearby.ts` · `src/sector.ts` | Entering a sector opens its card, leaving clears it; off-network returns null rather than guessing nearest | **done** |
+| Vegetation measured from satellite, not inferred | Owner: parking lots and paved walkways were being painted as grass | `script/measure-vegetation.mjs` | PASS iff `greenness()` reads `vegetation_ratio`, every sector was sampled, and no sector below 0.45 is a biome or carries species | **done** |
+| Pokémon-GO play view | Owner: "simple pokemon go like with character 3d looking, map view, friendly and less cluttered ui" | `src/play-map.tsx` | 390 px: raked camera, one green ramp, ≤5 labels, no horizontal overflow, ODbL credit still on screen | **done** |
+| Character with four stages | `1:05:55` egg → seedling → tree; `1:08:20` loses leaves when unvisited | `src/character.tsx` · `src/stage.ts` | Stage rises with sectors walked and never falls; vigor droops on absence and fully recovers; no stage is ever lost | **done** |
+| 360° camera that pivots on the walker | Owner: "move my camera around 360 … and my egg is walking" | `src/tile-map.tsx` | Two fingers (or shift-drag) swing the bearing; the walker stays centred and upright; compass returns north. `?bearing=` seeds it for a projector | **done** |
+| Field view shows the same ground | Owner: "fieldview still doesnt have the new updated map" | `src/campus-map.tsx` | Field draws `sector.ts`, not the old biome seed; it keeps every layer control and citation | **done** |
+| The mode switch never moves | Owner: "i want the switch to be in the same place always" | `MapChrome` in `src/app.tsx` | Both views render their controls through one frame, mode switch first in the top-right column. PASS iff the switch occupies the same slot in Play and Field at 390 px and 1440 px | **done** (2026-09-03) |
+| Field chrome stops overlapping itself | Owner: "fix the ui for the field guide" | `MapChrome` · `geo_chip` | Desktop no longer stacks the switch on the coordinate pill; "Following" and "Save offline" render once, not twice; chips wrap in a full-width row instead of one-per-line on 390 px | **done** (2026-09-03) |
+| Contact owners on `/plan` | The 09-03 announcement assigned Charisse (MO), Clariz (MO/AIS), Sophie (orgs), Ivan (CFMO) | `src/data.ts` · `/plan` | Each consult row names its owner and still reads "not yet" — an assignment is not a meeting | **done** |
+
+### Not done, and why
+
+| Item | Why not |
+|---|---|
+| three.js for the map's grass and birds | Asked for directly; **not done, and this is a deliberate deviation.** Ambient life ships as SVG/CSS instead — canopy tufts scattered on measured-vegetated sectors, drifting birds — at ~0 kB. three.js is ~168 kB gzipped against a 128 kB app whose whole story is working offline on a hall projector, and it would buy decoration, not a mechanic. The adopted 3D scope from the 09-03 spec (a `<model-viewer>` character and the unboxing reveal) is untouched and still the right place for it — `CHARACTER_MODEL_SLOT` marks where the `.glb` drops in. Say the word and I will pull it in for the map too. |
+| Species per sector | Only 2 sectors inherited provisional species from the 09-03 demo seed, and 1 of those sat on paved ground and was taken off. The AIS inventory (due 09-09) is the real source; the map does not invent assignments in the meantime. |
+| Blind-box reveal, per-sector badges | Still blocked on the P0 ranking decision, unchanged. |

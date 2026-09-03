@@ -23,6 +23,25 @@ import {
   type LatLon,
 } from "../src/geo.ts";
 import { encounter, ENCOUNTER_RADIUS_M, RESTRICTED_POLYGON } from "../src/data.ts";
+import { readFileSync } from "node:fs";
+
+interface BiomePart {
+  part_name: string;
+  point: [number, number][]; // [lat, lon] — unlike campus-path.json, which is [lon, lat]
+}
+
+interface BiomeRow {
+  biome_code: string;
+  name: string;
+  kind: string;
+  is_placeholder: boolean;
+  ring: BiomePart[] | null;
+  species_code: string[];
+}
+
+const biome_seed = JSON.parse(
+  readFileSync(new URL("../src/asset/campus-biome.json", import.meta.url), "utf8"),
+) as { biome: BiomeRow[] };
 
 /** Ray casting. Only the test needs it, so it lives with the test. */
 function isInsidePolygon(point: LatLon, ring: LatLon[]): boolean {
@@ -81,11 +100,14 @@ describe("distanceMeter", () => {
     assert.ok(Math.abs(distanceMeter(a, b) - distanceMeter(b, a)) < 1e-9);
   });
 
-  it("keeps the whole campus frame under a kilometre across", () => {
+  it("keeps the campus frame at walkable campus scale", () => {
     const nw = percentToLatLon(0, 0);
     const se = percentToLatLon(100, 100);
     const span = distanceMeter(nw, se);
-    assert.ok(span > 500 && span < 1500, `campus diagonal was ${span} m`);
+    /* T1.1 grew the box 2026-09-03 to stop clipping the biome extent (−137 m S,
+       −216 m N, −131 m E). The diagonal went from ~1.4 km to ~1.76 km — still a
+       campus, not a city. */
+    assert.ok(span > 1500 && span < 2000, `campus diagonal was ${span} m`);
   });
 });
 
@@ -235,6 +257,29 @@ describe("map framing", () => {
     assert.ok(far.lat >= CAMPUS_BOX.south - 0.005);
     assert.ok(far.lon >= CAMPUS_BOX.west - 0.005);
     assert.deepEqual(clampCenter(CAMPUS_CENTER), CAMPUS_CENTER);
+  });
+});
+
+/* T1.1 acceptance: the box was extended so the biome seed fits inside it. A
+   ring point landing outside CAMPUS_BOX means the frame regressed. */
+describe("campus frame vs the biome seed", () => {
+  it("contains every drawn ring point in campus-biome.json", () => {
+    let drawn = 0;
+    for (const row of biome_seed.biome) {
+      if (!row.ring) continue; // ring: null is the human-blocked case, not a geometry failure
+      for (const part of row.ring) {
+        assert.ok(part.point.length >= 3, `${row.biome_code} part ${part.part_name} is not a ring`);
+        for (const [lat, lon] of part.point) {
+          drawn += 1;
+          assert.equal(
+            isInsideCampus({ lat, lon }),
+            true,
+            `${row.biome_code} part ${part.part_name} point ${lat},${lon} fell outside CAMPUS_BOX`,
+          );
+        }
+      }
+    }
+    assert.ok(drawn >= 100, `expected the 7 drawn biomes to contribute real points, got ${drawn}`);
   });
 });
 
