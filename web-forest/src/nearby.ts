@@ -1,5 +1,6 @@
 import { biomeContains, drawn_biome, type Biome } from "./biome.ts";
 import { encounter, ENCOUNTER_RADIUS_M, type Encounter } from "./data.ts";
+import { sectorAt, sectorContains, type Sector } from "./sector.ts";
 import { bearingDegree, compassPoint, distanceMeter, type LatLon } from "./geo.ts";
 
 export interface NearbyEncounter {
@@ -72,4 +73,41 @@ export function biomePresenceAt(
   pool: Encounter[] = encounter,
 ): BiomePresence | null {
   return rankBiome(from, row, pool)[0] ?? null;
+}
+
+/* ── sector residents ────────────────────────────────────────────────────────
+ *
+ * Which curated encounters fall INSIDE a sector.
+ *
+ * Not baked into `campus-sector.json` on purpose. Written into the file these
+ * would read as survey data — "this sector contains a Narra" — when what we
+ * actually have is a demo-map position from the 09-03 seed. Derived at runtime
+ * from `encounter`, they stay exactly what they are: the walk's own props,
+ * labelled as such wherever they render, and superseded the moment the AIS
+ * inventory lands with real counts and locations.
+ *
+ * Six of the eight demo encounters land in a biome; two sit on the path
+ * network itself, and those are simply not residents of anywhere.
+ */
+
+export interface SectorResident {
+  row: Sector;
+  resident: Encounter[];
+}
+
+export function sectorResident(of: Sector, pool: Encounter[] = encounter): Encounter[] {
+  return pool.filter((e) => sectorContains(of, { lat: e.lat, lon: e.lon }));
+}
+
+/** Every encounter that has a home, paired with the sector that holds it. */
+export function residentBySector(pool: Encounter[] = encounter): Map<string, Encounter[]> {
+  const out = new Map<string, Encounter[]>();
+  for (const e of pool) {
+    const at = sectorAt({ lat: e.lat, lon: e.lon });
+    if (!at || !at.is_biome) continue;
+    const list = out.get(at.sector_code) ?? [];
+    list.push(e);
+    out.set(at.sector_code, list);
+  }
+  return out;
 }

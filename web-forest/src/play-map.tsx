@@ -1,7 +1,8 @@
 import { useMemo, useRef } from "react";
 import campus_shape from "./asset/campus-shape.json" with { type: "json" };
 import Character, { type Stage } from "./character";
-import { RESTRICTED_POLYGON } from "./data";
+import { RESTRICTED_POLYGON, species, type Encounter } from "./data";
+import { residentBySector } from "./nearby";
 import type { Fix } from "./geo";
 import {
   biome_sector,
@@ -104,6 +105,22 @@ function scatterTuft(): { lat: number; lon: number; r: number; dark: boolean }[]
 }
 const tuft = scatterTuft();
 
+/**
+ * The things there are to walk TOWARDS.
+ *
+ * A map with nothing on it is a diagram. The genre's whole loop is "see a thing
+ * at a distance, go to it", and the first cut of this view had no markers at
+ * all — only sector fills — so there was nothing to aim at.
+ *
+ * These are the curated demo encounters, placed in whichever biome contains
+ * them. Six of the eight land in one; the other two sit on the path network and
+ * are residents of nowhere. They are DEMO-MAP positions and the card says so —
+ * the AIS inventory (due 2026-09-09) is what replaces them with real counts and
+ * locations.
+ */
+const resident_by_sector = residentBySector();
+const marker: Encounter[] = [...resident_by_sector.values()].flat();
+
 /** Fixed cast so they do not reshuffle every render. Decoration, not data. */
 const BIRD = [
   { top: 12, size: 22, duration: 38, delay: 0, track: "yc-fly-a" },
@@ -121,6 +138,9 @@ interface Props {
   stage: Stage;
   vigor: number;
   onSelectSector: (row: Sector) => void;
+  onSelectEncounter: (e: Encounter) => void;
+  /** Species already in this journal — a logged marker reads as filled. */
+  seen_species: Set<string>;
   onGesture?: () => void;
   is_desktop?: boolean;
   is_restricted_on?: boolean;
@@ -219,6 +239,8 @@ export default function PlayMap({
   stage,
   vigor,
   onSelectSector,
+  onSelectEncounter,
+  seen_species,
   onGesture,
   is_desktop = false,
   is_restricted_on = true,
@@ -466,7 +488,14 @@ export default function PlayMap({
                 />
               )}
 
-              {/* 5 · a walked sector gets a quiet tick. Never a score. */}
+              {/* 5 · the ground shadow under each find, drawn with the map so it
+                   sits ON the sector. The pin itself billboards above it. */}
+            {marker.map((e) => {
+              const p = project({ lat: e.lat, lon: e.lon });
+              return <ellipse key={`sh-${e.encounter_id}`} cx={p.x} cy={p.y} rx="15" ry="10" fill="rgba(28,74,34,0.20)" />;
+            })}
+
+            {/* 6 · a walked sector gets a quiet tick. Never a score. */}
               {sector_row
                 .filter((row) => row.is_biome && seen_sector.has(row.sector_code))
                 .map((row) => {
@@ -479,6 +508,47 @@ export default function PlayMap({
                   );
                 })}
             </svg>
+
+            {/* The finds, standing up out of the plane like the walker does.
+                A flat dot on the ground reads as a map symbol; a pin standing
+                against raked ground reads as a thing over there worth walking
+                to, which is the loop this view exists for. */}
+            {marker.map((e) => {
+              const p = project({ lat: e.lat, lon: e.lon });
+              const sp = species[e.species_code];
+              const is_logged = seen_species.has(e.species_code);
+              return (
+                <div
+                  key={`pin-${e.encounter_id}`}
+                  onClick={() => onSelectEncounter(e)}
+                  title={sp ? `${sp.common_name} — demo-map position` : e.where}
+                  style={{
+                    position: "absolute",
+                    left: p.x,
+                    top: p.y,
+                    transform: `translate(-50%, -100%) rotateZ(${-bearing_degree}deg) rotateX(${-TILT_DEGREE}deg)`,
+                    transformOrigin: "50% 100%",
+                    transformStyle: "preserve-3d",
+                    cursor: "pointer",
+                    zIndex: 4,
+                  }}
+                >
+                  <svg width="40" height="52" viewBox="0 0 40 52" aria-label={sp?.common_name ?? "A find"}>
+                    <path
+                      d="M20 51 C20 51 4 30 4 19 A16 16 0 0 1 36 19 C36 30 20 51 20 51 Z"
+                      fill={is_logged ? "#2F6B3A" : "#FFFFFF"}
+                      stroke="#2F6B3A"
+                      strokeWidth="3"
+                      strokeLinejoin="round"
+                    />
+                    <circle cx="20" cy="19" r="7.5" fill={is_logged ? "#FFFFFF" : "#2F6B3A"} />
+                    {!is_logged && (
+                      <path d="M20 15.5 q4 2 0 7 q-4 -5 0 -7" fill="#FFFFFF" />
+                    )}
+                  </svg>
+                </div>
+              );
+            })}
 
             {/* The walker. Standing up out of the plane. */}
             {fix && (

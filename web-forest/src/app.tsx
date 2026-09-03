@@ -16,6 +16,7 @@ import {
   SEEK_URL,
   species,
   WILD_NOTE,
+  type Encounter,
   type Species,
 } from "./data";
 import {
@@ -38,7 +39,7 @@ import {
 import { CAMPUS_CENTER, formatLatLon, formatMeter } from "./geo";
 import { LAYER_ORDER, nextLayer, prefetchCampus, SOURCE, type Layer, type View } from "./tile-map";
 import { useGeo } from "./use-geo";
-import { biomePresenceAt, rankEncounter, type BiomePresence } from "./nearby";
+import { biomePresenceAt, rankEncounter, sectorResident, type BiomePresence } from "./nearby";
 
 import {
   campusCodeForScientific,
@@ -1588,12 +1589,21 @@ function useDesktop() {
  */
 function SectorCard({
   row,
+  resident,
   progress,
   is_desktop,
   onLog,
   onDismiss,
 }: {
   row: Sector;
+  /**
+   * Curated encounters that fall inside this sector.
+   *
+   * Passed in rather than read off `row.species_code`, because these are demo-
+   * map positions derived at runtime, not a field of the sector data. Keeping
+   * them out of `campus-sector.json` is what stops them reading as a survey.
+   */
+  resident: Encounter[];
   progress: { seen_count: number; total: number };
   is_desktop: boolean;
   onLog: (species_code: string) => void;
@@ -1657,19 +1667,19 @@ function SectorCard({
         </button>
       </div>
 
-      {row.species_code.length > 0 ? (
+      {resident.length > 0 ? (
         <div style={{ display: "grid", gap: 9 }}>
           <div style={{ fontSize: 12.5, fontWeight: 700, color: "rgba(31,32,34,0.55)" }}>
-            {progress.seen_count} of {progress.total} logged here · yours only
+            On the walk list here · {progress.seen_count} logged · yours only
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-            {row.species_code.map((code) => {
-              const sp = species[code];
+            {resident.map((e) => {
+              const sp = species[e.species_code];
               if (!sp) return null;
               return (
                 <button
-                  key={code}
-                  onClick={() => onLog(code)}
+                  key={e.encounter_id}
+                  onClick={() => onLog(e.species_code)}
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
@@ -1691,12 +1701,13 @@ function SectorCard({
         </div>
       ) : (
         <p style={{ fontSize: 13, lineHeight: 1.5, color: "rgba(31,32,34,0.6)", margin: 0 }}>
-          No species are assigned here yet — the AIS inventory is the source that will. Log what you actually see.
+          Nothing is on the walk list here yet — the AIS inventory (due 09-09) is the source that will name what grows in
+          this sector. Log whatever you actually see.
         </p>
       )}
 
       <button
-        onClick={() => onLog(row.species_code[0] ?? "narra")}
+        onClick={() => onLog(resident[0]?.species_code ?? "narra")}
         style={{
           width: "100%",
           background: "#2F6B3A",
@@ -2269,6 +2280,14 @@ export default function App() {
         is_desktop={is_desktop}
         is_restricted_on={is_restricted}
         onSelectSector={(row) => setPickedSector(row)}
+        seen_species={seen}
+        onSelectEncounter={(e) => {
+          /* Tapping a marker is an explicit intent to log THAT species, so it
+             opens the camera on it rather than on whatever sector card the
+             walker happens to be standing in. */
+          setPickedSector(null);
+          openCamera(e.species_code, e.where);
+        }}
         bearing_degree={bearing}
         onBearing={setBearing}
       />
@@ -2332,6 +2351,7 @@ export default function App() {
       {picked_sector && (
         <SectorCard
           row={picked_sector}
+          resident={sectorResident(picked_sector)}
           progress={sectorProgress(sighting, picked_sector)}
           is_desktop={is_desktop}
           onLog={(code) => openCamera(code, picked_sector.name)}
