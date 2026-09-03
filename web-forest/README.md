@@ -33,6 +33,18 @@ npm run lint
 Port 4177 is claimed with `strictPort`, so a collision fails loudly rather than
 silently moving.
 
+## The species-model pack
+
+`public/model/` holds a cute animated `.glb` for **every species known from
+the campus** — 1,098 models from the cached iNaturalist campus-box sweep
+(2026-09-03) merged with the curated guide list, plus the companion
+character's four stages at the `CHARACTER_MODEL_SLOT` paths. Provenance,
+method, and the AIS-supersession rule live in
+[`../docs/spec/species-model-pack.md`](../docs/spec/species-model-pack.md).
+View them all at `/model-gallery.html` (dev server), regenerate with
+`node script/build-species-model.mjs`. The pack is served on demand and is
+not precached; it is not wired into the app bundle yet (that is spec T4.1).
+
 ## Two map views
 
 - **Play** (default) — raked camera, sector fills on one green ramp, your
