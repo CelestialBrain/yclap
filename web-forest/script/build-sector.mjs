@@ -565,8 +565,8 @@ const sector = unique
       green_tag: cover?.tag ?? null,
       seed_biome_code: seeded?.biome_code ?? null,
       species_code: seeded?.species_code ?? [],
-      label_point: toLatLon(point).map((n) => Number(n.toFixed(6))),
-      point: ring.map((p) => toLatLon(p).map((n) => Number(n.toFixed(6)))),
+      label_point: toLatLon(point).map((n) => Number(n.toFixed(5))),
+      point: ring.map((p) => toLatLon(p).map((n) => Number(n.toFixed(5)))),
     };
   });
 
@@ -617,7 +617,11 @@ const out = {
   sector,
 };
 
-writeFileSync(new URL("../src/asset/campus-sector.json", import.meta.url), JSON.stringify(out, null, 1));
+/* Compact, not pretty-printed. This file ships in the bundle and every space
+ * is a byte against the offline budget — indenting 830 coordinate pairs cost
+ * more than the coordinates themselves. Read it with `node -e` or a formatter,
+ * not by eye. */
+writeFileSync(new URL("../src/asset/campus-sector.json", import.meta.url), JSON.stringify(out));
 
 console.log(`\nwrote ${sector.length} sectors`);
 const by_kind = {};

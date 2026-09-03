@@ -271,7 +271,8 @@ doc.vegetation_method = {
     "car park; building footprints alone cannot, because a car park has no building on it.",
 };
 
-writeFileSync(file_url, JSON.stringify(doc, null, 1));
+/* Compact for the same reason build-sector.mjs is: this file ships. */
+writeFileSync(file_url, JSON.stringify(doc));
 
 const band = { bare: 0, sparse: 0, mixed: 0, green: 0 };
 for (const s of doc.sector) {
