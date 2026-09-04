@@ -1731,7 +1731,17 @@ function PlanScreen({ is_desktop }: { is_desktop: boolean }) {
   );
 }
 
-function DesktopTopBar({
+/**
+ * The desktop shell: a persistent left rail, the map filling the centre, and
+ * the encounter + citations in a right column.
+ *
+ * This replaces a top bar. The reason is the projector: at 1440 px a
+ * horizontal header spends the scarcest axis — vertical — on navigation that
+ * never changes, and the map is the thing the room came to see. A rail spends
+ * the abundant axis instead. Every control the header carried is still here,
+ * in one place, and the phone is untouched: it keeps its bottom nav.
+ */
+function DesktopRail({
   route,
   onRoute,
   is_demo,
@@ -1755,24 +1765,32 @@ function DesktopTopBar({
     { id: "/plan", label: "Plan", Icon: PlanIcon },
   ];
   return (
-    <header
-      className="flex items-center"
-      style={{ height: 64, background: "#F9F9F9", borderBottom: "1.5px solid #E4E7E8", padding: "0 28px", flexShrink: 0 }}
+    <nav
+      className="flex flex-col"
+      style={{
+        width: is_wide ? 232 : 196,
+        flexShrink: 0,
+        height: "100%",
+        background: "#F9F9F9",
+        borderRight: "1.5px solid #E4E7E8",
+        padding: "22px 16px 18px",
+      }}
     >
       <button
         onClick={() => onRoute("/")}
         className="flex items-center gap-2.5"
-        style={{ width: is_wide ? 260 : 200, flexShrink: 0, textAlign: "left" }}
+        style={{ textAlign: "left", padding: "0 6px" }}
       >
         <PlantMark size={32} />
-        <span>
-          <span style={{ display: "block", fontWeight: 800, fontSize: 18, lineHeight: 1 }}>Field Guide</span>
+        <span style={{ minWidth: 0 }}>
+          <span style={{ display: "block", fontWeight: 800, fontSize: 17, lineHeight: 1 }}>Field Guide</span>
           <span style={{ display: "block", fontSize: 11, color: "#008653", fontWeight: 700, marginTop: 2 }}>
             Ateneo Loyola Heights
           </span>
         </span>
       </button>
-      <nav className="flex-1 flex items-center justify-center" style={{ gap: is_wide ? 8 : 2, minWidth: 0 }}>
+
+      <div className="flex flex-col" style={{ gap: 4, marginTop: 26 }}>
         {tab.map(({ id, label, Icon }) => {
           const is_active = route === id;
           return (
@@ -1780,43 +1798,58 @@ function DesktopTopBar({
               key={id}
               onClick={() => onRoute(id)}
               aria-current={is_active ? "page" : undefined}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2.5"
               style={{
                 fontWeight: 700,
                 fontSize: 14.5,
                 color: is_active ? "#008653" : "rgba(31,32,34,0.72)",
                 background: is_active ? "rgba(0,134,83,0.12)" : "transparent",
-                borderRadius: RADIUS.pill,
-                padding: is_wide ? "8px 16px" : "8px 11px",
-                whiteSpace: "nowrap",
+                borderRadius: 14,
+                padding: "10px 12px",
+                textAlign: "left",
+                width: "100%",
                 transition: "background .18s ease, color .18s ease",
               }}
             >
               <Icon size={19} active={is_active} />
               {label}
+              {/* Active state is carried by the left bar as well as the wash,
+                  so the current route is readable in greyscale too. */}
+              {is_active && (
+                <span
+                  style={{
+                    marginLeft: "auto",
+                    width: 4,
+                    height: 18,
+                    borderRadius: 999,
+                    background: "#008653",
+                  }}
+                />
+              )}
             </button>
           );
         })}
-      </nav>
-      <div className="flex items-center gap-3" style={{ width: is_wide ? 260 : 200, flexShrink: 0, justifyContent: "flex-end" }}>
-        {/* Replaces a dead `EN` span that looked like a locale switcher this app
-            has never had. This one is a real number from the real journal. */}
-        {is_wide && (
-          <button
-            onClick={() => onRoute("/journal")}
-            className="flex items-center gap-1.5"
-            style={{ fontSize: 12.5, fontWeight: 700, color: "rgba(31,32,34,0.62)" }}
-          >
-            <JournalIcon size={17} active={false} />
-            {seen_count} logged
-          </button>
-        )}
+      </div>
+
+      <div style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: 10 }}>
+        {/* A real number from the real journal — never a dead locale switcher. */}
+        <button
+          onClick={() => onRoute("/journal")}
+          className="flex items-center gap-1.5"
+          style={{ fontSize: 12.5, fontWeight: 700, color: "rgba(31,32,34,0.62)", padding: "0 6px" }}
+        >
+          <JournalIcon size={17} active={false} />
+          {seen_count} logged
+        </button>
         <Chip is_on={is_demo} onClick={onDemo}>
           <LocateIcon size={15} />
           Demo campus
         </Chip>
+        <p style={{ fontSize: 10.5, color: "rgba(31,32,34,0.42)", lineHeight: 1.35, padding: "0 6px" }}>
+          Youth CLAP 2026 · student prototype · not an official AIS product.
+        </p>
       </div>
-    </header>
+    </nav>
   );
 }
 
@@ -2884,8 +2917,12 @@ export default function App() {
   return (
     <div style={{ height: "100%", background: "#F9F9F9", color: "#1F2022", overflowX: "hidden" }}>
       {is_desktop ? (
-        <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-          <DesktopTopBar route={route} onRoute={go} is_demo={is_demo} onDemo={() => setDemo((d) => !d)} seen_count={seen.size} is_wide={is_wide} />
+        /* Rail down the left, everything else in the column beside it. The
+           inner column keeps flex-direction column so each route's own
+           flex-1 sizing is unchanged from the top-bar shell. */
+        <div style={{ height: "100%", display: "flex" }}>
+          <DesktopRail route={route} onRoute={go} is_demo={is_demo} onDemo={() => setDemo((d) => !d)} seen_count={seen.size} is_wide={is_wide} />
+          <div style={{ flex: 1, minWidth: 0, height: "100%", display: "flex", flexDirection: "column" }}>
           {route === "/" && <HomeScreen is_desktop onWalk={() => go("/map")} onPlan={() => go("/plan")} />}
           {/* Play goes full-bleed on desktop too — a projector wants the map,
               not a 38% reading column beside it. Field keeps the column. */}
@@ -2964,6 +3001,7 @@ export default function App() {
           )}
           {route === "/journal" && <JournalScreen sighting={sighting} seen={seen} is_desktop />}
           {route === "/plan" && <PlanScreen is_desktop />}
+          </div>
           {is_camera_open && (
             <CameraSheet
               pick_code={pick_code}

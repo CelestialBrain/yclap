@@ -680,3 +680,46 @@ asphalt it is, but it carries no species and cannot be tapped to log a tree.
 | three.js for the map's grass and birds | Asked for directly; **not done, and this is a deliberate deviation.** Ambient life ships as SVG/CSS instead — canopy tufts scattered on measured-vegetated sectors, drifting birds — at ~0 kB. three.js is ~168 kB gzipped against a 128 kB app whose whole story is working offline on a hall projector, and it would buy decoration, not a mechanic. The adopted 3D scope from the 09-03 spec (a `<model-viewer>` character and the unboxing reveal) is untouched and still the right place for it — `CHARACTER_MODEL_SLOT` marks where the `.glb` drops in. Say the word and I will pull it in for the map too. |
 | Species per sector | Only 2 sectors inherited provisional species from the 09-03 demo seed, and 1 of those sat on paved ground and was taken off. The AIS inventory (due 09-09) is the real source; the map does not invent assignments in the meantime. |
 | Blind-box reveal, per-sector badges | Still blocked on the P0 ranking decision, unchanged. |
+
+## 2026-09-05 — the 09-02 consensus rows, closed
+
+Ran the open rows from the 09-02 UI-consensus set. Three of them turned out
+to be **already shipped** and were closed on inspection rather than rebuilt:
+the stat strip already read `AIS · SY 2025–2026` (source *and* year),
+`sectorProgress` was already wired into the sector card, and the report-a-tree
+**data layer** (`entry_kind`, `reported_name`, distinct GeoJSON `feature_type`)
+already existed — only the affordance was missing.
+
+Verifier-first throughout: every row below carries a test that encodes its
+benchmark. Gate at the tip: `build 0 · test 0 (158 pass) · lint 0`.
+
+| Item | Surface | Benchmark | Status |
+|---|---|---|---|
+| End a walk with a receipt | `journal.ts` · `WalkReceiptSheet` | Distance is the haversine sum of the recorded fix track; sectors entered in order; species seen and which were new; demo-driven walks say so on screen; no rank key at any depth | **done** — `Walk` gained a breadcrumb trail (`trackWalk`, 6 m floor so standing still adds nothing), `endWalk` returns a `WalkReceipt`, no-fix walks report `is_distance_unknown` rather than a confident 0 m |
+| Quote the walk in minutes | `geo.ts` · `NearbyBar` · sector card | `249 m W of you` also reads `≈3 min walk`; pace stated on screen; metres stay primary | **done** — `WALK_PACE_MS = 1.3`, pace printed next to the figure |
+| Seen-of-total with a stable index | `journal.ts` · `/journal` | `n of 9 species seen` against the curated list, not the padded grid; each entry carries a stable local index | **done** — `species_total` off `picker_order`; `entry_index` assigned once and never reissued, so deleting an early entry does not renumber the rest |
+| Say what a species is actually like | `data.ts` · `SpeciesBack` | ≥3 attribute tiles + a habitat line, each with a source; every field traces to a citation already in `data.ts` | **done** — a test refuses any citation whose author token does not appear in that species' own record; where our curation is the only warrant, `CURATED_SOURCE` says so instead of borrowing a paper's authority |
+| Warn where misidentification bites | Lagundi / Molave cards | Caution names the other and the difference; the two stay separate records | **done** — renders **above** the name in sheet and desktop column |
+| Report a tree the guide lacks | camera sheet · export | Saves species-unknown + coordinate + accuracy + note, leaves as a distinct feature type | **done** — "It is not on this list"; a guess is fine, Unknown is fine, the position is the part AIS does not have |
+| Make a pin say what kind of thing it is | `src/pin.ts` · `play-map.tsx` | Native / exotic / threatened distinguishable **in greyscale** | **done** — inner shape (round / square / triangle) + ring weight, threatened heaviest. Taxonomy lives in `pin.ts` because the runner strips types from `.ts` but cannot parse JSX |
+| Filter the map by what you care about | `geo_chip` · both maps | Chips filter by native / exotic / threatened; restricted hatch not filterable away | **done** — empty set means show everything; the selected encounter is never filtered out from under its own card |
+| Ask what the student noticed | camera sheet | A one-line prompt on save; stays optional | **done** — "What did you notice?" replaces a labelled empty box |
+| Desktop kiosk shell | `DesktopRail` | 1440 px: persistent left rail, map centre, encounter + stats right column; 390 px unchanged, no horizontal overflow | **done** — measured 0 px overflow at 390 with the bottom nav unchanged. `play-desktop.png` and `field-desktop.png` re-shot at 3200×2000 against the new shell |
+
+### Still blocked, and by what
+
+| Item | Blocker |
+|---|---|
+| Species per sector | The AIS inventory. 6 of 68 walkable sectors name anything to find until it lands |
+| Real walkable path graph | The ADMUNAV graph has not been shared |
+| Landmark tree oral history | An actual interview or a dated photo. The card ships with the gap stated |
+| Ledesma / Fatallo full PDFs | The mirror has no `pdf_url`; cards stay at abstract-level claims |
+| PWA install on a real handset | Never tested on an actual phone |
+| 3D character offline | `<model-viewer>` + every `.glb` must be precached or the character is a blank box on stage. Not verified |
+
+### Noted while working
+
+The pre-existing `make()` helper in `journal.test.ts` was missing `entry_kind`
+and `reported_name`, so its literal no longer satisfied `Sighting`. It went
+unnoticed because `tsconfig` does not cover `test/` — worth knowing that the
+test files are **not** typechecked by the gate.
