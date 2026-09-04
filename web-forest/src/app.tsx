@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import CampusMap from "./campus-map";
 import PlayMap from "./play-map";
 import Character, { stageFor, STAGE_LABEL, toNextStage } from "./character";
-import { biome_sector, sectorAt, sector as sector_row, type Sector } from "./sector";
+import { biome_sector, sectorAt, sectorByCode, sector as sector_row, type Sector } from "./sector";
 import Viewfinder, { type Shot } from "./camera";
 import {
   AIS_GAP_NOTE,
@@ -15,7 +15,9 @@ import {
   picker_order,
   SEEK_URL,
   species,
+  speciesDetail,
   WILD_NOTE,
+  type Confusable,
   type Encounter,
   type Species,
 } from "./data";
@@ -29,14 +31,16 @@ import {
   seenSector,
   sectorProgress,
   startWalk,
+  trackWalk,
   summarize,
   toCsv,
   toGeoJson,
   vigorOf,
   type Sighting,
   type Walk,
+  type WalkReceipt,
 } from "./journal";
-import { CAMPUS_CENTER, formatLatLon, formatMeter } from "./geo";
+import { CAMPUS_CENTER, formatLatLon, formatMeter, formatWalkMinute, WALK_PACE_MS } from "./geo";
 import { LAYER_ORDER, nextLayer, prefetchCampus, SOURCE, type Layer, type View } from "./tile-map";
 import { useGeo } from "./use-geo";
 import { biomePresenceAt, rankEncounter, sectorResident, type BiomePresence } from "./nearby";
@@ -457,12 +461,22 @@ function NearbySheet({
           }
         />
       </div>
+      {/* A minute count with no pace behind it cannot be checked by anyone, so
+          the assumption rides next to the number rather than in a footnote. */}
+      {distance_line?.includes("min walk") ? (
+        <p style={{ fontSize: 11, color: "rgba(31,32,34,0.5)", marginTop: 8 }}>
+          Minutes assume a walking pace of {WALK_PACE_MS} m/s. The metre figure is the measured one.
+        </p>
+      ) : null}
       <div style={{ marginTop: 12 }}>
         <SpeciesPill sp={sp} />
       </div>
-      <p style={{ fontSize: 14, lineHeight: 1.45, marginTop: 12, color: "#1F2022" }}>{sp.note}</p>
-      {sp.caption && <div style={{ fontSize: 11, color: "rgba(31,32,34,0.5)", marginTop: 8 }}>{sp.caption}</div>}
-      <div style={{ marginTop: "auto", display: "flex", gap: 10 }}>
+      <div style={{ overflowY: "auto", flex: 1, minHeight: 0 }}>
+        <p style={{ fontSize: 14, lineHeight: 1.45, marginTop: 12, color: "#1F2022" }}>{sp.note}</p>
+        {sp.caption && <div style={{ fontSize: 11, color: "rgba(31,32,34,0.5)", marginTop: 8 }}>{sp.caption}</div>}
+        <SpeciesBack sp={sp} />
+      </div>
+      <div style={{ marginTop: 14, display: "flex", gap: 10 }}>
         <button
           onClick={onLog}
           className="flex items-center justify-center gap-2"
@@ -493,6 +507,75 @@ function NearbySheet({
   );
 }
 
+/* ── the back of a species card ───────────────────────────────────────────
+ *
+ * The front stays four elements — thumbnail, name, distance, primary pill —
+ * because "don't overfeed too much… cocomelon, not an informational video"
+ * (`1:00:34`). Nothing sourced was deleted to achieve that; it moved here,
+ * one tap away. Every tile and the habitat line carry the reason we can say
+ * them, and where our own curation is the only warrant it says so.
+ */
+function ConfusableWarning({ warn }: { warn: Confusable }) {
+  const other = species[warn.species_code];
+  return (
+    <div
+      style={{
+        marginTop: 12,
+        padding: "10px 12px",
+        borderRadius: 14,
+        background: "#FFF6E5",
+        border: "1.5px solid #F0C97A",
+      }}
+    >
+      <div style={{ fontSize: 11, fontWeight: 800, color: "#7A5A12", letterSpacing: "0.06em" }}>
+        EASY TO CONFUSE WITH {(other?.common_name ?? warn.species_code).toUpperCase()}
+      </div>
+      <p style={{ fontSize: 12.5, lineHeight: 1.45, marginTop: 4, color: "#5C4410" }}>{warn.difference}</p>
+      <div style={{ fontSize: 10.5, color: "rgba(92,68,16,0.62)", marginTop: 5 }}>{warn.source}</div>
+    </div>
+  );
+}
+
+function SpeciesBack({ sp }: { sp: Species }) {
+  const detail = speciesDetail(sp.species_code);
+  if (!detail) return null;
+  return (
+    <div style={{ marginTop: 12 }}>
+      {/* Above the name, not below the fold: a look-alike warning nobody
+          scrolled to is a warning nobody read. */}
+      {detail.confusable && <ConfusableWarning warn={detail.confusable} />}
+      <div className="flex gap-2" style={{ marginTop: 12 }}>
+        {detail.attribute.map((tile) => (
+          <div
+            key={tile.label}
+            style={{
+              flex: 1,
+              minWidth: 0,
+              borderRadius: TILE_RADIUS,
+              border: "1.5px solid #E4E7E8",
+              background: "#fff",
+              padding: "9px 10px",
+            }}
+          >
+            <div style={{ fontSize: 10, fontWeight: 800, color: "#008653", letterSpacing: "0.05em" }}>
+              {tile.label.toUpperCase()}
+            </div>
+            <div style={{ fontSize: 13, fontWeight: 700, marginTop: 3, lineHeight: 1.25 }}>{tile.value}</div>
+            <div style={{ fontSize: 9.5, color: "rgba(31,32,34,0.45)", marginTop: 5, lineHeight: 1.3 }}>
+              {tile.source}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style={{ marginTop: 12 }}>
+        <Eyebrow>WHERE IT GROWS</Eyebrow>
+        <p style={{ fontSize: 13.5, lineHeight: 1.45, marginTop: 5 }}>{detail.habitat.line}</p>
+        <div style={{ fontSize: 10.5, color: "rgba(31,32,34,0.5)", marginTop: 5 }}>{detail.habitat.source}</div>
+      </div>
+    </div>
+  );
+}
+
 /* ── biome card ──────────────────────────────────────────────────────────────
  *
  * The pivot's card: entering a biome opens it, leaving closes it. It shows the
@@ -518,7 +601,7 @@ function BiomeSpeciesRow({
       ? "You are at this tree"
       : resident.is_at
         ? `In range · ${formatMeter(resident.distance_m)}`
-        : `${formatMeter(resident.distance_m)} ${resident.compass}`
+        : `${formatMeter(resident.distance_m)} ${resident.compass} · ${formatWalkMinute(resident.distance_m)}`
     : null;
   return (
     <button
@@ -929,8 +1012,15 @@ function CameraSheet({
         </div>
 
         <label style={{ display: "block", marginTop: 16 }}>
-          <span style={{ fontSize: 11, fontWeight: 700, color: "#008653", letterSpacing: "0.06em" }}>
-            FIELD NOTE (OPTIONAL)
+          {/* Asked as a question rather than labelled as a field: a student who
+              is prompted to look writes something, a student shown an empty box
+              usually does not. It stays optional, and an entry saved without
+              one renders clean. */}
+          <span style={{ fontSize: 13.5, fontWeight: 700, display: "block" }}>
+            What did you notice?
+          </span>
+          <span style={{ fontSize: 11.5, color: "rgba(31,32,34,0.5)", display: "block", marginTop: 2 }}>
+            Optional — one line is plenty.
           </span>
           <textarea
             value={note}
@@ -1152,7 +1242,21 @@ function SightingLog({ sighting }: { sighting: Sighting[] }) {
             >
               <TaxonThumb species_code={s.species_code} size={52} photo_data={s.photo_data} />
               <div style={{ minWidth: 0 }}>
-                <div style={{ fontWeight: 700, fontSize: 14.5 }}>{sp?.common_name ?? s.species_code}</div>
+                <div className="flex items-baseline gap-2">
+                  <div style={{ fontWeight: 700, fontSize: 14.5 }}>{sp?.common_name ?? s.species_code}</div>
+                  {/* The catalogue number is assigned once and never reissued, so
+                      an entry a student cites today is the same one tomorrow. */}
+                  <span
+                    style={{
+                      fontSize: 11,
+                      fontVariantNumeric: "tabular-nums",
+                      color: "rgba(31,32,34,0.42)",
+                      letterSpacing: 0.3,
+                    }}
+                  >
+                    №{String(s.entry_index).padStart(4, "0")}
+                  </span>
+                </div>
                 <div style={{ fontSize: 11.5, color: "rgba(31,32,34,0.55)", marginTop: 2 }}>
                   {s.created_at ? new Date(s.created_at).toLocaleString() : "—"}
                 </div>
@@ -1179,6 +1283,155 @@ function SightingLog({ sighting }: { sighting: Sighting[] }) {
   );
 }
 
+/**
+ * What a walk amounted to. Every figure is measured or counted: the distance
+ * is the haversine sum of the recorded fixes, not an estimate, and when no
+ * fix was ever taken it says the distance is unknown rather than printing a
+ * confident zero. No comparison to anybody else appears here by construction —
+ * the receipt object carries no rank or score field at any depth.
+ */
+function WalkReceiptSheet({
+  receipt,
+  is_desktop,
+  onJournal,
+  onDismiss,
+}: {
+  receipt: WalkReceipt;
+  is_desktop: boolean;
+  onJournal: () => void;
+  onDismiss: () => void;
+}) {
+  const sector_name = receipt.sector_code
+    .map((code) => sectorByCode(code)?.name)
+    .filter(Boolean)
+    .slice(0, 4);
+  return (
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 70,
+        background: "rgba(20,26,22,0.42)",
+        display: "flex",
+        alignItems: is_desktop ? "center" : "flex-end",
+        justifyContent: "center",
+        padding: is_desktop ? 24 : 0,
+      }}
+      onClick={onDismiss}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          width: "100%",
+          maxWidth: 460,
+          background: "#fff",
+          borderRadius: is_desktop ? CARD_RADIUS : `${CARD_RADIUS}px ${CARD_RADIUS}px 0 0`,
+          padding: 20,
+          maxHeight: "88vh",
+          overflowY: "auto",
+        }}
+      >
+        <Eyebrow>WALK ENDED</Eyebrow>
+        <h2 style={{ fontWeight: 800, fontSize: 22, marginTop: 6 }}>
+          {receipt.species_count === 0 ? "You walked. Nothing logged." : "Here is what you walked past."}
+        </h2>
+
+        <div className="flex gap-2" style={{ marginTop: 14 }}>
+          <StatTile
+            big={receipt.is_distance_unknown ? "—" : formatMeter(receipt.distance_meter)}
+            line="walked"
+            source={receipt.is_distance_unknown ? "no fix recorded" : "haversine along your trail"}
+          />
+          <StatTile big={`${receipt.elapsed_minute}`} line="minutes" source="start to end" />
+          <StatTile big={`${receipt.species_count}`} line="species" source="this walk" />
+        </div>
+
+        <div style={{ marginTop: 16 }}>
+          <Eyebrow>AREAS YOU PASSED THROUGH</Eyebrow>
+          <div className="flex flex-wrap gap-1.5" style={{ marginTop: 8 }}>
+            {sector_name.length > 0 ? (
+              sector_name.map((name) => <Pill key={name}>{name}</Pill>)
+            ) : (
+              <span style={{ fontSize: 12.5, color: "rgba(31,32,34,0.55)" }}>
+                No area recorded — the walk had no position fixes.
+              </span>
+            )}
+            {receipt.sector_count > sector_name.length && (
+              <Pill>+{receipt.sector_count - sector_name.length} more</Pill>
+            )}
+          </div>
+        </div>
+
+        {receipt.new_species_count > 0 && (
+          <div style={{ marginTop: 16 }}>
+            <Eyebrow>NEW TO YOUR JOURNAL</Eyebrow>
+            <div className="flex flex-wrap gap-1.5" style={{ marginTop: 8 }}>
+              {receipt.new_species_code.map((code) => (
+                <Pill key={code} tone="native">
+                  {species[code]?.common_name ?? code}
+                </Pill>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {receipt.is_demo && (
+          <p
+            style={{
+              fontSize: 11.5,
+              lineHeight: 1.45,
+              marginTop: 16,
+              padding: "10px 12px",
+              borderRadius: 14,
+              background: "#FFF6E5",
+              color: "#7A5A12",
+            }}
+          >
+            This walk was driven by the demo loop, not by a device fix. The distance and areas above are the
+            demo route&rsquo;s, not yours.
+          </p>
+        )}
+
+        <p style={{ fontSize: 11.5, color: "rgba(31,32,34,0.5)", marginTop: 14, lineHeight: 1.4 }}>
+          Counts only — no score, no rank, and nothing here is compared to anybody else&rsquo;s walk.
+        </p>
+
+        <div className="flex gap-2" style={{ marginTop: 16 }}>
+          <button
+            onClick={onJournal}
+            style={{
+              flex: 1,
+              height: 46,
+              borderRadius: 999,
+              border: "none",
+              background: "var(--grad-forest)",
+              color: "#fff",
+              fontWeight: 800,
+              fontSize: 14.5,
+            }}
+          >
+            View in journal
+          </button>
+          <button
+            onClick={onDismiss}
+            style={{
+              height: 46,
+              padding: "0 18px",
+              borderRadius: 999,
+              border: "1.5px solid #E4E7E8",
+              background: "#fff",
+              fontWeight: 700,
+              fontSize: 14.5,
+            }}
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function JournalScreen({
   sighting,
   seen,
@@ -1188,6 +1441,8 @@ function JournalScreen({
   seen: Set<string>;
   is_desktop: boolean;
 }) {
+  const summary = summarize(sighting);
+  const seen_of_total = `${summary.species_count} of ${summary.species_total} species seen`;
   if (seen.size === 0) {
     return (
       <div
@@ -1236,13 +1491,20 @@ function JournalScreen({
         <div style={{ marginTop: 16 }}>
           <SummaryStrip sighting={sighting} />
         </div>
-        <div style={{ marginTop: 24 }}>
+        <div className="flex items-baseline justify-between gap-3" style={{ marginTop: 24 }}>
           <Eyebrow>YOUR COLLECTION</Eyebrow>
+          {/* Seen of findable, not seen of grid slots. The denominator is the
+              curated starter list; padded slots have no species behind them. */}
+          <span style={{ fontSize: 12.5, fontWeight: 700, color: "#008653", fontVariantNumeric: "tabular-nums" }}>
+            {seen_of_total}
+          </span>
         </div>
         <div style={{ marginTop: 14 }}>
           <JournalGrid seen={seen} is_desktop={is_desktop} />
         </div>
-        <p style={{ fontSize: 12, color: "rgba(31,32,34,0.55)", marginTop: 14 }}>12 of a starter list — not the 1,809.</p>
+        <p style={{ fontSize: 12, color: "rgba(31,32,34,0.55)", marginTop: 14 }}>
+          A starter list — not the 1,809. Your own count only; nobody else&rsquo;s journal is in this number.
+        </p>
         <SightingLog sighting={sighting} />
         <ExportRow sighting={sighting} />
       </div>
@@ -2030,6 +2292,7 @@ export default function App() {
   const [toast, setToast] = useState<string | null>(null);
   const [inat, setInat] = useState<InatNearbyState>({ status: "idle" });
   const [walk, setWalk] = useState<Walk | null>(() => readWalk());
+  const [receipt, setReceipt] = useState<WalkReceipt | null>(null);
   const { is_desktop, is_wide } = useDesktop();
   const geo = useGeo(is_demo);
   const seen = seenCode(sighting);
@@ -2188,14 +2451,23 @@ export default function App() {
 
   const toggleWalk = () => {
     if (walk) {
-      endWalk();
+      /* Ending a walk hands back what it amounted to. A walk that closes with
+         nothing on screen is a stop, not a walk. */
+      setReceipt(endWalk(sighting));
       setWalk(null);
-      showToast("Walk ended. Your sightings stay in the journal.");
       return;
     }
     setWalk(startWalk());
     showToast("Walk started. Log what you pass.");
   };
+
+  /* Record the trail while a walk is open. trackWalk applies its own 6 m floor,
+     so standing still adds nothing and the receipt's distance stays honest. */
+  useEffect(() => {
+    if (!walk || !geo.fix) return;
+    const moved = trackWalk(geo.fix, walk);
+    if (moved) setWalk(moved);
+  }, [walk?.walk_id, geo.fix?.lat, geo.fix?.lon]);
 
   const walk_count = walk ? sighting.filter((row) => row.walk_id === walk.walk_id).length : 0;
 
@@ -2209,7 +2481,7 @@ export default function App() {
       ? "You are at this tree"
       : selected_near.is_at
         ? `In range · ${formatMeter(selected_near.distance_m)} away`
-        : `${formatMeter(selected_near.distance_m)} ${selected_near.compass} of you`
+        : `${formatMeter(selected_near.distance_m)} ${selected_near.compass} of you · ${formatWalkMinute(selected_near.distance_m)}`
     : null;
 
   /* The desktop kiosk header already owns the Demo toggle — don't print two. */
@@ -2513,6 +2785,7 @@ export default function App() {
                     </div>
                     <p style={{ fontSize: 16, lineHeight: 1.5, marginTop: 18 }}>{sel_sp.note}</p>
                     {sel_sp.caption && <div style={{ fontSize: 12, color: "rgba(31,32,34,0.5)", marginTop: 10 }}>{sel_sp.caption}</div>}
+                    <SpeciesBack sp={sel_sp} />
                     <div className="flex gap-3" style={{ marginTop: 24 }}>
                       {[
                         ["1,809", "campus trees · AIS SY 2025–2026"],
@@ -2559,6 +2832,17 @@ export default function App() {
               onClose={() => setCameraOpen(false)}
             />
           )}
+          {receipt && (
+            <WalkReceiptSheet
+              receipt={receipt}
+              is_desktop={is_desktop}
+              onJournal={() => {
+                setReceipt(null);
+                go("/journal");
+              }}
+              onDismiss={() => setReceipt(null)}
+            />
+          )}
           {toast && <Toast msg={toast} />}
         </div>
       ) : (
@@ -2578,6 +2862,17 @@ export default function App() {
             />
           )}
           <MobileNav route={route} onRoute={go} />
+          {receipt && (
+            <WalkReceiptSheet
+              receipt={receipt}
+              is_desktop={is_desktop}
+              onJournal={() => {
+                setReceipt(null);
+                go("/journal");
+              }}
+              onDismiss={() => setReceipt(null)}
+            />
+          )}
           {toast && <Toast msg={toast} />}
         </div>
       )}
