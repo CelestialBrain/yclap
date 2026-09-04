@@ -225,3 +225,26 @@ export const CAMPUS_CENTER: LatLon = {
   lat: (CAMPUS_BOX.north + CAMPUS_BOX.south) / 2,
   lon: (CAMPUS_BOX.west + CAMPUS_BOX.east) / 2,
 };
+
+/* ── walking time ───────────────────────────────────────────────────────── */
+
+/**
+ * Assumed walking pace, in metres per second. 1.3 m/s is the ordinary adult
+ * preferred walking speed and is what every "≈n min" on screen is computed
+ * from. It is stated next to the figure wherever minutes render, because a
+ * minute count without its pace is an unfalsifiable number.
+ */
+export const WALK_PACE_MS = 1.3;
+
+/** Whole minutes at WALK_PACE_MS. Floors at 1 so a nearby tree never reads "0 min". */
+export function walkMinute(meter: number): number {
+  return Math.max(1, Math.round(meter / WALK_PACE_MS / 60));
+}
+
+/**
+ * The minute phrase only. The caller keeps the metre figure as the primary
+ * number — minutes are the gloss, never the headline.
+ */
+export function formatWalkMinute(meter: number): string {
+  return `≈${walkMinute(meter)} min walk`;
+}

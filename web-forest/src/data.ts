@@ -109,6 +109,176 @@ export const species: Record<string, Species> = {
   },
 };
 
+/* ── what a species is actually like ───────────────────────────────────────
+ *
+ * The cards shipped pills and a prose note, which is not enough to answer
+ * "what am I looking at" and too much to read at a glance. These are the
+ * attribute tiles and the habitat line.
+ *
+ * Every value here is a restatement of something already in the record above —
+ * its origin, its pill set, its note — or of a citation already in this file.
+ * Nothing was looked up to build this block, and nothing here is a campus
+ * measurement. Where the only warrant is our own curation, the source says so
+ * in those words rather than borrowing a paper's authority.
+ */
+
+export const CURATED_SOURCE = "Curated field-guide list — not a campus survey";
+
+export interface SpeciesAttribute {
+  label: string;
+  value: string;
+  /** Why we can say it. Either a citation already in this file, or CURATED_SOURCE. */
+  source: string;
+}
+
+export interface SpeciesHabitat {
+  line: string;
+  source: string;
+}
+
+/**
+ * A documented look-alike. Rendered ABOVE the species name, because a warning
+ * under the fold is a warning nobody read. The pair stays two separate
+ * records — merging Lagundi into Molave is a standing rejection.
+ */
+export interface Confusable {
+  species_code: string;
+  difference: string;
+  source: string;
+}
+
+export interface SpeciesDetail {
+  attribute: SpeciesAttribute[];
+  habitat: SpeciesHabitat;
+  confusable: Confusable | null;
+}
+
+const detail: Record<string, SpeciesDetail> = {
+  narra: {
+    attribute: [
+      { label: "Origin", value: "Native", source: CURATED_SOURCE },
+      { label: "In the canopy", value: "Shade tree", source: CURATED_SOURCE },
+      { label: "Standing", value: "National tree", source: CURATED_SOURCE },
+    ],
+    habitat: {
+      line: "Long-lived, planted for shade; urban land cover is what changes the heat you feel underneath it.",
+      source: "Bilang et al. 2022 / Llorin, Villarin et al. 2024 (Archīum Physics + Manila Observatory)",
+    },
+    confusable: null,
+  },
+  molave: {
+    attribute: [
+      { label: "Origin", value: "Native", source: CURATED_SOURCE },
+      { label: "In the canopy", value: "Hardwood", source: CURATED_SOURCE },
+      { label: "Standing", value: "Threatened", source: CURATED_SOURCE },
+    ],
+    habitat: {
+      line: "Hard timber, slow to grow — the kind of tree a campus should protect on purpose.",
+      source: CURATED_SOURCE,
+    },
+    confusable: {
+      species_code: "lagundi",
+      difference:
+        "Lagundi (Vitex negundo) is the same genus but a medicinal shrub, not a canopy hardwood. Same Vitex, different plant.",
+      source: CURATED_SOURCE,
+    },
+  },
+  katmon: {
+    attribute: [
+      { label: "Origin", value: "Native", source: CURATED_SOURCE },
+      { label: "In the canopy", value: "Understory", source: CURATED_SOURCE },
+      { label: "Standing", value: "Endemic", source: CURATED_SOURCE },
+    ],
+    habitat: {
+      line: "An understory tree with edible sour fruit; campus samples were barcoded, and so were Mindoro ones.",
+      source: "Fatallo 2022 — campus samples barcoded. Also Mindoro. Not an inventory.",
+    },
+    confusable: null,
+  },
+  dao: {
+    attribute: [
+      { label: "Origin", value: "Native", source: CURATED_SOURCE },
+      { label: "In the canopy", value: "Canopy", source: CURATED_SOURCE },
+      { label: "Standing", value: "Shade without crowding", source: CURATED_SOURCE },
+    ],
+    habitat: {
+      line: "A big native canopy tree that shades the ground without closing it off to what grows beneath.",
+      source: CURATED_SOURCE,
+    },
+    confusable: null,
+  },
+  mahogany: {
+    attribute: [
+      { label: "Origin", value: "Exotic", source: CURATED_SOURCE },
+      { label: "In the canopy", value: "Fast shade", source: CURATED_SOURCE },
+      { label: "Standing", value: "Plantation timber", source: CURATED_SOURCE },
+    ],
+    habitat: {
+      line: "Natives often fail underneath plantation canopies — read as an analog, never as an Ateneo mahogany survey.",
+      source: "Ortiz et al. 2024 (Chile pines/eucalypts, Manila Observatory); Navarrete et al. 2018",
+    },
+    confusable: null,
+  },
+  raintree: {
+    attribute: [
+      { label: "Origin", value: "Exotic", source: CURATED_SOURCE },
+      { label: "In the canopy", value: "Wide, low shade", source: CURATED_SOURCE },
+      { label: "Standing", value: "Common on the quads", source: CURATED_SOURCE },
+    ],
+    habitat: {
+      line: "Wide, low shade — common on the quads, but not from here.",
+      source: CURATED_SOURCE,
+    },
+    confusable: null,
+  },
+  teak: {
+    attribute: [
+      { label: "Origin", value: "Exotic", source: CURATED_SOURCE },
+      { label: "In the canopy", value: "Big-leaved timber", source: CURATED_SOURCE },
+      { label: "Standing", value: "Planted, not wild here", source: CURATED_SOURCE },
+    ],
+    habitat: {
+      line: "Planted for timber; big leaves, but exotic to Philippine forest.",
+      source: CURATED_SOURCE,
+    },
+    confusable: null,
+  },
+  balete: {
+    attribute: [
+      { label: "Origin", value: "Native", source: CURATED_SOURCE },
+      { label: "In the canopy", value: "Strangler fig", source: CURATED_SOURCE },
+      { label: "Standing", value: "Landmark", source: CURATED_SOURCE },
+    ],
+    habitat: {
+      line: "A strangler fig — one of the landmark trees people navigate by without knowing the name.",
+      source: CURATED_SOURCE,
+    },
+    confusable: null,
+  },
+  lagundi: {
+    attribute: [
+      { label: "Origin", value: "Native", source: CURATED_SOURCE },
+      { label: "In the canopy", value: "Shrub, not canopy", source: "Ledesma 2022 · campus accessions" },
+      { label: "Standing", value: "Medicinal", source: CURATED_SOURCE },
+    ],
+    habitat: {
+      line: "A medicinal shrub rather than a canopy tree, documented from Loyola Heights accessions.",
+      source: "Ledesma 2022 · campus accessions",
+    },
+    confusable: {
+      species_code: "molave",
+      difference:
+        "Molave (Vitex parviflora) is the same genus but a threatened canopy hardwood, not a shrub. Same Vitex, different plant.",
+      source: CURATED_SOURCE,
+    },
+  },
+};
+
+/** Detail for a curated species. null for anything off the starter list. */
+export function speciesDetail(species_code: string): SpeciesDetail | null {
+  return detail[species_code] ?? null;
+}
+
 export interface EncounterSeed {
   encounter_id: string;
   species_code: string;

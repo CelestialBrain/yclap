@@ -1,6 +1,7 @@
+import { picker_order } from "./data.ts";
 import { biomeContains, biome as biome_row, type Biome } from "./biome.ts";
 import { sectorAt, sectorContains, sector as sector_list, type Sector } from "./sector.ts";
-import { formatLatLon, type LatLon } from "./geo.ts";
+import { distanceMeter, formatLatLon, type Fix, type LatLon } from "./geo.ts";
 
 export interface Sighting {
   sighting_id: string;
@@ -25,12 +26,34 @@ export interface Sighting {
   entry_kind: "badge" | "contribution";
   /** What the caller says they saw, for contributions off the curated list. */
   reported_name: string | null;
+  /**
+   * A stable catalogue number, 1-based, assigned once when the entry is saved
+   * and never recomputed. Deliberately NOT the array position: deleting an
+   * early entry must not renumber every later one, because a student who
+   * photographed "No. 7" should still find No. 7 tomorrow.
+   */
+  entry_index: number;
+}
+
+/** One recorded position along a walk. Kept flat so it survives JSON round-trip. */
+export interface WalkFix {
+  lat: number;
+  lon: number;
+  at: number;
+  source: "gps" | "demo";
 }
 
 export interface Walk {
   walk_id: string;
   started_at: string;
   ended_at: string | null;
+  /**
+   * The breadcrumb trail. Without it a receipt can only guess at distance, and
+   * a guessed distance on a summary screen is exactly the kind of invented
+   * number this project refuses. Walks recorded before this field existed read
+   * back as an empty track and their receipt says so rather than showing 0 m.
+   */
+  track: WalkFix[];
 }
 
 const STORAGE_KEY = "field-guide.sighting";
@@ -78,6 +101,9 @@ function parse(raw: string | null): Sighting[] {
           note: str(r.note),
           walk_id: str(r.walk_id),
           entry_kind: kind,
+          /* Rows saved before catalogue numbers existed get theirs from their
+             stored position, which is fixed, so the assignment is stable too. */
+          entry_index: num(r.entry_index) ?? 0,
           reported_name: str(r.reported_name),
         },
       ];
@@ -88,7 +114,9 @@ function parse(raw: string | null): Sighting[] {
 }
 
 export function readSighting(): Sighting[] {
-  return parse(localStorage.getItem(STORAGE_KEY));
+  /* Backfill happens on the way in, so every caller sees numbered entries and
+     the next save persists them. */
+  return withEntryIndex(parse(localStorage.getItem(STORAGE_KEY)));
 }
 
 export function writeSighting(row: Sighting[]): void {
@@ -123,9 +151,27 @@ export function addSighting(draft: SightingDraft): Sighting {
     walk_id: draft.walk_id ?? null,
     entry_kind: draft.entry_kind ?? "badge",
     reported_name: draft.reported_name?.trim() || null,
+    entry_index: 0,
   };
-  writeSighting([...readSighting(), next]);
+  const row = readSighting();
+  next.entry_index = nextEntryIndex(row);
+  writeSighting([...row, next]);
   return next;
+}
+
+/** One past the highest number ever handed out, so numbers are never reused. */
+export function nextEntryIndex(row: Sighting[]): number {
+  return row.reduce((high, s) => Math.max(high, s.entry_index), 0) + 1;
+}
+
+/**
+ * Backfill catalogue numbers onto rows saved before they existed. Position in
+ * the stored array is the only ordering those rows have, and it does not
+ * change, so this is deterministic.
+ */
+export function withEntryIndex(row: Sighting[]): Sighting[] {
+  let high = row.reduce((n, s) => Math.max(n, s.entry_index), 0);
+  return row.map((s) => (s.entry_index > 0 ? s : { ...s, entry_index: (high += 1) }));
 }
 
 export function removeSighting(sighting_id: string): void {
@@ -297,25 +343,155 @@ export function isNotSeenLately(row: Sighting[], species_code: string, now: numb
 
 /* ── walk session ───────────────────────────────────────────────────────── */
 
+/**
+ * A fix nearer than this to the last recorded one is dropped. GPS jitter while
+ * standing still would otherwise accumulate hundreds of phantom metres onto
+ * the receipt, which is the classic way a step counter lies.
+ */
+export const TRACK_MIN_METER = 6;
+
+/** Ceiling on stored points, so a two-hour walk cannot fill localStorage. */
+export const TRACK_MAX_POINT = 2000;
+
+function readTrack(value: unknown): WalkFix[] {
+  if (!Array.isArray(value)) return [];
+  const out: WalkFix[] = [];
+  for (const raw of value) {
+    const lat = num((raw as WalkFix)?.lat);
+    const lon = num((raw as WalkFix)?.lon);
+    const at = num((raw as WalkFix)?.at);
+    const source = (raw as WalkFix)?.source;
+    if (lat === null || lon === null || at === null) continue;
+    if (source !== "gps" && source !== "demo") continue;
+    out.push({ lat, lon, at, source });
+  }
+  return out;
+}
+
 export function readWalk(): Walk | null {
   try {
     const raw = localStorage.getItem(WALK_KEY);
     if (!raw) return null;
     const value = JSON.parse(raw) as Walk;
-    return typeof value?.walk_id === "string" ? value : null;
+    if (typeof value?.walk_id !== "string") return null;
+    /* Walks written before the track existed read back with an empty one. */
+    return { ...value, track: readTrack(value.track) };
   } catch {
     return null;
   }
 }
 
-export function startWalk(): Walk {
-  const walk: Walk = { walk_id: `walk-${Date.now()}`, started_at: new Date().toISOString(), ended_at: null };
+function writeWalk(walk: Walk): Walk {
   localStorage.setItem(WALK_KEY, JSON.stringify(walk));
   return walk;
 }
 
-export function endWalk(): void {
+export function startWalk(): Walk {
+  return writeWalk({
+    walk_id: `walk-${Date.now()}`,
+    started_at: new Date().toISOString(),
+    ended_at: null,
+    track: [],
+  });
+}
+
+/**
+ * Append a position to the open walk. Returns the walk when the point was
+ * kept, null when there is no walk running or the fix did not move far enough
+ * to be worth recording.
+ */
+export function trackWalk(fix: Fix, walk: Walk | null = readWalk()): Walk | null {
+  if (!walk) return null;
+  const last = walk.track[walk.track.length - 1];
+  if (last && distanceMeter(last, fix) < TRACK_MIN_METER) return null;
+  if (walk.track.length >= TRACK_MAX_POINT) return null;
+  const track = [...walk.track, { lat: fix.lat, lon: fix.lon, at: fix.at, source: fix.source }];
+  return writeWalk({ ...walk, track });
+}
+
+/** Haversine sum along the recorded trail. Zero for a track of under two points. */
+export function trackMeter(track: WalkFix[]): number {
+  let meter = 0;
+  for (let i = 1; i < track.length; i += 1) meter += distanceMeter(track[i - 1], track[i]);
+  return meter;
+}
+
+/**
+ * What a walk amounted to. Counts and names only — the same rule the journal
+ * summary follows, so nothing here can be read as a score against anyone else.
+ */
+export interface WalkReceipt {
+  walk_id: string;
+  started_at: string;
+  ended_at: string;
+  elapsed_minute: number;
+  /** Haversine sum of the recorded fixes. */
+  distance_meter: number;
+  /** True when no fix was ever recorded, so the distance is unknown, not zero. */
+  is_distance_unknown: boolean;
+  /** Sectors the trail passed through, in the order they were first entered. */
+  sector_code: string[];
+  sector_count: number;
+  species_code: string[];
+  species_count: number;
+  /** Of those, the ones this walk was the first ever sighting of. */
+  new_species_code: string[];
+  new_species_count: number;
+  /** "demo" when the stage loop drove the walk — said out loud on the receipt. */
+  fix_source: "gps" | "demo" | null;
+  is_demo: boolean;
+}
+
+/**
+ * Close a walk out. `row` is the whole journal, not just this walk's rows,
+ * because "new to the journal" can only be decided against everything logged
+ * before this walk started.
+ */
+export function walkReceipt(walk: Walk, row: Sighting[], ended_at = new Date().toISOString()): WalkReceipt {
+  const mine = row.filter((s) => s.walk_id === walk.walk_id);
+  const earlier = row.filter((s) => s.walk_id !== walk.walk_id);
+  const seen_before = new Set(earlier.map((s) => s.species_code));
+
+  const species_code: string[] = [];
+  for (const s of mine) if (!species_code.includes(s.species_code)) species_code.push(s.species_code);
+
+  const sector_code: string[] = [];
+  for (const point of walk.track) {
+    const found = sectorAt(point);
+    if (found && !sector_code.includes(found.sector_code)) sector_code.push(found.sector_code);
+  }
+
+  const new_species_code = species_code.filter((code) => !seen_before.has(code));
+  const source_seen = new Set([...walk.track.map((p) => p.source), ...mine.map((s) => s.fix_source)]);
+  const fix_source = source_seen.has("demo") ? "demo" : source_seen.has("gps") ? "gps" : null;
+  const elapsed_ms = new Date(ended_at).getTime() - new Date(walk.started_at).getTime();
+
+  return {
+    walk_id: walk.walk_id,
+    started_at: walk.started_at,
+    ended_at,
+    elapsed_minute: Math.max(0, Math.round(elapsed_ms / 60000)),
+    distance_meter: trackMeter(walk.track),
+    is_distance_unknown: walk.track.length < 2,
+    sector_code,
+    sector_count: sector_code.length,
+    species_code,
+    species_count: species_code.length,
+    new_species_code,
+    new_species_count: new_species_code.length,
+    fix_source,
+    is_demo: fix_source === "demo",
+  };
+}
+
+/**
+ * End the walk and hand back its receipt. Returns null when no walk was open,
+ * so a stray tap cannot produce a summary of nothing.
+ */
+export function endWalk(row: Sighting[] = readSighting()): WalkReceipt | null {
+  const walk = readWalk();
   localStorage.removeItem(WALK_KEY);
+  return walk ? walkReceipt(walk, row) : null;
 }
 
 /* ── summary ────────────────────────────────────────────────────────────── */
@@ -328,6 +504,12 @@ export interface SummaryGroup {
 export interface JournalSummary {
   sighting_count: number;
   species_count: number;
+  /**
+   * The denominator behind "n of N species seen". It is the curated starter
+   * list, not the padded journal grid — a grid slot with no species behind it
+   * is not something a student can go and find.
+   */
+  species_total: number;
   located_count: number;
   photo_count: number;
   day_count: number;
@@ -357,6 +539,7 @@ export function summarize(row: Sighting[]): JournalSummary {
   return {
     sighting_count: row.length,
     species_count: by_species.length,
+    species_total: picker_order.length,
     located_count: row.filter((s) => s.lat !== null && s.lon !== null).length,
     photo_count: row.filter((s) => s.photo_data !== null).length,
     day_count: by_day.length,

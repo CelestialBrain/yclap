@@ -12,6 +12,9 @@ import {
   isInsideCampus,
   latLonToPercent,
   percentToLatLon,
+  WALK_PACE_MS,
+  walkMinute,
+  formatWalkMinute,
   CAMPUS_CENTER,
   clampCenter,
   fitZoom,
@@ -300,6 +303,41 @@ describe("restricted geofence", () => {
   it("the demo walk never enters it either", () => {
     for (let t = 0; t < 1; t += 0.005) {
       assert.equal(isInsidePolygon(demoWalkAt(t), RESTRICTED_POLYGON), false, `demo walk entered the grove at t=${t}`);
+    }
+  });
+});
+
+describe("walking time", () => {
+  it("converts metres to minutes at the stated 1.3 m/s pace", () => {
+    assert.equal(WALK_PACE_MS, 1.3);
+    /* 249 m — the distance the 09-02 card actually printed — is ≈3 min. */
+    assert.equal(walkMinute(249), 3);
+    assert.equal(walkMinute(78), 1);
+    assert.equal(walkMinute(1000), 13);
+  });
+
+  it("never reads zero minutes for a tree you can still walk to", () => {
+    for (const meter of [0, 1, 5, 20, 40]) {
+      assert.ok(walkMinute(meter) >= 1, `${meter} m rendered as under a minute`);
+    }
+  });
+
+  it("formats the minute as a gloss, not as a distance", () => {
+    const line = formatWalkMinute(249);
+    assert.match(line, /≈3 min walk/);
+    /* The metre figure must not be swallowed into this string — the caller
+       keeps it as the primary number. */
+    assert.equal(line.includes("249"), false);
+    /* Exactly the minute phrase and nothing else — no metre figure smuggled in. */
+    assert.match(line, /^≈\d+ min walk$/);
+  });
+
+  it("rises monotonically with distance", () => {
+    let last = 0;
+    for (let meter = 0; meter < 2000; meter += 37) {
+      const now = walkMinute(meter);
+      assert.ok(now >= last, `minutes fell from ${last} to ${now} at ${meter} m`);
+      last = now;
     }
   });
 });
