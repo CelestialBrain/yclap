@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import CampusMap from "./campus-map";
 import PlayMap from "./play-map";
+import { pinKindOf, type PinKind } from "./pin";
 import Character, { stageFor, STAGE_LABEL, toNextStage } from "./character";
 import { biome_sector, sectorAt, sectorByCode, sector as sector_row, type Sector } from "./sector";
 import Viewfinder, { type Shot } from "./camera";
@@ -874,10 +875,25 @@ function SuggestionList({
   );
 }
 
+/** The filter chips over the map. Kind comes from play-map's pin taxonomy. */
+const PIN_FILTER: { kind: PinKind; label: string; tone: string }[] = [
+  { kind: "native", label: "Native", tone: "#008653" },
+  { kind: "exotic", label: "Exotic", tone: "#8A6A28" },
+  { kind: "threatened", label: "Threatened", tone: "#B3391F" },
+];
+
 export interface SaveInput {
   photo_data: string | null;
   inat: { scientific_name: string | null; common_name: string | null };
   note: string | null;
+  /**
+   * "contribution" when the student is reporting something the guide does not
+   * have. This is Cathy's count-and-location gap (`2:12:12`) turned into an
+   * affordance: the export already carries contributions as a distinct feature
+   * type, so what a student reports leaves the device in a shape AIS can read.
+   */
+  entry_kind: "badge" | "contribution";
+  reported_name: string | null;
 }
 
 function CameraSheet({
@@ -897,6 +913,8 @@ function CameraSheet({
 }) {
   const [shot, setShot] = useState<Shot | null>(null);
   const [note, setNote] = useState("");
+  const [is_reporting, setReporting] = useState(false);
+  const [reported_name, setReportedName] = useState("");
   const [identify, setIdentify] = useState<InatIdentifyState>({ status: "idle" });
 
   useEffect(() => {
@@ -1009,7 +1027,70 @@ function CameraSheet({
               </button>
             );
           })}
+          {/* The list is nine species. Campus has far more, and a student who
+              cannot say what they saw currently has nowhere to put it. */}
+          <button
+            onClick={() => setReporting((prev) => !prev)}
+            className="w-full flex items-center justify-between"
+            style={{
+              padding: "12px 14px",
+              background: is_reporting ? "rgba(7,93,137,0.08)" : "transparent",
+              borderTop: "1px solid #E4E7E8",
+              textAlign: "left",
+            }}
+          >
+            <span style={{ minWidth: 0 }}>
+              <span style={{ display: "block", fontWeight: 700, fontSize: 15, lineHeight: 1.2 }}>
+                It is not on this list
+              </span>
+              <span style={{ display: "block", fontSize: 11.5, color: "rgba(31,32,34,0.6)", marginTop: 2 }}>
+                Report a tree the guide does not have
+              </span>
+            </span>
+            <Pill tone="info">{is_reporting ? "Reporting" : "Report"}</Pill>
+          </button>
         </div>
+
+        {is_reporting && (
+          <div
+            style={{
+              marginTop: 12,
+              padding: "12px 14px",
+              borderRadius: 16,
+              border: "1.5px solid #BBD9EA",
+              background: "#F2F8FC",
+            }}
+          >
+            <label style={{ display: "block" }}>
+              <span style={{ fontSize: 13.5, fontWeight: 700, display: "block" }}>
+                What would you call it?
+              </span>
+              <span style={{ fontSize: 11.5, color: "rgba(31,32,34,0.55)", display: "block", marginTop: 2 }}>
+                A guess is fine. &ldquo;Unknown&rdquo; is fine too — the position is the part AIS does not have.
+              </span>
+              <input
+                value={reported_name}
+                onChange={(ev) => setReportedName(ev.target.value)}
+                placeholder="Tall, peeling bark, beside Gonzaga"
+                style={{
+                  display: "block",
+                  width: "100%",
+                  marginTop: 8,
+                  borderRadius: 12,
+                  border: "1.5px solid #BBD9EA",
+                  background: "#fff",
+                  padding: "10px 12px",
+                  fontSize: 14,
+                  fontFamily: "inherit",
+                }}
+              />
+            </label>
+            <p style={{ fontSize: 11, color: "rgba(31,32,34,0.55)", marginTop: 8, lineHeight: 1.4 }}>
+              This saves as a report, not as a species badge, and leaves the export tagged that way. It is not
+              added to the guide — nobody here is deciding what a tree is.
+            </p>
+          </div>
+        )}
 
         <label style={{ display: "block", marginTop: 16 }}>
           {/* Asked as a question rather than labelled as a field: a student who
@@ -1059,11 +1140,13 @@ function CameraSheet({
                 common_name: top?.common_name ?? null,
               },
               note: note.trim() || null,
+              entry_kind: is_reporting ? "contribution" : "badge",
+              reported_name: is_reporting ? reported_name.trim() || "Unknown" : null,
             })
           }
           style={{ width: "100%", height: 48, borderRadius: 12, background: "#008653", color: "#fff", fontWeight: 700, fontSize: 15, marginTop: 16 }}
         >
-          Save to my journal
+          {is_reporting ? "Save this report" : "Save to my journal"}
         </button>
       </div>
     </div>
@@ -1243,7 +1326,13 @@ function SightingLog({ sighting }: { sighting: Sighting[] }) {
               <TaxonThumb species_code={s.species_code} size={52} photo_data={s.photo_data} />
               <div style={{ minWidth: 0 }}>
                 <div className="flex items-baseline gap-2">
-                  <div style={{ fontWeight: 700, fontSize: 14.5 }}>{sp?.common_name ?? s.species_code}</div>
+                  {/* A report is not a species badge and must not read as one. */}
+                  <div style={{ fontWeight: 700, fontSize: 14.5 }}>
+                    {s.entry_kind === "contribution"
+                      ? (s.reported_name ?? "Unknown")
+                      : (sp?.common_name ?? s.species_code)}
+                  </div>
+                  {s.entry_kind === "contribution" && <Pill tone="info">Report</Pill>}
                   {/* The catalogue number is assigned once and never reissued, so
                       an entry a student cites today is the same one tomorrow. */}
                   <span
@@ -2293,6 +2382,14 @@ export default function App() {
   const [inat, setInat] = useState<InatNearbyState>({ status: "idle" });
   const [walk, setWalk] = useState<Walk | null>(() => readWalk());
   const [receipt, setReceipt] = useState<WalkReceipt | null>(null);
+  /**
+   * Which finds to draw. Empty means all of them — an explicit "off" state, so
+   * a student who taps every chip off sees the whole map back rather than an
+   * empty one. The restricted hatch is deliberately NOT in here: it is a place
+   * you may not walk, not a preference, and filtering it away would hide the
+   * one thing on the map that is a rule.
+   */
+  const [pin_filter, setPinFilter] = useState<Set<PinKind>>(() => new Set());
   const { is_desktop, is_wide } = useDesktop();
   const geo = useGeo(is_demo);
   const seen = seenCode(sighting);
@@ -2431,7 +2528,8 @@ export default function App() {
     setCameraOpen(true);
   };
 
-  const saveSighting = ({ photo_data, inat: id, note }: SaveInput) => {
+  const saveSighting = ({ photo_data, inat: id, note, entry_kind, reported_name }: SaveInput) => {
+    const is_report = entry_kind === "contribution";
     addSighting({
       species_code: pick_code,
       photo_data,
@@ -2442,11 +2540,17 @@ export default function App() {
         : null,
       note,
       walk_id: walk?.walk_id ?? null,
+      entry_kind,
+      reported_name,
     });
     setSighting(readSighting());
     setCameraOpen(false);
     go("/journal");
-    showToast(`${species[pick_code].common_name} added to your journal.`);
+    showToast(
+      is_report
+        ? "Report saved. It leaves in the export as a report, not as a species."
+        : `${species[pick_code].common_name} added to your journal.`,
+    );
   };
 
   const toggleWalk = () => {
@@ -2474,6 +2578,19 @@ export default function App() {
   const fix_line = geo.fix
     ? `${formatLatLon(geo.fix)} · ±${Math.round(geo.fix.accuracy_m)} m · ${geo.fix.source === "demo" ? "demo walk" : "this device"}`
     : "No position — this sighting will be saved without one.";
+
+  /* The same filter the play view applies, so the two surfaces agree about
+     what is on the map. The selected encounter is never filtered out from
+     under the card that is describing it. */
+  const shown_encounter = useMemo(
+    () =>
+      pin_filter.size === 0
+        ? encounter
+        : encounter.filter(
+            (e) => pin_filter.has(pinKindOf(species[e.species_code])) || e.encounter_id === sel.encounter_id,
+          ),
+    [pin_filter, sel.encounter_id],
+  );
 
   const selected_near = distance_of(sel.encounter_id);
   const selected_distance = selected_near
@@ -2510,6 +2627,30 @@ export default function App() {
         <WalkIcon size={15} />
         {walk ? `End walk · ${walk_count}` : "Start a walk"}
       </Chip>
+      {/* Filter what you are looking for. State rides in the border and the
+          label, per the kit rule — never in fill alone. */}
+      {PIN_FILTER.map((row) => (
+        <Chip
+          key={row.kind}
+          is_on={pin_filter.has(row.kind)}
+          tone={row.tone}
+          onClick={() =>
+            setPinFilter((prev) => {
+              const next = new Set(prev);
+              if (next.has(row.kind)) next.delete(row.kind);
+              else next.add(row.kind);
+              return next;
+            })
+          }
+        >
+          {row.label}
+        </Chip>
+      ))}
+      {pin_filter.size > 0 && (
+        <Chip tone="#75797B" onClick={() => setPinFilter(new Set())}>
+          Show all
+        </Chip>
+      )}
       <Chip is_on={is_following} onClick={recentre}>
         <LocateIcon size={15} />
         {is_following ? "Following" : "Recentre"}
@@ -2553,6 +2694,7 @@ export default function App() {
         is_restricted_on={is_restricted}
         onSelectSector={(row) => setPickedSector(row)}
         seen_species={seen}
+        pin_filter={pin_filter}
         onSelectEncounter={(e) => {
           /* Tapping a marker is an explicit intent to log THAT species, so it
              opens the camera on it rather than on whatever sector card the
@@ -2636,7 +2778,7 @@ export default function App() {
   const mapBody = (
     <div style={{ position: "absolute", inset: 0 }}>
       <CampusMap
-        encounter={encounter}
+        encounter={shown_encounter}
         selected_id={selected_id}
         onSelect={(encounter_id) => {
           setPinnedId(encounter_id);

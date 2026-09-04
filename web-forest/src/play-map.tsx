@@ -3,6 +3,7 @@ import campus_shape from "./asset/campus-shape.json" with { type: "json" };
 import Character, { type Stage } from "./character";
 import { RESTRICTED_POLYGON, species, type Encounter } from "./data";
 import { residentBySector } from "./nearby";
+import { pinKindOf, pinRingWidth, type PinKind } from "./pin";
 import type { Fix } from "./geo";
 import {
   biome_sector,
@@ -144,6 +145,8 @@ interface Props {
   onGesture?: () => void;
   is_desktop?: boolean;
   is_restricted_on?: boolean;
+  /** Empty means draw every kind. Never hides the restricted hatch. */
+  pin_filter?: Set<PinKind>;
   bearing_degree: number;
   onBearing: (degree: number) => void;
 }
@@ -231,6 +234,14 @@ function pickLabel(
   return placed;
 }
 
+/* Pin shape vocabulary lives in ./pin.ts — see the note there on why. */
+
+function PinCentre({ kind, fill }: { kind: PinKind; fill: string }) {
+  if (kind === "exotic") return <rect x="13" y="12" width="14" height="14" rx="2" fill={fill} />;
+  if (kind === "threatened") return <path d="M20 11 L28.5 25.5 L11.5 25.5 Z" fill={fill} />;
+  return <circle cx="20" cy="19" r="7.5" fill={fill} />;
+}
+
 export default function PlayMap({
   view,
   onView,
@@ -244,6 +255,7 @@ export default function PlayMap({
   onGesture,
   is_desktop = false,
   is_restricted_on = true,
+  pin_filter,
   bearing_degree,
   onBearing,
 }: Props) {
@@ -517,6 +529,9 @@ export default function PlayMap({
               const p = project({ lat: e.lat, lon: e.lon });
               const sp = species[e.species_code];
               const is_logged = seen_species.has(e.species_code);
+              const pin_kind = pinKindOf(sp);
+              /* No filter set means every kind is drawn. */
+              if (pin_filter && pin_filter.size > 0 && !pin_filter.has(pin_kind)) return null;
               return (
                 <div
                   key={`pin-${e.encounter_id}`}
@@ -533,18 +548,20 @@ export default function PlayMap({
                     zIndex: 4,
                   }}
                 >
-                  <svg width="40" height="52" viewBox="0 0 40 52" aria-label={sp?.common_name ?? "A find"}>
+                  <svg
+                    width="40"
+                    height="52"
+                    viewBox="0 0 40 52"
+                    aria-label={`${sp?.common_name ?? "A find"} — ${pin_kind}`}
+                  >
                     <path
                       d="M20 51 C20 51 4 30 4 19 A16 16 0 0 1 36 19 C36 30 20 51 20 51 Z"
                       fill={is_logged ? "#2F6B3A" : "#FFFFFF"}
                       stroke="#2F6B3A"
-                      strokeWidth="3"
+                      strokeWidth={pinRingWidth(pin_kind)}
                       strokeLinejoin="round"
                     />
-                    <circle cx="20" cy="19" r="7.5" fill={is_logged ? "#FFFFFF" : "#2F6B3A"} />
-                    {!is_logged && (
-                      <path d="M20 15.5 q4 2 0 7 q-4 -5 0 -7" fill="#FFFFFF" />
-                    )}
+                    <PinCentre kind={pin_kind} fill={is_logged ? "#FFFFFF" : "#2F6B3A"} />
                   </svg>
                 </div>
               );
